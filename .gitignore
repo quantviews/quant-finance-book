@@ -1,0 +1,18 @@
+# IDE и кэш
+.Rproj.user/
+.quarto/
+_book/
+_freeze/
+*.Rhistory
+*.RData
+*.Rproj
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+
+# Quarto outputs
+*.html
+*.pdf
+*.docx
+/.quarto/
