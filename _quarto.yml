@@ -9,6 +9,7 @@ book:
   chapters:
     - index.qmd
     - 01-intro.qmd
+    - 02-financial-data.qmd
     # Добавьте здесь другие главы по мере написания:
     # - 02-financial-data.qmd
     # - 03-var-es.qmd
@@ -26,9 +27,11 @@ format:
     toc: true
     number-sections: true
   pdf:
-    documentclass: scrbook
-    number-sections: true
-    toc: true
+    pdf-engine: typst
+    lang: ru
+    papersize: a4
+    default-image-extension: png
+    fig-format: png
   docx: default
 
 execute:
