@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Марсель Салихов">
 
-<title>Количественные финансы</title>
+<title>4&nbsp; Финансовые данные по России – Количественные финансы</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-intro.html" rel="next">
+<link href="./02-financial-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Добро пожаловать!</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-financial-data.html">Финансовые данные и х обработка</a></li><li class="breadcrumb-item"><a href="./02-financial-data-russia.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Финансовые данные по России</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -109,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Добро пожаловать!</span></span></a>
   </div>
 </li>
@@ -136,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-financial-data-russia.html" class="sidebar-item-text sidebar-link">
+  <a href="./02-financial-data-russia.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Финансовые данные по России</span></span></a>
   </div>
 </li>
@@ -152,12 +186,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#добро-пожаловать" id="toc-добро-пожаловать" class="nav-link active" data-scroll-target="#добро-пожаловать"><span class="header-section-number">1</span> Добро пожаловать!</a>
+  <li><a href="#финансовые-данные-по-россии" id="toc-финансовые-данные-по-россии" class="nav-link active" data-scroll-target="#финансовые-данные-по-россии"><span class="header-section-number">4.1</span> Финансовые данные по России</a></li>
+  <li><a href="#yahoo-finance" id="toc-yahoo-finance" class="nav-link" data-scroll-target="#yahoo-finance"><span class="header-section-number">4.2</span> Yahoo Finance</a></li>
+  <li><a href="#получение-данных-из-yahoo-finance-с-помощью-yfinance" id="toc-получение-данных-из-yahoo-finance-с-помощью-yfinance" class="nav-link" data-scroll-target="#получение-данных-из-yahoo-finance-с-помощью-yfinance"><span class="header-section-number">4.3</span> Получение данных из Yahoo Finance с помощью <code>yfinance</code></a>
   <ul class="collapse">
-  <li><a href="#о-чём-эта-книга" id="toc-о-чём-эта-книга" class="nav-link" data-scroll-target="#о-чём-эта-книга"><span class="header-section-number">1.1</span> О чём эта книга?</a></li>
-  <li><a href="#навигация-по-главам" id="toc-навигация-по-главам" class="nav-link" data-scroll-target="#навигация-по-главам"><span class="header-section-number">1.2</span> Навигация по главам</a></li>
-  <li><a href="#используемые-технологии" id="toc-используемые-технологии" class="nav-link" data-scroll-target="#используемые-технологии"><span class="header-section-number">1.3</span> Используемые технологии</a></li>
-  <li><a href="#контакты" id="toc-контакты" class="nav-link" data-scroll-target="#контакты"><span class="header-section-number">1.4</span> Контакты</a></li>
+  <li><a href="#установка-и-подключение" id="toc-установка-и-подключение" class="nav-link" data-scroll-target="#установка-и-подключение">Установка и подключение</a></li>
+  <li><a href="#задание-анализ-финансовых-показателей" id="toc-задание-анализ-финансовых-показателей" class="nav-link" data-scroll-target="#задание-анализ-финансовых-показателей">Задание: анализ финансовых показателей</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -165,28 +199,16 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-financial-data.html">Финансовые данные и х обработка</a></li><li class="breadcrumb-item"><a href="./02-financial-data-russia.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Финансовые данные по России</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Количественные финансы</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Финансовые данные по России</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Автор</div>
-    <div class="quarto-title-meta-contents">
-             <p>Марсель Салихов </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Дата публикации</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">30 августа 2025 г.</p>
-    </div>
-  </div>
   
     
   </div>
@@ -196,48 +218,81 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="добро-пожаловать" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Добро пожаловать!</h1>
-<p>Эта книга — курс по дисциплине <strong>“Количественные финансы”</strong> с примерами на <strong>R</strong> и <strong>Python</strong>.</p>
-<p>Она предназначена для студентов, аналитиков и всех, кто хочет научиться применять количественные методы в финансовом анализе.</p>
-<hr>
-<section id="о-чём-эта-книга" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="о-чём-эта-книга"><span class="header-section-number">1.1</span> О чём эта книга?</h2>
-<ul>
-<li>Как обрабатывать и визуализировать финансовые данные</li>
-<li>Как строить статистические и эконометрические модели</li>
-<li>Как оценивать рыночный риск (VaR, ES, GARCH)</li>
-<li>Как работать с финансовыми временными рядами</li>
-<li>Как анализировать акции и облигации</li>
-<li>Как использовать R и Python на практике</li>
-</ul>
+<section id="финансовые-данные-по-россии" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="финансовые-данные-по-россии"><span class="header-section-number">4.1</span> Финансовые данные по России</h2>
+<p>Любой количественный анализ начинается с данных. От их качества напрямую зависит достоверность результатов. Недаром в анализе данных существует выражение: «Что вложишь, то и получишь» (Garbage in — garbage out).</p>
+<p>Перед тем как строить модели, рассчитывать риски или оптимизировать портфели, необходимо загрузить финансовые данные из надежных источников и привести их в пригодный для анализа формат.</p>
+</section>
+<section id="yahoo-finance" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="yahoo-finance"><span class="header-section-number">4.2</span> Yahoo Finance</h2>
+<p>Вот черновик раздела на русском языке для вашей книги <em>«Количественные финансы»</em> — глава <strong>«Получение данных из Yahoo Finance»</strong>:</p>
 <hr>
 </section>
-<section id="навигация-по-главам" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="навигация-по-главам"><span class="header-section-number">1.2</span> Навигация по главам</h2>
+<section id="получение-данных-из-yahoo-finance-с-помощью-yfinance" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="получение-данных-из-yahoo-finance-с-помощью-yfinance"><span class="header-section-number">4.3</span> Получение данных из Yahoo Finance с помощью <code>yfinance</code></h2>
+<p>Для количественного анализа в финансах критически важно иметь доступ к историческим и фундаментальным данным компаний. Один из самых удобных способов получить такие данные — использовать библиотеку <a href="https://pypi.org/project/yfinance/"><code>yfinance</code></a>, которая предоставляет доступ к данным с <a href="https://finance.yahoo.com/">Yahoo Finance</a>.</p>
+<p>Yahoo Finance содержит широкий спектр информации: котировки акций, дивиденды, финансовую отчетность компаний (отчеты о прибылях и убытках, балансы, отчеты о движении денежных средств), данные по опционам и рекомендации аналитиков.</p>
+<section id="установка-и-подключение" class="level3">
+<h3 class="anchored" data-anchor-id="установка-и-подключение">Установка и подключение</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Для начала работы достаточно создать объект <code>Ticker</code>, указав тикер интересующей компании:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>AAPL <span class="op">=</span> yf.Ticker(<span class="st">"AAPL"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Теперь у нас есть доступ ко всей информации, связанной с Apple Inc.</p>
+<p>Например, чтобы получить отчет о прибылях и убытках:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(AAPL.financials)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Список всех доступных атрибутов можно посмотреть через:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(AAPL)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="задание-анализ-финансовых-показателей" class="level3">
+<h3 class="anchored" data-anchor-id="задание-анализ-финансовых-показателей">Задание: анализ финансовых показателей</h3>
+<p>Давайте решим практическую задачу на основе полученных данных:</p>
+<section id="цель" class="level4">
+<h4 class="anchored" data-anchor-id="цель">Цель:</h4>
+<ol type="1">
+<li>Найти значения выручки (revenue), чистой прибыли (net income) и операционных расходов (operating expenses) за последние годы.</li>
+<li>Представить данные в виде удобной таблицы.</li>
+<li>Оценить динамику чистой прибыли по годам и рассчитать её годовые темпы роста (или падения).</li>
+<li>Вычислить отношение долга к капиталу (debt-to-equity ratio), если оно доступно в отчетности.</li>
+</ol>
+</section>
+<section id="пример-кода" class="level4">
+<h4 class="anchored" data-anchor-id="пример-кода">Пример кода:</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Получение финансовой отчетности</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>income_statement <span class="op">=</span> AAPL.financials</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>balance_sheet <span class="op">=</span> AAPL.balance_sheet</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Транспонируем для удобства чтения</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> income_statement.T</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Отбираем нужные строки</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df_selected <span class="op">=</span> df[[<span class="st">"Total Revenue"</span>, <span class="st">"Net Income"</span>, <span class="st">"Operating Expenses"</span>]]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Добавим расчет изменения чистой прибыли</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df_selected[<span class="st">"Net Income YoY %"</span>] <span class="op">=</span> df_selected[<span class="st">"Net Income"</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Добавим расчет коэффициента debt-to-equity, если доступны данные</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>debt <span class="op">=</span> balance_sheet.loc[<span class="st">"Total Liab"</span>]</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>equity <span class="op">=</span> balance_sheet.loc[<span class="st">"Total Stockholder Equity"</span>]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>df_selected[<span class="st">"Debt/Equity"</span>] <span class="op">=</span> (debt <span class="op">/</span> equity).values</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Округлим и отобразим</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>df_selected <span class="op">=</span> df_selected.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>df_selected</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="интерпретация" class="level4">
+<h4 class="anchored" data-anchor-id="интерпретация">Интерпретация:</h4>
 <ul>
-<li><a href="./01-intro.html">Введение</a></li>
-<li>…</li>
+<li><strong>Выручка</strong> отражает общий объем продаж.</li>
+<li><strong>Операционные расходы</strong> показывают, сколько компания тратит на свою деятельность.</li>
+<li><strong>Чистая прибыль</strong> — итоговая прибыль после всех расходов и налогов.</li>
+<li><strong>Debt/Equity</strong> — ключевой показатель финансовой устойчивости: чем выше, тем больше компания зависит от заемного капитала.</li>
 </ul>
 <hr>
-</section>
-<section id="используемые-технологии" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="используемые-технологии"><span class="header-section-number">1.3</span> Используемые технологии</h2>
-<ul>
-<li>📊 <strong>R / Python</strong></li>
-<li>🧮 <strong>Quarto</strong> для публикации</li>
-<li>📘 <strong>GitHub Pages</strong> для хостинга</li>
-<li>🔁 <strong>Воспроизводимые исследования</strong> (Reproducible Research)</li>
-</ul>
-<hr>
-</section>
-<section id="контакты" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="контакты"><span class="header-section-number">1.4</span> Контакты</h2>
-<p><a href="https://www.hse.ru/org/persons/26780297">Марсель Салихов</a></p>
-<hr>
-<p><em>Книга распространяется под лицензией CC BY-SA 4.0</em></p>
 
 
+</section>
 </section>
 </section>
 
@@ -643,11 +698,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./02-financial-data.html" class="pagination-link" aria-label="Финансовые данные и их обработка">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Финансовые данные и их обработка</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-intro.html" class="pagination-link" aria-label="Введение">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
