@@ -5,11 +5,15 @@ book:
   title: "Количественные финансы"
   author: "Марсель Салихов"
   language: ru
-  date: "15.06.2025"
+  date: 2025-08-30
   chapters:
     - index.qmd
     - 01-intro.qmd
-    - 02-financial-data.qmd
+    - part: "Финансовые данные и х обработка"    # название раздела
+      chapters:
+      - 02-financial-data.qmd
+      - 02-financial-data-russia.qmd
+
     # Добавьте здесь другие главы по мере написания:
     # - 02-financial-data.qmd
     # - 03-var-es.qmd
@@ -21,10 +25,12 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    lang: ru
+    theme: lumen
     code-fold: true
-    code-tools: true
+    code-tools: false
     toc: true
+    number-depth: 2
     number-sections: true
   pdf:
     pdf-engine: typst
