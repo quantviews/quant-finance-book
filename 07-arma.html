@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>7&nbsp; Свойства финансовых рядов и модели ARMA – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -49,10 +99,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-7b6eaa0ffa2c43a5297d387829f09eb4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main">
@@ -148,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -168,8 +218,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -188,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -197,8 +247,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -211,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -220,8 +270,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -240,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -249,8 +299,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -269,7 +319,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -278,8 +328,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -292,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -301,8 +351,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -321,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -336,8 +386,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -356,21 +406,83 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-acf" id="toc-sec-acf" class="nav-link active" data-scroll-target="#sec-acf"><span class="header-section-number">7.1</span> Автокорреляция</a>
+  <ul class="collapse">
+<li><a href="#%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D1%8F-%D1%80%D1%8F%D0%B4%D0%B0-%D1%81-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BF%D1%80%D0%BE%D1%88%D0%BB%D1%8B%D0%BC" id="toc-корреляция-ряда-с-собственным-прошлым" class="nav-link" data-scroll-target="#%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D1%8F-%D1%80%D1%8F%D0%B4%D0%B0-%D1%81-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BF%D1%80%D0%BE%D1%88%D0%BB%D1%8B%D0%BC"><span class="header-section-number">7.1.1</span> Корреляция ряда с собственным прошлым</a></li>
+  <li><a href="#%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9-%D0%B8-%D0%B8%D1%85-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9" id="toc-коррелограмма-доходностей-и-их-модулей" class="nav-link" data-scroll-target="#%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9-%D0%B8-%D0%B8%D1%85-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9"><span class="header-section-number">7.1.2</span> Коррелограмма доходностей и их модулей</a></li>
+  <li><a href="#%D1%82%D0%B5%D1%81%D1%82-%D0%BB%D1%8C%D1%8E%D0%BD%D0%B3%D0%B0-%D0%B1%D0%BE%D0%BA%D1%81%D0%B0" id="toc-тест-льюнга-бокса" class="nav-link" data-scroll-target="#%D1%82%D0%B5%D1%81%D1%82-%D0%BB%D1%8C%D1%8E%D0%BD%D0%B3%D0%B0-%D0%B1%D0%BE%D0%BA%D1%81%D0%B0"><span class="header-section-number">7.1.3</span> Тест Льюнга – Бокса</a></li>
+  <li><a href="#%D0%B0%D0%B2%D1%82%D0%BE%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D1%8F-%D0%BF%D0%BE-%D0%B3%D0%BE%D0%B4%D0%B0%D0%BC" id="toc-автокорреляция-по-годам" class="nav-link" data-scroll-target="#%D0%B0%D0%B2%D1%82%D0%BE%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D1%8F-%D0%BF%D0%BE-%D0%B3%D0%BE%D0%B4%D0%B0%D0%BC"><span class="header-section-number">7.1.4</span> Автокорреляция по годам</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-stationarity" id="toc-sec-stationarity" class="nav-link" data-scroll-target="#sec-stationarity"><span class="header-section-number">7.2</span> Стационарность</a>
+  <ul class="collapse">
+<li><a href="#%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9-%D1%88%D1%83%D0%BC-%D0%B8-%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D0%BE%D0%B5-%D0%B1%D0%BB%D1%83%D0%B6%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-белый-шум-и-случайное-блуждание" class="nav-link" data-scroll-target="#%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9-%D1%88%D1%83%D0%BC-%D0%B8-%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D0%BE%D0%B5-%D0%B1%D0%BB%D1%83%D0%B6%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">7.2.1</span> Белый шум и случайное блуждание</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-%D1%81%D1%82%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C" id="toc-что-такое-стационарность" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D1%82%D0%B0%D0%BA%D0%BE%D0%B5-%D1%81%D1%82%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C"><span class="header-section-number">7.2.2</span> Что такое стационарность</a></li>
+  <li><a href="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-adf-%D0%B8-kpss" id="toc-тесты-adf-и-kpss" class="nav-link" data-scroll-target="#%D1%82%D0%B5%D1%81%D1%82%D1%8B-adf-%D0%B8-kpss"><span class="header-section-number">7.2.3</span> Тесты ADF и KPSS</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ar" id="toc-sec-ar" class="nav-link" data-scroll-target="#sec-ar"><span class="header-section-number">7.3</span> Модель AR(1): терм-спред ОФЗ</a>
+  <ul class="collapse">
+<li><a href="#%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8" id="toc-устройство-модели" class="nav-link" data-scroll-target="#%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8"><span class="header-section-number">7.3.1</span> Устройство модели</a></li>
+  <li><a href="#%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D0%B4%D0%BB%D0%B8%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B8-%D0%BA%D0%BE%D1%80%D0%BE%D1%82%D0%BA%D0%B8%D0%BC%D0%B8-%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0%D0%BC%D0%B8" id="toc-данные-разница-между-длинными-и-короткими-ставками" class="nav-link" data-scroll-target="#%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D1%80%D0%B0%D0%B7%D0%BD%D0%B8%D1%86%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D0%B4%D0%BB%D0%B8%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%B8-%D0%BA%D0%BE%D1%80%D0%BE%D1%82%D0%BA%D0%B8%D0%BC%D0%B8-%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0%D0%BC%D0%B8"><span class="header-section-number">7.3.2</span> Данные: разница между длинными и короткими ставками</a></li>
+  <li><a href="#%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8" id="toc-оценка-модели" class="nav-link" data-scroll-target="#%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8"><span class="header-section-number">7.3.3</span> Оценка модели</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ma" id="toc-sec-ma" class="nav-link" data-scroll-target="#sec-ma"><span class="header-section-number">7.4</span> Модель MA(1): неликвидная акция</a>
+  <ul class="collapse">
+<li><a href="#%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8-1" id="toc-устройство-модели-1" class="nav-link" data-scroll-target="#%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8-1"><span class="header-section-number">7.4.1</span> Устройство модели</a></li>
+  <li><a href="#%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82-%D0%BE%D1%82%D1%81%D0%BA%D0%BE%D0%BA%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-bid-%D0%B8-ask" id="toc-эффект-отскока-между-bid-и-ask" class="nav-link" data-scroll-target="#%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82-%D0%BE%D1%82%D1%81%D0%BA%D0%BE%D0%BA%D0%B0-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-bid-%D0%B8-ask"><span class="header-section-number">7.4.2</span> Эффект отскока между bid и ask</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-arma" id="toc-sec-arma" class="nav-link" data-scroll-target="#sec-arma"><span class="header-section-number">7.5</span> Модели ARMA и выбор порядка</a>
+  <ul class="collapse">
+<li><a href="#%D0%BE%D0%B1%D1%89%D0%B0%D1%8F-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C" id="toc-общая-модель" class="nav-link" data-scroll-target="#%D0%BE%D0%B1%D1%89%D0%B0%D1%8F-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C"><span class="header-section-number">7.5.1</span> Общая модель</a></li>
+  <li><a href="#%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BA%D1%80%D0%B8%D1%82%D0%B5%D1%80%D0%B8%D0%B8" id="toc-информационные-критерии" class="nav-link" data-scroll-target="#%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BA%D1%80%D0%B8%D1%82%D0%B5%D1%80%D0%B8%D0%B8"><span class="header-section-number">7.5.2</span> Информационные критерии</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-diagnostics" id="toc-sec-diagnostics" class="nav-link" data-scroll-target="#sec-diagnostics"><span class="header-section-number">7.6</span> Диагностика остатков</a></li>
+  <li>
+<a href="#sec-oos" id="toc-sec-oos" class="nav-link" data-scroll-target="#sec-oos"><span class="header-section-number">7.7</span> Прогноз вне выборки</a>
+  <ul class="collapse">
+<li><a href="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD-%D1%87%D0%B5%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7" id="toc-как-устроен-честный-прогноз" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD-%D1%87%D0%B5%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7"><span class="header-section-number">7.7.1</span> Как устроен честный прогноз</a></li>
+  <li><a href="#%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%B0" id="toc-доходности-индекса" class="nav-link" data-scroll-target="#%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%B0"><span class="header-section-number">7.7.2</span> Доходности индекса</a></li>
+  <li><a href="#%D1%82%D0%B5%D1%80%D0%BC-%D1%81%D0%BF%D1%80%D0%B5%D0%B4" id="toc-терм-спред" class="nav-link" data-scroll-target="#%D1%82%D0%B5%D1%80%D0%BC-%D1%81%D0%BF%D1%80%D0%B5%D0%B4"><span class="header-section-number">7.7.3</span> Терм-спред</a></li>
+  <li><a href="#%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7" id="toc-многошаговый-прогноз" class="nav-link" data-scroll-target="#%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7"><span class="header-section-number">7.7.4</span> Многошаговый прогноз</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-arma" id="toc-sec-exercises-arma" class="nav-link" data-scroll-target="#sec-exercises-arma"><span class="header-section-number">7.8</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">7.8.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">7.8.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">7.8.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">7.8.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-arma.html">Временные ряды</a></li><li class="breadcrumb-item"><a href="./07-arma.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-arma.html">Временные ряды</a></li><li class="breadcrumb-item"><a href="./07-arma.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span>
+</h1>
 </div>
 
 
@@ -384,39 +496,1080 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбук Time_series_models_(base)_2026_ru (первая половина); moex-analytics/arima-analysis.py.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>Если индекс Московской биржи сегодня вырос, стоит ли ждать роста и завтра? Посчитаем корреляцию между дневной доходностью индекса IMOEX и доходностью предыдущего дня за всю историю индекса, с 22.09.1997 по 29.09.2026. Она равна 0,063: небольшая, но положительная и статистически значимая. Кажется, рынок обладает «инерцией», и на ней можно заработать.</p>
+<p>Посмотрим, однако, на отдельные годы. В 2022 г. та же корреляция была −0,17, то есть после роста чаще следовало падение. В 2023 г. она стала 0,15, в 2024 г. – 0,16, а в 2025 г. – −0,01. Правило «покупай после роста» в одни годы работало бы, в другие приносило бы убытки, и заранее не было бы известно, какой год наступил. Устойчива ли вообще зависимость доходности от прошлого? Как отличить настоящую закономерность от шума? И как построить прогноз, который не обманет на новых данных?</p>
+<p>Эта глава вводит инструменты для ответа на такие вопросы: автокорреляционную функцию, тесты на стационарность и модели ARMA. Модели ARMA – отправная точка анализа временных рядов. Для доходностей акций они обычно показывают, что предсказать почти нечего. Этот отрицательный результат тоже важен: он задаёт планку, которую должна превзойти любая торговая стратегия. Зато для других рядов, например процентных спредов, модели ARMA описывают данные хорошо.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Автокорреляция: ACF и PACF</li>
-<li>Стационарность: тесты ADF и KPSS</li>
-<li>Белый шум и случайное блуждание</li>
-<li>Модели AR, MA и ARMA; выбор порядка по AIC и BIC</li>
-<li>Диагностика остатков: тест Льюнга – Бокса</li>
-<li>Прогноз и его оценка вне выборки</li>
+<li>Измеряем зависимость ряда от своего прошлого: автокорреляционная функция и тест Льюнга – Бокса.</li>
+<li>Разбираем белый шум, случайное блуждание и стационарность; тесты ADF и KPSS.</li>
+<li>Строим модели AR и MA на рядах, где они действительно уместны: терм-спред ОФЗ и неликвидная акция.</li>
+<li>Выбираем порядок модели ARMA по информационным критериям и проверяем остатки.</li>
+<li>Оцениваем прогноз вне выборки и разбираем типичные ошибки при прогнозировании.</li>
 </ul>
+<p><strong>Данные:</strong> <code>indexes.parquet</code>, <code>stocks.parquet</code>, <code>zcyc.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> лог-доходности и волатильность (глава «Доходность и риск»), основы статистики: корреляция, проверка гипотез.</p>
 </div>
 </div>
+<p>В примерах главы используются статистические функции из пакета statsmodels и модули книги.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> acf, pacf, adfuller, kpss</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima.model <span class="im">import</span> ARIMA</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.diagnostic <span class="im">import</span> acorr_ljungbox</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sec-acf" class="level2 page-columns page-full" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-acf">
+<span class="header-section-number">7.1</span> Автокорреляция</h2>
+<section id="корреляция-ряда-с-собственным-прошлым" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="корреляция-ряда-с-собственным-прошлым">
+<span class="header-section-number">7.1.1</span> Корреляция ряда с собственным прошлым</h3>
+<p>Пусть <span class="math inline">\(r_t\)</span> – доходность в день <span class="math inline">\(t\)</span>. Автокорреляция порядка <span class="math inline">\(k\)</span> – это корреляция ряда с самим собой, сдвинутым на <span class="math inline">\(k\)</span> периодов:</p>
+<p><span id="eq-acf"><span class="math display">\[
+\rho_k = \frac{\operatorname{Cov}(r_t, r_{t-k})}{\operatorname{Var}(r_t)}.
+\tag{7.1}\]</span></span></p>
+<p>Число <span class="math inline">\(k\)</span> называют лагом. Набор <span class="math inline">\(\rho_1, \rho_2, \dots\)</span> как функция от лага – это автокорреляционная функция (ACF, autocorrelation function). По выборке из <span class="math inline">\(T\)</span> наблюдений её оценивают выборочной автокорреляцией <span class="math inline">\(\hat\rho_k\)</span>: в числителе стоит средняя по выборке сумма произведений отклонений <span class="math inline">\(r_t\)</span> и <span class="math inline">\(r_{t-k}\)</span> от среднего, в знаменателе – выборочная дисперсия.</p>
+<p>Даже если истинные автокорреляции равны нулю, выборочные будут отличаться от нуля из-за случайности. Для ряда независимых одинаково распределённых величин <span class="math inline">\(\hat\rho_k\)</span> примерно нормальна со средним 0 и стандартным отклонением <span class="math inline">\(1/\sqrt{T}\)</span>. Отсюда граница значимости <span class="math inline">\(\pm 1{,}96/\sqrt{T}\)</span>: выборочная автокорреляция за её пределами на уровне 5% отличается от нуля. График ACF с этой полосой называют коррелограммой.</p>
+<p>Граница <span class="math inline">\(\pm 1{,}96/\sqrt{T}\)</span> быстро сужается с ростом выборки. За 20 лет набирается около 5 тыс. торговых дней, и граница опускается до 0,028. На таких выборках значимой оказывается даже очень слабая зависимость, которая не имеет никакого практического значения. К этому различию статистической и экономической значимости мы ещё вернёмся.</p>
+</section><section id="коррелограмма-доходностей-и-их-модулей" class="level3 page-columns page-full" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="коррелограмма-доходностей-и-их-модулей">
+<span class="header-section-number">7.1.2</span> Коррелограмма доходностей и их модулей</h3>
+<p>Построим коррелограммы дневных лог-доходностей IMOEX с 2003 г. – периода, когда рынок акций уже стал достаточно ликвидным. Рядом поставим коррелограмму модулей доходности <span class="math inline">\(|r_t|\)</span>: она показывает, связана ли <em>величина</em> сегодняшнего движения с величиной вчерашнего, независимо от знака. Функцию для рисования коррелограммы оформим отдельно, она понадобится в главе ещё не раз.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_acf_bars(ax, x, nlags<span class="op">=</span><span class="dv">30</span>, kind<span class="op">=</span><span class="st">"acf"</span>, title<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Коррелограмма: столбики ACF (или PACF) и полоса значимости ±1,96/√T."""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> acf <span class="cf">if</span> kind <span class="op">==</span> <span class="st">"acf"</span> <span class="cf">else</span> pacf</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> f(x, nlags<span class="op">=</span>nlags)[<span class="dv">1</span>:]          <span class="co"># лаг 0 всегда равен 1, его не рисуем</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    band <span class="op">=</span> <span class="fl">1.96</span> <span class="op">/</span> np.sqrt(<span class="bu">len</span>(x))         <span class="co"># граница для белого шума</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ax.axhspan(<span class="op">-</span>band, band, color<span class="op">=</span>plot.GREY, alpha<span class="op">=</span><span class="fl">0.25</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ax.bar(np.arange(<span class="dv">1</span>, nlags <span class="op">+</span> <span class="dv">1</span>), vals, width<span class="op">=</span><span class="fl">0.6</span>, color<span class="op">=</span>plot.BLUE)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ax.axhline(<span class="dv">0</span>, color<span class="op">=</span>plot.LIGHT, lw<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(plt.MaxNLocator(integer<span class="op">=</span><span class="va">True</span>))   <span class="co"># лаги – целые числа</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Лаг"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Лог-доходности индекса с 2003 г.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>imoex <span class="op">=</span> data.load_index(<span class="st">"IMOEX"</span>, start<span class="op">=</span><span class="st">"2003-01-01"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.log(imoex).diff().dropna()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">2.8</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">0</span>], r, title<span class="op">=</span><span class="st">"Доходность $r_t$"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">1</span>], r.<span class="bu">abs</span>(), title<span class="op">=</span><span class="st">"Модуль доходности $|r_t|$"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plot.source(axes[<span class="dv">0</span>], <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-acf-returns" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-acf-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-acf-returns-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acf-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.1: Автокорреляции дневных лог-доходностей IMOEX и их модулей, 2003–2026 гг. Серая полоса – граница значимости ±1,96/√T
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>В R коррелограмму строит функция <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code>, а в стиле ggplot2 – функция <code><a href="https://pkg.robjhyndman.com/forecast/reference/autoplot.acf.html">ggAcf()</a></code> из пакета forecast.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/forecast/">forecast</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">imoex</span> <span class="op">&lt;-</span> <span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"IMOEX"</span>, start <span class="op">=</span> <span class="st">"2003-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">imoex</span><span class="op">$</span><span class="va">close</span><span class="op">)</span><span class="op">)</span>   <span class="co"># дневные лог-доходности</span></span>
+<span></span>
+<span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/autoplot.acf.html">ggAcf</a></span><span class="op">(</span><span class="va">r</span>, lag.max <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Доходность"</span><span class="op">)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="07-arma_files/figure-html/unnamed-chunk-4-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/autoplot.acf.html">ggAcf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, lag.max <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Модуль доходности"</span><span class="op">)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="07-arma_files/figure-html/unnamed-chunk-4-4.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Два графика устроены совсем по-разному. Автокорреляции самих доходностей малы: первая равна −0,011 при границе значимости ±0,025. За границу выходят 13 из 30 лагов, но это следствие большой выборки: наибольшая по модулю автокорреляция равна всего 0,061. Автокорреляции модулей, напротив, велики и убывают очень медленно: 0,27 на первом лаге, 0,23 на пятом и ещё 0,16 на тридцатом, то есть спустя полтора месяца торгов.</p>
+<p>Это два из «стилизованных фактов» финансовых доходностей <span class="citation" data-cites="cont2001">(<a href="references.html#ref-cont2001" role="doc-biblioref">Cont 2001 г.</a>)</span>, которые наблюдаются на рынках разных стран и в разные периоды:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-cont2001" class="csl-entry" role="listitem">
+Cont, Rama. 2001 г. <span>«Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues»</span>. <em>Quantitative Finance</em> 1 (2): 223–36. <a href="https://doi.org/10.1080/713665670">https://doi.org/10.1080/713665670</a>.
+</div></div><ol type="1">
+<li>
+<strong>Линейная автокорреляция доходностей близка к нулю.</strong> Знак завтрашней доходности почти не зависит от знака сегодняшней.</li>
+<li>
+<strong>Модули и квадраты доходностей сильно автокоррелированы.</strong> За днями больших движений следуют дни больших движений, за спокойными днями – спокойные. Это кластеризация волатильности, которую мы видели на графике скользящей волатильности в главе «Доходность и риск».</li>
+</ol>
+<p>Отсюда важное различие. Некоррелированность доходностей не означает их независимости. Ряд может быть непредсказуем по знаку и при этом хорошо предсказуем по размаху колебаний. Модели ARMA этой главы описывают только первое – условное среднее ряда. Размах колебаний, то есть условную дисперсию, описывают модели GARCH из следующей главы.</p>
+</section><section id="тест-льюнга-бокса" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="тест-льюнга-бокса">
+<span class="header-section-number">7.1.3</span> Тест Льюнга – Бокса</h3>
+<p>Смотреть на коррелограмму лаг за лагом неудобно: при 30 лагах и уровне 5% в среднем полтора столбика выйдут за границу даже у чистого шума. Тест Льюнга – Бокса проверяет сразу гипотезу, что первые <span class="math inline">\(m\)</span> автокорреляций равны нулю:</p>
+<p><span id="eq-ljung-box"><span class="math display">\[
+Q(m) = T(T+2)\sum_{k=1}^{m}\frac{\hat\rho_k^2}{T-k}.
+\tag{7.2}\]</span></span></p>
+<p>Если гипотеза верна, статистика <span class="math inline">\(Q(m)\)</span> имеет распределение <span class="math inline">\(\chi^2\)</span> с <span class="math inline">\(m\)</span> степенями свободы. Большие значения <span class="math inline">\(Q\)</span> и малые p-значения говорят о том, что в ряде есть автокорреляция. Применим тест с <span class="math inline">\(m = 10\)</span> к доходностям IMOEX за несколько периодов.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>r_full <span class="op">=</span> np.log(data.load_index(<span class="st">"IMOEX"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]).diff().dropna()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> start <span class="kw">in</span> [<span class="st">"1997"</span>, <span class="st">"2003"</span>, <span class="st">"2010"</span>, <span class="st">"2015"</span>]:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> r_full.loc[start:]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    lb <span class="op">=</span> acorr_ljungbox(x, lags<span class="op">=</span>[<span class="dv">10</span>])                 <span class="co"># таблица со статистикой и p-значением</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Период"</span>: <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">.</span>index[<span class="dv">0</span>]<span class="sc">.</span>year<span class="sc">}</span><span class="ss">–</span><span class="sc">{</span>x<span class="sc">.</span>index[<span class="op">-</span><span class="dv">1</span>]<span class="sc">.</span>year<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Наблюдений"</span>: <span class="bu">len</span>(x),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ACF(1)"</span>: acf(x, nlags<span class="op">=</span><span class="dv">1</span>)[<span class="dv">1</span>],</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Граница ±1,96/√T"</span>: <span class="fl">1.96</span> <span class="op">/</span> np.sqrt(<span class="bu">len</span>(x)),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"p-значение Q(10)"</span>: lb[<span class="st">"lb_pvalue"</span>].iloc[<span class="dv">0</span>],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Числа в русской записи: запятая, типографский минус, пробел между разрядами</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ru <span class="op">=</span> <span class="kw">lambda</span> v, d<span class="op">=</span><span class="dv">3</span>: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:,.</span>{d}f<span class="sc">}</span><span class="ss">"</span>.replace(<span class="st">","</span>, <span class="st">"&nbsp;"</span>).replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>pval <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"&lt;0,0001"</span> <span class="cf">if</span> v <span class="op">&lt;</span> <span class="fl">1e-4</span> <span class="cf">else</span> ru(v, <span class="dv">4</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows).style.<span class="bu">format</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"Наблюдений"</span>: <span class="kw">lambda</span> v: ru(v, <span class="dv">0</span>), <span class="st">"ACF(1)"</span>: ru, <span class="st">"Граница ±1,96/√T"</span>: ru,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>     <span class="st">"p-значение Q(10)"</span>: pval}).hide(axis<span class="op">=</span><span class="st">"index"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-ljung-box" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ljung-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.1: Первая автокорреляция и тест Льюнга – Бокса (10 лагов) для дневных доходностей IMOEX
+</figcaption><div aria-describedby="tbl-ljung-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_9dd39" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th id="T_9dd39_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Период</th>
+<th id="T_9dd39_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Наблюдений</th>
+<th id="T_9dd39_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">ACF(1)</th>
+<th id="T_9dd39_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Граница ±1,96/√T</th>
+<th id="T_9dd39_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">p-значение Q(10)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td id="T_9dd39_row0_col0" class="data row0 col0">1997–2026</td>
+<td id="T_9dd39_row0_col1" class="data row0 col1">7&nbsp;221</td>
+<td id="T_9dd39_row0_col2" class="data row0 col2">0,063</td>
+<td id="T_9dd39_row0_col3" class="data row0 col3">0,023</td>
+<td id="T_9dd39_row0_col4" class="data row0 col4">&lt;0,0001</td>
+</tr>
+<tr class="even">
+<td id="T_9dd39_row1_col0" class="data row1 col0">2003–2026</td>
+<td id="T_9dd39_row1_col1" class="data row1 col1">5&nbsp;915</td>
+<td id="T_9dd39_row1_col2" class="data row1 col2">−0,011</td>
+<td id="T_9dd39_row1_col3" class="data row1 col3">0,025</td>
+<td id="T_9dd39_row1_col4" class="data row1 col4">0,0031</td>
+</tr>
+<tr class="odd">
+<td id="T_9dd39_row2_col0" class="data row2 col0">2010–2026</td>
+<td id="T_9dd39_row2_col1" class="data row2 col1">4&nbsp;186</td>
+<td id="T_9dd39_row2_col2" class="data row2 col2">−0,035</td>
+<td id="T_9dd39_row2_col3" class="data row2 col3">0,030</td>
+<td id="T_9dd39_row2_col4" class="data row2 col4">0,0602</td>
+</tr>
+<tr class="even">
+<td id="T_9dd39_row3_col0" class="data row3 col0">2015–2026</td>
+<td id="T_9dd39_row3_col1" class="data row3 col1">2&nbsp;943</td>
+<td id="T_9dd39_row3_col2" class="data row3 col2">−0,053</td>
+<td id="T_9dd39_row3_col3" class="data row3 col3">0,036</td>
+<td id="T_9dd39_row3_col4" class="data row3 col4">0,0046</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>За всю историю индекса первая автокорреляция положительна, а тест уверенно отвергает отсутствие автокорреляции. Но почти весь этот эффект создают 1997–2002 гг., когда рынок был узким и цены многих акций индекса отставали от новостей. С 2003 г. первая автокорреляция отрицательна (−0,011), а с 2015 г. равна −0,053. Для периода с 2010 г. p-значение 0,06, и на уровне 5% гипотеза об отсутствии автокорреляции не отвергается.</p>
+<p>Какой из этого вывод? Автокорреляция доходностей существует, но она мала, меняет знак и зависит от выбранного периода. Малое p-значение на длинной выборке говорит лишь о том, что корреляция, скорее всего, не равна нулю в точности. Оно ничего не говорит о том, достаточно ли она велика, чтобы на ней заработать после комиссий.</p>
+</section><section id="автокорреляция-по-годам" class="level3 page-columns page-full" data-number="7.1.4"><h3 data-number="7.1.4" class="anchored" data-anchor-id="автокорреляция-по-годам">
+<span class="header-section-number">7.1.4</span> Автокорреляция по годам</h3>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>За всю историю IMOEX первая автокорреляция дневных доходностей положительна. Сколько, по-вашему, лет из трёх десятилетий она была отрицательной? Сколько раз она по модулю превышала 0,1?</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Автокорреляция доходности с доходностью предыдущего дня внутри каждого года</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> r_full.groupby(r_full.index.year).<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.autocorr(<span class="dv">1</span>)).loc[<span class="dv">1998</span>:]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>band <span class="op">=</span> <span class="fl">1.96</span> <span class="op">/</span> np.sqrt(<span class="dv">250</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax.axhspan(<span class="op">-</span>band, band, color<span class="op">=</span>plot.GREY, alpha<span class="op">=</span><span class="fl">0.25</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.bar(by_year.index, by_year, color<span class="op">=</span>np.where(by_year <span class="op">&gt;</span> <span class="dv">0</span>, plot.BLUE, plot.ORANGE), width<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span>plot.LIGHT, lw<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-acf-by-year" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-acf-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-acf-by-year-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acf-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.2: Первая автокорреляция дневных доходностей IMOEX по годам. Серая полоса – граница значимости для года из 250 торговых дней; 2026 г. – по конец сентября
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Из 29 лет с 1998 г. первая автокорреляция была отрицательной в 9, а по модулю превышала 0,1 в 10. Устойчиво положительной она была только в 1998–2003 гг., на узком рынке тех лет. С 2004 г. отрицательных лет 9 из 23, а самые большие по модулю значения обоих знаков пришлись на последние годы: −0,17 в 2022 г., 0,15 и 0,16 в 2023 и 2024 гг.</p>
+<p>Обратите внимание на парадокс. Средняя по годам автокорреляция с 2004 г. положительна (0,009), а посчитанная по всему периоду с 2003 г. – отрицательна (−0,011). Объединённая оценка придаёт больший вес годам с высокой волатильностью, а в бурном 2022 г. автокорреляция была сильно отрицательной. Если вывод о знаке зависимости меняется от способа усреднения, устойчивой закономерности, скорее всего, нет. Это типичная картина для ликвидного рынка: если бы устойчивая автокорреляция существовала, участники быстро бы её использовали и тем самым устранили.</p>
+<p>Похожую проверку можно провести на недельных и месячных доходностях. Автокорреляции на более длинных горизонтах иногда оказываются больше, но и наблюдений становится в 5 и в 20 раз меньше, поэтому граница значимости расширяется во столько же корней раз. Классическую проверку гипотезы случайного блуждания через сравнение дисперсий доходностей на разных горизонтах предложили <span class="citation" data-cites="lo1988">Lo и MacKinlay (<a href="references.html#ref-lo1988" role="doc-biblioref">1988 г.</a>)</span>. Мы вернёмся к этой идее в упражнениях.</p>
+<div class="no-row-height column-margin column-container"></div></section></section><section id="sec-stationarity" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="sec-stationarity">
+<span class="header-section-number">7.2</span> Стационарность</h2>
+<section id="белый-шум-и-случайное-блуждание" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="белый-шум-и-случайное-блуждание">
+<span class="header-section-number">7.2.1</span> Белый шум и случайное блуждание</h3>
+<p>Две простейшие модели временного ряда служат точками отсчёта для всего остального.</p>
+<p><strong>Белый шум</strong> <span class="math inline">\(\varepsilon_t\)</span> – последовательность величин с нулевым средним, постоянной дисперсией <span class="math inline">\(\sigma^2\)</span> и нулевыми автокорреляциями на всех лагах. Его коррелограмма целиком лежит в пределах полосы значимости. Если к тому же величины независимы и нормальны, говорят о гауссовском белом шуме.</p>
+<p><strong>Случайное блуждание</strong> – ряд, приращения которого являются белым шумом:</p>
+<p><span id="eq-random-walk"><span class="math display">\[
+p_t = \mu + p_{t-1} + \varepsilon_t.
+\tag{7.3}\]</span></span></p>
+<p>Если <span class="math inline">\(p_t\)</span> – логарифм цены, то <span class="math inline">\(p_t - p_{t-1} = r_t\)</span> – лог-доходность, и гипотеза случайного блуждания цены – это гипотеза о том, что доходности являются белым шумом со средним <span class="math inline">\(\mu\)</span>. Первый раздел главы показал, что для IMOEX это неплохое приближение, если говорить об автокорреляциях доходностей (но не их модулей).</p>
+<p>Случайное блуждание обманчиво: оно выглядит так, будто в нём есть тренды, циклы и уровни поддержки. Сравним логарифм индекса IMOEX с тремя искусственными рядами. Каждый из них – случайное блуждание, шаги которого взяты из нормального распределения с тем же средним и стандартным отклонением, что у дневных доходностей индекса.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">7</span>)                      <span class="co"># фиксируем зерно для воспроизводимости</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>log_p <span class="op">=</span> np.log(imoex)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Случайное блуждание: накопленная сумма нормальных шагов, старт с того же уровня</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    steps <span class="op">=</span> rng.normal(r.mean(), r.std(), size<span class="op">=</span><span class="bu">len</span>(r))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    walk <span class="op">=</span> log_p.iloc[<span class="dv">0</span>] <span class="op">+</span> np.concatenate([[<span class="dv">0</span>], steps.cumsum()])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    ax.plot(log_p.index, walk, color<span class="op">=</span>plot.GREY, lw<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.plot(log_p.index, log_p, color<span class="op">=</span>plot.BLUE, lw<span class="op">=</span><span class="fl">1.2</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Логарифм уровня"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-random-walk" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-random-walk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-random-walk-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-random-walk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.3: Логарифм IMOEX (синим) и три случайных блуждания с той же средней доходностью и волатильностью
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>На первый взгляд серые линии мало отличаются от синей. В каждой можно увидеть «бычий рынок», «коррекцию» и «боковик», хотя никакой закономерности в них нет по построению. Это полезная прививка от поиска фигур технического анализа на графике цены.</p>
+</section><section id="что-такое-стационарность" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="что-такое-стационарность">
+<span class="header-section-number">7.2.2</span> Что такое стационарность</h3>
+<p>Ряд называют (слабо) стационарным, если его среднее и дисперсия не меняются во времени, а ковариация между <span class="math inline">\(x_t\)</span> и <span class="math inline">\(x_{t-k}\)</span> зависит только от лага <span class="math inline">\(k\)</span>, но не от момента <span class="math inline">\(t\)</span>. Стационарность нужна, чтобы по одной реализации ряда можно было оценивать его свойства: среднее, ACF, параметры модели. Если свойства ряда меняются, то выборочное среднее за 20 лет описывает не «среднее ряда», а просто среднее за эти 20 лет.</p>
+<p>Случайное блуждание нестационарно: его дисперсия растёт со временем, <span class="math inline">\(\operatorname{Var}(p_t) = t\sigma^2\)</span>, а шок <span class="math inline">\(\varepsilon_t\)</span> не затухает и остаётся в уровне ряда навсегда. Про такой ряд говорят, что у него есть единичный корень, или что он интегрирован первого порядка, <span class="math inline">\(I(1)\)</span>. Его первая разность стационарна, <span class="math inline">\(I(0)\)</span>. Цены активов обычно ведут себя как <span class="math inline">\(I(1)\)</span>, доходности – как <span class="math inline">\(I(0)\)</span>. Поэтому модели этой главы строят для доходностей, а не для цен.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: регрессия уровня на уровень">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: регрессия уровня на уровень
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Корреляция двух цен почти ничего не говорит о связи между активами. Мы сгенерировали 1000 пар <em>независимых</em> случайных блужданий длиной 1000 шагов. У 46% пар корреляция уровней по модулю превысила 0,5, а у приращений тех же рядов – у 0%. Это явление называют ложной регрессией. Прежде чем считать корреляции, строить регрессии или модели ARMA, переходите от цен к доходностям. Исключение составляет коинтеграция, когда у двух нестационарных рядов есть стационарная комбинация; её мы не рассматриваем.</p>
+</div>
+</div>
+</section><section id="тесты-adf-и-kpss" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="тесты-adf-и-kpss">
+<span class="header-section-number">7.2.3</span> Тесты ADF и KPSS</h3>
+<p>Визуально отличить единичный корень от очень медленно затухающего стационарного ряда трудно, поэтому используют формальные тесты. Два самых распространённых построены на противоположных нулевых гипотезах.</p>
+<ul>
+<li>
+<strong>Тест Дики – Фуллера (ADF, augmented Dickey – Fuller).</strong> Нулевая гипотеза: у ряда есть единичный корень (ряд нестационарен). Малое p-значение – аргумент в пользу стационарности.</li>
+<li>
+<strong>Тест KPSS (Kwiatkowski – Phillips – Schmidt – Shin).</strong> Нулевая гипотеза: ряд стационарен. Малое p-значение – аргумент в пользу нестационарности.</li>
+</ul>
+<p>Тесты проверяют разные гипотезы, поэтому их полезно применять вместе:</p>
+<div id="tbl-adf-kpss-logic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-adf-kpss-logic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.2: Как читать тесты ADF и KPSS вместе
+</figcaption><div aria-describedby="tbl-adf-kpss-logic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">ADF</th>
+<th style="text-align: left;">KPSS</th>
+<th style="text-align: left;">Вывод</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">не отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">ряд стационарен</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">не отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">ряд нестационарен</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">не отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">не отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">данных мало, тесты не различают гипотезы</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">отвергает <span class="math inline">\(H_0\)</span>
+</td>
+<td style="text-align: left;">противоречие: возможен структурный сдвиг или изменение дисперсии</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Применим оба теста к логарифму индекса и к его доходностям.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stationarity_tests(x, trend<span class="op">=</span><span class="st">"c"</span>):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""p-значения тестов ADF (H0: единичный корень) и KPSS (H0: стационарность).</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">    trend="c" – в уравнении теста есть константа, trend="ct" – константа и линейный тренд.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"ADF, p"</span>: adfuller(x, regression<span class="op">=</span>trend)[<span class="dv">1</span>],</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KPSS, p"</span>: kpss(x, regression<span class="op">=</span>trend, nlags<span class="op">=</span><span class="st">"auto"</span>)[<span class="dv">1</span>]}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># У логарифма цены есть снос вверх, поэтому для него включаем тренд</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"Логарифм цены"</span>: stationarity_tests(log_p, trend<span class="op">=</span><span class="st">"ct"</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Доходность"</span>: stationarity_tests(r)}).T.style.<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.3f}</span><span class="st">"</span>, decimal<span class="op">=</span><span class="st">","</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-stationarity" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stationarity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.3: Тесты ADF и KPSS: логарифм IMOEX и дневные доходности, 2003–2026 гг.
+</figcaption><div aria-describedby="tbl-stationarity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_42fdc" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_42fdc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ADF, p</th>
+<th id="T_42fdc_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">KPSS, p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_42fdc_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Логарифм цены</th>
+<td id="T_42fdc_row0_col0" class="data row0 col0">0,088</td>
+<td id="T_42fdc_row0_col1" class="data row0 col1">0,010</td>
+</tr>
+<tr class="even">
+<th id="T_42fdc_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Доходность</th>
+<td id="T_42fdc_row1_col0" class="data row1 col0">0,000</td>
+<td id="T_42fdc_row1_col1" class="data row1 col1">0,100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tseries</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">log_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">imoex</span><span class="op">$</span><span class="va">close</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tseries/man/adf.test.html">adf.test</a></span><span class="op">(</span><span class="va">log_p</span><span class="op">)</span>                   <span class="co"># H0: единичный корень; тренд включён всегда</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Augmented Dickey-Fuller Test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  log_p</span></span>
+<span><span class="co">#&gt; Dickey-Fuller = -3.0961, Lag order = 18, p-value = 0.1141</span></span>
+<span><span class="co">#&gt; alternative hypothesis: stationary</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tseries/man/kpss.test.html">kpss.test</a></span><span class="op">(</span><span class="va">log_p</span>, null <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span>  <span class="co"># H0: стационарность вокруг тренда</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  KPSS Test for Trend Stationarity</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  log_p</span></span>
+<span><span class="co">#&gt; KPSS Trend = 2.448, Truncation lag parameter = 11, p-value = 0.01</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tseries/man/adf.test.html">adf.test</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Augmented Dickey-Fuller Test</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  r</span></span>
+<span><span class="co">#&gt; Dickey-Fuller = -17.862, Lag order = 18, p-value = 0.01</span></span>
+<span><span class="co">#&gt; alternative hypothesis: stationary</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tseries/man/kpss.test.html">kpss.test</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  KPSS Test for Level Stationarity</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; data:  r</span></span>
+<span><span class="co">#&gt; KPSS Level = 0.28387, Truncation lag parameter = 11, p-value = 0.1</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Для логарифма цены ADF не отвергает единичный корень (p = 0,09), а KPSS отвергает стационарность: цена ведёт себя как случайное блуждание. Для доходностей всё наоборот: ADF уверенно отвергает единичный корень, KPSS не отвергает стационарность. Результат зависит от спецификации теста. У логарифма цены есть снос вверх, поэтому в уравнение теста мы включили тренд (<code>regression="ct"</code>). Если оставить только константу, ADF для периода с 2003 г. даёт p = 0,042 и формально отвергает единичный корень на уровне 5%, хотя по всей истории индекса с трендом p = 0,66. Пограничные p-значения теста на единичный корень – повод не для уверенного вывода, а для проверки его устойчивости к спецификации и периоду.</p>
+<p>Табличные p-значения KPSS ограничены диапазоном от 0,01 до 0,1, поэтому значения 0,010 и 0,100 в таблице означают «0,01 или меньше» и «0,1 или больше».</p>
+<p>Стационарность доходностей по этим тестам не означает, что их свойства постоянны. Средняя доходность стационарна, а волатильность, как мы видели, меняется из года в год. Тесты на единичный корень проверяют только одну форму нестационарности.</p>
+</section></section><section id="sec-ar" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-ar">
+<span class="header-section-number">7.3</span> Модель AR(1): терм-спред ОФЗ</h2>
+<section id="устройство-модели" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="устройство-модели">
+<span class="header-section-number">7.3.1</span> Устройство модели</h3>
+<p>Модель авторегрессии первого порядка AR(1) говорит, что сегодняшнее значение ряда – это доля вчерашнего плюс шок:</p>
+<p><span id="eq-ar1"><span class="math display">\[
+x_t = c + \varphi x_{t-1} + \varepsilon_t, \qquad |\varphi| &lt; 1.
+\tag{7.4}\]</span></span></p>
+<p>При <span class="math inline">\(|\varphi| &lt; 1\)</span> ряд стационарен и колеблется вокруг среднего <span class="math inline">\(\mu = c/(1-\varphi)\)</span>, возвращаясь к нему после каждого шока. Это свойство называют возвратом к среднему (mean reversion). Параметр <span class="math inline">\(\varphi\)</span> задаёт скорость возврата: отклонение от среднего через <span class="math inline">\(h\)</span> периодов в среднем уменьшается в <span class="math inline">\(\varphi^h\)</span> раз. Удобная мера скорости – период полураспада, за который отклонение сокращается вдвое:</p>
+<p><span id="eq-half-life"><span class="math display">\[
+h_{1/2} = \frac{\ln 0{,}5}{\ln \varphi}.
+\tag{7.5}\]</span></span></p>
+<p>При <span class="math inline">\(\varphi = 1\)</span> модель превращается в случайное блуждание, и возврата к среднему нет.</p>
+<p>У модели AR(1) характерная коррелограмма: автокорреляции убывают геометрически, <span class="math inline">\(\rho_k = \varphi^k\)</span>. Чтобы отличить AR(1) от процессов с более длинной памятью, используют частную автокорреляционную функцию (PACF, partial autocorrelation function). Частная автокорреляция на лаге <span class="math inline">\(k\)</span> – это коэффициент при <span class="math inline">\(x_{t-k}\)</span> в регрессии <span class="math inline">\(x_t\)</span> на <span class="math inline">\(x_{t-1}, \dots, x_{t-k}\)</span>, то есть связь с <span class="math inline">\(k\)</span>-м лагом за вычетом того, что объясняют более близкие лаги. У модели AR(1) частная автокорреляция отлична от нуля только на первом лаге: всё, что <span class="math inline">\(x_{t-2}\)</span> говорит о <span class="math inline">\(x_t\)</span>, уже содержится в <span class="math inline">\(x_{t-1}\)</span>.</p>
+</section><section id="данные-разница-между-длинными-и-короткими-ставками" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="данные-разница-между-длинными-и-короткими-ставками">
+<span class="header-section-number">7.3.2</span> Данные: разница между длинными и короткими ставками</h3>
+<p>Доходности акций плохо подходят для иллюстрации AR(1): у них почти нет автокорреляции. Возьмём ряд, у которого память точно есть, – терм-спред, разницу между доходностями длинных и коротких государственных облигаций. Используем кривую бескупонной доходности ОФЗ, которую публикует Московская биржа, и возьмём разницу доходностей на сроках 10 лет и 3 месяца на конец каждого месяца.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Кривая бескупонной доходности: строки – даты, столбцы – сроки в годах</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>zcyc <span class="op">=</span> data.load_zcyc().pivot_table(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"period"</span>, values<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Терм-спред на последний торговый день каждого месяца</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>spread <span class="op">=</span> (zcyc[<span class="fl">10.0</span>] <span class="op">-</span> zcyc[<span class="fl">0.25</span>]).resample(<span class="st">"ME"</span>).last().dropna()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax.plot(spread.index, spread, color<span class="op">=</span>plot.BLUE)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span>plot.LIGHT, lw<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"п. п."</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-term-spread" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-term-spread-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-term-spread-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-term-spread-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.4: Терм-спред ОФЗ: разница бескупонных доходностей на сроках 10 лет и 3 месяца, конец месяца, п. п.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>В нормальной ситуации длинные ставки выше коротких: инвестор требует премию за то, что вкладывает деньги надолго, и терм-спред положителен. Но в России спред часто уходил в минус – в 33% месяцев с 2014 г. Так бывает, когда Банк России резко поднимает ключевую ставку: короткие ставки идут вслед за ключевой, а длинные растут меньше, потому что рынок ожидает её снижения в будущем. Минимум, −7,0 п. п., был в ноябре 2024 г., когда ключевая ставка достигла 21%. После начала цикла снижения ставки спред вернулся в плюс.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">2.8</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">0</span>], spread, nlags<span class="op">=</span><span class="dv">12</span>, kind<span class="op">=</span><span class="st">"acf"</span>, title<span class="op">=</span><span class="st">"ACF"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">1</span>], spread, nlags<span class="op">=</span><span class="dv">12</span>, kind<span class="op">=</span><span class="st">"pacf"</span>, title<span class="op">=</span><span class="st">"PACF"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plot.source(axes[<span class="dv">0</span>], <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-spread-acf" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-spread-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-spread-acf-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spread-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.5: ACF и PACF месячного терм-спреда ОФЗ
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Коррелограммы похожи на учебник: ACF убывает плавно, почти геометрически, а PACF после первого лага падает до уровня шума. Это «подпись» модели AR(1).</p>
+</section><section id="оценка-модели" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="оценка-модели">
+<span class="header-section-number">7.3.3</span> Оценка модели</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># order=(p, d, q): p = 1 лаг авторегрессии, d = 0 (ряд не дифференцируем), q = 0</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ar1 <span class="op">=</span> ARIMA(spread, order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)).fit()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ar1.summary().tables[<span class="dv">1</span>])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ==============================================================================</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  coef    std err          z      P&gt;|z|      [0.025      0.975]</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------------------------</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; const          0.8193      0.837      0.979      0.328      -0.821       2.459</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ar.L1          0.8992      0.027     33.205      0.000       0.846       0.952</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sigma2         0.8269      0.074     11.129      0.000       0.681       0.972</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ==============================================================================</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spread</span> <span class="op">&lt;-</span> <span class="fu">qf_load_zcyc</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">period</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span>                                   <span class="co"># оба срока есть на дату</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>s <span class="op">=</span> <span class="va">value</span><span class="op">[</span><span class="va">period</span> <span class="op">==</span> <span class="fl">10</span><span class="op">]</span> <span class="op">-</span> <span class="va">value</span><span class="op">[</span><span class="va">period</span> <span class="op">==</span> <span class="fl">0.25</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y-%m"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span>                                  <span class="co"># последний день месяца</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ar1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/Arima.html">Arima</a></span><span class="op">(</span><span class="va">spread</span><span class="op">$</span><span class="va">s</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ar1</span></span>
+<span><span class="co">#&gt; Series: spread$s </span></span>
+<span><span class="co">#&gt; ARIMA(1,0,0) with non-zero mean </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;          ar1    mean</span></span>
+<span><span class="co">#&gt;       0.8992  0.8195</span></span>
+<span><span class="co">#&gt; s.e.  0.0369  0.7014</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; sigma^2 = 0.8378:  log likelihood = -203.38</span></span>
+<span><span class="co">#&gt; AIC=412.76   AICc=412.92   BIC=421.85</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Оценка <span class="math inline">\(\varphi\)</span> равна 0,899: терм-спред очень инерционен. Период полураспада по формуле <a href="#eq-half-life" class="quarto-xref"><span>7.5</span></a> – около 6,5 месяца: отклонение спреда от среднего уменьшается вдвое примерно за полгода.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: константа – это не свободный член">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: константа – это не свободный член
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В выдаче statsmodels коэффициент <code>const</code> равен 0,82, и его легко принять за <span class="math inline">\(c\)</span> в формуле <a href="#eq-ar1" class="quarto-xref"><span>7.4</span></a>. На самом деле <code>ARIMA</code> в statsmodels (как и <code>Arima</code> в R, где он называется <code>mean</code> или <code>intercept</code>) оценивает <em>среднее ряда</em> <span class="math inline">\(\mu\)</span>. Свободный член уравнения равен <span class="math inline">\(c = \mu(1-\varphi) =\)</span> 0,083. Путаница ведёт к неверным прогнозам, если строить их вручную по формуле.</p>
+</div>
+</div>
+<p>А стационарен ли терм-спред вообще? Тест ADF даёт p = 0,065, то есть на уровне 5% единичный корень формально не отвергается. Причина – в малой мощности теста: у нас 153 месячных наблюдения, а <span class="math inline">\(\varphi\)</span> близко к единице. На таких данных ADF плохо отличает медленный возврат к среднему от случайного блуждания. Здесь помогает экономическая логика: спред между ставками одной и той же кривой не может неограниченно уходить в сторону, как цена акции. Поэтому модель AR(1) для него разумна, но к её прогнозам на дальний горизонт стоит относиться осторожно.</p>
+</section></section><section id="sec-ma" class="level2 page-columns page-full" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="sec-ma">
+<span class="header-section-number">7.4</span> Модель MA(1): неликвидная акция</h2>
+<section id="устройство-модели-1" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="устройство-модели-1">
+<span class="header-section-number">7.4.1</span> Устройство модели</h3>
+<p>Модель скользящего среднего первого порядка MA(1) строится не из прошлых значений ряда, а из прошлых шоков:</p>
+<p><span id="eq-ma1"><span class="math display">\[
+r_t = \mu + \varepsilon_t + \theta \varepsilon_{t-1}.
+\tag{7.6}\]</span></span></p>
+<p>Сегодняшний шок влияет на сегодняшнее значение и, с весом <span class="math inline">\(\theta\)</span>, на завтрашнее, а дальше забывается. Поэтому у MA(1) картина обратная AR(1): автокорреляция отлична от нуля только на первом лаге, <span class="math inline">\(\rho_1 = \theta/(1+\theta^2)\)</span>, и обрывается после него, а частная автокорреляция затухает постепенно.</p>
+</section><section id="эффект-отскока-между-bid-и-ask" class="level3 page-columns page-full" data-number="7.4.2"><h3 data-number="7.4.2" class="anchored" data-anchor-id="эффект-отскока-между-bid-и-ask">
+<span class="header-section-number">7.4.2</span> Эффект отскока между bid и ask</h3>
+<p>Откуда в доходностях берётся такая память на один день? Классическое объяснение предложил <span class="citation" data-cites="roll1984">Roll (<a href="references.html#ref-roll1984" role="doc-biblioref">1984 г.</a>)</span>. Сделки на бирже проходят то по цене продавца (ask), то по цене покупателя (bid). Даже если «справедливая» цена не меняется, цена закрытия прыгает между ними, и за ростом от bid к ask чаще следует падение обратно. Это создаёт отрицательную автокорреляцию первого порядка. Если спред между ask и bid равен <span class="math inline">\(s\)</span>, ковариация соседних изменений цены равна <span class="math inline">\(-s^2/4\)</span>. Отсюда оценка спреда по одним только ценам закрытия: <span class="math inline">\(\hat s = 2\sqrt{-\operatorname{Cov}(r_t, r_{t-1})}\)</span>.</p>
+<div class="no-row-height column-margin column-container"></div><p>У ликвидных акций спред составляет сотые доли процента, и эффект незаметен. У неликвидных бумаг он может быть заметным. Возьмём обыкновенные акции ПАО «Нижнекамскнефтехим» (ИНН 1651000010, тикер NKNC) – крупной нефтехимической компании, большая часть акций которой не находится в свободном обращении. Для сравнения используем самую ликвидную акцию рынка – Сбербанк (SBER).</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_returns(ticker, start<span class="op">=</span><span class="st">"2015-01-01"</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Дневные лог-доходности по ценам с поправкой на дивиденды и медианный оборот, млн руб."""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> data.load_stocks(ticker, start<span class="op">=</span>start).set_index(<span class="st">"date"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.log(df[<span class="st">"adj_close"</span>]).diff().dropna(), df[<span class="st">"value_rub"</span>].median() <span class="op">/</span> <span class="fl">1e6</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>r_nk, turnover_nk <span class="op">=</span> load_returns(<span class="st">"NKNC"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>r_sb, turnover_sb <span class="op">=</span> load_returns(<span class="st">"SBER"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">2.8</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">0</span>], r_nk, nlags<span class="op">=</span><span class="dv">10</span>, kind<span class="op">=</span><span class="st">"acf"</span>, title<span class="op">=</span><span class="st">"ACF"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plot_acf_bars(axes[<span class="dv">1</span>], r_nk, nlags<span class="op">=</span><span class="dv">10</span>, kind<span class="op">=</span><span class="st">"pacf"</span>, title<span class="op">=</span><span class="st">"PACF"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plot.source(axes[<span class="dv">0</span>], <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-nknc-acf" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nknc-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-nknc-acf-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nknc-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.6: ACF и PACF дневных доходностей акций NKNC, 2015–2026 гг.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Модели MA(1) и AR(1) для доходностей NKNC (в процентах – так оптимизатору проще)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ma1_nk <span class="op">=</span> ARIMA(r_nk.values <span class="op">*</span> <span class="dv">100</span>, order<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)).fit()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ar1_nk <span class="op">=</span> ARIMA(r_nk.values <span class="op">*</span> <span class="dv">100</span>, order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)).fit()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Оценка спреда по Роллу: s = 2 * sqrt(-Cov(r_t, r_{t-1}))</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>cov1 <span class="op">=</span> np.cov(r_nk.values[<span class="dv">1</span>:], r_nk.values[:<span class="op">-</span><span class="dv">1</span>])[<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>roll_spread <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.sqrt(<span class="op">-</span>cov1) <span class="cf">if</span> cov1 <span class="op">&lt;</span> <span class="dv">0</span> <span class="cf">else</span> np.nan</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>pd.Series({<span class="st">"θ (MA(1))"</span>: ma1_nk.params[<span class="dv">1</span>], <span class="st">"BIC MA(1)"</span>: ma1_nk.bic, <span class="st">"BIC AR(1)"</span>: ar1_nk.bic,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Спред по Роллу, %"</span>: roll_spread <span class="op">*</span> <span class="dv">100</span>}).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; θ (MA(1))               -0.099</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC MA(1)            13300.993</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; BIC AR(1)            13302.407</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Спред по Роллу, %        1.417</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Медианный дневной оборот NKNC с 2015 г. – около 2,6 млн руб., у Сбербанка – около 9,8 млрд руб., в тысячи раз больше. Первая автокорреляция доходностей NKNC равна −0,093, а на втором лаге – всего −0,021: картина обрыва после первого лага, как у MA(1). У Сбербанка первая автокорреляция −0,004 и неотличима от нуля. Оценка <span class="math inline">\(\theta\)</span> в модели MA(1) – −0,099, что соответствует <span class="math inline">\(\rho_1 =\)</span> −0,098, близко к выборочной автокорреляции. По BIC модель MA(1) немного лучше AR(1), хотя разница невелика: при <span class="math inline">\(|\theta|\)</span> около 0,1 модели AR(1) и MA(1) почти неразличимы.</p>
+<p>Спред по формуле Ролла получается около 1,4%. Это грубая оценка: в ковариацию попадают не только отскоки между bid и ask, но и любые другие краткосрочные эффекты. Но порядок величины разумен для бумаги, по которой в 5% торговых дней цена не менялась вовсе.</p>
+<p>Важно, что отрицательная автокорреляция здесь не сулит прибыли. Она возникает из-за того, что цена прыгает внутри спреда, а чтобы на этом заработать, нужно покупать по bid и продавать по ask, то есть самому быть маркет-мейкером. Инвестор, торгующий по рыночным заявкам, заплатит этот спред сам. Микроструктуре рынка и измерению ликвидности посвящена отдельная глава книги.</p>
+</section></section><section id="sec-arma" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="sec-arma">
+<span class="header-section-number">7.5</span> Модели ARMA и выбор порядка</h2>
+<section id="общая-модель" class="level3" data-number="7.5.1"><h3 data-number="7.5.1" class="anchored" data-anchor-id="общая-модель">
+<span class="header-section-number">7.5.1</span> Общая модель</h3>
+<p>Модели AR и MA объединяются в модель ARMA<span class="math inline">\((p, q)\)</span> с <span class="math inline">\(p\)</span> авторегрессионными лагами и <span class="math inline">\(q\)</span> лагами шоков:</p>
+<p><span id="eq-arma"><span class="math display">\[
+x_t = c + \sum_{i=1}^{p}\varphi_i x_{t-i} + \varepsilon_t + \sum_{j=1}^{q}\theta_j \varepsilon_{t-j}.
+\tag{7.7}\]</span></span></p>
+<p>Если ряд перед моделированием дифференцируют <span class="math inline">\(d\)</span> раз, получается модель ARIMA<span class="math inline">\((p, d, q)\)</span>; отсюда аргумент <code>order=(p, d, q)</code> в statsmodels. Для доходностей <span class="math inline">\(d = 0\)</span>, для логарифма цены <span class="math inline">\(d = 1\)</span>, и это одна и та же модель.</p>
+<p>Классическая процедура Бокса – Дженкинса строит модель в четыре шага: идентификация (выбор <span class="math inline">\(p\)</span> и <span class="math inline">\(q\)</span> по коррелограммам), оценка параметров, диагностика остатков и прогноз. Для идентификации служат подписи моделей в ACF и PACF:</p>
+<div id="tbl-acf-signatures" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-acf-signatures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.4: Как выглядят модели AR, MA и ARMA на коррелограммах
+</figcaption><div aria-describedby="tbl-acf-signatures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead><tr class="header">
+<th style="text-align: left;">Модель</th>
+<th style="text-align: left;">ACF</th>
+<th style="text-align: left;">PACF</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AR<span class="math inline">\((p)\)</span>
+</td>
+<td style="text-align: left;">затухает постепенно</td>
+<td style="text-align: left;">обрывается после лага <span class="math inline">\(p\)</span>
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MA<span class="math inline">\((q)\)</span>
+</td>
+<td style="text-align: left;">обрывается после лага <span class="math inline">\(q\)</span>
+</td>
+<td style="text-align: left;">затухает постепенно</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ARMA<span class="math inline">\((p, q)\)</span>
+</td>
+<td style="text-align: left;">затухает постепенно</td>
+<td style="text-align: left;">затухает постепенно</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section><section id="информационные-критерии" class="level3" data-number="7.5.2"><h3 data-number="7.5.2" class="anchored" data-anchor-id="информационные-критерии">
+<span class="header-section-number">7.5.2</span> Информационные критерии</h3>
+<p>На реальных данных подписи редко бывают такими чёткими, как у терм-спреда. Поэтому порядок модели чаще выбирают по информационным критериям. Они поощряют модель за правдоподобие <span class="math inline">\(L\)</span> и штрафуют за число параметров <span class="math inline">\(k\)</span>:</p>
+<p><span id="eq-aic-bic"><span class="math display">\[
+\text{AIC} = -2\ln L + 2k, \qquad \text{BIC} = -2\ln L + k\ln T.
+\tag{7.8}\]</span></span></p>
+<p>Выбирают модель с наименьшим значением критерия. Лишний параметр почти всегда немного увеличивает правдоподобие, и критерии требуют, чтобы это увеличение окупало штраф. BIC при <span class="math inline">\(T &gt; 7\)</span> штрафует сильнее AIC и выбирает более простые модели. AIC нацелен на качество прогноза, BIC – на поиск «истинной» модели, если она есть среди кандидатов.</p>
+<p>Переберём модели ARMA<span class="math inline">\((p, q)\)</span> с <span class="math inline">\(p, q \in \{0, 1, 2\}\)</span> для дневных доходностей IMOEX. Оценивать будем на обучающем периоде 2003–2019 гг., а 2020–2026 гг. оставим для проверки прогноза вне выборки. Доходности умножим на 100, чтобы оценки были в процентах.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r100 <span class="op">=</span> r <span class="op">*</span> <span class="dv">100</span>                                   <span class="co"># доходности в процентах</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> r100.loc[:<span class="st">"2019-12-31"</span>], r100.loc[<span class="st">"2020-01-01"</span>:]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> []</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> q <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># .values: даты торговых дней идут с пропусками, частоту statsmodels не нужна</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> ARIMA(train.values, order<span class="op">=</span>(p, <span class="dv">0</span>, q)).fit()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        grid.append({<span class="st">"p"</span>: p, <span class="st">"q"</span>: q, <span class="st">"AIC"</span>: m.aic, <span class="st">"BIC"</span>: m.bic})</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> pd.DataFrame(grid)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Разница с лучшей моделью по каждому критерию</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> grid.assign(AIC<span class="op">=</span>grid.AIC <span class="op">-</span> grid.AIC.<span class="bu">min</span>(), BIC<span class="op">=</span>grid.BIC <span class="op">-</span> grid.BIC.<span class="bu">min</span>())</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>tab.pivot(index<span class="op">=</span><span class="st">"p"</span>, columns<span class="op">=</span><span class="st">"q"</span>, values<span class="op">=</span>[<span class="st">"AIC"</span>, <span class="st">"BIC"</span>]).style.<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.1f}</span><span class="st">"</span>, decimal<span class="op">=</span><span class="st">","</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-arma-grid" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-arma-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.5: Информационные критерии моделей ARMA(p, q) для дневных доходностей IMOEX, 2003–2019 гг. Значения за вычетом минимума: 0 – лучшая модель
+</figcaption><div aria-describedby="tbl-arma-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_cf1c7" class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th colspan="3" id="T_cf1c7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">AIC</th>
+<th colspan="3" id="T_cf1c7_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">BIC</th>
+</tr>
+<tr class="even">
+<th class="index_name level1" data-quarto-table-cell-role="th">q</th>
+<th id="T_cf1c7_level1_col0" class="col_heading level1 col0" data-quarto-table-cell-role="th">0</th>
+<th id="T_cf1c7_level1_col1" class="col_heading level1 col1" data-quarto-table-cell-role="th">1</th>
+<th id="T_cf1c7_level1_col2" class="col_heading level1 col2" data-quarto-table-cell-role="th">2</th>
+<th id="T_cf1c7_level1_col3" class="col_heading level1 col3" data-quarto-table-cell-role="th">0</th>
+<th id="T_cf1c7_level1_col4" class="col_heading level1 col4" data-quarto-table-cell-role="th">1</th>
+<th id="T_cf1c7_level1_col5" class="col_heading level1 col5" data-quarto-table-cell-role="th">2</th>
+</tr>
+<tr class="header">
+<th class="index_name level0" data-quarto-table-cell-role="th">p</th>
+<th class="blank col0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col1" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col2" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col3" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col4" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col5" data-quarto-table-cell-role="th">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th id="T_cf1c7_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</th>
+<td id="T_cf1c7_row0_col0" class="data row0 col0">0,0</td>
+<td id="T_cf1c7_row0_col1" class="data row0 col1">1,5</td>
+<td id="T_cf1c7_row0_col2" class="data row0 col2">2,4</td>
+<td id="T_cf1c7_row0_col3" class="data row0 col3">0,0</td>
+<td id="T_cf1c7_row0_col4" class="data row0 col4">7,8</td>
+<td id="T_cf1c7_row0_col5" class="data row0 col5">15,1</td>
+</tr>
+<tr class="even">
+<th id="T_cf1c7_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</th>
+<td id="T_cf1c7_row1_col0" class="data row1 col0">1,5</td>
+<td id="T_cf1c7_row1_col1" class="data row1 col1">1,9</td>
+<td id="T_cf1c7_row1_col2" class="data row1 col2">0,1</td>
+<td id="T_cf1c7_row1_col3" class="data row1 col3">7,8</td>
+<td id="T_cf1c7_row1_col4" class="data row1 col4">14,5</td>
+<td id="T_cf1c7_row1_col5" class="data row1 col5">19,1</td>
+</tr>
+<tr class="odd">
+<th id="T_cf1c7_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</th>
+<td id="T_cf1c7_row2_col0" class="data row2 col0">2,4</td>
+<td id="T_cf1c7_row2_col1" class="data row2 col1">0,0</td>
+<td id="T_cf1c7_row2_col2" class="data row2 col2">1,7</td>
+<td id="T_cf1c7_row2_col3" class="data row2 col3">15,1</td>
+<td id="T_cf1c7_row2_col4" class="data row2 col4">19,0</td>
+<td id="T_cf1c7_row2_col5" class="data row2 col5">27,1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Функция <code><a href="https://pkg.robjhyndman.com/forecast/reference/auto.arima.html">auto.arima()</a></code> из пакета forecast перебирает модели и выбирает лучшую по заданному критерию.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r100</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">r</span></span>
+<span><span class="va">train</span> <span class="op">&lt;-</span> <span class="va">r100</span><span class="op">[</span><span class="va">imoex</span><span class="op">$</span><span class="va">date</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2019-12-31"</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># stepwise = FALSE – полный перебор, а не пошаговый поиск</span></span>
+<span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/auto.arima.html">auto.arima</a></span><span class="op">(</span><span class="va">train</span>, d <span class="op">=</span> <span class="fl">0</span>, max.p <span class="op">=</span> <span class="fl">2</span>, max.q <span class="op">=</span> <span class="fl">2</span>, ic <span class="op">=</span> <span class="st">"bic"</span>,</span>
+<span>           stepwise <span class="op">=</span> <span class="cn">FALSE</span>, approximation <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Series: train </span></span>
+<span><span class="co">#&gt; ARIMA(0,0,0) with zero mean </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; sigma^2 = 3.725:  log likelihood = -8776.97</span></span>
+<span><span class="co">#&gt; AIC=17555.94   AICc=17555.94   BIC=17562.29</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>BIC выбирает модель ARMA(0, 0). Это константа плюс белый шум: лучший прогноз завтрашней доходности равен средней доходности. Ни одна из более сложных моделей не улучшает правдоподобие настолько, чтобы окупить дополнительные параметры. Например, ARMA(2, 2) по BIC хуже константы на 27,1.</p>
+<p>AIC штрафует мягче и выбирает ARMA(2, 1), но по AIC она лучше константы всего на 0,01, то есть модели практически равноценны. Посмотрите на оценки: коэффициент авторегрессии на первом лаге 0,77, коэффициент скользящего среднего −0,76. Они почти равны по модулю и противоположны по знаку, поэтому их вклады почти взаимно сокращаются. В простейшем случае ARMA(1, 1) в записи через оператор лага <span class="math inline">\(L\)</span> (<span class="math inline">\(Lx_t = x_{t-1}\)</span>) модель имеет вид <span class="math inline">\((1 - \varphi L)x_t = (1 + \theta L)\varepsilon_t\)</span>, и при <span class="math inline">\(\theta \approx -\varphi\)</span> множители слева и справа сокращаются, оставляя белый шум. Такое «сокращение корней» – частый признак того, что модель подогнана под шум. Вне выборки она ведёт себя соответственно: <span class="math inline">\(R^2_{OOS}\)</span> против исторического среднего равен −0,0054 (эту меру мы введём в разделе <a href="#sec-oos" class="quarto-xref"><span>7.7</span></a>).</p>
+<p>Этот результат согласуется с первым разделом главы: линейная память в дневных доходностях индекса слишком слаба, чтобы на ней строить модель.</p>
+</section></section><section id="sec-diagnostics" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="sec-diagnostics">
+<span class="header-section-number">7.6</span> Диагностика остатков</h2>
+<p>Хорошая модель должна извлечь из ряда всю линейную зависимость, и её остатки <span class="math inline">\(\hat\varepsilon_t\)</span> должны быть похожи на белый шум. Стандартная проверка – тест Льюнга – Бокса по остаткам. Число степеней свободы при этом уменьшают на число оценённых параметров <span class="math inline">\(p + q\)</span> (аргумент <code>model_df</code>).</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>best <span class="op">=</span> ARIMA(train.values, order<span class="op">=</span>(<span class="bu">int</span>(best_bic.p), <span class="dv">0</span>, <span class="bu">int</span>(best_bic.q))).fit()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>resid <span class="op">=</span> best.resid</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>df_model <span class="op">=</span> <span class="bu">int</span>(best_bic.p <span class="op">+</span> best_bic.q)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p-значения теста для 10 лагов: по остаткам и по их квадратам</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Остатки"</span>: acorr_ljungbox(resid, lags<span class="op">=</span>[<span class="dv">10</span>], model_df<span class="op">=</span>df_model)[<span class="st">"lb_pvalue"</span>].iloc[<span class="dv">0</span>],</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Квадраты остатков"</span>: acorr_ljungbox(resid<span class="op">**</span><span class="dv">2</span>, lags<span class="op">=</span>[<span class="dv">10</span>], model_df<span class="op">=</span>df_model)[<span class="st">"lb_pvalue"</span>].iloc[<span class="dv">0</span>],</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}, name<span class="op">=</span><span class="st">"p-значение Q(10)"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Остатки               1.789733e-03</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Квадраты остатков    3.968749e-287</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: p-значение Q(10), dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>По остаткам тест даёт p = 0,0018, то есть формально какая-то автокорреляция в них осталась. Мы уже знаем её природу: на длинной выборке значимыми оказываются автокорреляции порядка сотых, которые меняют знак от года к году. Информационные критерии, которые учитывают размер эффекта, а не только его значимость, сочли, что моделировать её не стоит.</p>
+<p>Намного важнее результат для квадратов остатков. Для них статистика <span class="math inline">\(Q(10)\)</span> равна 1&nbsp;365, а p-значение неотличимо от нуля. Остатки некоррелированы, но не независимы: их размах сильно зависит от прошлого. Модель ARMA описывает условное среднее и предполагает постоянную дисперсию шока, а у доходностей она явно меняется. Такой эффект называют условной гетероскедастичностью, и для него нужны модели ARCH и GARCH из следующей главы.</p>
+</section><section id="sec-oos" class="level2 page-columns page-full" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="sec-oos">
+<span class="header-section-number">7.7</span> Прогноз вне выборки</h2>
+<section id="как-устроен-честный-прогноз" class="level3 page-columns page-full" data-number="7.7.1"><h3 data-number="7.7.1" class="anchored" data-anchor-id="как-устроен-честный-прогноз">
+<span class="header-section-number">7.7.1</span> Как устроен честный прогноз</h3>
+<p>Модель, которая хорошо описывает прошлое, не обязательно хорошо предсказывает будущее. Единственная надёжная проверка – прогноз вне выборки (out-of-sample), на данных, которые не участвовали ни в выборе модели, ни в оценке её параметров. Схема такая:</p>
+<ol type="1">
+<li>Разделить ряд на обучающую и тестовую части по времени, без перемешивания.</li>
+<li>Выбрать модель и оценить параметры только на обучающей части.</li>
+<li>Для каждого дня тестовой части построить прогноз на один шаг вперёд, используя только данные, известные к этому дню.</li>
+<li>Сравнить ошибки прогноза с ошибками простого эталона.</li>
+</ol>
+<p>На третьем шаге есть два варианта. Можно после каждого нового наблюдения переоценивать параметры на расширяющемся окне – это честнее, но медленнее. Можно оставить параметры, оценённые на обучающей части, и только подставлять в модель новые значения ряда. Для дневных данных с тысячами точек обычно достаточно второго варианта; в statsmodels он реализован методом <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code>.</p>
+<p>В качестве меры качества для доходностей используют <span class="math inline">\(R^2\)</span> вне выборки <span class="citation" data-cites="campbell2008">(<a href="references.html#ref-campbell2008" role="doc-biblioref">Campbell и Thompson 2008 г.</a>)</span>:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-r2-oos"><span class="math display">\[
+R^2_{OOS} = 1 - \frac{\sum_t (r_t - \hat r_t)^2}{\sum_t (r_t - \bar r_t)^2},
+\tag{7.9}\]</span></span></p>
+<p>где <span class="math inline">\(\hat r_t\)</span> – прогноз модели, а <span class="math inline">\(\bar r_t\)</span> – прогноз эталона, например историческое среднее доходности на момент прогноза. Положительный <span class="math inline">\(R^2_{OOS}\)</span> означает, что модель предсказывает лучше эталона, отрицательный – хуже.</p>
+</section><section id="доходности-индекса" class="level3 page-columns page-full" data-number="7.7.2"><h3 data-number="7.7.2" class="anchored" data-anchor-id="доходности-индекса">
+<span class="header-section-number">7.7.2</span> Доходности индекса</h3>
+<p>Выбранная BIC модель ARMA(0, 0) прогнозирует константу. Чтобы проверка была содержательной, возьмём модель AR(1), которая использует вчерашнюю доходность, и сравним её с двумя эталонами: историческим средним и нулём.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AR(1) на обучающем периоде; параметры дальше не меняем</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ar1_r <span class="op">=</span> ARIMA(train.values, order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)).fit()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># apply() прогоняет модель с теми же параметрами по всему ряду;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict() даёт прогноз на шаг вперёд для каждого дня по данным до него</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> ar1_r.<span class="bu">apply</span>(r100.values).predict()[<span class="bu">len</span>(train):]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Историческое среднее: для каждого дня – средняя доходность по всем предыдущим дням</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>hist_mean <span class="op">=</span> r100.expanding().mean().shift(<span class="dv">1</span>).loc[test.index].values</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> test.values</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> <span class="kw">lambda</span> f: np.mean((actual <span class="op">-</span> f) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>pd.Series({</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"φ в AR(1)"</span>: ar1_r.params[<span class="dv">1</span>],</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R² OOS против среднего"</span>: <span class="dv">1</span> <span class="op">-</span> mse(pred) <span class="op">/</span> mse(hist_mean),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R² OOS против нуля"</span>: <span class="dv">1</span> <span class="op">-</span> mse(pred) <span class="op">/</span> mse(np.zeros_like(actual)),</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Доля верно угаданных знаков"</span>: np.mean(np.sign(pred) <span class="op">==</span> np.sign(actual)),</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Доля дней роста"</span>: np.mean(actual <span class="op">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; φ в AR(1)                      0.0111</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R² OOS против среднего        -0.0019</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R² OOS против нуля            -0.0031</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Доля верно угаданных знаков    0.5270</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Доля дней роста                0.5317</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Оценка <span class="math inline">\(\varphi\)</span> на обучающем периоде – 0,011, почти ноль. На 1&nbsp;687 днях теста модель AR(1) проигрывает обоим эталонам: <span class="math inline">\(R^2_{OOS}\)</span> против исторического среднего равен −0,0019, против нуля – −0,0031. Модель угадывает знак доходности в 52,7% дней, при том что доля дней роста в тестовом периоде – 53,2%. Ничего удивительного: прогноз модели положителен в 99% дней, и почти весь «успех» в угадывании знака объясняется тем, что рынок растёт чаще, чем падает.</p>
+<p>Это типичный результат. <span class="citation" data-cites="welch2008">Welch и Goyal (<a href="references.html#ref-welch2008" role="doc-biblioref">2008 г.</a>)</span> показали, что десятки переменных, которые в литературе считались предикторами доходности американского рынка, вне выборки обычно не превосходят историческое среднее. Отрицательный <span class="math inline">\(R^2_{OOS}\)</span> простых моделей – не провал анализа, а честная характеристика рынка и планка для любой торговой стратегии, о чём подробнее пойдёт речь в главе о бэктестинге.</p>
+<div class="no-row-height column-margin column-container"></div></section><section id="терм-спред" class="level3" data-number="7.7.3"><h3 data-number="7.7.3" class="anchored" data-anchor-id="терм-спред">
+<span class="header-section-number">7.7.3</span> Терм-спред</h3>
+<p>Теперь повторим проверку для терм-спреда, где память в данных точно есть. Здесь рядов немного, поэтому будем переоценивать модель каждый месяц на расширяющемся окне. Эталонов три: модель AR(1), случайное блуждание (прогноз равен последнему значению) и историческое среднее.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>test_months <span class="op">=</span> spread.loc[<span class="st">"2020-01-01"</span>:].index</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fc <span class="op">=</span> {<span class="st">"AR(1)"</span>: [], <span class="st">"Случайное блуждание"</span>: [], <span class="st">"Историческое среднее"</span>: []}</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> test_months:</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    hist <span class="op">=</span> spread.loc[:d].iloc[:<span class="op">-</span><span class="dv">1</span>]                  <span class="co"># только данные до месяца прогноза</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> ARIMA(hist, order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)).fit()       <span class="co"># переоцениваем на расширяющемся окне</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    fc[<span class="st">"AR(1)"</span>].append(model.forecast(<span class="dv">1</span>).iloc[<span class="dv">0</span>])</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    fc[<span class="st">"Случайное блуждание"</span>].append(hist.iloc[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    fc[<span class="st">"Историческое среднее"</span>].append(hist.mean())</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>actual_sp <span class="op">=</span> spread.loc[test_months].values</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> {k: np.sqrt(np.mean((actual_sp <span class="op">-</span> np.array(v)) <span class="op">**</span> <span class="dv">2</span>)) <span class="cf">for</span> k, v <span class="kw">in</span> fc.items()}</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>pd.Series(rmse, name<span class="op">=</span><span class="st">"RMSE, п. п."</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AR(1)                   1.181</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Случайное блуждание     1.183</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Историческое среднее    2.514</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: RMSE, п. п., dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Модель AR(1) предсказывает терм-спред на следующий месяц вдвое точнее исторического среднего: среднеквадратичная ошибка 1,18 п. п. против 2,51. Но случайное блуждание даёт почти ту же точность (1,18 п. п.). При <span class="math inline">\(\varphi \approx 0{,}9\)</span> почти вся информация о следующем значении содержится в последнем, и учёт возврата к среднему уточняет прогноз на месяц вперёд совсем немного. Преимущество модели AR(1) над случайным блужданием проявляется на более длинных горизонтах, где возврат к среднему успевает накопиться.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: константный прогноз и заглядывание в будущее">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: константный прогноз и заглядывание в будущее
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Частая ошибка – обучить модель один раз и затем в цикле по тестовому периоду вызывать <code>forecast(steps=1)</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ARIMA(train, order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)).fit()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> [model.forecast(steps<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>] <span class="cf">for</span> day <span class="kw">in</span> test.index]   <span class="co"># неправильно</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Модель ничего не знает о новых наблюдениях, поэтому все прогнозы в списке одинаковы: это прогноз на первый день теста, повторённый много раз. Похожая ошибка – вызвать <code>forecast(steps=len(test))</code>. Это многошаговый прогноз из последней точки обучающей выборки, который быстро сходится к среднему ряда (см. ниже), а не последовательность прогнозов на день вперёд. Правильно – обновлять модель новыми данными через <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> или <code><a href="https://rdrr.io/r/base/append.html">append()</a></code> либо переоценивать её в цикле, как в примере с терм-спредом.</p>
+<p>Противоположная ошибка – заглядывание в будущее: модель оценивают по всей выборке, включая тестовый период, а затем «проверяют» на нём. Такая проверка завышает качество, потому что параметры уже подстроены под тестовые данные. Выбор порядка модели по критериям на всей выборке – тоже заглядывание в будущее.</p>
+</div>
+</div>
+</section><section id="многошаговый-прогноз" class="level3" data-number="7.7.4"><h3 data-number="7.7.4" class="anchored" data-anchor-id="многошаговый-прогноз">
+<span class="header-section-number">7.7.4</span> Многошаговый прогноз</h3>
+<p>Прогноз модели AR(1) на <span class="math inline">\(h\)</span> шагов вперёд из точки <span class="math inline">\(T\)</span> равен</p>
+<p><span id="eq-ar1-forecast"><span class="math display">\[
+\hat x_{T+h} = \mu + \varphi^h (x_T - \mu).
+\tag{7.10}\]</span></span></p>
+<p>С ростом горизонта <span class="math inline">\(\varphi^h \to 0\)</span>, и прогноз сходится к среднему ряда, а доверительный интервал расширяется до безусловного разброса ряда. Для модели ARMA(0, 0) прогноз на любой горизонт равен среднему с самого начала. Построим прогноз терм-спреда на два года вперёд по модели, оценённой на всех данных.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get_forecast() возвращает и точечный прогноз, и доверительные интервалы</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fc24 <span class="op">=</span> ar1.get_forecast(steps<span class="op">=</span><span class="dv">24</span>).summary_frame(alpha<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ax.plot(spread.loc[<span class="st">"2019"</span>:].index, spread.loc[<span class="st">"2019"</span>:], color<span class="op">=</span>plot.BLUE, label<span class="op">=</span><span class="st">"Факт"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ax.plot(fc24.index, fc24[<span class="st">"mean"</span>], color<span class="op">=</span>plot.ORANGE, label<span class="op">=</span><span class="st">"Прогноз"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>ax.fill_between(fc24.index, fc24[<span class="st">"mean_ci_lower"</span>], fc24[<span class="st">"mean_ci_upper"</span>],</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>plot.ORANGE, alpha<span class="op">=</span><span class="fl">0.15</span>, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ax.axhline(ar1.params[<span class="st">"const"</span>], color<span class="op">=</span>plot.LIGHT, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">"--"</span>)   <span class="co"># оценка среднего μ</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"п. п."</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"lower left"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-spread-forecast" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-spread-forecast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-arma_files/figure-html/fig-spread-forecast-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spread-forecast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.7: Прогноз терм-спреда ОФЗ по модели AR(1) на 24 месяца с 95%-м интервалом
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="va">ar1</span>, h <span class="op">=</span> <span class="fl">24</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"п. п."</span><span class="op">)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="07-arma_files/figure-html/unnamed-chunk-26-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Последнее значение спреда, 5,2 п. п., – максимум за всю историю ряда. Модель ожидает, что через год спред снизится до 2,0 п. п., а через два – до 1,2 п. п., приближаясь к среднему. Но 95%-й интервал через два года – от −2,9 до 5,2 п. п., то есть модель допускает и сохранение высокого спреда, и его инверсию. Модель честно показывает, как быстро прогноз по прошлому ряда теряет информативность. Прогноз на дальний горизонт требует других данных: ожиданий по ключевой ставке, инфляции, бюджетной политике.</p>
+</section></section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Автокорреляционная функция измеряет линейную зависимость ряда от своего прошлого. Граница значимости <span class="math inline">\(\pm 1{,}96/\sqrt{T}\)</span> сужается с ростом выборки, поэтому на длинных рядах значимыми становятся экономически ничтожные эффекты.</li>
+<li>Дневные доходности индекса Мосбиржи почти не автокоррелированы: первая автокорреляция мала и меняет знак от года к году. Модули и квадраты доходностей, напротив, автокоррелированы сильно и долго – это кластеризация волатильности.</li>
+<li>Цены ведут себя как случайное блуждание и нестационарны; доходности стационарны. Модели и корреляции строят для доходностей. Тесты ADF и KPSS имеют противоположные нулевые гипотезы, и их полезно применять вместе.</li>
+<li>Модель AR(1) описывает ряды с возвратом к среднему, например терм-спред ОФЗ; скорость возврата удобно выражать периодом полураспада. Модель MA(1) описывает краткую отрицательную память доходностей неликвидных акций, связанную с отскоком цены между bid и ask.</li>
+<li>Порядок модели ARMA выбирают по ACF и PACF и по информационным критериям. Для доходностей IMOEX BIC выбирает модель без лагов, а более сложная модель, выбранная AIC, фактически сводится к белому шуму и проигрывает вне выборки.</li>
+<li>Остатки проверяют тестом Льюнга – Бокса. Автокорреляция квадратов остатков указывает на изменяющуюся волатильность, которую описывают модели GARCH.</li>
+<li>Качество прогноза оценивают только вне выборки и относительно простого эталона. Простые модели доходностей не превосходят историческое среднее; модель терм-спреда почти не превосходит случайное блуждание на горизонте одного месяца.</li>
+</ul></section><section id="sec-exercises-arma" class="level2 page-columns page-full" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="sec-exercises-arma">
+<span class="header-section-number">7.8</span> Упражнения</h2>
+<p>Упражнения разделены на четыре типа. Задания <strong>А</strong> проверяют понимание и решаются без компьютера. Задания <strong>Б</strong> выполняются на данных вашей акции (тикер назначает преподаватель), поэтому готового ответа у них нет. Задания <strong>В</strong> учат работать с ИИ-ассистентом: не получать ответ, а проверять его. Задание <strong>Г</strong> – небольшое исследование, результаты которого нужно защитить устно.</p>
+<section id="а.-понимание" class="level3" data-number="7.8.1"><h3 data-number="7.8.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">7.8.1</span> А. Понимание</h3>
+<ol type="1">
+<li>По 5000 дневным доходностям получена первая автокорреляция 0,04. Значима ли она на уровне 5%? Следует ли отсюда, что стратегия «покупай после роста» прибыльна? Какие данные нужны, чтобы это проверить?</li>
+<li>Ряд описывается моделью AR(1) с <span class="math inline">\(\varphi = 0{,}8\)</span> и средним <span class="math inline">\(\mu = 2\)</span>. Сегодня <span class="math inline">\(x_T = 5\)</span>. Найдите прогноз на 1, 3 и 12 шагов вперёд и период полураспада. Чему равен свободный член <span class="math inline">\(c\)</span>?</li>
+<li>Для модели MA(1) с <span class="math inline">\(\theta = -0{,}5\)</span> найдите <span class="math inline">\(\rho_1\)</span> и <span class="math inline">\(\rho_2\)</span>. Может ли у модели MA(1) первая автокорреляция быть равна <span class="math inline">\(-0{,}7\)</span>?</li>
+<li>Тест ADF даёт p = 0,40, тест KPSS – p &lt; 0,01. Что можно сказать о ряде? А если оба теста дают p &lt; 0,01?</li>
+<li>Почему BIC обычно выбирает более простые модели, чем AIC? Для какой цели – прогноза или поиска истинной модели – вы бы предпочли каждый из критериев?</li>
+<li>Аналитик обучил ARMA на 2003–2026 гг., а затем посчитал ошибку прогноза на 2020–2026 гг. и получил положительный <span class="math inline">\(R^2_{OOS}\)</span>. Что не так с этой проверкой?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="7.8.2"><h3 data-number="7.8.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">7.8.2</span> Б. Практика на своей акции</h3>
+<ol start="7" type="1">
+<li>Постройте коррелограммы дневных доходностей вашей акции и их модулей с 2015 г. Проведите тест Льюнга – Бокса для 10 лагов. Сравните с результатами для IMOEX из раздела <a href="#sec-acf" class="quarto-xref"><span>7.1</span></a>.</li>
+<li>Проверьте тестами ADF и KPSS логарифм цены и доходность вашей акции. Согласуются ли выводы тестов?</li>
+<li>Подберите модель ARMA<span class="math inline">\((p, q)\)</span> при <span class="math inline">\(p, q \le 2\)</span> по AIC и BIC на данных до конца 2019 г. (если история короче – на первых двух третях выборки). Оцените <span class="math inline">\(R^2_{OOS}\)</span> выбранной модели и модели AR(1) против нуля и исторического среднего на оставшихся данных.</li>
+<li>Посчитайте первую автокорреляцию доходностей вашей акции и оценку спреда по формуле Ролла. Сравните с медианным дневным оборотом бумаги. Как вы объясните результат?</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="7.8.3"><h3 data-number="7.8.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">7.8.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="11" type="1">
+<li>Попросите ИИ-ассистента написать код, который обучает модель ARIMA на доходностях IMOEX до 2020 г. и строит прогноз на каждый день 2020–2026 гг. Проверьте код на две ошибки из врезки в разделе <a href="#sec-oos" class="quarto-xref"><span>7.7</span></a>: константный прогноз и заглядывание в будущее. Если ошибок нет, найдите, как ассистент обновляет модель новыми данными, и убедитесь, что прогноз на день <span class="math inline">\(t\)</span> не использует доходность дня <span class="math inline">\(t\)</span>.</li>
+<li>Спросите ассистента, можно ли предсказывать доходность российского рынка акций моделями ARIMA, и попросите ссылки на исследования. Проверьте, существуют ли названные работы и говорится ли в них то, что утверждает ассистент. Сопоставьте его ответ с результатами главы.</li>
+</ol></section><section id="г.-мини-исследование" class="level3 page-columns page-full" data-number="7.8.4"><h3 data-number="7.8.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">7.8.4</span> Г. Мини-исследование</h3>
+<ol start="13" type="1">
+<li>Растёт ли автокорреляция доходностей IMOEX с горизонтом? Посчитайте первую автокорреляцию дневных, недельных и месячных лог-доходностей за 2003–2026 гг. и отношение дисперсий <span class="math inline">\(VR(q) = \operatorname{Var}(r_t^{(q)}) / (q \operatorname{Var}(r_t))\)</span> для <span class="math inline">\(q = 5\)</span> и <span class="math inline">\(q = 20\)</span> <span class="citation" data-cites="lo1988">(<a href="references.html#ref-lo1988" role="doc-biblioref">Lo и MacKinlay 1988 г.</a>)</span>. Оцените, сколько независимых наблюдений у вас на каждом горизонте и насколько надёжен вывод. Подготовьте короткий (3–5 минут) устный рассказ.</li>
+</ol><div class="no-row-height column-margin column-container"></div></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Чем отличаются ACF и PACF? Как по ним отличить модель AR(1) от MA(1)?</li>
+<li>Почему некоррелированность доходностей не означает их независимости? Приведите пример из данных.</li>
+<li>Какие нулевые гипотезы у тестов ADF и KPSS?</li>
+<li>Почему модели ARMA строят для доходностей, а не для цен?</li>
+<li>Что такое период полураспада в модели AR(1)? Чему он равен при <span class="math inline">\(\varphi = 0{,}5\)</span>?</li>
+<li>Какой вывод следует из того, что тест Льюнга – Бокса отвергает гипотезу для квадратов остатков, но почти не отвергает её для самих остатков?</li>
+<li>К чему сходится многошаговый прогноз стационарной модели ARMA?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>ACF – полная корреляция с лагом <span class="math inline">\(k\)</span>, PACF – корреляция с лагом <span class="math inline">\(k\)</span> за вычетом влияния промежуточных лагов. У AR(1) ACF затухает геометрически, PACF обрывается после первого лага; у MA(1) – наоборот.</li>
+<li>Некоррелированность означает отсутствие <em>линейной</em> зависимости знака и величины. Модули доходностей IMOEX имеют автокорреляцию около 0,3–0,4 на первых лагах: большие движения следуют за большими.</li>
+<li>ADF: у ряда есть единичный корень. KPSS: ряд стационарен.</li>
+<li>Цены нестационарны (случайное блуждание), и оценки ACF и параметров для них не имеют обычного смысла; корреляции уровней бывают ложными. Доходности стационарны.</li>
+<li>Число периодов, за которое отклонение от среднего в среднем уменьшается вдвое: <span class="math inline">\(h_{1/2} = \ln 0{,}5 / \ln\varphi\)</span>. При <span class="math inline">\(\varphi = 0{,}5\)</span> – один период.</li>
+<li>Условное среднее описано моделью удовлетворительно, но дисперсия шока меняется во времени (условная гетероскедастичность); нужна модель волатильности, например GARCH.</li>
+<li>К безусловному среднему ряда <span class="math inline">\(\mu\)</span>; доверительный интервал расширяется до безусловного разброса ряда.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="tsay2010">Tsay (<a href="references.html#ref-tsay2010" role="doc-biblioref">2010 г.</a>)</span>, гл. 2 – линейные модели временных рядов с примерами на финансовых данных.</li>
+<li>
+<span class="citation" data-cites="hyndman2021">Hyndman и Athanasopoulos (<a href="references.html#ref-hyndman2021" role="doc-biblioref">2021 г.</a>)</span>, гл. 9 – модели ARIMA, выбор порядка и прогноз; открытый учебник с кодом на R.</li>
+<li>
+<span class="citation" data-cites="campbell1997">Campbell и др. (<a href="references.html#ref-campbell1997" role="doc-biblioref">1997 г.</a>)</span>, гл. 2 – предсказуемость доходностей и тесты гипотезы случайного блуждания.</li>
+<li>
+<span class="citation" data-cites="lo1988">Lo и MacKinlay (<a href="references.html#ref-lo1988" role="doc-biblioref">1988 г.</a>)</span> – тест отношения дисперсий для проверки гипотезы случайного блуждания.</li>
+<li>
+<span class="citation" data-cites="roll1984">Roll (<a href="references.html#ref-roll1984" role="doc-biblioref">1984 г.</a>)</span> – оценка спреда по автокорреляции цен.</li>
+<li>
+<span class="citation" data-cites="welch2008">Welch и Goyal (<a href="references.html#ref-welch2008" role="doc-biblioref">2008 г.</a>)</span> и <span class="citation" data-cites="campbell2008">Campbell и Thompson (<a href="references.html#ref-campbell2008" role="doc-biblioref">2008 г.</a>)</span> – как оценивать прогнозы доходности вне выборки и почему их трудно сделать лучше исторического среднего.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div class="no-row-height column-margin column-container"><div id="ref-tsay2010" class="csl-entry" role="listitem">
+Tsay, Ruey S. 2010 г. <em>Analysis of Financial Time Series</em>. 3-я изд. Wiley.
+</div><div id="ref-hyndman2021" class="csl-entry" role="listitem">
+Hyndman, Rob J., и George Athanasopoulos. 2021 г. <em>Forecasting: Principles and Practice</em>. 3-я изд. OTexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
+</div><div id="ref-campbell1997" class="csl-entry" role="listitem">
+Campbell, John Y., Andrew W. Lo, и A. Craig MacKinlay. 1997 г. <em>The Econometrics of Financial Markets</em>. Princeton University Press.
+</div><div id="ref-lo1988" class="csl-entry" role="listitem">
+Lo, Andrew W., и A. Craig MacKinlay. 1988 г. <span>«Stock Market Prices Do Not Follow Random Walks: Evidence from a Simple Specification Test»</span>. <em>The Review of Financial Studies</em> 1 (1): 41–66.
+</div><div id="ref-roll1984" class="csl-entry" role="listitem">
+Roll, Richard. 1984 г. <span>«A Simple Implicit Measure of the Effective Bid-Ask Spread in an Efficient Market»</span>. <em>The Journal of Finance</em> 39 (4): 1127–39.
+</div><div id="ref-welch2008" class="csl-entry" role="listitem">
+Welch, Ivo, и Amit Goyal. 2008 г. <span>«A Comprehensive Look at the Empirical Performance of Equity Premium Prediction»</span>. <em>The Review of Financial Studies</em> 21 (4): 1455–508.
+</div><div id="ref-campbell2008" class="csl-entry" role="listitem">
+Campbell, John Y., и Samuel B. Thompson. 2008 г. <span>«Predicting Excess Stock Returns Out of Sample: Can Anything Beat the Historical Average?»</span> <em>The Review of Financial Studies</em> 21 (4): 1509–31.
+</div></div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -815,9 +1968,7 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./06-industry-analysis.html" class="pagination-link" aria-label="Отраслевой анализ">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Отраслевой анализ</span></span>
       </a>          
@@ -829,7 +1980,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
