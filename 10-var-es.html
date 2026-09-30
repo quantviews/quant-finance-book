@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>1&nbsp; Введение – Количественные финансы</title>
+
+
+<title>10&nbsp; VaR и Expected Shortfall – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,42 +26,8 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
+
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -67,8 +36,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-data-sources.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./11-portfolio.html" rel="next">
+<link href="./09-ml-forecasting.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +51,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-de02a6cd1397838b90e0b8d72152825c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,37 +78,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script><style>html{ scroll-behavior: smooth; }</style>
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <!--
+
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
+
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
+
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
---><script>
+
+-->
+
+<script>
+
   window.MathJax = {
+
     output: {
+
       font: 'mathjax-stix2',
+
       displayOverflow: 'scroll'
+
     }
+
   };
+
 </script>
+
+
+
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./10-var-es.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
     </div>
@@ -150,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -158,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span></span></a>
   </div>
 </li>
@@ -170,8 +164,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -190,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -199,8 +193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -213,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -222,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -242,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -251,10 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
+  <a href="./10-var-es.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
   </div>
 </li>
@@ -271,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -280,8 +274,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -294,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -303,8 +297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -323,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -338,8 +332,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -358,30 +352,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
-   
-  <ul>
-<li><a href="#%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%B3%D0%BE-%D1%8D%D1%82%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0" id="toc-для-кого-эта-книга" class="nav-link active" data-scroll-target="#%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%B3%D0%BE-%D1%8D%D1%82%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0"><span class="header-section-number">1.1</span> Для кого эта книга</a></li>
-  <li><a href="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0" id="toc-как-устроена-книга" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0"><span class="header-section-number">1.2</span> Как устроена книга</a></li>
-  <li><a href="#%D0%BA%D0%BE%D0%B4-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" id="toc-код-и-данные" class="nav-link" data-scroll-target="#%D0%BA%D0%BE%D0%B4-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5"><span class="header-section-number">1.3</span> Код и данные</a></li>
-  <li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BA%D0%BE%D0%B4-%D0%B0-%D0%BD%D0%B5-excel" id="toc-почему-код-а-не-excel" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BA%D0%BE%D0%B4-%D0%B0-%D0%BD%D0%B5-excel"><span class="header-section-number">1.4</span> Почему код, а не Excel</a></li>
-  <li><a href="#%D1%83%D1%87%D0%B8%D1%82%D1%8C%D1%81%D1%8F-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-учиться-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D1%83%D1%87%D0%B8%D1%82%D1%8C%D1%81%D1%8F-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">1.5</span> Учиться с ИИ-ассистентом</a></li>
-  <li><a href="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%BA%D1%83%D1%80%D1%81%D0%B0" id="toc-история-курса" class="nav-link" data-scroll-target="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%BA%D1%83%D1%80%D1%81%D0%B0"><span class="header-section-number">1.6</span> История курса</a></li>
-  <li><a href="#%D0%B5%D1%81%D0%BB%D0%B8-%D0%B2%D1%8B-%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D0%B5%D1%82%D0%B5-%D0%BA%D0%BD%D0%B8%D0%B3%D1%83-%D0%B2-%D1%80%D0%B0%D0%BC%D0%BA%D0%B0%D1%85-%D0%BA%D1%83%D1%80%D1%81%D0%B0" id="toc-если-вы-изучаете-книгу-в-рамках-курса" class="nav-link" data-scroll-target="#%D0%B5%D1%81%D0%BB%D0%B8-%D0%B2%D1%8B-%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D0%B5%D1%82%D0%B5-%D0%BA%D0%BD%D0%B8%D0%B3%D1%83-%D0%B2-%D1%80%D0%B0%D0%BC%D0%BA%D0%B0%D1%85-%D0%BA%D1%83%D1%80%D1%81%D0%B0"><span class="header-section-number">1.7</span> Если вы изучаете книгу в рамках курса</a></li>
-  <li><a href="#%D0%BE%D0%B1-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B5" id="toc-об-авторе" class="nav-link" data-scroll-target="#%D0%BE%D0%B1-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B5"><span class="header-section-number">1.8</span> Об авторе</a></li>
-  </ul></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./10-var-es.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></h1>
 </div>
 
 
@@ -395,221 +380,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Количественные финансы – это применение статистики, эконометрики и программирования к финансовым данным. Цель – отвечать на практические вопросы с помощью измерений и проверяемых расчётов. Какую доходность приносил рынок акций и сколько риска за неё приходилось нести? Чем отличается финансовое положение двух компаний одной отрасли? Работает ли торговая стратегия после учёта издержек или её результат – следствие подгонки под историю?</p>
-<p>Эта книга учит решать такие задачи на реальных данных, в первую очередь российских: котировках Московской биржи, дивидендах, ставках Банка России, бухгалтерской отчётности компаний. Каждый метод показан в коде, который можно запустить и повторить.</p>
-<section id="для-кого-эта-книга" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="для-кого-эта-книга">
-<span class="header-section-number">1.1</span> Для кого эта книга</h2>
-<p>Книга написана как учебник к курсу «Количественные финансы» для студентов бакалавриата НИУ ВШЭ. Она подойдёт и тем, кто изучает предмет самостоятельно: аналитикам, начинающим исследователям, частным инвесторам, которые хотят проверять идеи на данных.</p>
-<p>Предполагается, что читатель знаком с основами:</p>
-<ul>
-<li>
-<strong>статистики и эконометрики</strong> – среднее, дисперсия, корреляция, линейная регрессия, проверка гипотез;</li>
-<li>
-<strong>финансов</strong> – процентная ставка, дисконтирование, акции и облигации;</li>
-<li>
-<strong>программирования</strong> – переменные, циклы, функции. Основы Python кратко повторяются в приложении.</li>
-</ul></section><section id="как-устроена-книга" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="как-устроена-книга">
-<span class="header-section-number">1.2</span> Как устроена книга</h2>
-<p>Книга состоит из шести частей. Они идут в порядке курса. Часть I нужна для всех остальных. Часть IV опирается на модели волатильности из части III, остальные части почти независимы.</p>
-<div id="tbl-book-parts" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-book-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;1.1: Структура книги
-</figcaption><div aria-describedby="tbl-book-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead><tr class="header">
-<th>Часть</th>
-<th>О чём</th>
-<th>Основные методы</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>I. Данные и инструменты</td>
-<td>Источники финансовых данных, их подготовка, доходность и риск</td>
-<td>MOEX ISS, корпоративные действия, волатильность, просадки, коэффициент Шарпа</td>
-</tr>
-<tr class="even">
-<td>II. Корпоративная отчётность</td>
-<td>Анализ отчётности сотен тысяч российских компаний</td>
-<td>RFSD, Polars, финансовые коэффициенты, DuPont</td>
-</tr>
-<tr class="odd">
-<td>III. Временные ряды</td>
-<td>Модели доходности и волатильности, прогнозирование</td>
-<td>ARMA, GARCH, машинное обучение с валидацией во времени</td>
-</tr>
-<tr class="even">
-<td>IV. Риск и портфели</td>
-<td>Измерение риска и построение портфелей</td>
-<td>VaR и ES, Марковиц, CAPM, факторные модели</td>
-</tr>
-<tr class="odd">
-<td>V. Долговой рынок</td>
-<td>Облигации и кредитный риск</td>
-<td>доходность к погашению, дюрация, кривая ОФЗ, спреды</td>
-</tr>
-<tr class="even">
-<td>VI. Торговые стратегии</td>
-<td>Проверка инвестиционных идей на истории</td>
-<td>бэктест, издержки, переобучение, моментум</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<p>Каждая глава построена одинаково:</p>
-<ul>
-<li>в начале – цели главы, используемые данные и что нужно знать заранее;</li>
-<li>в тексте – разобранные примеры на данных, врезки <strong>«Сначала предскажите»</strong> (оцените результат до запуска кода) и <strong>«Типичная ошибка»</strong>;</li>
-<li>в конце – итоги, упражнения, вопросы для самопроверки и литература.</li>
-</ul>
-<p>Упражнения бывают четырёх типов:</p>
-<ul>
-<li>
-<strong>А. Понимание</strong> – решаются без компьютера и проверяют, понятна ли идея.</li>
-<li>
-<strong>Б. Практика</strong> – выполняются на данных своей акции или отрасли, поэтому готового ответа у них нет.</li>
-<li>
-<strong>В. Работа с ИИ-ассистентом</strong> – не получить ответ от ассистента, а проверить его: найти ошибку, неявное допущение, неподтверждённое утверждение.</li>
-<li>
-<strong>Г. Мини-исследование</strong> – небольшая самостоятельная задача с устной защитой результата.</li>
-</ul></section><section id="код-и-данные" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="код-и-данные">
-<span class="header-section-number">1.3</span> Код и данные</h2>
-<p>Основной язык книги – <strong>Python</strong>. Для ключевых примеров в онлайн-версии есть вкладка с тем же расчётом на <strong>R</strong>. Печатная версия содержит только Python-код.</p>
-<p>Все примеры работают на снимке данных, который прилагается к книге (папка <code>data/</code>). В снимке – дневные котировки около ста акций Московской биржи с поправкой на дивиденды и сплиты, индексы, дивиденды, ключевая ставка, RUONIA и кривая доходности ОФЗ. Отдельным архивом доступна полная история всего рынка акций Московской биржи с 1997 г. Данные читаются одной строкой:</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sber <span class="op">=</span> data.load_stocks(<span class="st">"SBER"</span>, start<span class="op">=</span><span class="st">"2026-01-01"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sber[[<span class="st">"date"</span>, <span class="st">"close"</span>, <span class="st">"adj_close"</span>, <span class="st">"market_cap"</span>]].tail(<span class="dv">3</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           date   close  adj_close    market_cap</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 185 2026-09-25  276.35     276.35  5.965553e+12</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 186 2026-09-28  272.45     272.45  5.881364e+12</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 187 2026-09-29  274.65     274.65  5.928855e+12</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">qf_load_stocks</span><span class="op">(</span><span class="st">"SBER"</span>, start <span class="op">=</span> <span class="st">"2026-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">close</span>, <span class="va">adj_close</span>, <span class="va">market_cap</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 3 x 4</span></span>
-<span><span class="co">#&gt;   date       close adj_close    market_cap</span></span>
-<span><span class="co">#&gt;   &lt;date&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2026-09-25  276.      276. 5965553079800</span></span>
-<span><span class="co">#&gt; 2 2026-09-28  272.      272. 5881363982600</span></span>
-<span><span class="co">#&gt; 3 2026-09-29  275.      275. 5928855268200</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</div>
-</div>
-</div>
-<p>Состав данных и источники описаны в <code>data/README.md</code>. Поскольку снимок зафиксирован, результаты в книге воспроизводятся с точностью до знака. Все числа в тексте рассчитываются при сборке книги из тех же данных, а не переносятся вручную.</p>
-</section><section id="почему-код-а-не-excel" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="почему-код-а-не-excel">
-<span class="header-section-number">1.4</span> Почему код, а не Excel</h2>
-<p>Excel остаётся стандартом финансовой отрасли, и для быстрой проверки идеи или разбора отчётности одной компании он удобен. Но у него есть ограничения, существенные для количественного анализа:</p>
-<ul>
-<li>
-<strong>объём данных</strong> – с сотнями тысяч строк работать неудобно, а с миллионами невозможно;</li>
-<li>
-<strong>ошибки</strong> – в большой таблице с формулами ошибку трудно найти. Известные примеры – расчёты Reinhart и Rogoff (2010) и потеря данных о заражениях COVID-19 в Великобритании в 2020 г.;</li>
-<li>
-<strong>статистика</strong> – кроме базовых функций, статистических методов почти нет;</li>
-<li>
-<strong>воспроизводимость</strong> – по файлу Excel трудно восстановить, что и в каком порядке было сделано.</li>
-</ul>
-<p>Анализ в виде кода лишён этих недостатков: его можно перезапустить на новых данных, проверить построчно и передать коллеге. Это основа <strong>воспроизводимого исследования</strong> (reproducible research).</p>
-<p>Python и R – бесплатные языки с огромным набором библиотек. Python – язык общего назначения и стандарт в машинном обучении. R создавался для статистики, и многие эконометрические методы появляются в нём раньше. Для задач этой книги подходят оба. Мы выбрали Python как основной: он более распространён и чаще нужен в работе.</p>
-</section><section id="учиться-с-ии-ассистентом" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="учиться-с-ии-ассистентом">
-<span class="header-section-number">1.5</span> Учиться с ИИ-ассистентом</h2>
-<p>ИИ-ассистенты уже умеют писать код для большинства задач этой книги. Это меняет то, чему стоит учиться. Написать функцию, которая считает волатильность, ассистент может быстрее студента. Но решить, <em>какую</em> волатильность считать, заметить, что в данных пропущен месяц торгов, и понять, почему результат бэктеста слишком хорош, – это остаётся задачей аналитика.</p>
-<p>Поэтому книга делает акцент на трёх навыках:</p>
-<ol type="1">
-<li>
-<strong>Постановка задачи</strong> – сформулировать вопрос так, чтобы на него можно было ответить данными.</li>
-<li>
-<strong>Проверка</strong> – сверить результат с простым расчётом, со здравым смыслом, с другим источником.</li>
-<li>
-<strong>Интерпретация</strong> – объяснить, что означают числа и где границы вывода.</li>
-</ol>
-<p>Пользоваться ассистентом при выполнении упражнений можно. Но результат, который вы не можете объяснить и проверить, не засчитывается.</p>
-</section><section id="история-курса" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="история-курса">
-<span class="header-section-number">1.6</span> История курса</h2>
-<p>Курс «Количественные финансы» читается на факультете мировой экономики и мировой политики НИУ ВШЭ с 2016/17 учебного года. Он вырос из курса по выбору «Финансовые рынки и институты» для второго курса, который давал общее представление о финансовой системе: денежно-кредитная политика, банки, рынки ценных бумаг и деривативов, пенсионная система. Со временем остались только «Количественные финансы» – курс для четвёртого курса бакалавриата с упором на работу с данными и построение моделей.</p>
-<p>Содержание и инструменты курса менялись:</p>
-<ul>
-<li>
-<strong>2016–2021</strong> – курс на R. Темы: финансовые данные, модели временных рядов, CAPM, риск и волатильность, портфельная теория, процентные ставки и опционы.</li>
-<li>
-<strong>2021/22</strong> – семинары на R и Python. Добавлена работа с корпоративной отчётностью с помощью кода.</li>
-<li>
-<strong>с 2024/25</strong> – курс полностью на Python.</li>
-<li>
-<strong>2025/26</strong> – форма контроля стала проектной. В курс вошли открытые данные отчётности российских компаний (RFSD) и прогнозирование с помощью машинного обучения.</li>
-</ul>
-<p>Материалы прошлых лет доступны на GitHub: <a href="https://github.com/quantviews">github.com/quantviews</a>. Эта книга собирает их в единый учебник и дополняет новыми главами.</p>
-</section><section id="если-вы-изучаете-книгу-в-рамках-курса" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="если-вы-изучаете-книгу-в-рамках-курса">
-<span class="header-section-number">1.7</span> Если вы изучаете книгу в рамках курса</h2>
-<p>Курс состоит из лекций и семинаров. На семинарах разбираются примеры и упражнения из соответствующих глав. Итоговая оценка складывается из трёх частей:</p>
-<div id="tbl-grading" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;1.2: Структура оценки в курсе
-</figcaption><div aria-describedby="tbl-grading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
-<thead><tr class="header">
-<th>Компонент</th>
-<th>Вес</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Два индивидуальных проекта</td>
-<td>60%</td>
-</tr>
-<tr class="even">
-<td>Письменный экзамен</td>
-<td>30%</td>
-</tr>
-<tr class="odd">
-<td>Посещаемость</td>
-<td>10%</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<p><strong>Проект 1. Фундаментальный анализ отрасли.</strong> По данным бухгалтерской отчётности (RFSD) нужно сравнить финансовое положение и эффективность компаний одной отрасли: рассчитать и визуализировать коэффициенты рентабельности, ликвидности и долговой нагрузки и сделать обоснованные выводы о лидерах и аутсайдерах.</p>
-<p><strong>Проект 2. Модель и стратегия для акции.</strong> Для назначенной акции Московской биржи нужно построить и проверить модель временного ряда, сравнить её прогнозы с простым бенчмарком. В продвинутой части – разработать торговую стратегию и протестировать её с учётом издержек.</p>
-<p><strong>Экзамен</strong> проверяет понимание, а не умение генерировать код. Он пишется в аудитории без гаджетов и включает три типа заданий:</p>
-<ul>
-<li>интерпретация готового результата (графика, таблицы регрессии, расчёта VaR);</li>
-<li>поиск логической или концептуальной ошибки во фрагменте кода;</li>
-<li>кейс, в котором нужно применить понятия курса и дать рекомендацию.</li>
-</ul></section><section id="об-авторе" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="об-авторе">
-<span class="header-section-number">1.8</span> Об авторе</h2>
-<p><strong>Марсель Салихов</strong> – президент Института энергетики и финансов, директор Центра экономической экспертизы ИГМУ НИУ ВШЭ. Преподаёт в НИУ ВШЭ с 2008 г. Более 20 лет работает в консалтинге и прикладных исследованиях. Основные области – российская макроэкономика, финансовые и нефтегазовые рынки. Пишет на R с 2012 г., на Python – с 2017 г.</p>
-<ul>
-<li><a href="https://quantviews.github.io/">Личный сайт</a></li>
-<li><a href="https://www.hse.ru/org/persons/26780297">Профиль на сайте НИУ ВШЭ</a></li>
-<li><a href="https://fief.ru/">Институт энергетики и финансов</a></li>
-<li><a href="https://github.com/quantviews">Материалы и проекты на GitHub</a></li>
-</ul>
+</header>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<!--
+Заготовка главы. Материалы для работы:
+Материала в курсе нет – пишется с нуля; опирается на главы 4 и 8.
+-->
+<div class="callout callout-style-default callout-note callout-titled" title="Глава готовится">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Глава готовится
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Эта глава входит в второй этап работы над книгой. Планируемое содержание:</p>
+<ul>
+<li>Меры хвостового риска: VaR и ES</li>
+<li>Историческая, параметрическая и Монте-Карло оценки</li>
+<li>VaR на основе GARCH</li>
+<li>Бэктест VaR: тесты Купика и Кристофферсена</li>
+<li>Кейс: риск российского рынка в 2022 г.</li>
+</ul>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1008,18 +810,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Предисловие">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Предисловие</span>
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-ml-forecasting.html" class="pagination-link" aria-label="Прогнозирование и машинное обучение">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-data-sources.html" class="pagination-link" aria-label="Источники финансовых данных">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11-portfolio.html" class="pagination-link" aria-label="Портфельная теория">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

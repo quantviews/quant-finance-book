@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4&nbsp; Доходность и риск – Количественные финансы</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-accounting-data.html" rel="next">
+<link href="./03-data-preparation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0b552e407b994c949c80d38323c6ecd4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-de02a6cd1397838b90e0b8d72152825c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!--
+  Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
+  Сам MathJax 4 подключается через html-math-method в _quarto.yml
+  (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
+--><script>
+  window.MathJax = {
+    output: {
+      font: 'mathjax-stix2',
+      displayOverflow: 'scroll'
+    }
+  };
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-sources.html">Данные и инструменты</a></li><li class="breadcrumb-item"><a href="./04-returns-risk.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Доходность и риск</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Количественные финансы</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Предисловие</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Данные и инструменты</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-preparation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Подготовка данных</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-returns-risk.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Доходность и риск</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Корпоративная отчётность</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-industry-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Отраслевой анализ</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Временные ряды</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-volatility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Волатильность: модели ARCH и GARCH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-ml-forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Риск и портфели</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-capm-factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">CAPM и факторные модели</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Долговой рынок</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-credit-risk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Кредитный риск</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Торговые стратегии</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-momentum.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Моментум и управление волатильностью</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-microstructure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Литература</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Приложения</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Справочник по данным</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix-projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты курса</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-returns" id="toc-sec-returns" class="nav-link active" data-scroll-target="#sec-returns"><span class="header-section-number">4.1</span> Цены и доходности</a>
+  <ul class="collapse">
+<li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BD%D0%B5-%D1%86%D0%B5%D0%BD%D1%8B" id="toc-почему-не-цены" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BD%D0%B5-%D1%86%D0%B5%D0%BD%D1%8B"><span class="header-section-number">4.1.1</span> Почему не цены</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%B0%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C" id="toc-простая-доходность" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%B0%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C"><span class="header-section-number">4.1.2</span> Простая доходность</a></li>
+  <li><a href="#%D0%BB%D0%BE%D0%B3%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C" id="toc-логарифмическая-доходность" class="nav-link" data-scroll-target="#%D0%BB%D0%BE%D0%B3%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C"><span class="header-section-number">4.1.3</span> Логарифмическая доходность</a></li>
+  <li><a href="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D1%86%D0%B5%D0%BD%D1%83-%D0%B1%D1%80%D0%B0%D1%82%D1%8C-close-%D0%B8%D0%BB%D0%B8-adj_close" id="toc-какую-цену-брать-close-или-adj_close" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA%D1%83%D1%8E-%D1%86%D0%B5%D0%BD%D1%83-%D0%B1%D1%80%D0%B0%D1%82%D1%8C-close-%D0%B8%D0%BB%D0%B8-adj_close"><span class="header-section-number">4.1.4</span> Какую цену брать: <code>close</code> или <code>adj_close</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-total-return" id="toc-sec-total-return" class="nav-link" data-scroll-target="#sec-total-return"><span class="header-section-number">4.2</span> Дивиденды и полная доходность</a>
+  <ul class="collapse">
+<li><a href="#%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D1%8F%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B8-%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F" id="toc-средняя-доходность-арифметическая-и-геометрическая" class="nav-link" data-scroll-target="#%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D1%8F%D1%8F-%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B8-%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F"><span class="header-section-number">4.2.1</span> Средняя доходность: арифметическая и геометрическая</a></li>
+  <li><a href="#%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B2-%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D0%B2%D0%B0%D0%BB%D1%8E%D1%82%D0%B5" id="toc-доходность-в-какой-валюте" class="nav-link" data-scroll-target="#%D0%B4%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B2-%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D0%B2%D0%B0%D0%BB%D1%8E%D1%82%D0%B5"><span class="header-section-number">4.2.2</span> Доходность в какой валюте</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-volatility" id="toc-sec-volatility" class="nav-link" data-scroll-target="#sec-volatility"><span class="header-section-number">4.3</span> Волатильность</a>
+  <ul class="collapse">
+<li><a href="#%D0%B2%D0%BE%D0%BB%D0%B0%D1%82%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%BC%D0%B5%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%B2%D0%BE-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8" id="toc-волатильность-меняется-во-времени" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BB%D0%B0%D1%82%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%BC%D0%B5%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%B2%D0%BE-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8"><span class="header-section-number">4.3.1</span> Волатильность меняется во времени</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-fat-tails" id="toc-sec-fat-tails" class="nav-link" data-scroll-target="#sec-fat-tails"><span class="header-section-number">4.4</span> Распределение доходностей: тяжёлые хвосты</a></li>
+  <li><a href="#sec-drawdown" id="toc-sec-drawdown" class="nav-link" data-scroll-target="#sec-drawdown"><span class="header-section-number">4.5</span> Просадки</a></li>
+  <li><a href="#sec-risk-return" id="toc-sec-risk-return" class="nav-link" data-scroll-target="#sec-risk-return"><span class="header-section-number">4.6</span> Риск и доходность отдельных акций</a></li>
+  <li><a href="#sec-sharpe" id="toc-sec-sharpe" class="nav-link" data-scroll-target="#sec-sharpe"><span class="header-section-number">4.7</span> Доходность с поправкой на риск: коэффициент Шарпа</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-returns" id="toc-sec-exercises-returns" class="nav-link" data-scroll-target="#sec-exercises-returns"><span class="header-section-number">4.8</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">4.8.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">4.8.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">4.8.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">4.8.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-sources.html">Данные и инструменты</a></li><li class="breadcrumb-item"><a href="./04-returns-risk.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Доходность и риск</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Доходность и риск</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Представьте инвестора, который 20.10.2021 вложил деньги в индекс Московской биржи с учётом дивидендов. Через год, 26.09.2022, от вложений осталось меньше половины: индекс опустился на 53,5% от точки входа. Вернуться к исходной сумме удалось только 17.02.2025, спустя 40 месяцев. Хорошее это было вложение или плохое? Какую доходность оно принесло и сколько риска за неё пришлось нести? Что было бы, если бы инвестор вложился на год раньше или на год позже?</p>
+<p>Чтобы ответить на такие вопросы, нужен общий язык: способ измерять доходность и риск так, чтобы результаты можно было сравнивать между активами, периодами и стратегиями. Этот язык и есть предмет главы. Мы будем опираться на данные Московской биржи за два десятилетия. За это время российский рынок пережил кризис 2008 г., девальвацию 2014 г., пандемию 2020 г. и шок 2022 г., поэтому примеров того, как ведут себя доходности в спокойные и в кризисные годы, будет достаточно.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="В этой главе">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>В этой главе
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Считаем простую и логарифмическую доходность и выясняем, какую из них для чего использовать.</li>
+<li>Разбираем, почему доходность российского рынка без дивидендов занижена в разы и почему средняя доходность бывает обманчивой.</li>
+<li>Измеряем риск: волатильность, тяжёлые хвосты, просадки.</li>
+<li>Сравниваем активы по доходности с поправкой на риск с учётом высокой безрисковой ставки в России.</li>
+</ul>
+<p><strong>Данные:</strong> <code>stocks.parquet</code>, <code>indexes.parquet</code>, <code>ruonia.parquet</code>, <code>key_rate.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> работа с pandas, загрузка данных (глава о финансовых данных).</p>
+</div>
+</div>
+<p>В примерах главы используются следующие библиотеки и модули книги: <code>data</code> загружает учебные данные, <code>plot</code> задаёт единый стиль графиков.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sec-returns" class="level2 page-columns page-full" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="sec-returns">
+<span class="header-section-number">4.1</span> Цены и доходности</h2>
+<section id="почему-не-цены" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="почему-не-цены">
+<span class="header-section-number">4.1.1</span> Почему не цены</h3>
+<p>Акция Сбербанка в сентябре 2026 г. стоит около 275 руб., акция ВТБ – несколько десятков рублей. Значит ли это, что Сбербанк «дороже»? Нет: цена одной акции зависит от того, на сколько акций разделён капитал компании, и сама по себе ничего не говорит ни о стоимости бизнеса, ни о привлекательности вложения. Инвестора интересует другое – на сколько процентов вырастут или упадут его деньги.</p>
+<p>Поэтому почти весь количественный анализ в финансах работает не с ценами, а с <strong>доходностями</strong> – относительными изменениями стоимости вложения. У доходностей есть и статистическое преимущество. Цены со временем растут и «уходят» в сторону, поэтому их среднее и разброс зависят от выбранного периода. Доходности колеблются вокруг сравнительно устойчивого уровня, и их свойства можно изучать и сравнивать между периодами.</p>
+</section><section id="простая-доходность" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="простая-доходность">
+<span class="header-section-number">4.1.2</span> Простая доходность</h3>
+<p>Пусть <span class="math inline">\(P_t\)</span> – цена актива на закрытие дня <span class="math inline">\(t\)</span>. <strong>Простая доходность</strong> за день – это относительное изменение цены:</p>
+<p><span id="eq-simple-return"><span class="math display">\[
+R_t = \frac{P_t - P_{t-1}}{P_{t-1}} = \frac{P_t}{P_{t-1}} - 1.
+\tag{4.1}\]</span></span></p>
+<p>Если акция стоила 100 руб. и подорожала до 103 руб., простая доходность равна 3%. Именно её инвестор видит в отчёте брокера. Ей удобно пользоваться для портфелей: доходность портфеля равна взвешенной сумме доходностей входящих в него активов, где веса – доли вложенных денег.</p>
+<p>Но у простой доходности есть неудобное свойство: она несимметрична. Падение на 50% не компенсируется ростом на 50% – после такой пары движений от 100 руб. останется 75. Чтобы вернуться к исходному уровню после падения на 50%, нужен рост на 100%.</p>
+<p>Российский рынок дал наглядный пример этой асимметрии. В 2008 г. индекс полной доходности MCFTR упал на 66,6%, а в 2009 г. вырос на 126,1%. Кажется, что рост с лихвой перекрыл падение. На деле за два года инвестор потерял 24,5%: чтобы отыграть падение 2008 г., индексу нужно было вырасти на 199%.</p>
+</section><section id="логарифмическая-доходность" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="логарифмическая-доходность">
+<span class="header-section-number">4.1.3</span> Логарифмическая доходность</h3>
+<p>Эту асимметрию устраняет <strong>логарифмическая (непрерывно начисляемая) доходность</strong>:</p>
+<p><span id="eq-log-return"><span class="math display">\[
+r_t = \ln \frac{P_t}{P_{t-1}} = \ln(1 + R_t).
+\tag{4.2}\]</span></span></p>
+<p>Её главное свойство – <strong>аддитивность во времени</strong>. Доходность за несколько дней равна сумме дневных лог-доходностей, потому что логарифм произведения равен сумме логарифмов:</p>
+<p><span class="math display">\[
+\ln \frac{P_T}{P_0} = \ln \frac{P_1}{P_0} + \ln \frac{P_2}{P_1} + \dots + \ln \frac{P_T}{P_{T-1}} = \sum_{t=1}^{T} r_t.
+\]</span></p>
+<p>Падение с 100 до 50 руб. – это лог-доходность <span class="math inline">\(\ln 0{,}5 \approx -0{,}693\)</span>, а рост с 50 до 100 руб. – ровно <span class="math inline">\(+0{,}693\)</span>. Сумма равна нулю, как и должно быть. Поэтому модели временных рядов, которые мы будем строить в следующих главах, почти всегда работают с лог-доходностями.</p>
+<p>При небольших изменениях цены две доходности почти совпадают: <span class="math inline">\(\ln(1 + R) \approx R\)</span>, когда <span class="math inline">\(R\)</span> мало. Для дневных доходностей разница обычно видна лишь в четвёртом знаке после запятой. Но для крупных движений она существенна: падение на 33% – это лог-доходность около <span class="math inline">\(-0{,}40\)</span>.</p>
+<div id="tbl-returns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;4.1: Простая и логарифмическая доходность
+</figcaption><div aria-describedby="tbl-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Свойство</th>
+<th>Простая <span class="math inline">\(R_t\)</span>
+</th>
+<th>Логарифмическая <span class="math inline">\(r_t\)</span>
+</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Доходность за несколько периодов</td>
+<td><span class="math inline">\(\prod (1 + R_t) - 1\)</span></td>
+<td>
+<span class="math inline">\(\sum r_t\)</span> – простая сумма</td>
+</tr>
+<tr class="even">
+<td>Доходность портфеля</td>
+<td>
+<span class="math inline">\(\sum w_i R_{i,t}\)</span> – взвешенная сумма</td>
+<td>не складывается по активам</td>
+</tr>
+<tr class="odd">
+<td>Нижняя граница</td>
+<td><span class="math inline">\(-100\%\)</span></td>
+<td><span class="math inline">\(-\infty\)</span></td>
+</tr>
+<tr class="even">
+<td>Где применять</td>
+<td>портфели, отчётность, интерпретация</td>
+<td>модели временных рядов, агрегирование во времени</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Из таблицы следует правило, которое пригодится во всей книге: <strong>складываем во времени – логарифмические, складываем по активам – простые</strong>. Перейти от одной доходности к другой можно по формулам <span class="math inline">\(r = \ln(1+R)\)</span> и <span class="math inline">\(R = e^r - 1\)</span>.</p>
+<p>Посчитаем обе доходности для акций Сбербанка. Метод <code>pct_change()</code> возвращает простую доходность, а разность логарифмов цен – логарифмическую.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sber <span class="op">=</span> data.load_stocks(<span class="st">"SBER"</span>, start<span class="op">=</span><span class="st">"2024-01-01"</span>).set_index(<span class="st">"date"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sber[<span class="st">"R"</span>] <span class="op">=</span> sber[<span class="st">"adj_close"</span>].pct_change()            <span class="co"># простая доходность</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sber[<span class="st">"r"</span>] <span class="op">=</span> np.log(sber[<span class="st">"adj_close"</span>]).diff()          <span class="co"># логарифмическая</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sber[[<span class="st">"adj_close"</span>, <span class="st">"R"</span>, <span class="st">"r"</span>]].tail()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             adj_close         R         r</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                                     </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-23     280.74 -0.000036 -0.000036</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-24     279.33 -0.005022 -0.005035</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-25     276.35 -0.010668 -0.010726</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-28     272.45 -0.014113 -0.014213</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-29     274.65  0.008075  0.008042</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Первая строка любого ряда доходностей пустая (<code>NaN</code>): для первого дня нет предыдущей цены. В обычные дни столбцы <code>R</code> и <code>r</code> различаются лишь в четвёртом знаке.</p>
+</section><section id="какую-цену-брать-close-или-adj_close" class="level3 page-columns page-full" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="какую-цену-брать-close-или-adj_close">
+<span class="header-section-number">4.1.4</span> Какую цену брать: <code>close</code> или <code>adj_close</code>
+</h3>
+<p>В коде выше мы взяли не цену закрытия <code>close</code>, а столбец <code>adj_close</code>. Почему?</p>
+<p>Допустим, вы купили акцию за 317 руб. накануне дивидендной отсечки. На следующий день цена упала до 296 руб., но на ваш счёт придёт дивиденд 33 руб. Потеряли вы или заработали? Если смотреть только на цену – потеряли 7%. Если учесть дивиденд – заработали: <span class="math inline">\(296 + 33 = 329\)</span> руб. против вложенных 317.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>С 31 июля 2023 г. сделки с акциями на Мосбирже рассчитываются в режиме T+1, поэтому экс-дивидендная дата совпадает с датой закрытия реестра. До этого, при расчётах T+2, она наступала на торговый день раньше.</p>
+</div></div><p>Именно это происходит в день, когда акция начинает торговаться без права на дивиденд (<strong>экс-дивидендная дата</strong>): цена падает примерно на размер выплаты. Для акционера это не убыток – деньги просто переходят из цены акции на его счёт. Но доходность, посчитанная по <code>close</code>, покажет в этот день провал.</p>
+<p>Поэтому для доходностей используют <strong>скорректированную цену</strong> <code>adj_close</code>. Все цены до экс-даты умножаются на коэффициент <span class="math inline">\(1 - D/P\)</span>, где <span class="math inline">\(D\)</span> – дивиденд, а <span class="math inline">\(P\)</span> – цена закрытия накануне. После такой корректировки доходность в день отсечки отражает полный результат акционера: изменение цены плюс дивиденд. Аналогично цены корректируются на сплиты. Подробно корректировка разобрана в главе о подготовке данных.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>11 июля 2024 г. – экс-дивидендная дата Сбербанка: дивиденд 33,30 руб. на акцию при цене около 317 руб. накануне. Какой будет доходность за этот день по <code>close</code> и по <code>adj_close</code>? Запишите оценку, потом запустите код.</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ex <span class="op">=</span> data.load_stocks(<span class="st">"SBER"</span>, start<span class="op">=</span><span class="st">"2024-07-09"</span>, end<span class="op">=</span><span class="st">"2024-07-12"</span>).set_index(<span class="st">"date"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ex[<span class="st">"R_close"</span>] <span class="op">=</span> ex[<span class="st">"close"</span>].pct_change()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ex[<span class="st">"R_adj"</span>] <span class="op">=</span> ex[<span class="st">"adj_close"</span>].pct_change()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ex[[<span class="st">"close"</span>, <span class="st">"adj_close"</span>, <span class="st">"R_close"</span>, <span class="st">"R_adj"</span>]].<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              close  adj_close  R_close   R_adj</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                                          </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2024-07-09  319.99   221.4367      NaN     NaN</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2024-07-10  316.68   219.1461  -0.0103 -0.0103</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2024-07-11  295.87   228.8050  -0.0657  0.0441</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2024-07-12  292.21   225.9746  -0.0124 -0.0124</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>По <code>close</code> получается −6,6% – будто акция резко упала. По <code>adj_close</code> доходность 4,4%: цена снизилась меньше, чем на размер дивиденда, и с учётом выплаты акционер в тот день заработал.</p>
+<p>Скорректированная цена устраняет <em>технический</em> эффект выплаты, но не отменяет реальных новостей о дивидендах. Хороший контрпример – Газпром. 30 июня 2022 г. годовое собрание акционеров отказалось от выплаты дивидендов за 2021 г., которые рынок уже заложил в цену. В этот день акции упали на 30,5%, и <code>adj_close</code> показывает то же падение: дивиденда не было, корректировать нечего. Инвесторы действительно потеряли эти деньги.</p>
+</section></section><section id="sec-total-return" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="sec-total-return">
+<span class="header-section-number">4.2</span> Дивиденды и полная доходность</h2>
+<p>Для российского рынка вопрос о дивидендах особенно важен. Многие крупные компании, прежде всего с государственным участием, платят высокие дивиденды, и значительная часть дохода акционера приходит в виде выплат, а не роста цены.</p>
+<p>Посмотрим, как это отражается на индексах. Индекс Мосбиржи <strong>IMOEX</strong> – ценовой: он показывает только изменение цен входящих в него акций. Индекс <strong>MCFTR</strong> состоит из тех же акций, но это индекс <em>полной доходности</em>: в нём дивиденды реинвестируются, то есть как будто сразу направляются на покупку акций. Для сравнения возьмём индекс полной доходности гособлигаций <strong>RGBITR</strong>.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ix <span class="op">=</span> (data.load_index([<span class="st">"IMOEX"</span>, <span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span>], start<span class="op">=</span><span class="st">"2010-01-01"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        .pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"close"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> (ix.index[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> ix.index[<span class="dv">0</span>]).days <span class="op">/</span> <span class="fl">365.25</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cagr <span class="op">=</span> (ix.iloc[<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> ix.iloc[<span class="dv">0</span>]) <span class="op">**</span> (<span class="dv">1</span> <span class="op">/</span> years) <span class="op">-</span> <span class="dv">1</span>   <span class="co"># среднегодовой темп роста</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>cagr.<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; IMOEX     0.0271</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MCFTR     0.0886</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RGBITR    0.0724</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Чтобы сравнивать рост за разные сроки, мы пересчитали его в <strong>среднегодовой темп роста</strong> (CAGR, compound annual growth rate). Это такая постоянная годовая доходность, которая за тот же срок дала бы тот же итоговый результат:</p>
+<p><span id="eq-cagr"><span class="math display">\[
+\text{CAGR} = \left(\frac{P_T}{P_0}\right)^{1/T} - 1,
+\tag{4.3}\]</span></span></p>
+<p>где <span class="math inline">\(T\)</span> – срок в годах. CAGR не означает, что каждый год доходность была такой: реальные годовые доходности сильно колебались вокруг неё.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>growth100 <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> ix <span class="op">/</span> ix.iloc[<span class="dv">0</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> growth100.plot(logy<span class="op">=</span><span class="va">True</span>, rot<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ax.minorticks_off()                                   <span class="co"># без промежуточных делений</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>], labels<span class="op">=</span>[<span class="st">"100"</span>, <span class="st">"150"</span>, <span class="st">"200"</span>, <span class="st">"300"</span>, <span class="st">"400"</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">""</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"руб."</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">"IMOEX (цены)"</span>, <span class="st">"MCFTR (с дивидендами)"</span>, <span class="st">"RGBITR (ОФЗ)"</span>])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-total-return" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-total-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-returns-risk_files/figure-html/fig-total-return-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-total-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.1: Рост 100 рублей, вложенных в индексы MOEX в начале 2010 г. (логарифмическая шкала)
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qf_load_index</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"IMOEX"</span>, <span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span><span class="op">)</span>, start <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ticker</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>growth <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">close</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">first</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">growth</span>, colour <span class="op">=</span> <span class="va">ticker</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"руб."</span>, colour <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04-returns-risk_files/figure-html/unnamed-chunk-10-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Обратите внимание на логарифмическую шкалу по вертикали. На ней одинаковые <em>относительные</em> изменения выглядят одинаково: рост со 100 до 200 руб. занимает столько же места, сколько рост с 200 до 400. Для длинных рядов цен это почти всегда правильный выбор – на обычной шкале ранние годы сжимаются в линию у оси.</p>
+<p>С 11.01.2010 по 29.09.2026 ценовой индекс IMOEX рос в среднем на 2,7% в год, а индекс полной доходности MCFTR – на 8,9%. Разница в 6,1 процентного пункта в год – это вклад реинвестированных дивидендов. За весь период она накопилась в большой разрыв: 100 руб. в MCFTR превратились в 413 руб., а в IMOEX – лишь в 156 руб. Большую часть дохода российского инвестора в акции за эти годы составили дивиденды. Заметьте и то, что индекс гособлигаций RGBITR рос в среднем на 7,2% в год при гораздо меньших колебаниях.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Сравнивать стратегию, которая получает дивиденды, с ценовым индексом IMOEX. Такое сравнение завышает превосходство стратегии на несколько процентных пунктов в год. Бенчмарком для российских акций служит индекс полной доходности MCFTR или MCFTRR – вариант с учётом налога на дивиденды для российских инвесторов.</p>
+</div>
+</div>
+<section id="средняя-доходность-арифметическая-и-геометрическая" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="средняя-доходность-арифметическая-и-геометрическая">
+<span class="header-section-number">4.2.1</span> Средняя доходность: арифметическая и геометрическая</h3>
+<p>Когда говорят о «средней доходности», часто имеют в виду разные вещи. Посчитаем годовые доходности MCFTR и сравним два вида среднего.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual <span class="op">=</span> mcftr_all.resample(<span class="st">"YE"</span>).last().pct_change().loc[<span class="st">"2004"</span>:<span class="st">"2025"</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>arith <span class="op">=</span> annual.mean()                                     <span class="co"># арифметическое среднее</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>geom <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> annual).prod() <span class="op">**</span> (<span class="dv">1</span> <span class="op">/</span> <span class="bu">len</span>(annual)) <span class="op">-</span> <span class="dv">1</span>       <span class="co"># геометрическое = CAGR</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>pd.Series({<span class="st">"арифметическое"</span>: arith, <span class="st">"геометрическое"</span>: geom,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">"волатильность"</span>: annual.std()}).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; арифметическое    0.1993</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; геометрическое    0.1283</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; волатильность     0.4014</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>За 22 полных года с 2004 по 2025 г. арифметическое среднее годовых доходностей составило 19,9%, а геометрическое (фактический среднегодовой рост) – только 12,8%. Разница возникает из-за колебаний: как мы видели на примере 2008–2009 гг., потери и приросты одинаковой величины не компенсируют друг друга. Чем выше волатильность, тем больше разрыв. Приближённо</p>
+<p><span id="eq-vol-drag"><span class="math display">\[
+\bar R_{\text{геом}} \approx \bar R_{\text{арифм}} - \frac{\sigma^2}{2},
+\tag{4.4}\]</span></span></p>
+<p>что даёт 11,9%. Приближение грубое, потому что годовые доходности российского рынка очень велики по модулю, но направление и порядок эффекта оно передаёт верно. Эту разницу называют <em>потерями от волатильности</em> (volatility drag).</p>
+<p>Какое среднее правильное? Оба, но для разных вопросов. Геометрическое отвечает на вопрос «как в среднем росли деньги инвестора за прошлые годы». Арифметическое – лучшая оценка ожидаемой доходности <em>одного</em> следующего года. Путать их опасно: в рекламе инвестиционных продуктов иногда приводят арифметическое среднее, которое выглядит привлекательнее.</p>
+</section><section id="доходность-в-какой-валюте" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="доходность-в-какой-валюте">
+<span class="header-section-number">4.2.2</span> Доходность в какой валюте</h3>
+<p>Доходность всегда измеряется в какой-то валюте, и для российского инвестора это различие бывает решающим. У индекса Мосбиржи есть «двойник» – индекс <strong>RTSI</strong>, который рассчитывается по тем же акциям, но в долларах.</p>
+<p>Хорошо это видно на событиях декабря 2014 г. В ночь на 16 декабря Банк России повысил ключевую ставку с 10,5% до 17%, пытаясь остановить обвал рубля. В этот день IMOEX <em>вырос</em> на 1,4%, а RTSI <em>упал</em> на 12,4%. Цены акций в рублях почти не изменились, но сами рубли резко подешевели, и для инвестора, считающего в долларах, это был один из худших дней десятилетия. Индекс гособлигаций RGBITR в тот же день потерял 8,7%: при резком росте ставок цены облигаций падают. Эту связь мы разберём в главе об облигациях.</p>
+</section></section><section id="sec-volatility" class="level2 page-columns page-full" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="sec-volatility">
+<span class="header-section-number">4.3</span> Волатильность</h2>
+<p>Доходность – только половина картины. Два актива с одинаковой средней доходностью могут вести себя совершенно по-разному: один растёт ровно, другой то взлетает, то падает. Второй рискованнее: у него выше шанс оказаться в плохом положении в тот момент, когда деньги понадобятся. Главная мера такого риска в финансах – <strong>волатильность</strong>, стандартное отклонение доходностей:</p>
+<p><span id="eq-vol"><span class="math display">\[
+\sigma = \sqrt{\frac{1}{n-1}\sum_{t=1}^{n}(r_t - \bar r)^2}.
+\tag{4.5}\]</span></span></p>
+<p>Волатильность показывает, насколько сильно доходности обычно отклоняются от своего среднего. Если бы доходности были распределены нормально, примерно в двух случаях из трёх доходность попадала бы в интервал <span class="math inline">\(\bar r \pm \sigma\)</span> и в 95% случаев – в интервал <span class="math inline">\(\bar r \pm 2\sigma\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Число торговых дней на Мосбирже в разные годы немного различается, поэтому для годового пересчёта используют условное значение 252 – так же, как на большинстве мировых рынков.</p>
+</div></div><p>Волатильность считают по дневным данным, но приводят в годовом выражении, чтобы её можно было сопоставлять с годовой доходностью. Дневную волатильность умножают на <span class="math inline">\(\sqrt{252}\)</span> – примерно столько торговых дней в году:</p>
+<p><span id="eq-vol-annual"><span class="math display">\[
+\sigma_{\text{год}} = \sigma_{\text{день}} \sqrt{252}.
+\tag{4.6}\]</span></span></p>
+<p>Откуда корень? Если дневные доходности независимы, дисперсия их суммы равна сумме дисперсий. За 252 дня дисперсия вырастает в 252 раза, а стандартное отклонение – в <span class="math inline">\(\sqrt{252}\)</span> раз. Если доходности зависимы – например, за ростом чаще следует рост, – правило даёт лишь приближение. Для месячных данных множитель равен <span class="math inline">\(\sqrt{12}\)</span>, для недельных – <span class="math inline">\(\sqrt{52}\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.log(ix).diff().dropna()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>vol <span class="op">=</span> r.std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>vol.<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; IMOEX     0.237</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MCFTR     0.237</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RGBITR    0.076</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Годовая волатильность индекса акций MCFTR с 2010 г. – 23,7%, индекса гособлигаций RGBITR – 7,6%. На языке инвестора это значит: при волатильности около 24% год, в котором индекс акций отклонится от своей средней доходности на 20–25 процентных пунктов в любую сторону, – обычное дело, а не исключение.</p>
+<section id="волатильность-меняется-во-времени" class="level3 page-columns page-full" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="волатильность-меняется-во-времени">
+<span class="header-section-number">4.3.1</span> Волатильность меняется во времени</h3>
+<p>Одно число за полтора десятилетия скрывает важную деталь: риск не постоянен. Посчитаем волатильность в скользящем окне из 63 торговых дней – примерно квартала – и посмотрим, как она менялась.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>imoex <span class="op">=</span> data.load_index(<span class="st">"IMOEX"</span>, start<span class="op">=</span><span class="st">"2005-01-01"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>r_imoex <span class="op">=</span> np.log(imoex).diff().dropna()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>roll_vol <span class="op">=</span> r_imoex.rolling(<span class="dv">63</span>).std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> roll_vol.plot(color<span class="op">=</span><span class="st">"#34699A"</span>, rot<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">""</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> y, _: <span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:.0%}</span><span class="ss">"</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-rolling-vol" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rolling-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-returns-risk_files/figure-html/fig-rolling-vol-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rolling-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.2: Годовая волатильность IMOEX в скользящем окне 63 дня
+</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"IMOEX"</span>, start <span class="op">=</span> <span class="st">"2005-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">close</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    vol <span class="op">=</span> <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/rollapply.html">rollapply</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">63</span>, <span class="va">sd</span>, fill <span class="op">=</span> <span class="cn">NA</span>, align <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">252</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">vol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#34699A"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04-returns-risk_files/figure-html/unnamed-chunk-16-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>На графике хорошо видны <strong>кластеры волатильности</strong>: долгие спокойные периоды сменяются короткими бурными, и большие движения цен следуют за большими, а малые – за малыми. Пики легко связать с событиями: осень 2008 г., декабрь 2014 г., март 2020 г., февраль 2022 г. Вот пять худших дней IMOEX с 2005 г.:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> (np.exp(r_imoex) <span class="op">-</span> <span class="dv">1</span>).nsmallest(<span class="dv">5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>worst.to_frame(<span class="st">"доходность"</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             доходность</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                  </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2022-02-24      -0.333</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2008-10-06      -0.187</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2008-09-16      -0.175</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2008-10-08      -0.144</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2008-10-24      -0.142</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Из пяти худших дней 4 пришлись на осень 2008 г., когда биржа несколько раз приостанавливала торги из-за обвала котировок. Кластеризация волатильности – одно из самых устойчивых эмпирических свойств финансовых рядов: она наблюдается на всех рынках и во все периоды <span class="citation" data-cites="cont2001">(<a href="references.html#ref-cont2001" role="doc-biblioref">Cont 2001 г.</a>)</span>. Практический вывод: волатильность, посчитанная за спокойный год, плохо описывает риск в кризис. В главе о волатильности мы построим модели GARCH, которые учитывают, что сегодняшний риск зависит от вчерашних движений.</p>
+<div class="no-row-height column-margin column-container"></div></section></section><section id="sec-fat-tails" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="sec-fat-tails">
+<span class="header-section-number">4.4</span> Распределение доходностей: тяжёлые хвосты</h2>
+<p>Во многих финансовых моделях – от классической теории портфеля до формулы Блэка – Шоулза – предполагается, что доходности распределены нормально. Это удобно: нормальное распределение полностью описывается средним и дисперсией, и для него хорошо известны вероятности любых отклонений. Проверим, насколько это допущение соответствует данным.</p>
+<p>Самый наглядный способ – <strong>QQ-график</strong> (quantile-quantile plot). По горизонтали на нём откладываются квантили нормального распределения, по вертикали – квантили наших доходностей, приведённых к нулевому среднему и единичному стандартному отклонению. Если данные нормальны, точки ложатся на прямую.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">4.2</span>, <span class="fl">3.2</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stats.probplot(z, dist<span class="op">=</span><span class="st">"norm"</span>, plot<span class="op">=</span>ax)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.get_lines()[<span class="dv">0</span>].<span class="bu">set</span>(marker<span class="op">=</span><span class="st">"."</span>, markersize<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">"#34699A"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.get_lines()[<span class="dv">1</span>].<span class="bu">set</span>(color<span class="op">=</span><span class="st">"#B8412E"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">""</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Квантили нормального распределения"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Квантили стандартизованных доходностей"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-qq" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-qq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-returns-risk_files/figure-html/fig-qq-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.3: Квантили дневных доходностей IMOEX против квантилей нормального распределения
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>В центре точки действительно лежат на прямой: обычные дни неплохо описываются нормальным распределением. Но на концах они резко уходят от неё – вниз слева и вверх справа. Это значит, что крайние доходности встречаются гораздо чаще, чем предсказывает нормальное распределение. Такие распределения называют распределениями с <strong>тяжёлыми хвостами</strong>.</p>
+<p>Насколько чаще? При нормальном распределении движение сильнее 4 стандартных отклонений – редчайшее событие: оно должно случаться в среднем раз в 63 года. Из 5&nbsp;418 торговых дней IMOEX с 2005 г. таких движений было 39, а нормальное распределение ожидает около 0,3. Худший день – 24.02.2022, когда индекс упал на 33,3%, – это отклонение от среднего на 21 стандартное отклонение. С точки зрения нормального распределения такое событие практически невозможно, а на реальном рынке оно произошло.</p>
+<p>Мера тяжести хвостов – <strong>коэффициент эксцесса</strong> (kurtosis). У нормального распределения избыточный эксцесс равен нулю, а у дневных доходностей IMOEX он составляет 58,6. Модели, которые опираются на нормальность, систематически недооценивают вероятность больших потерь. К этому мы вернёмся в главе о VaR и Expected Shortfall.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Особенность данных: пропуск в 2022 г.">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Особенность данных: пропуск в 2022 г.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>После 25 февраля 2022 г. торги акциями на Мосбирже были остановлены и возобновились только 24 марта. Здесь подстерегают две ошибки.</p>
+<p>Во-первых, <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> посчитает изменение цены между 25 февраля и 24 марта как доходность <em>одного дня</em>, хотя на самом деле это доходность за месяц.</p>
+<p>Во-вторых, облигации начали торговаться раньше акций, с 21 марта. Если в одной таблице есть и индекс акций, и индекс облигаций, то в дни 21–23 марта у индекса акций будут пропуски. Метод <code>pct_change()</code> в pandas 2.x по умолчанию заполняет пропуски предыдущим значением и вернёт в эти дни <em>нулевую</em> доходность, будто рынок работал, а цены не менялись. Чтобы этого не случилось, передавайте <code>pct_change(fill_method=None)</code> или считайте доходности через <code>np.log(prices).diff()</code>.</p>
+<p>Перед любыми расчётами проверяйте разрывы в датах: <code>prices.index.to_series().diff().dt.days.max()</code>.</p>
+</div>
+</div>
+</section><section id="sec-drawdown" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="sec-drawdown">
+<span class="header-section-number">4.5</span> Просадки</h2>
+<p>Волатильность – удобная мера, но у неё есть недостаток: она одинаково «наказывает» и неожиданный рост, и неожиданное падение. Инвестора же рост не беспокоит. Его волнует другое: сколько он может потерять, если купит в неудачный момент, и сколько времени придётся ждать восстановления. На эти вопросы отвечает <strong>просадка</strong> (drawdown) – падение стоимости от предыдущего максимума:</p>
+<p><span id="eq-drawdown"><span class="math display">\[
+DD_t = \frac{P_t}{\max_{s \le t} P_s} - 1.
+\tag{4.7}\]</span></span></p>
+<p>Просадка всегда неположительна: она равна нулю в дни новых максимумов и отрицательна в остальное время. Наихудшее значение за период – <strong>максимальная просадка</strong> (maximum drawdown) – показывает результат самого неудачливого инвестора, купившего на пике.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mcftr <span class="op">=</span> ix[<span class="st">"MCFTR"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dd <span class="op">=</span> mcftr <span class="op">/</span> mcftr.cummax() <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> dd.plot(color<span class="op">=</span><span class="st">"#B8412E"</span>, rot<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ax.fill_between(dd.index, dd, <span class="dv">0</span>, color<span class="op">=</span><span class="st">"#B8412E"</span>, alpha<span class="op">=</span><span class="fl">0.15</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">""</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> y, _: <span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:.0%}</span><span class="ss">"</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-drawdown" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-drawdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-returns-risk_files/figure-html/fig-drawdown-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-drawdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.4: Просадки индекса полной доходности MCFTR
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>График показывает, что индекс большую часть времени – 94% торговых дней – находился <em>ниже</em> своего предыдущего максимума. Для рынка акций это нормальное состояние, а не исключение. Максимальная просадка MCFTR с 2010 г. – 53,5% (26.09.2022). Это тот самый эпизод из начала главы: инвестор, купивший индекс на пике осени 2021 г., потерял больше половины вложений даже с учётом дивидендов и ждал восстановления больше трёх лет. Кризис 2008 г. был ещё глубже: тогда просадка MCFTR достигла 73,6%. На последнюю дату в данных индекс находится на 21,4% ниже своего максимума.</p>
+<p>Максимальная просадка – популярная мера в управлении активами, но она определяется одним-единственным эпизодом. Две стратегии с одинаковой максимальной просадкой могут сильно различаться тем, как часто и надолго они уходят в минус. Поэтому её дополняют длительностью просадок и их средней глубиной.</p>
+</section><section id="sec-risk-return" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="sec-risk-return">
+<span class="header-section-number">4.6</span> Риск и доходность отдельных акций</h2>
+<p>До сих пор мы смотрели на индексы. Теперь сопоставим среднюю доходность и волатильность отдельных акций из набора данных книги за последние 10 лет. Возьмём только бумаги, у которых есть хотя бы пять лет истории, чтобы оценки не были слишком шумными.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> data.load_prices(start<span class="op">=</span><span class="st">"2016-01-01"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>rets <span class="op">=</span> np.log(prices).diff()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>enough <span class="op">=</span> rets.count() <span class="op">&gt;=</span> <span class="dv">252</span> <span class="op">*</span> <span class="dv">5</span>                     <span class="co"># не менее 5 лет истории</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"доходность"</span>: rets.loc[:, enough].mean() <span class="op">*</span> <span class="dv">252</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"волатильность"</span>: rets.loc[:, enough].std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> summary.plot.scatter(x<span class="op">=</span><span class="st">"волатильность"</span>, y<span class="op">=</span><span class="st">"доходность"</span>, color<span class="op">=</span><span class="st">"#34699A"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> [<span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>, <span class="st">"YDEX"</span>, <span class="st">"VTBR"</span>, <span class="st">"PLZL"</span>]:</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> t <span class="kw">in</span> summary.index:</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        ax.annotate(t, summary.loc[t, [<span class="st">"волатильность"</span>, <span class="st">"доходность"</span>]],</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                    xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">3</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"#999999"</span>, lw<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-risk-return" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-risk-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-returns-risk_files/figure-html/fig-risk-return-5.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-risk-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;4.5: Годовая доходность и волатильность акций MOEX (лог-доходности, акции с историей не менее 5 лет)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Из учебников по финансам известен принцип: чем выше риск, тем выше должна быть ожидаемая доходность, иначе инвестор не стал бы брать риск на себя. На графике мы видим обратное. Корреляция между волатильностью и средней доходностью по 74 акциям равна −0,45: более волатильные акции в среднем приносили <em>меньше</em>. У 23 бумаг средняя лог-доходность за период отрицательна, и среди них много самых волатильных.</p>
+<p>Означает ли это, что теория неверна? Не обязательно, и у результата есть три объяснения. Первое – механическое. Мы усредняли логарифмические доходности, а средняя лог-доходность примерно на <span class="math inline">\(\sigma^2/2\)</span> меньше средней простой доходности (вспомните формулу <a href="#eq-vol-drag" class="quarto-xref"><span>4.4</span></a>). Для акции с волатильностью 50% эта поправка составляет 12,5 процентного пункта в год, так что волатильные бумаги «наказываются» уже самим способом расчёта.</p>
+<p>Второе – статистическое. Средняя доходность за 10 лет – очень неточная оценка ожидаемой доходности: при волатильности 30–40% в год её стандартная ошибка составляет порядка 10 процентных пунктов.</p>
+<p>Третье – содержательное. Теория говорит, что рынок вознаграждает не любую волатильность, а только ту её часть, которую нельзя убрать диверсификацией. Значительная часть колебаний отдельной акции связана с новостями самой компании и гасится в портфеле. Эту идею формализует модель CAPM, которую мы разберём в главе о портфелях.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ошибка выжившего">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Ошибка выжившего
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В наборе данных книги есть и бумаги, которые уже не торгуются на бирже, – 25 компаний. Если бы мы взяли только акции, которые торгуются сегодня, то незаметно исключили бы часть неудачников и завысили бы среднюю доходность рынка. Эта ошибка называется <strong>ошибкой выжившего</strong> (survivorship bias). Подробнее о ней – в главе о подготовке данных.</p>
+</div>
+</div>
+</section><section id="sec-sharpe" class="level2 page-columns page-full" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="sec-sharpe">
+<span class="header-section-number">4.7</span> Доходность с поправкой на риск: коэффициент Шарпа</h2>
+<p>Допустим, одна стратегия принесла 15% годовых при волатильности 30%, а другая – 12% при волатильности 10%. Какая лучше? Ответ зависит от того, что можно было получить без риска. Если депозит приносил 11%, первая стратегия дала 4 процентных пункта сверх него, но за очень большой риск, а вторая – 1 пункт за небольшой.</p>
+<p>Эту логику формализует <strong>коэффициент Шарпа</strong> <span class="citation" data-cites="sharpe1966">(<a href="references.html#ref-sharpe1966" role="doc-biblioref">Sharpe 1966 г.</a>)</span> – избыточная доходность сверх безрисковой ставки в расчёте на единицу риска:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-sharpe1966" class="csl-entry" role="listitem">
+Sharpe, William F. 1966 г. <span>«Mutual Fund Performance»</span>. <em>The Journal of Business</em> 39 (1): 119–38.
+</div></div><p><span id="eq-sharpe"><span class="math display">\[
+SR = \frac{\mathbb{E}[R - R_f]}{\sigma(R - R_f)}.
+\tag{4.8}\]</span></span></p>
+<p>Числитель показывает, сколько инвестор получает за то, что берёт на себя риск, знаменатель – сколько этого риска. Коэффициент Шарпа не зависит от кредитного плеча: если удвоить вложения в рискованный актив за счёт заёмных денег по безрисковой ставке, и избыточная доходность, и волатильность вырастут вдвое, а их отношение не изменится.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>RUONIA</strong> (Ruble OverNight Index Average) – средневзвешенная ставка по однодневным рублёвым межбанковским кредитам. Ставку публикует Банк России; её история с 2010 г. есть в данных книги (<code>ruonia.parquet</code>).</p>
+</div></div><p>В России выбор безрисковой ставки особенно важен, потому что она высокая и сильно менялась. В качестве <span class="math inline">\(R_f\)</span> возьмём ставку <strong>RUONIA</strong> – ставку однодневных межбанковских кредитов, которую рассчитывает Банк России. Её доходность близка к доходности фондов денежного рынка, доступных любому частному инвестору.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ruonia <span class="op">=</span> data.load_ruonia(start<span class="op">=</span><span class="st">"2011-01-01"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Дневная безрисковая доходность: ставка RUONIA начисляется за календарные дни</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># до следующей даты, в которую есть цена индекса.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>px <span class="op">=</span> ix.loc[<span class="st">"2011-01-01"</span>:, [<span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span>]].dropna()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>rf_rate <span class="op">=</span> ruonia.reindex(px.index, method<span class="op">=</span><span class="st">"ffill"</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>days <span class="op">=</span> px.index.to_series().diff().dt.days</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> rf_rate.shift(<span class="dv">1</span>) <span class="op">*</span> days <span class="op">/</span> <span class="dv">365</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>excess <span class="op">=</span> px.pct_change().sub(rf, axis<span class="op">=</span><span class="dv">0</span>).dropna()</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>sharpe <span class="op">=</span> excess.mean() <span class="op">/</span> excess.std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>sharpe.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MCFTR     0.05</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RGBITR   -0.29</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Разберём код. Ставка RUONIA публикуется в процентах годовых, поэтому мы делим её на 100 и на 365 и умножаем на число календарных дней между соседними торговыми датами: деньги на денежном рынке приносят доход и в выходные. Сдвиг <code>shift(1)</code> означает, что доход за период определяется ставкой, известной в его начале. Затем из дневной доходности индекса вычитается безрисковая доходность, а отношение среднего к стандартному отклонению переводится в годовое выражение умножением на <span class="math inline">\(\sqrt{252}\)</span>.</p>
+<p>С 2011 г. безрисковая ставка в среднем давала около 9,9% в год. На этом фоне коэффициент Шарпа индекса акций MCFTR составил всего 0,05, а у индекса ОФЗ RGBITR он и вовсе отрицательный: −0,29. Для сравнения: для американского рынка акций за длинные периоды этот коэффициент составляет около 0,3–0,4. Российский рынок акций за эти годы почти не вознаграждал инвестора за риск сверх того, что давал денежный рынок, а длинные ОФЗ в среднем ему проигрывали: ставки несколько раз резко повышались, и цены облигаций падали.</p>
+<p>Особенно наглядно это проявилось в 2024 г. Банк России повышал ключевую ставку, пока она не достигла 21% (28.10.2024). Индекс MCFTR за 2024 г. принёс 1,6%, а вложения по ставке RUONIA – 18,9%. Инвестор, который весь год держал деньги в фонде денежного рынка, заработал намного больше владельца акций и не пережил ни одного дня падения стоимости.</p>
+<p>Коэффициент Шарпа – самая распространённая мера доходности с поправкой на риск, и мы будем использовать его при сравнении портфелей и стратегий. Но он наследует слабости волатильности: не различает рост и падение и плохо отражает риск редких крупных потерь. Поэтому его дополняют просадками и мерами хвостового риска.</p>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Анализ ведётся не в ценах, а в доходностях. Для агрегирования во времени удобны логарифмические доходности, для портфелей – простые.</li>
+<li>Доходность считают по цене с поправкой на дивиденды и сплиты. Бенчмарк для российских акций – индекс полной доходности MCFTR, а не ценовой IMOEX: разница составляет несколько процентных пунктов в год.</li>
+<li>Арифметическое среднее доходностей выше фактического среднегодового роста; разрыв тем больше, чем выше волатильность.</li>
+<li>Доходность зависит от валюты, в которой она измеряется.</li>
+<li>Волатильность меняется во времени и образует кластеры. Распределение доходностей имеет тяжёлые хвосты: крайние движения случаются намного чаще, чем предсказывает нормальное распределение.</li>
+<li>Просадка показывает риск так, как его ощущает инвестор: глубину и длительность потерь.</li>
+<li>Коэффициент Шарпа сравнивает активы по доходности сверх безрисковой ставки. В России эта ставка высокая, и премия акций за риск в последние 15 лет была невелика.</li>
+</ul></section><section id="sec-exercises-returns" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="sec-exercises-returns">
+<span class="header-section-number">4.8</span> Упражнения</h2>
+<p>Упражнения разделены на четыре типа. Задания <strong>А</strong> проверяют понимание и решаются без компьютера. Задания <strong>Б</strong> выполняются на данных вашей акции (тикер назначает преподаватель), поэтому готового ответа у них нет. Задания <strong>В</strong> учат работать с ИИ-ассистентом: не получать ответ, а проверять его. Задание <strong>Г</strong> – небольшое исследование, результаты которого нужно защитить устно.</p>
+<section id="а.-понимание" class="level3" data-number="4.8.1"><h3 data-number="4.8.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">4.8.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Акция за день выросла на 10%, а на следующий упала на 10%. Какова доходность за два дня? Чему равна сумма двух логарифмических доходностей и почему она не равна нулю?</li>
+<li>Портфель на 60% состоит из акций с дневной доходностью <span class="math inline">\(+2\%\)</span> и на 40% – из облигаций с доходностью <span class="math inline">\(-1\%\)</span>. Посчитайте доходность портфеля. Можно ли так же взвесить логарифмические доходности?</li>
+<li>Дневная волатильность акции – 2%. Оцените годовую. При каком свойстве доходностей эта оценка будет занижена?</li>
+<li>Фонд рекламирует «среднюю доходность 20% годовых за 5 лет». Годовые доходности фонда: +60%, −30%, +40%, −20%, +50%. Посчитайте арифметическое и геометрическое среднее. Какое из них использовал фонд?</li>
+<li>Почему коэффициент Шарпа одного и того же индекса будет разным для инвестора из США и из России? А для российского инвестора в 2019 и в 2024 г.?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="4.8.2"><h3 data-number="4.8.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">4.8.2</span> Б. Практика на своей акции</h3>
+<ol start="6" type="1">
+<li>Для своего тикера посчитайте CAGR по <code>close</code> и по <code>adj_close</code> за последние 10 лет (или за всю историю, если она короче). Объясните разницу. Какую долю полной доходности дали дивиденды?</li>
+<li>Постройте скользящую 63-дневную волатильность своей акции и IMOEX на одном графике. Когда волатильность акции была выше рыночной и с какими событиями в компании или отрасли это связано?</li>
+<li>Найдите пять худших дней для вашей акции. Для каждого выясните: это реальное падение (какая новость?), дивидендная отсечка, сплит или разрыв в данных?</li>
+<li>Найдите максимальную просадку вашей акции, дату пика, дату дна и дату восстановления (если оно было). Сколько месяцев длилась просадка?</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="4.8.3"><h3 data-number="4.8.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">4.8.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="10" type="1">
+<li><p>Попросите ИИ-ассистента написать функцию годовой волатильности по <em>месячным</em> ценам. Проверьте множитель годового пересчёта. Затем попросите посчитать CAGR по дневным лог-доходностям. Какую формулу он предложил? Совпадает ли результат с формулой <a href="#eq-cagr" class="quarto-xref"><span>4.3</span></a>? Запишите, где ассистент ошибся или сделал неявное допущение.</p></li>
+<li>
+<p>Ассистент сгенерировал код ниже для расчёта коэффициента Шарпа акции. Найдите в нём как минимум три ошибки (подсказка: вспомните разделы <a href="#sec-returns" class="quarto-xref"><span>4.1</span></a>, <a href="#sec-volatility" class="quarto-xref"><span>4.3</span></a> и <a href="#sec-sharpe" class="quarto-xref"><span>4.7</span></a>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>px <span class="op">=</span> data.load_stocks(<span class="st">"GAZP"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> px.pct_change()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sharpe <span class="op">=</span> (ret.mean() <span class="op">-</span> <span class="fl">0.16</span>) <span class="op">/</span> ret.std() <span class="op">*</span> np.sqrt(<span class="dv">365</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+<li><p>Спросите ассистента, какой была доходность индекса Мосбиржи в 2008, 2014 и 2022 г. Сверьте ответы с данными книги. Какой индекс (IMOEX или MCFTR) и какую валюту подразумевал ассистент? Какие утверждения вы не смогли подтвердить?</p></li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="4.8.4"><h3 data-number="4.8.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">4.8.4</span> Г. Мини-исследование</h3>
+<ol start="13" type="1">
+<li>Верно ли, что после дней с очень большими падениями IMOEX (хуже <span class="math inline">\(-4\%\)</span>) следующая неделя в среднем тоже неудачная? Сформулируйте гипотезу, проверьте её на данных, оцените, сколько у вас наблюдений и насколько вывод надёжен. Подготовьте короткий (3–5 минут) устный рассказ о результате.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Дневная лог-доходность за 5 дней: 0,01; −0,02; 0,005; 0,01; −0,005. Чему равна лог-доходность за неделю?</li>
+<li>Как перевести дневную волатильность в годовую и на каком допущении основано это правило?</li>
+<li>Почему для расчёта доходности акции используют <code>adj_close</code>, а не <code>close</code>? В каком случае падение цены после дивидендных новостей <em>не</em> исчезает после корректировки?</li>
+<li>Какой индекс – IMOEX или MCFTR – корректный бенчмарк для стратегии, получающей дивиденды?</li>
+<li>Что такое тяжёлые хвосты и как их увидеть на QQ-графике?</li>
+<li>Почему максимальная просадка не может быть единственной мерой риска стратегии?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>
+<span class="math inline">\(0{,}01 - 0{,}02 + 0{,}005 + 0{,}01 - 0{,}005 = 0\)</span>: лог-доходности складываются.</li>
+<li>Умножить на <span class="math inline">\(\sqrt{252}\)</span>; допущение – дневные доходности независимы и одинаково распределены.</li>
+<li>
+<code>close</code> падает в день дивидендной отсечки и прыгает при сплите; <code>adj_close</code> учитывает дивиденды и сплиты. Если падение вызвано <em>отменой</em> ожидаемого дивиденда (как у Газпрома 30.06.2022), корректировать нечего – это реальная потеря.</li>
+<li>MCFTR – индекс полной доходности.</li>
+<li>Крайние доходности встречаются чаще, чем при нормальном распределении; на QQ-графике точки на концах уходят от прямой.</li>
+<li>Она определяется одним худшим эпизодом и ничего не говорит о частоте и длительности остальных просадок.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="campbell1997">Campbell и др. (<a href="references.html#ref-campbell1997" role="doc-biblioref">1997 г.</a>)</span>, гл. 1 – классическое введение в доходности и их статистические свойства.</li>
+<li>
+<span class="citation" data-cites="cont2001">Cont (<a href="references.html#ref-cont2001" role="doc-biblioref">2001 г.</a>)</span> – «стилизованные факты» о финансовых доходностях: тяжёлые хвосты, кластеры волатильности и др.</li>
+<li>
+<span class="citation" data-cites="tidyfinance2024">Scheuch и др. (<a href="references.html#ref-tidyfinance2024" role="doc-biblioref">2024 г.</a>)</span> – открытый учебник с кодом на Python; разделы о доходностях и данных.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-campbell1997" class="csl-entry" role="listitem">
+Campbell, John Y., Andrew W. Lo, и A. Craig MacKinlay. 1997 г. <em>The Econometrics of Financial Markets</em>. Princeton University Press.
+</div><div id="ref-cont2001" class="csl-entry" role="listitem">
+Cont, Rama. 2001 г. <span>«Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues»</span>. <em>Quantitative Finance</em> 1 (2): 223–36. <a href="https://doi.org/10.1080/713665670">https://doi.org/10.1080/713665670</a>.
+</div><div id="ref-tidyfinance2024" class="csl-entry" role="listitem">
+Scheuch, Christoph, Stefan Voigt, Patrick Weiss, и Christoph Frey. 2024 г. <em>Tidy Finance with Python</em>. Chapman; Hall/CRC. <a href="https://www.tidy-finance.org">https://www.tidy-finance.org</a>.
+</div></div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03-data-preparation.html" class="pagination-link" aria-label="Подготовка данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Подготовка данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-accounting-data.html" class="pagination-link" aria-label="Большие данные корпоративной отчётности">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
