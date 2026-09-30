@@ -28,6 +28,7 @@ import argparse
 import datetime as dt
 import json
 import shutil
+import sys
 from pathlib import Path
 
 import polars as pl
@@ -104,11 +105,28 @@ def build_full(out: Path) -> None:
     print(f"shares (весь рынок)    {len(years)} лет, {size:.0f} МБ -> {target}")
 
 
+def build_rfsd(out: Path) -> None:
+    """Отчётность компаний (RFSD) – из соседнего проекта rfsd (../rfsd)."""
+    try:
+        from rfsd import export
+    except ImportError:
+        sys.exit("Нет пакета rfsd: установите его из ../rfsd (pip install -e ../rfsd).")
+    export.to_book(out)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--full", action="store_true", help="выгрузить также всю историю рынка акций")
+    ap.add_argument("--rfsd", action="store_true", help="выгрузить также данные RFSD из проекта rfsd")
+    ap.add_argument("--rfsd-only", action="store_true",
+                    help="только RFSD, не пересобирая данные биржи (числа в главах 2–4 не изменятся)")
     args = ap.parse_args()
 
+    if args.rfsd_only:
+        build_rfsd(BOOK / "data")
+        return
+    if args.rfsd:
+        build_rfsd(BOOK / "data")
     info = build_core(BOOK / "data")
     info["built"] = dt.date.today().isoformat()
     (BOOK / "data" / "snapshot.json").write_text(json.dumps(info, ensure_ascii=False, indent=2))
