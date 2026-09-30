@@ -136,3 +136,45 @@ def load_shares_full(start=None, end=None, board: str | None = "TQBR", backend: 
         lf = lf.filter(pl.col("date") <= pd.Timestamp(end).date())
     df = lf.drop("year", strict=False).collect()
     return df if backend == "polars" else df.to_pandas()
+
+
+# ---- Отчётность компаний (RFSD) -------------------------------------------------
+# Источник: RFSD (Bondarkov, Ledenev, Skougarevskiy, 2025), CC BY 4.0; выгрузка из проекта rfsd.
+# Денежные показатели – в тысячах рублей; расходы (строки «в скобках») – отрицательные.
+
+def load_rfsd(okved=None, years=None, backend: Backend = "pandas"):
+    """Выборка отчётности: компании 5 отраслей с выручкой ≥ 1 млрд руб. хотя бы в одном году 2018–2024.
+
+    okved – префикс кода ОКВЭД («47» – розничная торговля) или список префиксов;
+    years – год или список лет.
+    """
+    lf = pl.scan_parquet(DATA_DIR / "rfsd_sample.parquet")
+    if okved is not None:
+        prefixes = [okved] if isinstance(okved, str) else list(okved)
+        lf = lf.filter(pl.any_horizontal([pl.col("okved").str.starts_with(p) for p in prefixes]))
+    if years is not None:
+        lf = lf.filter(pl.col("year").is_in([years] if isinstance(years, int) else list(years)))
+    df = lf.collect()
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rfsd_summary(backend: Backend = "pandas"):
+    """Сводка по всем компаниям RFSD и годам: число отчётов, проблемы качества, суммарная выручка."""
+    df = pl.read_parquet(DATA_DIR / "rfsd_summary.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rfsd_cases(backend: Backend = "pandas"):
+    """Отчётность нескольких известных компаний за все годы (для примеров в тексте)."""
+    df = pl.read_parquet(DATA_DIR / "rfsd_cases.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_okved() -> pd.DataFrame:
+    """Классификатор ОКВЭД 2: code, parent_code, section, name."""
+    return pd.read_csv(DATA_DIR / "okved.csv", dtype=str)
+
+
+def load_rfsd_lines() -> pd.DataFrame:
+    """Справочник строк отчётности: код, форма, название, знак хранения в RFSD."""
+    return pd.read_csv(DATA_DIR / "rfsd_lines.csv")
