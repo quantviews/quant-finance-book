@@ -4,6 +4,6 @@
     prices = data.load_stocks(["SBER", "GAZP"])
 """
 
-from . import data, plot
+from . import data, plot, secrets
 
-__all__ = ["data", "plot"]
+__all__ = ["data", "plot", "secrets"]

@@ -74,3 +74,6 @@ plural <- function(n, one, few, many, digits = 0) {
           else many
   paste(num(n, digits), word)
 }
+
+# Секреты (токены API) из файла .env в корне книги, если он есть.
+if (file.exists(".env")) readRenviron(".env")

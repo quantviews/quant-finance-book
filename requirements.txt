@@ -1,0 +1,16 @@
+# Пакеты Python для примеров книги «Количественные финансы».
+# Установка: pip install -r requirements.txt  (Python 3.11+; книга собирается на 3.12)
+numpy>=1.26
+pandas>=2.2
+polars>=1.0
+pyarrow>=15
+scipy>=1.12
+matplotlib>=3.8
+statsmodels>=0.14
+arch>=7.0
+scikit-learn>=1.4
+lightgbm>=4.0
+requests>=2.31
+pandas-datareader>=0.10
+huggingface_hub>=0.20
+jupyter

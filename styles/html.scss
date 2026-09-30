@@ -233,3 +233,41 @@ div.column-margin p {
   letter-spacing: 0;
   font-weight: 500;
 }
+
+// ---- Левое меню: название книги, части, главы ------------------------------
+
+// Название книги – полужирным, цветом заголовков.
+#quarto-sidebar .sidebar-title a,
+#quarto-sidebar .sidebar-title {
+  color: #23415F;
+  font-weight: 600;
+}
+
+// Части книги – мелкие прописные с разрядкой, как в оглавлении PDF.
+#quarto-sidebar .sidebar-item-section > .sidebar-item-container > .sidebar-item-text .menu-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #34699A;
+}
+
+#quarto-sidebar .sidebar-item-section {
+  margin-top: 0.9rem;
+}
+
+// Главы внутри части – с отступом и чуть светлее активной.
+#quarto-sidebar .sidebar-item-section .sidebar-section .sidebar-link .menu-text {
+  color: #374151;
+}
+
+#quarto-sidebar .sidebar-link.active .menu-text,
+#quarto-sidebar .sidebar-item-section .sidebar-section .sidebar-link.active .menu-text {
+  color: #23415F;
+  font-weight: 600;
+}
+
+// Номер главы в меню – приглушённым цветом.
+#quarto-sidebar .chapter-number {
+  color: #6B7280;
+}
