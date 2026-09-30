@@ -405,7 +405,8 @@ div.csl-indent {
   <li>
 <a href="#sec-ratios" id="toc-sec-ratios" class="nav-link" data-scroll-target="#sec-ratios"><span class="header-section-number">5.6</span> Финансовые коэффициенты</a>
   <ul class="collapse">
-<li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5" id="toc-почему-медиана-а-не-среднее" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5"><span class="header-section-number">5.6.1</span> Почему медиана, а не среднее</a></li>
+<li><a href="#sec-no-ebitda" id="toc-sec-no-ebitda" class="nav-link" data-scroll-target="#sec-no-ebitda"><span class="header-section-number">5.6.1</span> Чего нет в отчётности: амортизация и EBITDA</a></li>
+  <li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5" id="toc-почему-медиана-а-не-среднее" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5"><span class="header-section-number">5.6.2</span> Почему медиана, а не среднее</a></li>
   </ul>
 </li>
   <li><a href="#sec-articulation" id="toc-sec-articulation" class="nav-link" data-scroll-target="#sec-articulation"><span class="header-section-number">5.7</span> Связь форм отчётности</a></li>
@@ -446,7 +447,7 @@ div.csl-indent {
 данные – из проекта ../rfsd (RFSD v3, выгрузка scripts/build_data.py --rfsd-only).
 Идеи из курса Рыбина (2025; только идеи): связь трёх форм, косвенный ОДДС, FCF ≈ −Δ чистого долга
 (Модуль3_1, с. 26–40).
---><p>Выручка ПАО «Магнит» по бухгалтерской отчётности за 2023 г. – 0,56 млрд руб. Не триллионы, как можно было бы ожидать от одной из крупнейших розничных сетей страны, а меньше миллиарда. При этом чистая прибыль той же компании – 98,3 млрд руб., в сотню с лишним раз больше выручки. Ошибка в данных? Нет. ПАО «Магнит» – холдинговая компания: магазины сети принадлежат его дочерней компании АО «Тандер», выручка которой за тот же год составила 2,31 трлн руб. Прибыль холдинга почти целиком состоит из дивидендов дочерних компаний: 97,6 млрд руб. доходов от участия в других организациях.</p>
+--><p>Выручка ПАО «Магнит» (ИНН 2309085638) по бухгалтерской отчётности за 2023 г. – 0,56 млрд руб. Не триллионы, как можно было бы ожидать от одной из крупнейших розничных сетей страны, а меньше миллиарда. При этом чистая прибыль той же компании – 98,3 млрд руб., в сотню с лишним раз больше выручки. Ошибка в данных? Нет. ПАО «Магнит» – холдинговая компания: магазины сети принадлежат его дочерней компании АО «Тандер» (ИНН 2310031475), выручка которой за тот же год составила 2,31 трлн руб. Прибыль холдинга почти целиком состоит из дивидендов дочерних компаний: 97,6 млрд руб. доходов от участия в других организациях.</p>
 <p>Этот пример показывает главное, что нужно знать о бухгалтерской отчётности российских компаний: она описывает <strong>отдельное юридическое лицо</strong>, а не группу компаний. Чтобы проанализировать бизнес, нужно понимать, какое юрлицо его ведёт, как устроены формы отчётности и какие ловушки в них встречаются. Зато в обмен на эту сложность мы получаем уникальный источник: отчётность <strong>всех</strong> российских организаций – 2,1 млн отчётов только за 2023 г. Открытые данные такого охвата о частных, а не только о публичных компаниях есть лишь в немногих странах.</p>
 <div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
@@ -471,7 +472,8 @@ div.csl-indent {
 <section id="sec-rfsd-source" class="level2 page-columns page-full" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="sec-rfsd-source">
 <span class="header-section-number">5.1</span> Откуда берётся отчётность</h2>
 <p>Российские организации обязаны ежегодно сдавать бухгалтерскую отчётность в налоговую службу. Исключения – банки и некоторые другие финансовые организации (они отчитываются перед Банком России), а также организации государственного сектора. Отчётность составляется по российским стандартам бухгалтерского учёта (<strong>РСБУ</strong>) на стандартных формах, где у каждой строки есть свой код. С 2019 г. эта отчётность собирается в государственном информационном ресурсе бухгалтерской отчётности (ГИР БО) и открыто публикуется на сайте ФНС.</p>
-<p>Скачать с сайта ФНС отчётность одной компании просто, а отчётность трёх миллионов компаний за полтора десятилетия – очень трудоёмко: данные нужно собрать, разобрать, привести к единому виду и очистить от ошибок. Эту работу проделали исследователи Европейского университета в Санкт-Петербурге и опубликовали результат как открытый набор данных <strong>RFSD</strong> (Russian Financial Statements Database) <span class="citation" data-cites="bondarkov2025">(<a href="references.html#ref-bondarkov2025" role="doc-biblioref">Bondarkov и др. 2025 г.</a>)</span>. Набор распространяется по лицензии CC BY 4.0 и доступен на платформе Hugging Face.</p>
+<p>Скачать с <a href="https://bo.nalog.gov.ru/">сайта ФНС</a> отчётность одной компании просто, а отчётность трёх миллионов компаний за полтора десятилетия – очень трудоёмко: данные нужно собрать, разобрать, привести к единому виду и очистить от ошибок. Есть коммерческие компании, которые продают такие наборы данных, но они стоят дорого и не всегда прозрачны. Также такие провайдеры (к примеру, СПАРК Интерфакс или ФИРА) не дают возможности работать с данными напрямую в Python или R, а только через их интерфейсы.</p>
+<p>Эту работу проделали исследователи Европейского университета в Санкт-Петербурге и опубликовали результат как открытый набор данных <strong>RFSD</strong> (Russian Financial Statements Database) <span class="citation" data-cites="bondarkov2025">(<a href="references.html#ref-bondarkov2025" role="doc-biblioref">Bondarkov и др. 2025 г.</a>)</span>. Набор распространяется по лицензии CC BY 4.0 и доступен на платформе Hugging Face.</p>
 <div class="no-row-height column-margin column-container"></div><div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> summary[summary[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2012</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -639,7 +641,7 @@ div.csl-indent {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>top_retail <span class="op">=</span> (</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    lf.<span class="bu">filter</span>((pl.col(<span class="st">"year"</span>) <span class="op">==</span> <span class="dv">2023</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"filed"</span>) <span class="op">==</span> <span class="dv">1</span>)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="op">&amp;</span> pl.col(<span class="st">"okved"</span>).<span class="bu">str</span>.starts_with(<span class="st">"47"</span>))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      .select(<span class="st">"name"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      .select(<span class="st">"name"</span>, <span class="st">"inn"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      .with_columns((pl.col(<span class="st">"line_2110"</span>) <span class="op">/</span> <span class="fl">1e6</span>).alias(<span class="st">"выручка, млрд"</span>),</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    (pl.col(<span class="st">"line_2400"</span>) <span class="op">/</span> <span class="fl">1e6</span>).alias(<span class="st">"прибыль, млрд"</span>))</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      .sort(<span class="st">"line_2110"</span>, descending<span class="op">=</span><span class="va">True</span>, nulls_last<span class="op">=</span><span class="va">True</span>)</span>
@@ -655,11 +657,12 @@ div.csl-indent {
   white-space: pre-wrap;
 }
 </style>
-<small>shape: (5, 6)</small>
+<small>shape: (5, 7)</small>
 <table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">inn</th>
 <th data-quarto-table-cell-role="th">okved</th>
 <th data-quarto-table-cell-role="th">line_2110</th>
 <th data-quarto-table-cell-role="th">line_2400</th>
@@ -667,6 +670,7 @@ div.csl-indent {
 <th data-quarto-table-cell-role="th">прибыль, млрд</th>
 </tr>
 <tr class="even">
+<td>str</td>
 <td>str</td>
 <td>str</td>
 <td>f64</td>
@@ -678,6 +682,7 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td>"ООО "АГРОТОРГ""</td>
+<td>"7825706086"</td>
 <td>"47.19"</td>
 <td>2.3635e9</td>
 <td>3.5409084e7</td>
@@ -686,6 +691,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>"АО "ТАНДЕР""</td>
+<td>"2310031475"</td>
 <td>"47.11"</td>
 <td>2.3144e9</td>
 <td>6.4868767e7</td>
@@ -693,7 +699,8 @@ div.csl-indent {
 <td>64.868767</td>
 </tr>
 <tr class="odd">
-<td>null</td>
+<td>"АО "ТОРГОВЫЙ ДОМ "ПЕРЕКРЕСТОК""</td>
+<td>"7728029110"</td>
 <td>"47.11"</td>
 <td>8.18667841e8</td>
 <td>1.3156871e7</td>
@@ -702,6 +709,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>"ООО "ДНС РИТЕЙЛ""</td>
+<td>"2540167061"</td>
 <td>"47.42"</td>
 <td>7.26822689e8</td>
 <td>4.3627651e7</td>
@@ -709,7 +717,8 @@ div.csl-indent {
 <td>43.627651</td>
 </tr>
 <tr class="odd">
-<td>null</td>
+<td>"ООО "ВАЙЛДБЕРРИЗ""</td>
+<td>"7721546864"</td>
 <td>"47.91.20"</td>
 <td>5.38731599e8</td>
 <td>1.9685072e7</td>
@@ -726,13 +735,15 @@ div.csl-indent {
 <p>Синтаксис Polars построен на <strong>выражениях</strong>: <code>pl.col("line_2110") / 1e6</code> – это не вычисление, а описание того, что нужно сделать со столбцом. Выражения передаются в методы <code>filter</code> (отбор строк), <code>select</code> (отбор и вычисление столбцов), <code>with_columns</code> (добавление столбцов), <code>group_by(...).agg(...)</code> (группировка). Та же задача в pandas выглядела бы так:</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df23 <span class="op">=</span> rfsd[(rfsd[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2023</span>) <span class="op">&amp;</span> (rfsd[<span class="st">"filed"</span>] <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> rfsd[<span class="st">"okved"</span>].<span class="bu">str</span>.startswith(<span class="st">"47"</span>)]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df23.nlargest(<span class="dv">5</span>, <span class="st">"line_2110"</span>)[[<span class="st">"name"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    name     okved     line_2110   line_2400</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62353    ООО "АГРОТОРГ"     47.19  2.363463e+09  35409084.0</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8114        АО "ТАНДЕР"     47.11  2.314387e+09  64868767.0</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53503              None     47.11  8.186678e+08  13156871.0</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12116  ООО "ДНС РИТЕЙЛ"     47.42  7.268227e+08  43627651.0</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50208              None  47.91.20  5.387316e+08  19685072.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df23.nlargest(<span class="dv">5</span>, <span class="st">"line_2110"</span>)[[<span class="st">"name"</span>, <span class="st">"inn"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                  name         inn  ...     line_2110   line_2400</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62353                  ООО "АГРОТОРГ"  7825706086  ...  2.363463e+09  35409084.0</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8114                      АО "ТАНДЕР"  2310031475  ...  2.314387e+09  64868767.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53503  АО "ТОРГОВЫЙ ДОМ "ПЕРЕКРЕСТОК"  7728029110  ...  8.186678e+08  13156871.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12116                ООО "ДНС РИТЕЙЛ"  2540167061  ...  7.268227e+08  43627651.0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50208               ООО "ВАЙЛДБЕРРИЗ"  7721546864  ...  5.387316e+08  19685072.0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5 rows x 5 columns]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>На небольшой выборке разницы в скорости не заметно. Но полный RFSD в pandas пришлось бы целиком загрузить в память, а Polars может читать его прямо с сервера, скачивая только нужные столбцы. Так выглядит запрос к полному набору за 2023 г. на Hugging Face (при сборке книги он не выполняется: файл за один год весит около 550 МБ):</p>
@@ -797,19 +808,19 @@ div.csl-indent {
 <span class="header-section-number">5.5.2</span> Скрытая отчётность</h3>
 <p>С 2022 г. часть компаний вправе не раскрывать отчётность публично. В данных у них пустые строки, а флаг <code>filed</code> равен нулю.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ozon <span class="op">=</span> cases[cases[<span class="st">"inn"</span>] <span class="op">==</span> <span class="st">"7704217370"</span>][[<span class="st">"year"</span>, <span class="st">"filed"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ozon <span class="op">=</span> cases[cases[<span class="st">"inn"</span>] <span class="op">==</span> <span class="st">"7704217370"</span>][[<span class="st">"inn"</span>, <span class="st">"year"</span>, <span class="st">"filed"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ozon[ozon[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2019</span>]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year  filed    line_2110   line_2400</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  2019    0.0          NaN         NaN</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  2020    0.0          NaN         NaN</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  2021    0.0  177823485.0         0.0</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  2022    1.0  261369829.0 -48695018.0</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  2023    0.0          NaN         NaN</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  2024    0.0          NaN         NaN</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  2025    0.0          NaN         NaN</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            inn  year  filed    line_2110   line_2400</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  7704217370  2019    0.0          NaN         NaN</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  7704217370  2020    0.0          NaN         NaN</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  7704217370  2021    0.0  177823485.0         0.0</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  7704217370  2022    1.0  261369829.0 -48695018.0</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  7704217370  2023    0.0          NaN         NaN</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  7704217370  2024    0.0          NaN         NaN</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  7704217370  2025    0.0          NaN         NaN</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>ООО «Интернет Решения» – основная операционная компания Ozon – за 2022 г. отчётность раскрыла, а за следующие годы – уже нет. Для отраслевого анализа это означает смещение: из данных выпадают прежде всего крупные компании, в том числе под санкциями. Выводы о «всей отрасли» по таким данным нужно делать осторожно.</p>
+<p>ООО «Интернет Решения» (ИНН 7704217370) – основная операционная компания Ozon – за 2022 г. отчётность раскрыла, а за следующие годы – уже нет. Для отраслевого анализа это означает смещение: из данных выпадают прежде всего крупные компании, в том числе под санкциями. Выводы о «всей отрасли» по таким данным нужно делать осторожно.</p>
 </section><section id="отчётность-юрлица-а-не-группы" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="отчётность-юрлица-а-не-группы">
 <span class="header-section-number">5.5.3</span> Отчётность юрлица, а не группы</h3>
 <p>Пример «Магнита» из начала главы – не исключение. Крупные группы компаний обычно состоят из десятков юрлиц: холдинга, операционных компаний, финансовых и управляющих компаний. Отчётность по РСБУ каждого из них – это часть картины. Отчётность группы в целом (консолидированная, по МСФО) в RFSD не входит. Поэтому, анализируя крупную компанию, сначала выясните, какое юрлицо ведёт основной бизнес.</p>
@@ -912,8 +923,37 @@ div.csl-indent {
 </details>
 </div>
 <p>Медианная рентабельность продаж выше всего в классе 62 (разработка программного обеспечения) – 7,4%, ниже всего в классе 41 (строительство зданий) – 1,2%. Разница объясняется бизнес-моделью: разработчику программ почти не нужны материальные активы и закупки, а строитель и розничная сеть работают с большими объёмами при небольшой наценке. Зато у розницы высокая оборачиваемость активов: магазин быстро продаёт товар и снова закупает его. Эту связь маржи и оборачиваемости мы разберём в следующей главе с помощью разложения DuPont.</p>
-<section id="почему-медиана-а-не-среднее" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="почему-медиана-а-не-среднее">
-<span class="header-section-number">5.6.1</span> Почему медиана, а не среднее</h3>
+<section id="sec-no-ebitda" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="sec-no-ebitda">
+<span class="header-section-number">5.6.1</span> Чего нет в отчётности: амортизация и EBITDA</h3>
+<p>В аналитике и в новостях о компаниях постоянно встречается показатель <strong>EBITDA</strong> – прибыль до вычета процентов, налогов и амортизации (Earnings Before Interest, Taxes, Depreciation and Amortization). На нём основаны самые популярные мерки долговой нагрузки: отношение чистого долга к EBITDA, ковенанты в кредитных договорах, мультипликатор EV/EBITDA. Естественно захотеть посчитать EBITDA по данным RFSD. Сделать это корректно нельзя.</p>
+<p>Причина в устройстве российской отчётности. EBITDA = EBIT + амортизация. EBIT мы посчитали выше, а вот амортизации нет ни в одной из строк RFSD:</p>
+<ul>
+<li>в отчёте о финансовых результатах (форма 2) расходы сгруппированы по функциям – себестоимость, коммерческие, управленческие, – и амортизация «растворена» в них;</li>
+<li>отчёт о движении денежных средств (форма 4) по РСБУ составляется прямым методом: в нём показаны реальные поступления и платежи, а не корректировка прибыли на неденежные расходы, как в косвенном методе МСФО. Поэтому амортизации нет и там;</li>
+<li>амортизация раскрывается в пояснениях к отчётности (строка 5640 «Амортизация» в разделе о затратах на производство), но пояснения в RFSD не входят, а многие компании, сдающие упрощённую отчётность, их не составляют вовсе.</li>
+</ul>
+<p>Иногда амортизацию просто пропускают и называют EBITDA то, что на самом деле является EBIT. Для разработчика программ, у которого основные средства составляют в среднем (по медиане) 3% активов, ошибка будет небольшой. Для транспортной компании, у которой на основные средства приходится 41% активов, амортизация – одна из крупнейших статей затрат, и «EBITDA», посчитанная без неё, окажется сильно заниженной. Отношение долга к такой «EBITDA» будет завышено, и компания будет выглядеть более закредитованной, чем при расчёте по её опубликованной отчётности. Хуже того, ошибка разная для разных отраслей, поэтому искажаются и сравнения между ними.</p>
+<p>Что делать на практике:</p>
+<ul>
+<li>по данным RFSD использовать показатели, которые считаются честно: EBIT, прибыль от продаж (<code>line_2200</code>), чистую прибыль – и называть их своими именами;</li>
+<li>если нужна долговая нагрузка, считать долг к EBIT и помнить, что пороги, привычные для долга к EBITDA (например, «больше 3–4 – высокая нагрузка»), к нему не применимы: при той же компании отношение к EBIT всегда выше;</li>
+<li>для публичных компаний брать EBITDA из консолидированной отчётности по МСФО или раскрытий эмитента и указывать источник.</li>
+</ul>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Назвать EBITDA показатель без амортизации. В прошлые годы в учебных ноутбуках этого курса EBITDA по RFSD считалась «упрощённо, как EBIT». Название обещает читателю одно, а число означает другое. Если нужного показателя в данных нет, так и напишите и используйте ближайший корректный показатель с его настоящим названием.</p>
+</div>
+</div>
+</section><section id="почему-медиана-а-не-среднее" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="почему-медиана-а-не-среднее">
+<span class="header-section-number">5.6.2</span> Почему медиана, а не среднее</h3>
 <p>Распределения финансовых коэффициентов очень неравномерны. Посмотрим на ROE:</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>roe <span class="op">=</span> d[<span class="st">"roe"</span>].dropna()</span>
@@ -1008,9 +1048,10 @@ div.csl-indent {
 <li>Что делает метод <code>collect()</code> в Polars и почему ленивые вычисления ускоряют работу с большими файлами?</li>
 <li>Какие проверки качества отчётности вы знаете?</li>
 <li>Почему прибыль компании может быть положительной, а денежный поток от текущих операций – отрицательным?</li>
+<li>Почему по данным RFSD нельзя посчитать EBITDA и что использовать вместо неё?</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1019,7 +1060,7 @@ div.csl-indent {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>РСБУ – отчётность отдельного юрлица по российским стандартам; МСФО – консолидированная отчётность группы по международным стандартам, где внутригрупповые обороты исключаются.</li>
@@ -1027,6 +1068,7 @@ div.csl-indent {
 <li>Запускает выполнение построенного плана запроса. Ленивые вычисления позволяют оптимизировать план: читать только нужные столбцы, применять фильтры при чтении, не создавать промежуточных таблиц.</li>
 <li>Равенство активов и пассивов; суммы разделов; совпадение денег в балансе и отчёте о движении денежных средств; флаги RFSD (<code>filed</code>, <code>imputed</code>, <code>outlier</code>); неположительный капитал.</li>
 <li>Прибыль признаётся в момент продажи, а деньги поступают при оплате: отсрочка платежа покупателям, рост запасов, специфика отрасли (например, строительство с эскроу-счетами).</li>
+<li>В RFSD нет амортизации: в форме 2 она входит в себестоимость и другие расходы, отчёт о движении денежных средств по РСБУ составляется прямым методом, а пояснения (строка 5640) в базу не входят. Вместо EBITDA используют EBIT или прибыль от продаж под их настоящими названиями, а EBITDA публичных компаний берут из отчётности по МСФО.</li>
 </ol>
 </div>
 </div>
