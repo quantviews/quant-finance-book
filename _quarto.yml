@@ -87,6 +87,8 @@ format:
       method: mathjax
       url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"
     include-in-header: styles/mathjax.html
+    # Ссылки на литературу на полях – у каждого места цитирования (см. файл).
+    include-after-body: styles/margin-cites.html
     fig-format: svg
     code-copy: true
     code-overflow: wrap
