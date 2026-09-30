@@ -143,7 +143,7 @@ def load_shares_full(start=None, end=None, board: str | None = "TQBR", backend: 
 # Денежные показатели – в тысячах рублей; расходы (строки «в скобках») – отрицательные.
 
 def load_rfsd(okved=None, years=None, backend: Backend = "pandas"):
-    """Выборка отчётности: компании 5 отраслей с выручкой ≥ 1 млрд руб. хотя бы в одном году 2018–2024.
+    """Выборка отчётности: компании 5 отраслей с выручкой ≥ 1 млрд руб. хотя бы в одном году 2018–2025.
 
     okved – префикс кода ОКВЭД («47» – розничная торговля) или список префиксов;
     years – год или список лет.
@@ -167,6 +167,32 @@ def load_rfsd_summary(backend: Backend = "pandas"):
 def load_rfsd_cases(backend: Backend = "pandas"):
     """Отчётность нескольких известных компаний за все годы (для примеров в тексте)."""
     df = pl.read_parquet(DATA_DIR / "rfsd_cases.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rfsd_revenue_okved(backend: Backend = "pandas"):
+    """Суммарная выручка поданных отчётов полного RFSD по годам и классам ОКВЭД (2 знака), тыс. руб."""
+    df = pl.read_parquet(DATA_DIR / "rfsd_revenue_okved.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rosstat_revenue(backend: Backend = "pandas"):
+    """Выручка организаций по классам ОКВЭД по данным Росстата (rustata, showdata/indicator_278140),
+    тыс. руб. Код 101.АГ – «Всего по обследуемым видам экономической деятельности»."""
+    df = pl.read_parquet(DATA_DIR / "rosstat_revenue.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rfsd_hidden(backend: Backend = "pandas"):
+    """Крупные компании (выручка ≥ 10 млрд руб. в последнем раскрытом отчёте), не раскрывшие
+    отчётность, по годам: large – всего крупных, hidden – из них без отчёта, выручка в тыс. руб."""
+    df = pl.read_parquet(DATA_DIR / "rfsd_hidden.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_rfsd_hidden_top(backend: Backend = "pandas"):
+    """Крупнейшие компании, не раскрывшие отчётность в последнем году данных."""
+    df = pl.read_parquet(DATA_DIR / "rfsd_hidden_top.parquet")
     return df if backend == "polars" else df.to_pandas()
 
 

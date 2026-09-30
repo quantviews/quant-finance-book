@@ -4,7 +4,7 @@
   "hf_last_modified": "2026-09-02T15:47:56.000Z",
   "sample_years": [
     2018,
-    2024
+    2025
   ],
   "divisions": {
     "10": "Производство пищевых продуктов",
@@ -14,7 +14,7 @@
     "62": "Разработка программного обеспечения и консультирование"
   },
   "min_revenue_thousand_rub": 1000000,
-  "sample_rows": 69260,
-  "sample_firms": 11953,
-  "names_found_share": 0.954
+  "sample_rows": 89335,
+  "sample_firms": 13854,
+  "names_found_share": 0.96
 }
