@@ -1,0 +1,19 @@
+<!--
+  MathJax 4 со шрифтом STIX Two (в тон основному тексту).
+  Quarto 1.10 сам подключает MathJax 3, где этот шрифт недоступен,
+  поэтому в _quarto.yml стоит html-math-method: plain, а MathJax грузится здесь.
+-->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: { '[+]': [['\\(', '\\)']] },
+      displayMath: [['\\[', '\\]']],
+      tags: 'none'
+    },
+    output: {
+      font: 'mathjax-stix2',
+      displayOverflow: 'scroll'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>

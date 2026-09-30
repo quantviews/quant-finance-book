@@ -1,0 +1,98 @@
+/*-- scss:defaults --*/
+
+$font-family-base:
+  "STIX Two Text",
+  Georgia,
+  "Times New Roman",
+  serif;
+
+$headings-font-family:
+  "IBM Plex Sans",
+  Arial,
+  sans-serif;
+
+$font-family-monospace:
+  "JetBrains Mono",
+  "Cascadia Code",
+  Consolas,
+  monospace;
+
+$font-size-base: 1.05rem;
+$line-height-base: 1.6;
+
+$headings-font-weight: 600;
+$headings-line-height: 1.18;
+
+$code-font-size: 0.88em;
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$border-radius: 0.25rem;
+
+
+/*-- scss:rules --*/
+
+body {
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+}
+
+p,
+li {
+  hyphens: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+h2 {
+  margin-top: 2.2rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+code {
+  font-variant-ligatures: none;
+}
+
+pre {
+  line-height: 1.45;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
+.table {
+  font-size: 0.94rem;
+}
+
+.figure-caption,
+.table-caption,
+figcaption {
+  font-family: "IBM Plex Sans", Arial, sans-serif;
+  font-size: 0.88rem;
+}
+
+blockquote {
+  font-size: 0.98rem;
+  border-left-width: 3px;
+}
+
+.callout {
+  font-family: "IBM Plex Sans", Arial, sans-serif;
+}
+
+.callout-body-container {
+  font-family: "STIX Two Text", Georgia, serif;
+}

@@ -1,18 +1,36 @@
-# IDE и кэш
+# RStudio
 .Rproj.user/
-.quarto/
-_book/
-_freeze/
-*.Rhistory
-*.RData
-*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto: кэш и собранная книга
+/.quarto/
+/_book/
+**/*.quarto_ipynb
+# Промежуточные файлы рендера отдельных глав
+/*.html
+/*.rmarkdown
+/*.knit.md
+/*_files/
+/*.typ
+/site_libs/
+
+# _freeze/ хранится в git: при freeze: auto он позволяет собрать книгу
+# (например, в GitHub Actions) без повторного выполнения кода.
 
 # Python
 __pycache__/
 .ipynb_checkpoints/
 
-# Quarto outputs
-*.html
-*.pdf
-*.docx
-/.quarto/
+# Конфликтные копии Яндекс.Диска
+* (2).*
+* (3).*
+
+# Прочее
+_archive/
+# Полная история рынка акций раздаётся отдельным архивом (scripts/build_data.py --full)
+_data_full/
+.positai
+Thumbs.db
+.DS_Store

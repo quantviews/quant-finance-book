@@ -1,0 +1,98 @@
+color:
+  palette:
+    navy: "#23415F"
+    blue: "#34699A"
+    light-blue: "#EAF1F7"
+    dark-grey: "#252525"
+    medium-grey: "#6B7280"
+    light-grey: "#F4F5F6"
+
+  foreground: dark-grey
+  background: "#FFFFFF"
+  primary: blue
+  secondary: medium-grey
+
+typography:
+  fonts:
+    - family: "STIX Two Text"
+      source: file
+      files:
+        - path: fonts/stix/STIXTwoText-Regular.ttf
+          weight: 400
+          style: normal
+        - path: fonts/stix/STIXTwoText-Italic.ttf
+          weight: 400
+          style: italic
+        - path: fonts/stix/STIXTwoText-SemiBold.ttf
+          weight: 600
+          style: normal
+        - path: fonts/stix/STIXTwoText-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - path: fonts/stix/STIXTwoText-Bold.ttf
+          weight: 700
+          style: normal
+        - path: fonts/stix/STIXTwoText-BoldItalic.ttf
+          weight: 700
+          style: italic
+
+    - family: "STIX Two Math"
+      source: file
+      files:
+        - path: fonts/stix/STIXTwoMath-Regular.ttf
+
+    - family: "IBM Plex Sans"
+      source: file
+      files:
+        - path: fonts/ibm-plex-sans/IBMPlexSans-Regular.ttf
+          weight: 400
+          style: normal
+        - path: fonts/ibm-plex-sans/IBMPlexSans-Italic.ttf
+          weight: 400
+          style: italic
+        - path: fonts/ibm-plex-sans/IBMPlexSans-SemiBold.ttf
+          weight: 600
+          style: normal
+        - path: fonts/ibm-plex-sans/IBMPlexSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+
+    - family: "JetBrains Mono"
+      source: file
+      files:
+        - path: fonts/jetbrains-mono/JetBrainsMono-Regular.ttf
+          weight: 400
+          style: normal
+        - path: fonts/jetbrains-mono/JetBrainsMono-Italic.ttf
+          weight: 400
+          style: italic
+        - path: fonts/jetbrains-mono/JetBrainsMono-SemiBold.ttf
+          weight: 600
+          style: normal
+
+  base:
+    family: "STIX Two Text"
+    weight: 400
+
+  headings:
+    family: "IBM Plex Sans"
+    weight: 600
+    line-height: 1.15
+    color: navy
+
+  monospace:
+    family: "JetBrains Mono"
+    weight: 400
+
+  monospace-inline:
+    size: 0.88em
+    background-color: light-grey
+
+  monospace-block:
+    size: 0.86em
+    line-height: 1.4
+    background-color: light-grey
+
+  link:
+    color: blue
+    decoration: none
