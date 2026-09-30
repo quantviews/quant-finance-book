@@ -58,7 +58,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -80,9 +99,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-37c7103f8017a96ee1203fe8ed780e5c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-7b6eaa0ffa2c43a5297d387829f09eb4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   };
 </script>
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -373,7 +392,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%B3%D0%BE-%D1%8D%D1%82%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0" id="toc-для-кого-эта-книга" class="nav-link active" data-scroll-target="#%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%B3%D0%BE-%D1%8D%D1%82%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0"><span class="header-section-number">1.1</span> Для кого эта книга</a></li>
   <li><a href="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0" id="toc-как-устроена-книга" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B0-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0"><span class="header-section-number">1.2</span> Как устроена книга</a></li>
-  <li><a href="#%D0%BA%D0%BE%D0%B4-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" id="toc-код-и-данные" class="nav-link" data-scroll-target="#%D0%BA%D0%BE%D0%B4-%D0%B8-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5"><span class="header-section-number">1.3</span> Код и данные</a></li>
+  <li>
+<a href="#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D1%82%D1%8C-%D0%BA%D0%BE%D0%B4-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8" id="toc-как-запускать-код-книги" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D1%82%D1%8C-%D0%BA%D0%BE%D0%B4-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B8"><span class="header-section-number">1.3</span> Как запускать код книги</a>
+  <ul class="collapse">
+<li><a href="#%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D1%91%D0%BC-%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%B5" id="toc-на-своём-компьютере" class="nav-link" data-scroll-target="#%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D1%91%D0%BC-%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%B5"><span class="header-section-number">1.3.1</span> На своём компьютере</a></li>
+  <li><a href="#%D0%B2-google-colab" id="toc-в-google-colab" class="nav-link" data-scroll-target="#%D0%B2-google-colab"><span class="header-section-number">1.3.2</span> В Google Colab</a></li>
+  <li><a href="#%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C-qf" id="toc-модуль-qf" class="nav-link" data-scroll-target="#%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C-qf"><span class="header-section-number">1.3.3</span> Модуль <code>qf</code></a></li>
+  <li><a href="#%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5" id="toc-данные" class="nav-link" data-scroll-target="#%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5"><span class="header-section-number">1.3.4</span> Данные</a></li>
+  </ul>
+</li>
   <li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BA%D0%BE%D0%B4-%D0%B0-%D0%BD%D0%B5-excel" id="toc-почему-код-а-не-excel" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BA%D0%BE%D0%B4-%D0%B0-%D0%BD%D0%B5-excel"><span class="header-section-number">1.4</span> Почему код, а не Excel</a></li>
   <li><a href="#%D1%83%D1%87%D0%B8%D1%82%D1%8C%D1%81%D1%8F-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-учиться-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D1%83%D1%87%D0%B8%D1%82%D1%8C%D1%81%D1%8F-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">1.5</span> Учиться с ИИ-ассистентом</a></li>
   <li><a href="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%BA%D1%83%D1%80%D1%81%D0%B0" id="toc-история-курса" class="nav-link" data-scroll-target="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%BA%D1%83%D1%80%D1%81%D0%B0"><span class="header-section-number">1.6</span> История курса</a></li>
@@ -382,7 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span>
 </h1>
@@ -482,10 +509,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>В. Работа с ИИ-ассистентом</strong> – не получить ответ от ассистента, а проверить его: найти ошибку, неявное допущение, неподтверждённое утверждение.</li>
 <li>
 <strong>Г. Мини-исследование</strong> – небольшая самостоятельная задача с устной защитой результата.</li>
-</ul></section><section id="код-и-данные" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="код-и-данные">
-<span class="header-section-number">1.3</span> Код и данные</h2>
+</ul></section><section id="как-запускать-код-книги" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="как-запускать-код-книги">
+<span class="header-section-number">1.3</span> Как запускать код книги</h2>
 <p>Основной язык книги – <strong>Python</strong>. Для ключевых примеров в онлайн-версии есть вкладка с тем же расчётом на <strong>R</strong>. Печатная версия содержит только Python-код.</p>
-<p>Все примеры работают на снимке данных, который прилагается к книге (папка <code>data/</code>). В снимке – дневные котировки около ста акций Московской биржи с поправкой на дивиденды и сплиты, индексы, дивиденды, ключевая ставка, RUONIA и кривая доходности ОФЗ. Отдельным архивом доступна полная история всего рынка акций Московской биржи с 1997 г. Данные читаются одной строкой:</p>
+<p>Весь код из книги можно запустить у себя и получить те же результаты. Для этого нужны три вещи: код, данные и небольшой вспомогательный модуль <code>qf</code>. Всё это лежит в открытом репозитории книги: <a href="https://github.com/quantviews/quant-finance-book" class="uri">https://github.com/quantviews/quant-finance-book</a>.</p>
+<section id="на-своём-компьютере" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="на-своём-компьютере">
+<span class="header-section-number">1.3.1</span> На своём компьютере</h3>
+<p>Нужен Python 3.11 или новее. Скачайте репозиторий и установите пакеты:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/quantviews/quant-finance-book.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> quant-finance-book</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Запускайте Jupyter (или другой редактор) <strong>из папки книги</strong> – тогда Python найдёт модуль <code>qf</code> и данные в папке <code>data/</code>. Если ноутбук лежит в другом месте, добавьте путь к книге в начало ноутбука:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"путь/к/quant-finance-book"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="в-google-colab" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="в-google-colab">
+<span class="header-section-number">1.3.2</span> В Google Colab</h3>
+<p>В Colab ничего не нужно устанавливать на компьютер. В первой ячейке ноутбука скачайте репозиторий и перейдите в его папку:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>quantviews<span class="op">/</span>quant<span class="op">-</span>finance<span class="op">-</span>book.git</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd quant<span class="op">-</span>finance<span class="op">-</span>book</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">-</span>q <span class="op">-</span>r requirements.txt</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>После этого код из книги работает без изменений. При перезапуске среды Colab первую ячейку нужно выполнить снова.</p>
+</section><section id="модуль-qf" class="level3" data-number="1.3.3"><h3 data-number="1.3.3" class="anchored" data-anchor-id="модуль-qf">
+<span class="header-section-number">1.3.3</span> Модуль <code>qf</code>
+</h3>
+<p><code>qf</code> – папка с кодом в корне книги, которая избавляет от повторения одних и тех же строк в каждой главе. В ней три части:</p>
+<div id="tbl-qf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-qf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;1.2: Модуль <code>qf</code>
+</figcaption><div aria-describedby="tbl-qf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Модуль</th>
+<th>Что делает</th>
+<th>Пример</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>qf.data</code></td>
+<td>загружает данные книги из папки <code>data/</code>
+</td>
+<td><code>data.load_prices(["SBER", "GAZP"])</code></td>
+</tr>
+<tr class="even">
+<td><code>qf.plot</code></td>
+<td>задаёт единый стиль графиков и подпись источника</td>
+<td><code>plot.source(ax, "Московская биржа")</code></td>
+</tr>
+<tr class="odd">
+<td><code>qf.secrets</code></td>
+<td>читает токены API из файла <code>.env</code>
+</td>
+<td><code>secrets.get("RUSTATA_TOKEN")</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Основные функции загрузки данных:</p>
+<ul>
+<li>
+<code>load_stocks()</code> – дневные данные акций: цены, объёмы, цена с поправкой на дивиденды, капитализация;</li>
+<li>
+<code>load_prices()</code> – цены нескольких акций в «широком» формате: даты по строкам, тикеры по столбцам;</li>
+<li>
+<code>load_index()</code> – индексы Мосбиржи; <code>load_dividends()</code> – дивиденды;</li>
+<li>
+<code>load_key_rate()</code>, <code>load_ruonia()</code>, <code>load_zcyc()</code> – ставки и кривая доходности ОФЗ.</li>
+</ul>
+<p>Все они принимают тикеры и период: <code>data.load_stocks("SBER", start="2020-01-01")</code>. Модуль – обычный код на Python: его можно открыть и прочитать, а при желании – заменить своими функциями. Для R те же функции собраны в файле <code>R/qf.R</code> (<code>qf_load_stocks()</code> и т. д.); подключите его командой <code>source("R/qf.R")</code>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
@@ -494,20 +591,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sber <span class="op">=</span> data.load_stocks(<span class="st">"SBER"</span>, start<span class="op">=</span><span class="st">"2026-01-01"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sber[[<span class="st">"date"</span>, <span class="st">"close"</span>, <span class="st">"adj_close"</span>, <span class="st">"market_cap"</span>]].tail(<span class="dv">3</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           date   close  adj_close    market_cap</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 185 2026-09-25  276.35     276.35  5.965553e+12</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 186 2026-09-28  272.45     272.45  5.881364e+12</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 187 2026-09-29  274.65     274.65  5.928855e+12</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sber <span class="op">=</span> data.load_stocks(<span class="st">"SBER"</span>, start<span class="op">=</span><span class="st">"2026-01-01"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sber[[<span class="st">"date"</span>, <span class="st">"close"</span>, <span class="st">"adj_close"</span>, <span class="st">"market_cap"</span>]].tail(<span class="dv">3</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           date   close  adj_close    market_cap</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 185 2026-09-25  276.35     276.35  5.965553e+12</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 186 2026-09-28  272.45     272.45  5.881364e+12</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 187 2026-09-29  274.65     274.65  5.928855e+12</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">qf_load_stocks</span><span class="op">(</span><span class="st">"SBER"</span>, start <span class="op">=</span> <span class="st">"2026-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">qf_load_stocks</span><span class="op">(</span><span class="st">"SBER"</span>, start <span class="op">=</span> <span class="st">"2026-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">close</span>, <span class="va">adj_close</span>, <span class="va">market_cap</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 x 4</span></span>
@@ -521,21 +618,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Состав данных и источники описаны в <code>data/README.md</code>. Поскольку снимок зафиксирован, результаты в книге воспроизводятся с точностью до знака. Все числа в тексте рассчитываются при сборке книги из тех же данных, а не переносятся вручную.</p>
-</section><section id="почему-код-а-не-excel" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="почему-код-а-не-excel">
+</section><section id="данные" class="level3" data-number="1.3.4"><h3 data-number="1.3.4" class="anchored" data-anchor-id="данные">
+<span class="header-section-number">1.3.4</span> Данные</h3>
+<p>Все примеры работают на снимке данных, который прилагается к книге (папка <code>data/</code>). В снимке – дневные котировки около ста акций Московской биржи с поправкой на дивиденды и сплиты, индексы, дивиденды, ключевая ставка, RUONIA, кривая доходности ОФЗ и выборка бухгалтерской отчётности российских компаний. Отдельным архивом доступна полная история всего рынка акций Московской биржи с 1997 г. Поскольку снимок зафиксирован, результаты в книге воспроизводятся с точностью до знака, а все числа в тексте рассчитываются при сборке книги из тех же данных, а не переносятся вручную. Состав данных и источники описаны в главе «Источники финансовых данных» и в приложении B.</p>
+</section></section><section id="почему-код-а-не-excel" class="level2 page-columns page-full" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="почему-код-а-не-excel">
 <span class="header-section-number">1.4</span> Почему код, а не Excel</h2>
 <p>Excel остаётся стандартом финансовой отрасли, и для быстрой проверки идеи или разбора отчётности одной компании он удобен. Но у него есть ограничения, существенные для количественного анализа:</p>
 <ul>
 <li>
 <strong>объём данных</strong> – с сотнями тысяч строк работать неудобно, а с миллионами невозможно;</li>
 <li>
-<strong>ошибки</strong> – в большой таблице с формулами ошибку трудно найти. Известные примеры – расчёты Reinhart и Rogoff (2010) и потеря данных о заражениях COVID-19 в Великобритании в 2020 г.;</li>
+<strong>ошибки</strong> – в большой таблице с формулами ошибку трудно найти. Известные примеры – ошибка в таблице Reinhart и Rogoff <span class="citation" data-cites="reinhart2010">(<a href="references.html#ref-reinhart2010" role="doc-biblioref">Reinhart и Rogoff 2010 г.</a>)</span>, обнаруженная при попытке повторить их расчёты <span class="citation" data-cites="herndon2014">(<a href="references.html#ref-herndon2014" role="doc-biblioref">Herndon и др. 2014 г.</a>)</span>, и потеря данных о заражениях COVID-19 в Великобритании в 2020 г.;</li>
 <li>
 <strong>статистика</strong> – кроме базовых функций, статистических методов почти нет;</li>
 <li>
 <strong>воспроизводимость</strong> – по файлу Excel трудно восстановить, что и в каком порядке было сделано.</li>
 </ul>
-<p>Анализ в виде кода лишён этих недостатков: его можно перезапустить на новых данных, проверить построчно и передать коллеге. Это основа <strong>воспроизводимого исследования</strong> (reproducible research).</p>
+<div class="no-row-height column-margin column-container"><div id="ref-reinhart2010" class="csl-entry" role="listitem">
+Reinhart, Carmen M., и Kenneth S. Rogoff. 2010 г. <span>«Growth in a Time of Debt»</span>. <em>American Economic Review</em> 100 (2): 573–78.
+</div><div id="ref-herndon2014" class="csl-entry" role="listitem">
+Herndon, Thomas, Michael Ash, и Robert Pollin. 2014 г. <span>«Does High Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique of <span>Reinhart</span> and <span>Rogoff</span>»</span>. <em>Cambridge Journal of Economics</em> 38 (2): 257–79.
+</div></div><p>Анализ в виде кода лишён этих недостатков: его можно перезапустить на новых данных, проверить построчно и передать коллеге. Это основа <strong>воспроизводимого исследования</strong> (reproducible research).</p>
 <p>Python и R – бесплатные языки с огромным набором библиотек. Python – язык общего назначения и стандарт в машинном обучении. R создавался для статистики, и многие эконометрические методы появляются в нём раньше. Для задач этой книги подходят оба. Мы выбрали Python как основной: он более распространён и чаще нужен в работе.</p>
 </section><section id="учиться-с-ии-ассистентом" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="учиться-с-ии-ассистентом">
 <span class="header-section-number">1.5</span> Учиться с ИИ-ассистентом</h2>
@@ -570,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Курс состоит из лекций и семинаров. На семинарах разбираются примеры и упражнения из соответствующих глав. Итоговая оценка складывается из пяти частей:</p>
 <div id="tbl-grading" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;1.2: Структура оценки в курсе
+Таблица&nbsp;1.3: Структура оценки в курсе
 </figcaption><div aria-describedby="tbl-grading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead><tr class="header">
@@ -616,6 +719,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://fief.ru/">Институт энергетики и финансов</a></li>
 <li><a href="https://github.com/quantviews">Материалы и проекты на GitHub</a></li>
 </ul>
+
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
