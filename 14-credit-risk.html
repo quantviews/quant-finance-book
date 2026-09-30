@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-de02a6cd1397838b90e0b8d72152825c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1df7e8dbcd894e0acefb03df3949dd4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -135,6 +135,10 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
+        <div class="sidebar-tools-main">
+    <a href="./quant-finance-book.pdf" title="Скачать PDF" class="quarto-navigation-tool px-1" aria-label="Скачать PDF"><i class="bi bi-file-earmark-pdf"></i></a>
+    <a href="https://github.com/quantviews/quant-finance-book" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -313,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-microstructure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка и как её измеряют</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,8 +390,14 @@ ul.task-list li input[type="checkbox"] {
 <!--
 Заготовка главы. Материалы для работы:
 ratings/ (Эксперт РА), cbonds/ (календарь дефолтов); moexutils (bonds); идеи – Рыбин, М3_2.
+
+Идеи из курса Рыбина (2025; только идеи и постановки, текст не переносить):
+- Событийный анализ: понижение рейтинга М.Видео и облигация МВ ФИН 1Р3 (Рыбин, Модуль3_2, с. 14–21) – повторить на данных Мосбиржи (moexutils: bonds).
+- Пороги долговой нагрузки ND/EBITDA > 4x, EBITDA/проценты < 2 (Модуль3_2, с. 34–36) – признаки для модели дефолта на RFSD; ковенанты (с. 40–41).
+- Признаки манипуляций отчётностью: запасы и дебиторка растут быстрее выручки; кейсы «Ника», «Завод КЭС», «Рубеж» (Модуль3_2, с. 48–62) – признаки для детектора на RFSD.
+- Кейс предсказанного дефолта: Гарант-Инвест (Модуль3_3, с. 70–75).
 -->
-<div class="callout callout-style-default callout-note callout-titled" title="Глава готовится">
+<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -397,7 +407,7 @@ ratings/ (Эксперт РА), cbonds/ (календарь дефолтов); m
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в второй этап работы над книгой. Планируемое содержание:</p>
+<p>Эта глава входит во второй этап работы над книгой. Планируемое содержание:</p>
 <ul>
 <li>Кредитные спреды и их связь с рейтингами</li>
 <li>Долговая нагрузка эмитента: ND/EBITDA, покрытие процентов</li>

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>2&nbsp; Источники финансовых данных – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -49,10 +99,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-de02a6cd1397838b90e0b8d72152825c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1df7e8dbcd894e0acefb03df3949dd4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,24 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,15 +155,15 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
+        <div class="sidebar-tools-main">
+    <a href="./quant-finance-book.pdf" title="Скачать PDF" class="quarto-navigation-tool px-1" aria-label="Скачать PDF"><i class="bi bi-file-earmark-pdf"></i></a>
+    <a href="https://github.com/quantviews/quant-finance-book" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -144,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -164,8 +193,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -184,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -193,8 +222,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -207,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -216,8 +245,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -236,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -245,8 +274,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -265,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -274,8 +303,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -288,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -297,8 +326,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -313,11 +342,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-microstructure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка и как её измеряют</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -332,8 +361,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -352,21 +381,47 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li><a href="#sec-data-types" id="toc-sec-data-types" class="nav-link active" data-scroll-target="#sec-data-types"><span class="header-section-number">2.1</span> Какие бывают финансовые данные</a></li>
+  <li>
+<a href="#sec-moex-iss" id="toc-sec-moex-iss" class="nav-link" data-scroll-target="#sec-moex-iss"><span class="header-section-number">2.2</span> Московская биржа и ISS</a>
+  <ul class="collapse">
+<li><a href="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D1%8B-%D1%82%D0%BE%D1%80%D0%B3%D0%B8" id="toc-как-устроены-торги" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D1%8B-%D1%82%D0%BE%D1%80%D0%B3%D0%B8"><span class="header-section-number">2.2.1</span> Как устроены торги</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D1%8B%D0%B9-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81-iss" id="toc-программный-интерфейс-iss" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D1%8B%D0%B9-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81-iss"><span class="header-section-number">2.2.2</span> Программный интерфейс ISS</a></li>
+  <li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87%D0%B0" id="toc-постраничная-выдача" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87%D0%B0"><span class="header-section-number">2.2.3</span> Постраничная выдача</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-cbr" id="toc-sec-cbr" class="nav-link" data-scroll-target="#sec-cbr"><span class="header-section-number">2.3</span> Данные Банка России</a></li>
+  <li><a href="#sec-international" id="toc-sec-international" class="nav-link" data-scroll-target="#sec-international"><span class="header-section-number">2.4</span> Международные источники</a></li>
+  <li><a href="#sec-formats" id="toc-sec-formats" class="nav-link" data-scroll-target="#sec-formats"><span class="header-section-number">2.5</span> Форматы хранения данных</a></li>
+  <li><a href="#sec-book-data" id="toc-sec-book-data" class="nav-link" data-scroll-target="#sec-book-data"><span class="header-section-number">2.6</span> Данные этой книги</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-data" id="toc-sec-exercises-data" class="nav-link" data-scroll-target="#sec-exercises-data"><span class="header-section-number">2.7</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">2.7.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">2.7.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">2.7.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">2.7.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-sources.html">Данные и инструменты</a></li><li class="breadcrumb-item"><a href="./02-data-sources.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-sources.html">Данные и инструменты</a></li><li class="breadcrumb-item"><a href="./02-data-sources.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span>
+</h1>
 </div>
 
 
@@ -380,39 +435,421 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбук курса Financial_data_and_preprocessing_in_Python_2025_ru; moexutils (iss, rates); open-positions (web API MOEX); старые черновики глав 2–3 в _archive/drafts.
--->
-<div class="callout callout-style-default callout-note callout-titled" title="Глава готовится">
+</header><!--
+Материалы: ноутбук курса Financial_data_and_preprocessing_in_Python_2025_ru; moexutils (iss, rates);
+open-positions (web API MOEX); старые черновики глав 2–3 в _archive/drafts.
+Идеи из курса Рыбина (2025; только идеи): источники для проверки эмитента – e-disclosure.ru,
+kad.arbitr.ru, service.nalog.ru, ГИР БО (bo.nalog.ru), checko, list-org (Модуль3_2, с. 69).
+--><p>Сколько заработал акционер Сбербанка в 2024 г.? Вопрос кажется простым: достаточно взять цену акции в начале и в конце года. Откройте любой сайт с котировками – получится рост на 3,2%. Но в июле 2024 г. Сбербанк выплатил крупные дивиденды, и с их учётом доходность акционера составила 15,3% – почти в пять раз больше. Обе цифры «правильные», но отвечают на разные вопросы, и только одна из них отвечает на заданный.</p>
+<p>Этот пример показывает главное правило работы с финансовыми данными: прежде чем считать, нужно понять, откуда взялись числа и что именно они измеряют. Данные – не нейтральный материал, а результат чьих-то решений: какую цену считать ценой закрытия, учитывать ли дивиденды, что делать с днями без торгов, как склеить историю переименованной компании. В анализе данных есть выражение «мусор на входе – мусор на выходе» (garbage in, garbage out): никакая модель не исправит ошибку, заложенную в исходных данных.</p>
+<p>В этой главе мы разберёмся, какие данные нужны для количественного анализа и где их брать, а в следующей – как их подготовить.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Какие данные нужны для количественного анализа: цены, объёмы, дивиденды, ставки, отчётность</li>
-<li>Московская биржа: структура рынков и режимов торгов, программный интерфейс ISS</li>
-<li>Банк России: ключевая ставка, RUONIA, кривая доходности ОФЗ</li>
-<li>Международные источники: FRED, SEC EDGAR, Yahoo Finance – возможности и ограничения</li>
-<li>Форматы хранения: CSV, Parquet; pandas и Polars</li>
-<li>Данные книги: состав снимка и модуль <code>qf</code></li>
+<li>Разбираемся, какие бывают финансовые данные и чем они различаются.</li>
+<li>Загружаем котировки напрямую с Московской биржи через её программный интерфейс ISS.</li>
+<li>Знакомимся с данными Банка России: ключевой ставкой и ставкой RUONIA.</li>
+<li>Обсуждаем международные источники и их ограничения для российского рынка.</li>
+<li>Сравниваем форматы хранения данных: CSV и Parquet.</li>
+<li>Знакомимся с данными, которые прилагаются к книге.</li>
 </ul>
+<p><strong>Данные:</strong> запросы к ISS Московской биржи; <code>stocks.parquet</code>, <code>key_rate.parquet</code>, <code>ruonia.parquet</code>. <strong>Нужно знать:</strong> основы Python и pandas (приложение A).</p>
 </div>
 </div>
+<section id="sec-data-types" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="sec-data-types">
+<span class="header-section-number">2.1</span> Какие бывают финансовые данные</h2>
+<p>Финансовые данные удобно разделить на четыре группы.</p>
+<p><strong>Рыночные данные</strong> – всё, что порождают торги: цены сделок, объёмы, котировки на покупку и продажу. Их главное свойство – высокая частота и точная привязка ко времени. Одна и та же информация может храниться с разной степенью детализации: от журнала всех заявок с точностью до микросекунды до одной цены закрытия в день.</p>
+<p><strong>Фундаментальные данные</strong> описывают сами компании: выручку, прибыль, активы, долг, число акций, дивиденды. Они выходят редко – раз в квартал или раз в год – и с задержкой: годовую отчётность за 2025 г. компании публикуют весной 2026 г.</p>
+<p><strong>Макроэкономические данные и ставки</strong>: ключевая ставка, инфляция, курс рубля, ставки денежного рынка. Для финансового анализа они служат ориентирами: безрисковая ставка нужна для расчёта премии за риск, инфляция – для перехода к реальной доходности.</p>
+<p><strong>Альтернативные данные</strong> – всё остальное: новости, поисковые запросы, спутниковые снимки, данные о платежах. Мы почти не будем их использовать, но важно знать, что граница между «основными» и «альтернативными» данными постоянно сдвигается.</p>
+<p>Помимо содержания, данные различаются <strong>частотой</strong> (тиковые, минутные, дневные, месячные) и <strong>моментом доступности</strong>. Последнее особенно важно: в исторических данных число стоит под той датой, к которой оно относится, а не под той, когда о нём узнали. Прибыль за 2025 г. относится к 2025 г., но инвестор узнал о ней только весной 2026 г. Модель, которая «видит» её уже в декабре 2025 г., заглядывает в будущее. К этой проблеме мы вернёмся в следующей главе.</p>
+</section><section id="sec-moex-iss" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="sec-moex-iss">
+<span class="header-section-number">2.2</span> Московская биржа и ISS</h2>
+<section id="как-устроены-торги" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="как-устроены-торги">
+<span class="header-section-number">2.2.1</span> Как устроены торги</h3>
+<p>Московская биржа объединяет несколько рынков: фондовый (акции, облигации, фонды), валютный, денежный (РЕПО) и срочный (фьючерсы и опционы). Внутри каждого рынка торги идут в разных <strong>режимах торгов</strong> (boards). Одна и та же акция может одновременно торговаться в нескольких режимах: в основном, в режиме неполных лотов, в режиме крупных пакетов, в режиме РЕПО.</p>
+<p>Для анализа почти всегда нужен <strong>основной режим</strong> – для акций это <code>TQBR</code>. В нём проходит большая часть оборота, и именно по нему рассчитываются индексы. Смешивание режимов – частая ошибка: цены в режиме неполных лотов или крупных пакетов могут заметно отличаться от основных.</p>
+</section><section id="программный-интерфейс-iss" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="программный-интерфейс-iss">
+<span class="header-section-number">2.2.2</span> Программный интерфейс ISS</h3>
+<p>Биржа бесплатно раскрывает данные через <strong>ISS</strong> (Informational &amp; Statistical Server) – программный интерфейс, к которому можно обращаться по обычным веб-адресам. Текущие котировки без подписки отдаются с задержкой, а история торгов доступна полностью. Ответ приходит в формате JSON, XML или CSV.</p>
+<p>Начнём с карточки ценной бумаги. Адрес строится из базового <code>https://iss.moex.com/iss/</code> и пути к нужному ресурсу.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ISS <span class="op">=</span> <span class="st">"https://iss.moex.com/iss"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>card <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>ISS<span class="sc">}</span><span class="ss">/securities/SBER.json"</span>, params<span class="op">=</span>{<span class="st">"iss.meta"</span>: <span class="st">"off"</span>}, timeout<span class="op">=</span><span class="dv">30</span>).json()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>boards <span class="op">=</span> pd.DataFrame(card[<span class="st">"boards"</span>][<span class="st">"data"</span>], columns<span class="op">=</span>card[<span class="st">"boards"</span>][<span class="st">"columns"</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>boards[[<span class="st">"boardid"</span>, <span class="st">"title"</span>, <span class="st">"is_primary"</span>]].head(<span class="dv">5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   boardid                                       title  is_primary</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0    TQBR                  Т+: Акции и ДР - безадрес.           1</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    EQBR  Основной режим: А1-Акции и паи - безадрес.           0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    SMAL       Т+: Неполные лоты (акции) - безадрес.           0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    TQDP          Крупные пакеты - Акции - безадрес.           0</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    EQDP          Крупные пакеты - Акции - безадрес.           0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Ответ ISS устроен одинаково для всех запросов: это набор таблиц, у каждой – список столбцов <code>columns</code> и строки <code>data</code>. Из них легко собрать <code>DataFrame</code>. Параметр <code>iss.meta=off</code> убирает из ответа описание типов столбцов, которое нам не нужно. В столбце <code>is_primary</code> отмечен основной режим торгов – <code>TQBR</code>.</p>
+<p>Теперь загрузим историю торгов Сбербанка в основном режиме за июль 2024 г.:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>ISS<span class="sc">}</span><span class="ss">/history/engines/stock/markets/shares/boards/TQBR/securities/SBER.json"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {<span class="st">"from"</span>: <span class="st">"2024-07-01"</span>, <span class="st">"till"</span>: <span class="st">"2024-07-31"</span>, <span class="st">"iss.meta"</span>: <span class="st">"off"</span>}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> requests.get(url, params<span class="op">=</span>params, timeout<span class="op">=</span><span class="dv">30</span>).json()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>hist <span class="op">=</span> pd.DataFrame(resp[<span class="st">"history"</span>][<span class="st">"data"</span>], columns<span class="op">=</span>resp[<span class="st">"history"</span>][<span class="st">"columns"</span>])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>hist[[<span class="st">"TRADEDATE"</span>, <span class="st">"OPEN"</span>, <span class="st">"LOW"</span>, <span class="st">"HIGH"</span>, <span class="st">"CLOSE"</span>, <span class="st">"VOLUME"</span>, <span class="st">"VALUE"</span>]].tail()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      TRADEDATE    OPEN     LOW    HIGH   CLOSE    VOLUME         VALUE</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  2024-07-25  295.69  294.20  297.30  296.37  22868740  6.768217e+09</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  2024-07-26  296.40  292.67  300.00  293.30  84909830  2.514714e+10</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  2024-07-29  293.00  286.00  293.00  286.58  52445850  1.513426e+10</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  2024-07-30  286.50  284.32  291.99  290.00  42572480  1.229057e+10</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  2024-07-31  290.47  288.01  291.20  289.30  25974520  7.524944e+09</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://iss.moex.com/iss/history/engines/stock/markets/shares/boards/TQBR/"</span>,</span>
+<span>  <span class="st">"securities/SBER.json?from=2024-07-01&amp;till=2024-07-31&amp;iss.meta=off"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">resp</span><span class="op">$</span><span class="va">history</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">hist</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">resp</span><span class="op">$</span><span class="va">history</span><span class="op">$</span><span class="va">columns</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">hist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TRADEDATE"</span>, <span class="st">"OPEN"</span>, <span class="st">"LOW"</span>, <span class="st">"HIGH"</span>, <span class="st">"CLOSE"</span>, <span class="st">"VOLUME"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     TRADEDATE   OPEN    LOW   HIGH  CLOSE   VOLUME</span></span>
+<span><span class="co">#&gt; 18 2024-07-24 294.39  293.2 296.67 295.69 24565710</span></span>
+<span><span class="co">#&gt; 19 2024-07-25 295.69  294.2  297.3 296.37 22868740</span></span>
+<span><span class="co">#&gt; 20 2024-07-26  296.4 292.67    300  293.3 84909830</span></span>
+<span><span class="co">#&gt; 21 2024-07-29    293    286    293 286.58 52445850</span></span>
+<span><span class="co">#&gt; 22 2024-07-30  286.5 284.32 291.99    290 42572480</span></span>
+<span><span class="co">#&gt; 23 2024-07-31 290.47 288.01  291.2  289.3 25974520</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Путь запроса читается как адрес в иерархии биржи: движок <code>stock</code> (фондовый рынок) → рынок <code>shares</code> (акции) → режим <code>TQBR</code> → бумага <code>SBER</code>. Столбец <code>VALUE</code> – оборот в рублях, <code>VOLUME</code> – число акций.</p>
+</section><section id="постраничная-выдача" class="level3" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="постраничная-выдача">
+<span class="header-section-number">2.2.3</span> Постраничная выдача</h3>
+<p>Попробуем загрузить историю за весь 2023 г. и посмотрим, сколько строк придёт.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {<span class="st">"from"</span>: <span class="st">"2023-01-01"</span>, <span class="st">"till"</span>: <span class="st">"2023-12-31"</span>, <span class="st">"iss.meta"</span>: <span class="st">"off"</span>}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> requests.get(url, params<span class="op">=</span>params, timeout<span class="op">=</span><span class="dv">30</span>).json()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(resp[<span class="st">"history"</span>][<span class="st">"data"</span>]), <span class="st">"строк"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 100 строк</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>resp[<span class="st">"history.cursor"</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'columns': ['INDEX', 'TOTAL', 'PAGESIZE'], 'data': [[0, 254, 100]]}</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>В 2023 г. было около 250 торговых дней, а пришло только 100 строк. ISS отдаёт историю <strong>страницами по 100 строк</strong>, и об этом сообщает служебная таблица <code>history.cursor</code>: <code>TOTAL</code> – сколько строк всего, <code>PAGESIZE</code> – размер страницы, <code>INDEX</code> – номер первой строки текущей страницы. Чтобы получить всё, нужно запрашивать страницы по очереди, увеличивая параметр <code>start</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iss_history(ticker, start, end, board<span class="op">=</span><span class="st">"TQBR"</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""История торгов акцией на Мосбирже с учётом постраничной выдачи ISS."""</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> (<span class="ss">f"</span><span class="sc">{</span>ISS<span class="sc">}</span><span class="ss">/history/engines/stock/markets/shares/boards/</span><span class="sc">{</span>board<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"/securities/</span><span class="sc">{</span>ticker<span class="sc">}</span><span class="ss">.json"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    pages, first <span class="op">=</span> [], <span class="dv">0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> {<span class="st">"from"</span>: start, <span class="st">"till"</span>: end, <span class="st">"start"</span>: first, <span class="st">"iss.meta"</span>: <span class="st">"off"</span>}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        resp <span class="op">=</span> requests.get(url, params<span class="op">=</span>params, timeout<span class="op">=</span><span class="dv">30</span>).json()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        page <span class="op">=</span> pd.DataFrame(resp[<span class="st">"history"</span>][<span class="st">"data"</span>], columns<span class="op">=</span>resp[<span class="st">"history"</span>][<span class="st">"columns"</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        pages.append(page)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        total <span class="op">=</span> resp[<span class="st">"history.cursor"</span>][<span class="st">"data"</span>][<span class="dv">0</span>][<span class="dv">1</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        first <span class="op">+=</span> <span class="bu">len</span>(page)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(page) <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> first <span class="op">&gt;=</span> total:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.concat(pages, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>sber_2023 <span class="op">=</span> iss_history(<span class="st">"SBER"</span>, <span class="st">"2023-01-01"</span>, <span class="st">"2023-12-31"</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(sber_2023)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 254</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Теперь пришли все 254 торговых дня. Функцию загрузки полезно проверить сравнением с независимым источником – например, с данными книги. Цены закрытия совпадают во всех днях, кроме одного: 16.06.2023 в данных книги стоит 245,00 руб., а ISS сегодня отдаёт 243,87 руб. Вероятно, запись в данных книги за этот день получена из другой выгрузки: у неё немного другой объём торгов. Единичные расхождения между источниками – обычное дело: биржа иногда уточняет исторические данные, а разные поставщики по-разному обрабатывают нестандартные дни. Важно, чтобы таких расхождений было мало и чтобы вы о них знали.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Загрузить из ISS только первую страницу и не заметить этого. Код работает, ошибок не выдаёт, данные выглядят правдоподобно – но это лишь первые 100 дней периода. Проверяйте число строк: для дневных данных за год их должно быть около 250.</p>
+</div>
+</div>
+<p>Для регулярной работы с ISS удобно пользоваться готовыми библиотеками, которые берут постраничную выдачу на себя, например <code>apimoex</code>. Данные для этой книги собраны пакетом <code>moexutils</code>, который дополнительно учитывает сплиты, переименования и дивиденды (глава о подготовке данных).</p>
+</section></section><section id="sec-cbr" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="sec-cbr">
+<span class="header-section-number">2.3</span> Данные Банка России</h2>
+<p>Банк России публикует ставки, которые служат ориентиром для всего финансового рынка. Для нас важны две.</p>
+<p><strong>Ключевая ставка</strong> – главный инструмент денежно-кредитной политики: ставка, по которой Банк России предоставляет банкам ликвидность и принимает от них депозиты на неделю. Её изменения задают уровень всех остальных ставок в экономике.</p>
+<p><strong>RUONIA</strong> (Ruble OverNight Index Average) – средневзвешенная ставка однодневных рублёвых межбанковских кредитов. Это рыночная ставка, которая держится вблизи ключевой, и лучший ориентир для доходности «денег без риска» на один день: именно её используют фонды денежного рынка и как безрисковую ставку в расчётах (глава «Доходность и риск»).</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>kr <span class="op">=</span> data.load_key_rate().set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>].loc[<span class="st">"2013-09-13"</span>:]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ruonia <span class="op">=</span> data.load_ruonia(start<span class="op">=</span><span class="st">"2013-09-13"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ax.plot(ruonia.index, ruonia, color<span class="op">=</span><span class="st">"#9CA3AF"</span>, lw<span class="op">=</span><span class="fl">0.8</span>, label<span class="op">=</span><span class="st">"RUONIA"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax.step(kr.index, kr, where<span class="op">=</span><span class="st">"post"</span>, color<span class="op">=</span><span class="st">"#23415F"</span>, lw<span class="op">=</span><span class="fl">1.4</span>, label<span class="op">=</span><span class="st">"Ключевая ставка"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"% годовых"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Банк России"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-key-rate" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-key-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-data-sources_files/figure-html/fig-key-rate-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-key-rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;2.1: Ключевая ставка Банка России и ставка RUONIA, % годовых
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>На графике видны три эпизода резкого ужесточения денежно-кредитной политики. В декабре 2014 г. ставку подняли до 17% на фоне обвала рубля. 28 февраля 2022 г. – сразу до 20%. В 2023–2024 гг. ставку повышали постепенно, пока она не достигла 21% (28.10.2024). Минимум – 4,25% – пришёлся на период пандемии (27.07.2020). Для российского инвестора это означает, что «безрисковая» альтернатива вложениям в акции в разные годы давала от 4 до 21% годовых – разброс, немыслимый для развитых рынков.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Особенность данных: ключевая ставка до 2013 г.">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Особенность данных: ключевая ставка до 2013 г.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ключевая ставка введена Банком России 13 сентября 2013 г. В файле <code>key_rate.parquet</code> для более ранних дат приведена ставка рефинансирования, которая до этого выполняла похожую роль ориентира, но на практике была менее тесно связана с рыночными ставками. Поэтому на графике ряд начинается с 13.09.2013, а для расчётов безрисковой доходности за ранние годы лучше использовать RUONIA (с 2010 г.) или доходности коротких ОФЗ.</p>
+</div>
+</div>
+<p>Кроме ставок, на сайте Банка России публикуются курсы валют, статистика банковского сектора, данные платёжного баланса и многое другое. Кривую бескупонной доходности ОФЗ рассчитывает Московская биржа; её история входит в данные книги (<code>zcyc.parquet</code>) и понадобится в главе об облигациях.</p>
+</section><section id="sec-international" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="sec-international">
+<span class="header-section-number">2.4</span> Международные источники</h2>
+<p>Для данных по зарубежным рынкам и макроэкономике есть несколько удобных бесплатных источников. Код в этом разделе обращается к внешним сервисам и приведён для справки: при сборке книги он не выполняется.</p>
+<p><strong>FRED</strong> (Federal Reserve Economic Data) – база Федерального резервного банка Сент-Луиса с сотнями тысяч макроэкономических и финансовых рядов: ставки ФРС, инфляция, доходности казначейских облигаций. Ряды загружаются по коду:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas_datareader.data <span class="im">as</span> pdr</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>us <span class="op">=</span> pdr.DataReader([<span class="st">"FEDFUNDS"</span>, <span class="st">"CPIAUCSL"</span>], <span class="st">"fred"</span>, start<span class="op">=</span><span class="st">"2000-01-01"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>SEC EDGAR</strong> – раскрытие американских публичных компаний. Через программный интерфейс <code>companyfacts</code> можно получить все показатели из отчётности компании в машиночитаемом виде.</p>
+<p><strong>Yahoo Finance</strong> (через библиотеку <code>yfinance</code>) – самый популярный бесплатный источник котировок в учебниках и курсах. Он удобен для американских акций, но у него есть серьёзные ограничения: нет гарантий качества и полноты, бывают ошибки в корректировках на дивиденды, сервис ограничивает частоту запросов. Для российских бумаг международные агрегаторы после 2022 г. стали ненадёжным источником: котировки могут не обновляться или содержать пропуски. Проверяйте дату последнего наблюдения и сравнивайте данные с биржей.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вы загрузили из международного агрегатора дневные цены акции за 10 лет и посчитали доходность по столбцу <code>Close</code>. Какие две проблемы из этой и предыдущей глав могли исказить результат? Подумайте, прежде чем читать дальше.</p>
+</div>
+</div>
+<p>Ответ: во-первых, <code>Close</code> может быть как скорректированной, так и нескорректированной ценой – это зависит от источника и настроек загрузки (в <code>yfinance</code> за это отвечает параметр <code>auto_adjust</code>). Во-вторых, если в истории были сплиты или консолидации, нескорректированный ряд содержит разрывы.</p>
+<p>Для проверки российских эмитентов полезны и нерыночные источники: центр раскрытия корпоративной информации (e-disclosure.ru), картотека арбитражных дел (kad.arbitr.ru), государственный информационный ресурс бухгалтерской отчётности ФНС (bo.nalog.ru). Отчётность компаний из последнего источника собрана в открытый набор данных RFSD, с которым мы будем работать в части II.</p>
+</section><section id="sec-formats" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="sec-formats">
+<span class="header-section-number">2.5</span> Форматы хранения данных</h2>
+<p>Загруженные данные нужно где-то хранить. Самый распространённый формат – <strong>CSV</strong>: текстовый файл, в котором значения разделены запятыми. Его можно открыть в любой программе, включая Excel и блокнот. Но у CSV есть недостатки: он занимает много места, медленно читается и не хранит типы данных – дата при чтении может превратиться в строку, а код ценной бумаги из цифр – в число.</p>
+<p>Формат <strong>Parquet</strong> разработан для аналитических данных. Он хранит данные по столбцам, сжимает их и сохраняет типы. Сравним оба формата на данных книги – дневных котировках около ста акций за двадцать с лишним лет.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> data.load_stocks()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>tmp <span class="op">=</span> Path(<span class="st">"_tmp_formats"</span>)<span class="op">;</span> tmp.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>stocks.to_csv(tmp <span class="op">/</span> <span class="st">"stocks.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>stocks.to_parquet(tmp <span class="op">/</span> <span class="st">"stocks.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_time(fn, path, n<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        fn(path)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (time.perf_counter() <span class="op">-</span> t0) <span class="op">/</span> n</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>formats <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"размер, МБ"</span>: [(tmp <span class="op">/</span> f).stat().st_size <span class="op">/</span> <span class="fl">1e6</span> <span class="cf">for</span> f <span class="kw">in</span> (<span class="st">"stocks.csv"</span>, <span class="st">"stocks.parquet"</span>)],</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"чтение, с"</span>: [read_time(pd.read_csv, tmp <span class="op">/</span> <span class="st">"stocks.csv"</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                  read_time(pd.read_parquet, tmp <span class="op">/</span> <span class="st">"stocks.parquet"</span>)],</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>[<span class="st">"CSV"</span>, <span class="st">"Parquet"</span>])</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>formats.<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          размер, МБ  чтение, с</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CSV           35.69       0.21</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Parquet       14.91       0.03</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Таблица из 311&nbsp;631 строки в формате CSV занимает в 2 раза больше места и читается в 8 раз дольше, чем в Parquet. Кроме того, Parquet позволяет читать только нужные столбцы и строки, не загружая файл целиком, – это особенно важно для больших наборов данных, например отчётности сотен тысяч компаний в части II. Поэтому данные книги хранятся в Parquet, а CSV мы используем для небольших справочников и обмена с другими программами.</p>
+<p>Для работы с большими таблицами наряду с pandas мы будем использовать библиотеку <strong>Polars</strong>. Она быстрее pandas на больших данных и умеет выполнять запросы «лениво»: сначала строит план вычислений, а затем читает из файла только то, что нужно для результата.</p>
+</section><section id="sec-book-data" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="sec-book-data">
+<span class="header-section-number">2.6</span> Данные этой книги</h2>
+<p>Все примеры книги работают на снимке данных, который прилагается к ней (папка <code>data/</code>). Он собран из данных Московской биржи, Банка России и истории дивидендов и зафиксирован на определённую дату, поэтому результаты в тексте воспроизводятся точно.</p>
+<div id="tbl-book-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-book-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;2.1: Данные книги
+</figcaption><div aria-describedby="tbl-book-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Файл</th>
+<th>Содержание</th>
+<th>Функция загрузки</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>stocks.parquet</code></td>
+<td>дневные данные около 100 акций с 2003 г., с поправкой на сплиты и дивиденды</td>
+<td>
+<code>data.load_stocks()</code>, <code>data.load_prices()</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>stocks_raw.parquet</code></td>
+<td>«сырые» цены ISS по бумагам со сплитами и переименованиями</td>
+<td><code>data.load_stocks_raw()</code></td>
+</tr>
+<tr class="odd">
+<td><code>indexes.parquet</code></td>
+<td>индексы Мосбиржи: акций, облигаций, отраслевые</td>
+<td><code>data.load_index()</code></td>
+</tr>
+<tr class="even">
+<td><code>dividends.parquet</code></td>
+<td>история дивидендов</td>
+<td><code>data.load_dividends()</code></td>
+</tr>
+<tr class="odd">
+<td>
+<code>key_rate.parquet</code>, <code>ruonia.parquet</code>
+</td>
+<td>ключевая ставка и RUONIA</td>
+<td>
+<code>data.load_key_rate()</code>, <code>data.load_ruonia()</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>zcyc.parquet</code></td>
+<td>кривая бескупонной доходности ОФЗ</td>
+<td><code>data.load_zcyc()</code></td>
+</tr>
+<tr class="odd">
+<td>
+<code>sectors.csv</code>, <code>splits.csv</code>, <code>renames.csv</code>, <code>delisted.csv</code>
+</td>
+<td>справочники</td>
+<td><code>data.load_reference()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Отдельным архивом доступна полная история торгов всеми акциями Московской биржи с 1997 г. – около 2,5 тыс. бумаг во всех режимах торгов. Её загружает функция <code>data.load_shares_full()</code>. Подробное описание таблиц и полей – в приложении B.</p>
+<p>Функции загрузки возвращают таблицы в «длинном» формате: одна строка – одна бумага в один день. Для расчётов часто удобнее «широкий» формат, где даты идут по строкам, а бумаги – по столбцам:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> data.load_prices([<span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>], start<span class="op">=</span><span class="st">"2026-09-01"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>prices.tail(<span class="dv">3</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker       GAZP    LKOH    SBER</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                             </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-25  98.78  5374.0  276.35</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-28  96.39  5299.5  272.45</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-29  97.58  5369.0  274.65</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Финансовые данные бывают рыночными, фундаментальными, макроэкономическими и альтернативными; они различаются частотой и моментом доступности.</li>
+<li>Московская биржа бесплатно раскрывает историю торгов через ISS. Для акций нужен основной режим торгов <code>TQBR</code>; историю ISS отдаёт страницами по 100 строк.</li>
+<li>Банк России публикует ключевую ставку и RUONIA – ориентиры безрисковой доходности. Ключевая ставка существует с сентября 2013 г.</li>
+<li>Международные агрегаторы удобны, но для российских бумаг ненадёжны; данные нужно сверять с биржей.</li>
+<li>Для аналитических данных Parquet компактнее и быстрее CSV и сохраняет типы.</li>
+<li>Прежде чем считать, выясните, что именно измеряет каждое число: цена или полная доходность, какой режим торгов, какая дата.</li>
+</ul></section><section id="sec-exercises-data" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="sec-exercises-data">
+<span class="header-section-number">2.7</span> Упражнения</h2>
+<section id="а.-понимание" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">2.7.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Почему для анализа акций используют режим торгов <code>TQBR</code>, а не все сделки с бумагой? Приведите пример, когда это может сильно исказить результат.</li>
+<li>Компания опубликовала годовую отчётность за 2025 г. 28 марта 2026 г. С какой даты эти данные можно использовать в торговой стратегии? Что будет, если привязать их к 31 декабря 2025 г.?</li>
+<li>Почему в 2024 г. RUONIA была бо́льшую часть времени близка к ключевой ставке? Что означало бы устойчивое расхождение между ними?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="2.7.2"><h3 data-number="2.7.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">2.7.2</span> Б. Практика на своей акции</h3>
+<ol start="4" type="1">
+<li>Загрузите из ISS историю торгов своей акцией за последние три года с помощью функции <code>iss_history()</code>. Сравните цены закрытия с <code>data.load_stocks()</code>. Совпадают ли они? Если нет – в какие даты и почему?</li>
+<li>Запросите карточку своей бумаги (<code>/securities/{тикер}.json</code>). В каких режимах она торгуется? Какой у неё уровень листинга?</li>
+<li>Посчитайте доходность своей акции за последний полный год по <code>close</code> и по <code>adj_close</code>. Объясните разницу.</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="2.7.3"><h3 data-number="2.7.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">2.7.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="7" type="1">
+<li>Попросите ИИ-ассистента написать функцию загрузки дневной истории акции с Московской биржи через ISS за 5 лет. Проверьте: учитывает ли функция постраничную выдачу? Какой режим торгов она использует? Что произойдёт, если бумага торговалась в нескольких режимах? Исправьте найденные проблемы.</li>
+<li>Спросите ассистента, какой была ключевая ставка Банка России в 2012 г. Сверьте ответ с разделом <a href="#sec-cbr" class="quarto-xref"><span>2.3</span></a>. Какую ошибку легко допустить в этом вопросе?</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="2.7.4"><h3 data-number="2.7.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">2.7.4</span> Г. Мини-исследование</h3>
+<ol start="9" type="1">
+<li>С помощью ISS найдите пять самых торгуемых акций Мосбиржи по обороту за последний месяц и сравните их с пятью самыми торгуемыми акциями пять лет назад. Какие компании ушли из списка и почему? Подготовьте короткий устный рассказ.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Что такое режим торгов и какой режим является основным для акций на Мосбирже?</li>
+<li>Как узнать, что ISS вернул не все строки запроса?</li>
+<li>Чем RUONIA отличается от ключевой ставки?</li>
+<li>Назовите три преимущества формата Parquet перед CSV.</li>
+<li>Что означает «момент доступности» данных и почему он важен для моделей?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Режим торгов – отдельная «площадка» внутри рынка со своими правилами (размер лота, расчёты, участники). Основной режим для акций – <code>TQBR</code>.</li>
+<li>По служебной таблице <code>history.cursor</code>: если <code>TOTAL</code> больше числа полученных строк, нужно запрашивать следующие страницы.</li>
+<li>Ключевая ставка устанавливается Банком России; RUONIA – рыночная ставка однодневных межбанковских кредитов, которая колеблется вблизи ключевой.</li>
+<li>Меньший размер, более быстрое чтение, сохранение типов данных (а также чтение только нужных столбцов).</li>
+<li>Это дата, когда информация стала известна участникам рынка. Если модель использует данные раньше этой даты, она заглядывает в будущее, и её результаты на истории будут завышены.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>Документация ISS Московской биржи: <a href="https://iss.moex.com/iss/reference/" class="uri">https://iss.moex.com/iss/reference/</a> – полный список ресурсов программного интерфейса.</li>
+<li>
+<span class="citation" data-cites="tidyfinance2024">Scheuch и др. (<a href="references.html#ref-tidyfinance2024" role="doc-biblioref">2024 г.</a>)</span>, гл. 3 – организация финансовых данных в проекте и работа с базой данных.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div class="no-row-height column-margin column-container"><div id="ref-tidyfinance2024" class="csl-entry" role="listitem">
+Scheuch, Christoph, Stefan Voigt, Patrick Weiss, и Christoph Frey. 2024 г. <em>Tidy Finance with Python</em>. Chapman; Hall/CRC. <a href="https://www.tidy-finance.org">https://www.tidy-finance.org</a>.
+</div></div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -811,9 +1248,7 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./01-intro.html" class="pagination-link" aria-label="Введение">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Введение</span></span>
       </a>          
@@ -825,7 +1260,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

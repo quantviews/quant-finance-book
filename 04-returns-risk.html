@@ -99,9 +99,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-de02a6cd1397838b90e0b8d72152825c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-5ff27aa7eb6f6fb4e143efa3d01ab559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1df7e8dbcd894e0acefb03df3949dd4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -185,6 +185,10 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
+        <div class="sidebar-tools-main">
+    <a href="./quant-finance-book.pdf" title="Скачать PDF" class="quarto-navigation-tool px-1" aria-label="Скачать PDF"><i class="bi bi-file-earmark-pdf"></i></a>
+    <a href="https://github.com/quantviews/quant-finance-book" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -363,7 +367,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-microstructure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Микроструктура рынка и как её измеряют</span></span></a>
   </div>
 </li>
       </ul>
@@ -471,7 +475,7 @@ window.Quarto = {
 
 </header><p>Представьте инвестора, который 20.10.2021 вложил деньги в индекс Московской биржи с учётом дивидендов. Через год, 26.09.2022, от вложений осталось меньше половины: индекс опустился на 53,5% от точки входа. Вернуться к исходной сумме удалось только 17.02.2025, спустя 40 месяцев. Хорошее это было вложение или плохое? Какую доходность оно принесло и сколько риска за неё пришлось нести? Что было бы, если бы инвестор вложился на год раньше или на год позже?</p>
 <p>Чтобы ответить на такие вопросы, нужен общий язык: способ измерять доходность и риск так, чтобы результаты можно было сравнивать между активами, периодами и стратегиями. Этот язык и есть предмет главы. Мы будем опираться на данные Московской биржи за два десятилетия. За это время российский рынок пережил кризис 2008 г., девальвацию 2014 г., пандемию 2020 г. и шок 2022 г., поэтому примеров того, как ведут себя доходности в спокойные и в кризисные годы, будет достаточно.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="В этой главе">
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -598,7 +602,7 @@ r_t = \ln \frac{P_t}{P_{t-1}} = \ln(1 + R_t).
 <p>С 31 июля 2023 г. сделки с акциями на Мосбирже рассчитываются в режиме T+1, поэтому экс-дивидендная дата совпадает с датой закрытия реестра. До этого, при расчётах T+2, она наступала на торговый день раньше.</p>
 </div></div><p>Именно это происходит в день, когда акция начинает торговаться без права на дивиденд (<strong>экс-дивидендная дата</strong>): цена падает примерно на размер выплаты. Для акционера это не убыток – деньги просто переходят из цены акции на его счёт. Но доходность, посчитанная по <code>close</code>, покажет в этот день провал.</p>
 <p>Поэтому для доходностей используют <strong>скорректированную цену</strong> <code>adj_close</code>. Все цены до экс-даты умножаются на коэффициент <span class="math inline">\(1 - D/P\)</span>, где <span class="math inline">\(D\)</span> – дивиденд, а <span class="math inline">\(P\)</span> – цена закрытия накануне. После такой корректировки доходность в день отсечки отражает полный результат акционера: изменение цены плюс дивиденд. Аналогично цены корректируются на сплиты. Подробно корректировка разобрана в главе о подготовке данных.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -702,7 +706,7 @@ r_t = \ln \frac{P_t}{P_{t-1}} = \ln(1 + R_t).
 </div>
 <p>Обратите внимание на логарифмическую шкалу по вертикали. На ней одинаковые <em>относительные</em> изменения выглядят одинаково: рост со 100 до 200 руб. занимает столько же места, сколько рост с 200 до 400. Для длинных рядов цен это почти всегда правильный выбор – на обычной шкале ранние годы сжимаются в линию у оси.</p>
 <p>С 11.01.2010 по 29.09.2026 ценовой индекс IMOEX рос в среднем на 2,7% в год, а индекс полной доходности MCFTR – на 8,9%. Разница в 6,1 процентного пункта в год – это вклад реинвестированных дивидендов. За весь период она накопилась в большой разрыв: 100 руб. в MCFTR превратились в 413 руб., а в IMOEX – лишь в 156 руб. Большую часть дохода российского инвестора в акции за эти годы составили дивиденды. Заметьте и то, что индекс гособлигаций RGBITR рос в среднем на 7,2% в год при гораздо меньших колебаниях.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -863,7 +867,7 @@ r_t = \ln \frac{P_t}{P_{t-1}} = \ln(1 + R_t).
 <p>В центре точки действительно лежат на прямой: обычные дни неплохо описываются нормальным распределением. Но на концах они резко уходят от неё – вниз слева и вверх справа. Это значит, что крайние доходности встречаются гораздо чаще, чем предсказывает нормальное распределение. Такие распределения называют распределениями с <strong>тяжёлыми хвостами</strong>.</p>
 <p>Насколько чаще? При нормальном распределении движение сильнее 4 стандартных отклонений – редчайшее событие: оно должно случаться в среднем раз в 63 года. Из 5&nbsp;418 торговых дней IMOEX с 2005 г. таких движений было 39, а нормальное распределение ожидает около 0,3. Худший день – 24.02.2022, когда индекс упал на 33,3%, – это отклонение от среднего на 21 стандартное отклонение. С точки зрения нормального распределения такое событие практически невозможно, а на реальном рынке оно произошло.</p>
 <p>Мера тяжести хвостов – <strong>коэффициент эксцесса</strong> (kurtosis). У нормального распределения избыточный эксцесс равен нулю, а у дневных доходностей IMOEX он составляет 58,6. Модели, которые опираются на нормальность, систематически недооценивают вероятность больших потерь. К этому мы вернёмся в главе о VaR и Expected Shortfall.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Особенность данных: пропуск в 2022 г.">
+<div class="callout callout-style-simple callout-important callout-titled" title="Особенность данных: пропуск в 2022 г.">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -944,7 +948,7 @@ DD_t = \frac{P_t}{\max_{s \le t} P_s} - 1.
 <p>Означает ли это, что теория неверна? Не обязательно, и у результата есть три объяснения. Первое – механическое. Мы усредняли логарифмические доходности, а средняя лог-доходность примерно на <span class="math inline">\(\sigma^2/2\)</span> меньше средней простой доходности (вспомните формулу <a href="#eq-vol-drag" class="quarto-xref"><span>4.4</span></a>). Для акции с волатильностью 50% эта поправка составляет 12,5 процентного пункта в год, так что волатильные бумаги «наказываются» уже самим способом расчёта.</p>
 <p>Второе – статистическое. Средняя доходность за 10 лет – очень неточная оценка ожидаемой доходности: при волатильности 30–40% в год её стандартная ошибка составляет порядка 10 процентных пунктов.</p>
 <p>Третье – содержательное. Теория говорит, что рынок вознаграждает не любую волатильность, а только ту её часть, которую нельзя убрать диверсификацией. Значительная часть колебаний отдельной акции связана с новостями самой компании и гасится в портфеле. Эту идею формализует модель CAPM, которую мы разберём в главе о портфелях.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Ошибка выжившего">
+<div class="callout callout-style-simple callout-warning callout-titled" title="Ошибка выжившего">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1045,7 +1049,7 @@ SR = \frac{\mathbb{E}[R - R_f]}{\sigma(R - R_f)}.
 <li>Что такое тяжёлые хвосты и как их увидеть на QQ-графике?</li>
 <li>Почему максимальная просадка не может быть единственной мерой риска стратегии?</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Ответы">
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
