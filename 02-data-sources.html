@@ -99,9 +99,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-1df7e8dbcd894e0acefb03df3949dd4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-37c7103f8017a96ee1203fe8ed780e5c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -377,7 +377,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты курса</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты, экзамен и оценивание</span></span></a>
   </div>
 </li>
       </ul>
@@ -644,30 +644,32 @@ kad.arbitr.ru, service.nalog.ru, ГИР БО (bo.nalog.ru), checko, list-org (М
 <span class="header-section-number">2.4</span> Российская экономическая статистика: rustata</h2>
 <p>Для многих задач финансового анализа нужны макроэкономические данные: инфляция, чтобы перейти от номинальной доходности к реальной; промышленное производство, чтобы понять состояние отраслей; региональная статистика, бюджет, цены отдельных товаров. Основной источник таких данных в России – Росстат, но работать с ними напрямую неудобно. Данные разбросаны по системе ЕМИСС (fedstat.ru) и десяткам Excel-бюллетеней, показатели обозначены номерами вроде «31074», а один и тот же ряд в разных выгрузках называется по-разному. Кроме того, статистика <strong>пересматривается</strong>: первая оценка показателя через несколько месяцев может быть уточнена, и в свежей выгрузке вы увидите уже исправленное значение, а не то, что было известно в момент публикации.</p>
 <p>Эти проблемы решает проект <strong>rustata</strong> (<a href="https://rustata.ru" class="uri">https://rustata.ru</a>), который разрабатывает автор книги. Он собирает ряды Росстата, Банка России и Федерального казначейства, приводит их к единым справочникам территорий и единиц измерения и хранит <strong>историю публикаций</strong>. На сайте можно найти ряд поиском («инфляция», «цены на бензин», «промышленное производство»), посмотреть его на графике, сравнить регионы и скачать данные в CSV. Для программного доступа есть API.</p>
-<p>Доступ к API – по токену, который выдаётся в личном кабинете после бесплатной регистрации (вход по ссылке из письма). Бесплатного тарифа достаточно для учебных задач: объём ограничен числом значений в месяц, а не числом запросов. Токен лучше хранить не в коде, а в переменной окружения. Загрузка индекса потребительских цен по России целиком выглядит так:</p>
+<p>Доступ к API – по токену, который выдаётся в личном кабинете после бесплатной регистрации (вход по ссылке из письма). Бесплатного тарифа достаточно для учебных задач: объём ограничен числом значений в месяц, а не числом запросов.</p>
+<p>Токен – это пароль, поэтому его нельзя писать прямо в коде: код попадает в репозиторий, в отчёт, в чат с коллегами. Секреты принято хранить в файле <code>.env</code>, который не попадает в систему контроля версий. В корне книги лежит образец <code>.env.example</code>: скопируйте его в <code>.env</code> и впишите свой токен в строку <code>RUSTATA_TOKEN=</code>. Функция <code>secrets.get()</code> из модуля книги читает значение сначала из переменных окружения, затем из <code>.env</code>.</p>
+<p>Загрузим годовую инфляцию в России – индекс потребительских цен на все товары и услуги к тому же месяцу прошлого года:</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> secrets</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>API <span class="op">=</span> <span class="st">"https://rustata.ru/api/v1"</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {<span class="st">"Authorization"</span>: <span class="ss">f"Bearer </span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">'RUSTATA_TOKEN'</span>]<span class="sc">}</span><span class="ss">"</span>}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {<span class="st">"Authorization"</span>: <span class="ss">f"Bearer </span><span class="sc">{</span>secrets<span class="sc">.</span>get(<span class="st">'RUSTATA_TOKEN'</span>)<span class="sc">}</span><span class="ss">"</span>}</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> <span class="st">"fedstat/indicator_31074"</span>          <span class="co"># индексы потребительских цен (ЕМИСС 31074)</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Справочник кодов товаров и услуг этого набора</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Справочник кодов товаров и услуг набора: код 1 – «Все товары и услуги»</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>codes <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>API<span class="sc">}</span><span class="ss">/reference/codes"</span>, headers<span class="op">=</span>headers,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                     params<span class="op">=</span>{<span class="st">"dataset"</span>: dataset, <span class="st">"format"</span>: <span class="st">"csv"</span>}, timeout<span class="op">=</span><span class="dv">60</span>)</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>codes <span class="op">=</span> pd.read_csv(io.StringIO(codes.text), sep<span class="op">=</span><span class="st">";"</span>)</span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Значения по России целиком начиная с 2015 г.</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>API<span class="sc">}</span><span class="ss">/data"</span>, headers<span class="op">=</span>headers, timeout<span class="op">=</span><span class="dv">60</span>, params<span class="op">=</span>{</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dataset"</span>: dataset, <span class="st">"geo"</span>: <span class="st">"country"</span>, <span class="st">"start"</span>: <span class="st">"2015-01"</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"format"</span>: <span class="st">"csv"</span>, <span class="st">"labels"</span>: <span class="dv">1</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>cpi <span class="op">=</span> pd.read_csv(io.StringIO(resp.text), sep<span class="op">=</span><span class="st">";"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>resp <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>API<span class="sc">}</span><span class="ss">/data"</span>, headers<span class="op">=</span>headers, timeout<span class="op">=</span><span class="dv">60</span>, params<span class="op">=</span>{</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dataset"</span>: dataset, <span class="st">"geo"</span>: <span class="st">"country"</span>, <span class="st">"class"</span>: <span class="st">"1"</span>, <span class="st">"measure"</span>: <span class="st">"YOY"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"start"</span>: <span class="st">"2015-01"</span>, <span class="st">"format"</span>: <span class="st">"csv"</span>, <span class="st">"labels"</span>: <span class="dv">1</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>cpi <span class="op">=</span> pd.read_csv(io.StringIO(resp.text), sep<span class="op">=</span><span class="st">";"</span>, parse_dates<span class="op">=</span>[<span class="st">"period"</span>, <span class="st">"as_of"</span>])</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>inflation <span class="op">=</span> cpi.set_index(<span class="st">"period"</span>)[<span class="st">"value"</span>] <span class="op">/</span> <span class="dv">100</span> <span class="op">-</span> <span class="dv">1</span>     <span class="co"># 109,92 -&gt; 9,92%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Параметры запроса <code>/data</code> задают <strong>срез набора</strong>: территории (<code>geo</code> – страна, федеральные округа, регионы или конкретные коды), продукты (<code>class</code>), период (<code>start</code>, <code>end</code>). Один запрос может вернуть ряд сразу по всем регионам – это удобно для региональных сравнений. Полное описание методов и примеры на Python, R и Julia – на странице <a href="https://rustata.ru/api" class="uri">https://rustata.ru/api</a>.</p>
+<p>Параметры запроса <code>/data</code> задают <strong>срез набора</strong>: территории (<code>geo</code> – страна, федеральные округа, регионы или конкретные коды), продукты (<code>class</code>), вид показателя (<code>measure</code>) и период (<code>start</code>, <code>end</code>). Индексы цен Росстат публикует в нескольких видах: к предыдущему месяцу (<code>MOM</code>), к тому же месяцу прошлого года (<code>YOY</code>), к декабрю прошлого года (<code>DEC</code>). Значение 109,92 означает рост цен на 9,92%. Если не указать <code>class</code> и <code>measure</code>, запрос вернёт все товары во всех видах – сотни рядов. Один запрос может вернуть ряд сразу по всем регионам (<code>geo=region</code>) – это удобно для региональных сравнений. Полное описание методов и примеры на Python, R и Julia – на странице <a href="https://rustata.ru/api" class="uri">https://rustata.ru/api</a>.</p>
 <p>Главная особенность rustata для исследователя – <strong>история публикаций</strong>. У каждого значения хранится не только период, к которому оно относится, но и дата, когда оно стало известно. Поэтому можно запросить ряд в том виде, в каком он был опубликован на заданную дату (параметр <code>as_of</code> у метода <code>/series/{ключ}/observations</code>), и построить модель только на той информации, которая действительно была доступна. Это прямой ответ на проблему заглядывания в будущее, о которой пойдёт речь в следующей главе.</p>
 </section><section id="sec-international" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="sec-international">
 <span class="header-section-number">2.5</span> Международные источники</h2>
@@ -723,7 +725,7 @@ kad.arbitr.ru, service.nalog.ru, ГИР БО (bo.nalog.ru), checko, list-org (М
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>[<span class="st">"CSV"</span>, <span class="st">"Parquet"</span>])</span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>formats.<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          размер, МБ  чтение, с</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CSV           35.69       0.20</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CSV           35.69       0.19</span></span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Parquet       14.91       0.02</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>

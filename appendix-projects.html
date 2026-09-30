@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Приложение C — Проекты курса – Количественные финансы</title>
+<title>Приложение C — Проекты, экзамен и оценивание – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -48,9 +83,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-116a87f4909111ce87c16683344de049.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-1df7e8dbcd894e0acefb03df3949dd4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-ad569d2087324a7ccfc91e221523a9f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-37c7103f8017a96ee1203fe8ed780e5c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b5ecd93148713602b1bf0c0b3083dcbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,6 +141,35 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -118,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-projects.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты курса</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-projects.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты, экзамен и оценивание</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -351,7 +415,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-projects.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты курса</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты, экзамен и оценивание</span></span></a>
   </div>
 </li>
       </ul>
@@ -361,15 +425,49 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-grading" id="toc-sec-grading" class="nav-link active" data-scroll-target="#sec-grading"><span class="header-section-number">C.1</span> Итоговая оценка</a></li>
+  <li><a href="#sec-project-rules" id="toc-sec-project-rules" class="nav-link" data-scroll-target="#sec-project-rules"><span class="header-section-number">C.2</span> Общие правила для проектов</a>
+  <ul class="collapse">
+  <li><a href="#индивидуальные-задания" id="toc-индивидуальные-задания" class="nav-link" data-scroll-target="#индивидуальные-задания"><span class="header-section-number">C.2.1</span> Индивидуальные задания</a></li>
+  <li><a href="#что-сдаётся" id="toc-что-сдаётся" class="nav-link" data-scroll-target="#что-сдаётся"><span class="header-section-number">C.2.2</span> Что сдаётся</a></li>
+  <li><a href="#ии-ассистенты" id="toc-ии-ассистенты" class="nav-link" data-scroll-target="#ии-ассистенты"><span class="header-section-number">C.2.3</span> ИИ-ассистенты</a></li>
+  <li><a href="#устная-защита" id="toc-устная-защита" class="nav-link" data-scroll-target="#устная-защита"><span class="header-section-number">C.2.4</span> Устная защита</a></li>
+  <li><a href="#академическая-честность" id="toc-академическая-честность" class="nav-link" data-scroll-target="#академическая-честность"><span class="header-section-number">C.2.5</span> Академическая честность</a></li>
+  </ul></li>
+  <li><a href="#sec-project-1" id="toc-sec-project-1" class="nav-link" data-scroll-target="#sec-project-1"><span class="header-section-number">C.3</span> Проект 1. Фундаментальный анализ отрасли</a>
+  <ul class="collapse">
+  <li><a href="#задание" id="toc-задание" class="nav-link" data-scroll-target="#задание"><span class="header-section-number">C.3.1</span> Задание</a></li>
+  <li><a href="#критерии-оценки" id="toc-критерии-оценки" class="nav-link" data-scroll-target="#критерии-оценки"><span class="header-section-number">C.3.2</span> Критерии оценки</a></li>
+  <li><a href="#взаимная-проверка" id="toc-взаимная-проверка" class="nav-link" data-scroll-target="#взаимная-проверка"><span class="header-section-number">C.3.3</span> Взаимная проверка</a></li>
+  </ul></li>
+  <li><a href="#sec-project-2" id="toc-sec-project-2" class="nav-link" data-scroll-target="#sec-project-2"><span class="header-section-number">C.4</span> Проект 2. Модель и стратегия для акции</a>
+  <ul class="collapse">
+  <li><a href="#задание-1" id="toc-задание-1" class="nav-link" data-scroll-target="#задание-1"><span class="header-section-number">C.4.1</span> Задание</a></li>
+  <li><a href="#предварительная-фиксация" id="toc-предварительная-фиксация" class="nav-link" data-scroll-target="#предварительная-фиксация"><span class="header-section-number">C.4.2</span> Предварительная фиксация</a></li>
+  <li><a href="#проверка-на-новых-данных" id="toc-проверка-на-новых-данных" class="nav-link" data-scroll-target="#проверка-на-новых-данных"><span class="header-section-number">C.4.3</span> Проверка на новых данных</a></li>
+  <li><a href="#критерии-оценки-1" id="toc-критерии-оценки-1" class="nav-link" data-scroll-target="#критерии-оценки-1"><span class="header-section-number">C.4.4</span> Критерии оценки</a></li>
+  </ul></li>
+  <li><a href="#sec-seminars" id="toc-sec-seminars" class="nav-link" data-scroll-target="#sec-seminars"><span class="header-section-number">C.5</span> Работа на семинарах</a></li>
+  <li><a href="#sec-attendance" id="toc-sec-attendance" class="nav-link" data-scroll-target="#sec-attendance"><span class="header-section-number">C.6</span> Посещаемость</a></li>
+  <li><a href="#sec-exam" id="toc-sec-exam" class="nav-link" data-scroll-target="#sec-exam"><span class="header-section-number">C.7</span> Экзамен</a>
+  <ul class="collapse">
+  <li><a href="#примеры-заданий" id="toc-примеры-заданий" class="nav-link" data-scroll-target="#примеры-заданий"><span class="header-section-number">C.7.1</span> Примеры заданий</a></li>
+  <li><a href="#как-готовиться" id="toc-как-готовиться" class="nav-link" data-scroll-target="#как-готовиться"><span class="header-section-number">C.7.2</span> Как готовиться</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-projects.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты курса</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-projects.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Проекты, экзамен и оценивание</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Приложение C — Проекты курса</h1>
+<h1 class="title">Приложение C — Проекты, экзамен и оценивание</h1>
 </div>
 
 
@@ -387,30 +485,428 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!--
-Заготовка главы. Материалы для работы:
-projects/project-1-criteria.md, project-2-criteria.md; org/project-1/project-1-description.md.
+Материалы: projects/project-1-criteria.md, project-2-criteria.md (курс 2025/26);
+org/project-1/project-1-description.md; решения автора по весам от 30.09.2026.
 -->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>Это приложение описывает, как устроен контроль в курсе «Количественные финансы»: что входит в итоговую оценку, какие проекты выполняют студенты, по каким критериям они оцениваются и как проходит экзамен. Если вы читаете книгу самостоятельно, проекты можно использовать как большие упражнения, а критерии – как список вопросов для самопроверки своей работы.</p>
+<section id="sec-grading" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="sec-grading"><span class="header-section-number">C.1</span> Итоговая оценка</h2>
+<div id="tbl-final-grade" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-final-grade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;C.1: Структура итоговой оценки
+</figcaption>
+<div aria-describedby="tbl-final-grade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Компонент</th>
+<th>Вес</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Проект 1. Фундаментальный анализ отрасли</td>
+<td>20%</td>
+</tr>
+<tr class="even">
+<td>Проект 2. Модель и стратегия для акции</td>
+<td>25%</td>
+</tr>
+<tr class="odd">
+<td>Работа на семинарах</td>
+<td>10%</td>
+</tr>
+<tr class="even">
+<td>Письменный экзамен</td>
+<td>35%</td>
+</tr>
+<tr class="odd">
+<td>Посещаемость</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+</figure>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
+<p>Каждый компонент оценивается по 10-балльной шкале. Итоговая оценка – взвешенная сумма:</p>
+<p><span class="math display">\[
+O = 0{,}20\,П_1 + 0{,}25\,П_2 + 0{,}10\,С + 0{,}35\,Э + 0{,}10\,П_{\text{пос}},
+\]</span></p>
+<p>которая округляется по правилам НИУ ВШЭ.</p>
+<p>Структура оценки построена вокруг простой идеи. ИИ-ассистенты уже умеют писать код для большинства задач курса, поэтому оценивается прежде всего то, что ассистент за студента сделать не может: поставить вопрос, проверить данные, объяснить результат и защитить свои решения. Больше половины оценки (экзамен, семинары, устные защиты проектов) студент получает за работу, которую выполняет сам и при преподавателе.</p>
+</section>
+<section id="sec-project-rules" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="sec-project-rules"><span class="header-section-number">C.2</span> Общие правила для проектов</h2>
+<section id="индивидуальные-задания" class="level3" data-number="C.2.1">
+<h3 data-number="C.2.1" class="anchored" data-anchor-id="индивидуальные-задания"><span class="header-section-number">C.2.1</span> Индивидуальные задания</h3>
+<p>Каждый студент получает своё задание: отрасль (код ОКВЭД) для первого проекта и акцию Московской биржи для второго. Задания распределяет преподаватель. Одинаковых заданий у двух студентов нет, поэтому готовых ответов не существует.</p>
+</section>
+<section id="что-сдаётся" class="level3" data-number="C.2.2">
+<h3 data-number="C.2.2" class="anchored" data-anchor-id="что-сдаётся"><span class="header-section-number">C.2.2</span> Что сдаётся</h3>
 <ul>
-<li>Проект 1. Фундаментальный анализ отрасли: задание и критерии</li>
-<li>Проект 2. Модель и стратегия для акции: задание и критерии</li>
-<li>Как оформлять ноутбук и защищать результат</li>
-<li>Правила использования ИИ-ассистентов</li>
+<li><strong>Ноутбук</strong> (Jupyter или Quarto) с полным анализом. Ноутбук должен запускаться «с нуля» – сверху вниз, в чистом окружении, на данных книги или на данных, загрузка которых есть в самом ноутбуке, – и давать те же числа, что в тексте.</li>
+<li><strong>Журнал работы с ИИ</strong> (см. ниже). Без журнала из оценки за проект вычитается 1 балл.</li>
+<li>Для проекта 2 – <strong>файл предварительной фиксации</strong> (см. раздел <a href="#sec-project-2" class="quarto-xref"><span>C.4</span></a>).</li>
 </ul>
+<p>Выводы пишутся в ноутбуке обычным текстом, а не в комментариях к коду. Каждый вывод должен опираться на конкретные числа из вашего анализа.</p>
+</section>
+<section id="ии-ассистенты" class="level3" data-number="C.2.3">
+<h3 data-number="C.2.3" class="anchored" data-anchor-id="ии-ассистенты"><span class="header-section-number">C.2.3</span> ИИ-ассистенты</h3>
+<p>Пользоваться ИИ-ассистентами можно и нужно – это часть современной работы аналитика. Условия два.</p>
+<ol type="1">
+<li><strong>Вы отвечаете за каждую строку.</strong> Если на защите вы не можете объяснить, что делает фрагмент кода и почему он написан именно так, баллы за соответствующий раздел не засчитываются.</li>
+<li><strong>Вы ведёте журнал.</strong> В нём – основные запросы к ассистенту и то, что вы сделали с ответом.</li>
+</ol>
+<div id="tbl-ai-log" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ai-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;C.2: Образец журнала работы с ИИ
+</figcaption>
+<div aria-describedby="tbl-ai-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>№</th>
+<th>Что я спросил</th>
+<th>Что ответил ассистент (кратко)</th>
+<th>Что я сделал с ответом и почему</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Код загрузки истории акции из ISS</td>
+<td>Функция с запросом к <code>/history/...</code></td>
+<td>Принял, но добавил постраничную загрузку: ассистент получал только первые 100 строк</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Как выбрать порядок ARMA</td>
+<td>Перебор по AIC</td>
+<td>Принял; дополнительно проверил остатки тестом Льюнга – Бокса</td>
+</tr>
+</tbody>
+</table>
 </div>
+</figure>
 </div>
+<p>Журнал оценивается не по числу запросов. Если в нём задокументированы ошибки ассистента, которые вы нашли и исправили, к оценке за проект добавляется до 0,5 балла: это и есть навык, которому учит курс.</p>
+</section>
+<section id="устная-защита" class="level3" data-number="C.2.4">
+<h3 data-number="C.2.4" class="anchored" data-anchor-id="устная-защита"><span class="header-section-number">C.2.4</span> Устная защита</h3>
+<p>Каждый проект защищается устно, 10 минут. Защита – не презентация. Преподаватель задаёт вопросы по конкретным местам ноутбука:</p>
+<ul>
+<li>почему выбран этот период, показатель, модель, параметр;</li>
+<li>что изменится, если поменять одно из решений; одно изменение нужно сделать прямо на защите и объяснить результат;</li>
+<li>где в работе вы опирались на ассистента и как проверяли его ответы.</li>
+</ul>
+<p>Защита оценивается отдельным критерием (2 балла из 10) и, кроме того, <strong>подтверждает авторство</strong>: баллы за раздел, который студент не может объяснить, не засчитываются.</p>
+</section>
+<section id="академическая-честность" class="level3" data-number="C.2.5">
+<h3 data-number="C.2.5" class="anchored" data-anchor-id="академическая-честность"><span class="header-section-number">C.2.5</span> Академическая честность</h3>
+<p>Работы, совпадающие по содержанию с работами других студентов или прошлых лет, оцениваются в 0 баллов. Обсуждать проекты друг с другом можно; сдавать чужой анализ – нельзя.</p>
+</section>
+</section>
+<section id="sec-project-1" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="sec-project-1"><span class="header-section-number">C.3</span> Проект 1. Фундаментальный анализ отрасли</h2>
+<section id="задание" class="level3" data-number="C.3.1">
+<h3 data-number="C.3.1" class="anchored" data-anchor-id="задание"><span class="header-section-number">C.3.1</span> Задание</h3>
+<p>По данным бухгалтерской отчётности российских компаний (набор RFSD, главы 5 и 6) проведите сравнительный анализ компаний своей отрасли и ответьте на вопрос: <strong>за счёт чего лидеры отрасли эффективнее остальных?</strong></p>
+<p>Работа включает:</p>
+<ol type="1">
+<li><strong>Постановку.</strong> До начала расчётов запишите гипотезу – например: «Крупные компании отрасли более рентабельны за счёт оборачиваемости активов, а не маржи». Опишите, какие компании войдут в анализ и по какому правилу.</li>
+<li><strong>Данные и их проверку.</strong> Отберите компании по коду ОКВЭД, очистите данные, проверьте связь форм отчётности (например, что сходится баланс), найдите и объясните выбросы.</li>
+<li><strong>Расчёты.</strong> Коэффициенты рентабельности, оборачиваемости, ликвидности и долговой нагрузки; их распределения в отрасли; разложение DuPont.</li>
+<li><strong>Анализ.</strong> Сравнение лидеров и остальных, динамика за несколько лет, проверка гипотезы.</li>
+<li><strong>Выводы и ограничения.</strong> Что можно и что нельзя утверждать по этим данным.</li>
+</ol>
+</section>
+<section id="критерии-оценки" class="level3" data-number="C.3.2">
+<h3 data-number="C.3.2" class="anchored" data-anchor-id="критерии-оценки"><span class="header-section-number">C.3.2</span> Критерии оценки</h3>
+<div id="tbl-project-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;C.3: Критерии оценки проекта 1 (10 баллов)
+</figcaption>
+<div aria-describedby="tbl-project-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Критерий</th>
+<th>Баллы</th>
+<th>0 баллов</th>
+<th>1 балл</th>
+<th>2 балла</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Постановка</td>
+<td>1</td>
+<td>нет гипотезы или правила отбора</td>
+<td>гипотеза и правило отбора сформулированы до анализа</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>Данные и их проверка</td>
+<td>2</td>
+<td>данные использованы как есть</td>
+<td>есть очистка, но нет проверок</td>
+<td>отбор объяснён, формы сверены, выбросы найдены и объяснены</td>
+</tr>
+<tr class="odd">
+<td>Расчёты и визуализация</td>
+<td>1</td>
+<td>ошибки в формулах</td>
+<td>коэффициенты верны, графики читаются</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>Интерпретация</td>
+<td>2</td>
+<td>общие фразы без чисел</td>
+<td>выводы с числами, но без объяснения механизма</td>
+<td>выводы конкретны для отрасли, механизм объяснён (маржа, оборачиваемость, леверидж)</td>
+</tr>
+<tr class="odd">
+<td>Выводы и ограничения</td>
+<td>1</td>
+<td>ограничения не обсуждаются</td>
+<td>названы ограничения данных и метода (РСБУ, выжившие, консолидация)</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>Взаимная проверка</td>
+<td>1</td>
+<td>замечание формальное</td>
+<td>найдено содержательное замечание к работе соседа и дан ответ на замечания к своей</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>Устная защита</td>
+<td>2</td>
+<td>не может объяснить свои решения</td>
+<td>объясняет решения, но затрудняется с изменением на месте</td>
+<td>объясняет решения и уверенно интерпретирует изменение</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="взаимная-проверка" class="level3" data-number="C.3.3">
+<h3 data-number="C.3.3" class="anchored" data-anchor-id="взаимная-проверка"><span class="header-section-number">C.3.3</span> Взаимная проверка</h3>
+<p>После сдачи каждый студент получает работу одного из однокурсников и в течение недели пишет короткий отзыв: одно содержательное замечание (ошибка в данных, необоснованный вывод, пропущенная проверка) и один вопрос к автору. Автор отвечает на замечание письменно или на защите. Оценивается качество замечания и ответа, а не их тон.</p>
+</section>
+</section>
+<section id="sec-project-2" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="sec-project-2"><span class="header-section-number">C.4</span> Проект 2. Модель и стратегия для акции</h2>
+<section id="задание-1" class="level3" data-number="C.4.1">
+<h3 data-number="C.4.1" class="anchored" data-anchor-id="задание-1"><span class="header-section-number">C.4.1</span> Задание</h3>
+<p>Для назначенной акции Московской биржи постройте модель временного ряда (главы 7–9), проверьте, есть ли у неё прогнозная сила, и на её основе разработайте и честно протестируйте торговую стратегию (глава 15). Главный вопрос: <strong>даёт ли модель что-то сверх простого бенчмарка после учёта издержек?</strong> Отрицательный ответ, полученный корректно, – полноценный результат.</p>
+</section>
+<section id="предварительная-фиксация" class="level3" data-number="C.4.2">
+<h3 data-number="C.4.2" class="anchored" data-anchor-id="предварительная-фиксация"><span class="header-section-number">C.4.2</span> Предварительная фиксация</h3>
+<p>До расчётов на тестовом периоде сдайте короткий файл фиксации (одна страница):</p>
+<ul>
+<li>гипотеза: что именно модель должна предсказывать и почему;</li>
+<li>обучающий и тестовый периоды;</li>
+<li>метрики качества прогноза и стратегии;</li>
+<li>бенчмарки: наивный прогноз, индекс MCFTR, вложение по ставке RUONIA;</li>
+<li>размер издержек на сделку.</li>
+</ul>
+<p>После сдачи фиксации эти решения менять нельзя. Если вы всё же что-то изменили, об этом нужно прямо написать в работе и объяснить причину, – такое изменение не штрафуется, скрытое изменение оценивается как ошибка.</p>
+</section>
+<section id="проверка-на-новых-данных" class="level3" data-number="C.4.3">
+<h3 data-number="C.4.3" class="anchored" data-anchor-id="проверка-на-новых-данных"><span class="header-section-number">C.4.3</span> Проверка на новых данных</h3>
+<p>Модель и правила стратегии фиксируются к дедлайну. Через несколько недель после дедлайна преподаватель запускает ноутбук на данных, которых на момент сдачи ещё не было. Оценивается не доходность на этом периоде – она во многом случайна, – а то, что ноутбук воспроизводится без правок, и то, насколько результаты на новых данных согласуются с выводами работы. Большое расхождение нужно объяснить на защите.</p>
+</section>
+<section id="критерии-оценки-1" class="level3" data-number="C.4.4">
+<h3 data-number="C.4.4" class="anchored" data-anchor-id="критерии-оценки-1"><span class="header-section-number">C.4.4</span> Критерии оценки</h3>
+<div id="tbl-project-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-project-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;C.4: Критерии оценки проекта 2 (10 баллов)
+</figcaption>
+<div aria-describedby="tbl-project-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Критерий</th>
+<th>Баллы</th>
+<th>0 баллов</th>
+<th>1 балл</th>
+<th>1,5–2 балла</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Предварительная фиксация</td>
+<td>1</td>
+<td>нет или составлена задним числом</td>
+<td>гипотеза, периоды, метрики и бенчмарки зафиксированы до теста</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>Данные и разведочный анализ</td>
+<td>1</td>
+<td>нескорректированные цены, разрывы не проверены</td>
+<td>скорректированные цены, проверка разрывов и стационарности</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>Модель и диагностика</td>
+<td>1,5</td>
+<td>модель не обоснована</td>
+<td>выбор модели обоснован, остатки проверены</td>
+<td>1,5: понятно, что модель улавливает и чего нет</td>
+</tr>
+<tr class="even">
+<td>Честная оценка</td>
+<td>2</td>
+<td>нет проверки вне выборки или есть утечка данных</td>
+<td>прогноз вне выборки и сравнение с наивным прогнозом</td>
+<td>2: сравнение со всеми бенчмарками с учётом издержек, утечек нет</td>
+</tr>
+<tr class="odd">
+<td>Интерпретация и ограничения</td>
+<td>1,5</td>
+<td>результат не объяснён</td>
+<td>объяснено, почему результат такой</td>
+<td>1,5: обсуждены ограничения; отрицательный результат не спрятан</td>
+</tr>
+<tr class="even">
+<td>Проверка на новых данных</td>
+<td>1</td>
+<td>ноутбук не запускается</td>
+<td>запускается; расхождения с выводами объяснены</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>Устная защита</td>
+<td>2</td>
+<td>не может объяснить свои решения</td>
+<td>объясняет решения, но затрудняется с изменением на месте</td>
+<td>2: объясняет решения и уверенно интерпретирует изменение</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Обратите внимание, чего нет в критериях: баллов за число моделей, за «продвинутые» методы и за доходность стратегии. Нейросеть без честной проверки оценивается ниже, чем простая модель AR(1) с корректным сравнением, издержками и проверкой на новых данных.</p>
+</section>
+</section>
+<section id="sec-seminars" class="level2" data-number="C.5">
+<h2 data-number="C.5" class="anchored" data-anchor-id="sec-seminars"><span class="header-section-number">C.5</span> Работа на семинарах</h2>
+<p>На большинстве семинаров есть короткое задание на 5–10 минут, которое выполняется в аудитории без компьютера. Задания устроены так же, как упражнения типов А и В в книге:</p>
+<ul>
+<li>предсказать результат кода до его запуска;</li>
+<li>объяснить, что означает график или таблица;</li>
+<li>найти ошибку в коротком фрагменте кода;</li>
+<li>ответить на вопрос для самопроверки из текущей главы.</li>
+</ul>
+<p>Каждое задание оценивается в 0, 1 или 2 балла. Оценка за работу на семинарах – доля набранных баллов от максимума по 80% лучших заданий, переведённая в 10-балльную шкалу. Пропущенное задание получает 0 баллов; 20% худших результатов не учитываются, поэтому один-два пропуска по уважительной причине на оценку не влияют.</p>
+</section>
+<section id="sec-attendance" class="level2" data-number="C.6">
+<h2 data-number="C.6" class="anchored" data-anchor-id="sec-attendance"><span class="header-section-number">C.6</span> Посещаемость</h2>
+<p>Оценка за посещаемость – доля посещённых занятий, переведённая в 10-балльную шкалу.</p>
+</section>
+<section id="sec-exam" class="level2" data-number="C.7">
+<h2 data-number="C.7" class="anchored" data-anchor-id="sec-exam"><span class="header-section-number">C.7</span> Экзамен</h2>
+<p>Экзамен письменный, проходит в аудитории, длится 80 минут (одна пара). Пользоваться компьютером, телефоном и другими устройствами нельзя. Экзамен проверяет понимание, а не умение писать код: весь код на экзамене нужно прочитать и понять, но не написать. Максимум – 100 баллов, которые переводятся в 10-балльную шкалу. Время в таблице ориентировочное: порядок и распределение времени между частями студент выбирает сам.</p>
+<div id="tbl-exam" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;C.5: Структура экзамена
+</figcaption>
+<div aria-describedby="tbl-exam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Часть</th>
+<th>Баллы</th>
+<th>Время</th>
+<th>Что проверяется</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Тест</td>
+<td>20</td>
+<td>~10 мин</td>
+<td>10 вопросов с выбором ответа по всем темам курса</td>
+</tr>
+<tr class="even">
+<td>2. Интерпретация результата</td>
+<td>30</td>
+<td>~25 мин</td>
+<td>дан один готовый результат – график, таблица оценок модели или расчёт риска; нужно объяснить, что он означает, и назвать ограничения</td>
+</tr>
+<tr class="odd">
+<td>3. Найдите ошибку</td>
+<td>25</td>
+<td>~20 мин</td>
+<td>дан фрагмент кода с логической или концептуальной ошибкой (не синтаксической); нужно найти её, объяснить, почему это ошибка с точки зрения финансов или статистики, и предложить исправление</td>
+</tr>
+<tr class="even">
+<td>4. Кейс</td>
+<td>25</td>
+<td>~20 мин</td>
+<td>описана практическая ситуация; нужно применить понятия курса и дать обоснованную рекомендацию</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="примеры-заданий" class="level3" data-number="C.7.1">
+<h3 data-number="C.7.1" class="anchored" data-anchor-id="примеры-заданий"><span class="header-section-number">C.7.1</span> Примеры заданий</h3>
+<p><strong>Тест.</strong> Дневные лог-доходности акции за пять дней: 0,01; −0,02; 0,005; 0,01; −0,005. Чему равна лог-доходность за пять дней? (а) 0; (б) 0,01; (в) −0,01; (г) нельзя определить без цен.</p>
+<p><strong>Интерпретация.</strong> Для дневных доходностей индекса оценена модель GARCH(1,1): <span class="math inline">\(\omega = 0{,}00001\)</span>, <span class="math inline">\(\alpha = 0{,}09\)</span>, <span class="math inline">\(\beta = 0{,}89\)</span>. Что означают <span class="math inline">\(\alpha\)</span> и <span class="math inline">\(\beta\)</span>? Что можно сказать об устойчивости шоков волатильности? Какую безусловную годовую волатильность подразумевает модель? Какие допущения модели вы бы проверили в первую очередь?</p>
+<p><strong>Найдите ошибку.</strong> Студент протестировал стратегию «держать акцию, когда цена выше 20-дневной средней»:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>signal <span class="op">=</span> (price <span class="op">&gt;</span> price.rolling(<span class="dv">20</span>).mean()).astype(<span class="bu">int</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>strategy <span class="op">=</span> signal <span class="op">*</span> price.pct_change()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sharpe <span class="op">=</span> strategy.mean() <span class="op">/</span> strategy.std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Коэффициент Шарпа получился 1,4. В чём ошибка и как она влияет на результат? <em>(Сигнал, рассчитанный по цене закрытия дня <span class="math inline">\(t\)</span>, применяется к доходности того же дня – это заглядывание в будущее; нужен <code>signal.shift(1)</code>. Кроме того, не учтены издержки и безрисковая ставка.)</em></p>
+<p><strong>Кейс.</strong> Инвестор в начале 2024 г. выбирает между фондом денежного рынка и индексным фондом на акции Мосбиржи. Ключевая ставка – 16%, её дальнейшее направление неизвестно. Какие показатели риска и доходности вы бы сравнили? Как на выбор влияет горизонт инвестора? Что показали данные за 2024 г. и можно ли по одному году судить о правильности решения?</p>
+</section>
+<section id="как-готовиться" class="level3" data-number="C.7.2">
+<h3 data-number="C.7.2" class="anchored" data-anchor-id="как-готовиться"><span class="header-section-number">C.7.2</span> Как готовиться</h3>
+<p>Лучшая подготовка – вопросы для самопроверки и упражнения типов А и В в конце каждой главы: экзаменационные задания устроены так же. Полезно также пересмотреть свои проекты: в части «Интерпретация» часто встречаются результаты, похожие на те, что вы получали сами.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
