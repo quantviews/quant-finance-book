@@ -447,9 +447,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return out;
   };
+  // В разделе «Что почитать» записи на полях не нужны: список сам служит перечнем
+  // литературы, а ссылки ведут на полную запись в «Литературе».
+  const reading = document.getElementById("что-почитать");
   document.querySelectorAll("main .citation[data-cites]").forEach((cite) => {
     let block = blockOf(cite);
     if (!block || block.closest(".column-margin, aside, figcaption")) return;
+    if (reading && reading.contains(cite)) return;
     block = outermostList(block) || block;
     let container = block.nextElementSibling;
     if (!isContainer(container)) {
@@ -468,6 +472,9 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(copy);
     });
   });
+  if (reading) {
+    reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
+  }
 });
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
