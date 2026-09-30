@@ -52,3 +52,11 @@ qf_load_dividends <- function(tickers = NULL) {
 qf_load_key_rate <- function() qf_read("key_rate.parquet")
 qf_load_ruonia <- function(start = NULL, end = NULL) qf_read("ruonia.parquet", NULL, start, end)
 qf_load_zcyc <- function(start = NULL, end = NULL) qf_read("zcyc.parquet", NULL, start, end)
+
+#' Выборка RFSD (отчётность компаний; тыс. руб., расходы отрицательны)
+qf_load_rfsd <- function(okved = NULL, years = NULL) {
+  df <- qf_read("rfsd_sample.parquet")
+  if (!is.null(okved)) df <- df[substr(df$okved, 1, nchar(okved[1])) %in% okved, ]
+  if (!is.null(years)) df <- df[df$year %in% years, ]
+  df
+}
