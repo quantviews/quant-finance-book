@@ -282,3 +282,11 @@ div.column-margin p {
 #quarto-sidebar .chapter-number {
   color: #6B7280;
 }
+
+// Графики – на всю ширину колонки текста (SVG масштабируется без потери качества).
+.cell-output-display img,
+.quarto-figure img,
+img.figure-img {
+  width: 100%;
+  height: auto;
+}
