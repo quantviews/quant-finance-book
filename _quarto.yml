@@ -11,16 +11,39 @@ book:
   chapters:
     - index.qmd
     - 01-intro.qmd
-    - part: "Финансовые данные и их обработка"
+    - part: "Данные и инструменты"
       chapters:
-        - 02-financial-data.qmd
-        - 02-financial-data-russia.qmd
+        - 02-data-sources.qmd
+        - 03-data-preparation.qmd
         - 04-returns-risk.qmd
-    # Добавляйте главы по мере написания:
-    # - 03-var-es.qmd
-    # - 04-capm.qmd
-    # - 05-bond-pricing.qmd
+    - part: "Корпоративная отчётность"
+      chapters:
+        - 05-accounting-data.qmd
+        - 06-industry-analysis.qmd
+    - part: "Временные ряды"
+      chapters:
+        - 07-arma.qmd
+        - 08-volatility.qmd
+        - 09-ml-forecasting.qmd
+    - part: "Риск и портфели"
+      chapters:
+        - 10-var-es.qmd
+        - 11-portfolio.qmd
+        - 12-capm-factors.qmd
+    - part: "Долговой рынок"
+      chapters:
+        - 13-bonds.qmd
+        - 14-credit-risk.qmd
+    - part: "Торговые стратегии"
+      chapters:
+        - 15-backtesting.qmd
+        - 16-momentum.qmd
+        - 17-microstructure.qmd
     - references.qmd
+  appendices:
+    - appendix-python.qmd
+    - appendix-data.qmd
+    - appendix-projects.qmd
 
 lang: ru
 language:
