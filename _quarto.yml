@@ -8,6 +8,14 @@ book:
   author: "Марсель Салихов"
   date: 2026-09-30
   date-format: "YYYY"
+  # Имя PDF-файла (латиницей, чтобы ссылка была читаемой).
+  output-file: "quant-finance-book"
+  repo-url: https://github.com/quantviews/quant-finance-book
+  sidebar:
+    tools:
+      - icon: file-earmark-pdf
+        href: quant-finance-book.pdf
+        text: "Скачать PDF"
   chapters:
     - index.qmd
     - 01-intro.qmd
@@ -84,6 +92,9 @@ format:
     code-overflow: wrap
     code-link: true
     code-fold: show
+    code-summary: "Код"
+    # Врезки как в PDF: полоса слева, без рамки и цветной шапки.
+    callout-appearance: simple
     smooth-scroll: true
     reader-mode: true
     # Поля в стиле Tufte: сноски и ссылки на литературу – на правом поле,

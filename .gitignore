@@ -15,6 +15,7 @@
 /*.knit.md
 /*_files/
 /*.typ
+/*.pdf
 /site_libs/
 
 # _freeze/ хранится в git: при freeze: auto он позволяет собрать книгу

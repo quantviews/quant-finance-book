@@ -5,6 +5,9 @@ title: "Источники финансовых данных"
 <!--
 Заготовка главы. Материалы для работы:
 Ноутбук курса Financial_data_and_preprocessing_in_Python_2025_ru; moexutils (iss, rates); open-positions (web API MOEX); старые черновики глав 2–3 в _archive/drafts.
+
+Идеи из курса Рыбина (2025; только идеи и постановки, текст не переносить):
+- Источники для проверки эмитента: e-disclosure.ru, kad.arbitr.ru, service.nalog.ru, ГИР БО (bo.nalog.ru), checko, list-org (Рыбин, Модуль3_2, с. 69; Модуль3_3, с. 58–63).
 -->
 
 ::: {.callout-note title="Глава готовится"}
