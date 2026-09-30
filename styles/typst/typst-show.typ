@@ -259,37 +259,40 @@
 #show heading: set text(font: font-sans, fill: accent, hyphenate: false)
 #show heading: set par(justify: false)
 
+// Заголовок с висячим номером: при переносе строки текст выравнивается
+// по тексту, а не по номеру.
+#let numbered-title(it, gap: 0.6em) = {
+  // Код в заголовке – почти того же размера, что и текст заголовка
+  // (по умолчанию моноширинный шрифт уменьшен до 0,84 основного).
+  show raw: set text(size: 0.95em / 0.84)
+  if it.numbering == none { return it.body }
+  grid(
+    columns: (auto, 1fr),
+    column-gutter: gap,
+    text(fill: accent-2)[#counter(heading).display()],
+    it.body,
+  )
+}
+
 #show heading.where(level: 1): it => {
   [#metadata(none)<qf-break>]
   pagebreak(to: "odd", weak: true)
   [#metadata(none)<qf-start>]
-  v(14mm)
-  if it.numbering != none {
-    text(size: 10pt, weight: "semibold", fill: accent-2, tracking: 0.12em)[
-      #upper[Глава]
-    ]
-    h(0.4em)
-    text(size: 44pt, weight: "semibold", fill: accent-2)[#counter(heading).display()]
-    v(2pt)
-  }
-  block(below: 0pt, text(size: 24pt, weight: "semibold", it.body))
-  v(8pt)
+  v(22mm)
+  block(below: 0pt, text(size: 24pt, weight: "semibold", numbered-title(it, gap: 0.45em)))
+  v(10pt)
   line(length: 100%, stroke: 0.8pt + accent-2)
   v(14mm)
 }
 
 #show heading.where(level: 2): it => {
   set text(size: 13.5pt, weight: "semibold")
-  block(above: 2em, below: 0.9em, sticky: true)[
-    #if it.numbering != none [#text(fill: accent-2)[#counter(heading).display()]#h(0.7em)]#it.body
-  ]
+  block(above: 2em, below: 0.9em, sticky: true, numbered-title(it, gap: 0.7em))
 }
 
 #show heading.where(level: 3): it => {
   set text(size: 11.5pt, weight: "semibold")
-  block(above: 1.6em, below: 0.8em, sticky: true)[
-    #if it.numbering != none [#text(fill: accent-2)[#counter(heading).display()]#h(0.6em)]#it.body
-  ]
+  block(above: 1.6em, below: 0.8em, sticky: true, numbered-title(it, gap: 0.6em))
 }
 
 #show heading.where(level: 4): it => {
