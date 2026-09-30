@@ -415,6 +415,53 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<script>
+// Ссылки на литературу на полях (citation-location: margin).
+// Quarto переносит запись библиографии на поле только у последнего места цитирования
+// (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
+// все записи уезжают в конец главы. Копируем запись к каждому месту цитирования –
+// так же, как в PDF-версии.
+document.addEventListener("DOMContentLoaded", () => {
+  const isContainer = (el) =>
+    el && el.tagName === "DIV" &&
+    el.classList.contains("column-margin") && el.classList.contains("column-container");
+  // Первый предок цитаты, который не является span (как в Quarto)
+  const blockOf = (el) => {
+    let p = el.parentElement;
+    while (p && p.tagName === "SPAN") p = p.parentElement;
+    return p;
+  };
+  // Для пунктов списка Quarto ставит поле после всего (внешнего) списка
+  const outermostList = (el) => {
+    let out = null;
+    for (let p = el; p && p.tagName !== "MAIN"; p = p.parentElement) {
+      if (p.tagName === "UL" || p.tagName === "OL") out = p;
+    }
+    return out;
+  };
+  document.querySelectorAll("main .citation[data-cites]").forEach((cite) => {
+    let block = blockOf(cite);
+    if (!block || block.closest(".column-margin, aside, figcaption")) return;
+    block = outermostList(block) || block;
+    let container = block.nextElementSibling;
+    if (!isContainer(container)) {
+      container = document.createElement("div");
+      container.className = "no-row-height column-margin column-container";
+      block.after(container);
+    }
+    cite.getAttribute("data-cites").split(" ").forEach((key) => {
+      const id = "ref-" + key;
+      if (container.querySelector(`[id="${id}"], [data-ref="${id}"]`)) return;
+      const entry = document.getElementById(id);
+      if (!entry) return;
+      const copy = entry.cloneNode(true);
+      copy.removeAttribute("id");
+      copy.setAttribute("data-ref", id);
+      container.appendChild(copy);
+    });
+  });
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
