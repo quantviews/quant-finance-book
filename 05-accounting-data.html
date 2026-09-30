@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>5&nbsp; Большие данные корпоративной отчётности – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-7b6eaa0ffa2c43a5297d387829f09eb4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-60126cb324e1a246bc2177b4a0b36412.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,24 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +155,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main">
@@ -148,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -168,8 +193,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -188,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -197,8 +222,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -211,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -220,8 +245,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -240,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -249,8 +274,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -269,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -278,8 +303,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -292,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -301,8 +326,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -321,7 +346,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -336,8 +361,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -356,21 +381,53 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li><a href="#sec-rfsd-source" id="toc-sec-rfsd-source" class="nav-link active" data-scroll-target="#sec-rfsd-source"><span class="header-section-number">5.1</span> Откуда берётся отчётность</a></li>
+  <li><a href="#sec-forms" id="toc-sec-forms" class="nav-link" data-scroll-target="#sec-forms"><span class="header-section-number">5.2</span> Формы отчётности</a></li>
+  <li><a href="#sec-polars" id="toc-sec-polars" class="nav-link" data-scroll-target="#sec-polars"><span class="header-section-number">5.3</span> Большие таблицы: Polars</a></li>
+  <li><a href="#sec-okved" id="toc-sec-okved" class="nav-link" data-scroll-target="#sec-okved"><span class="header-section-number">5.4</span> Классификатор ОКВЭД</a></li>
+  <li>
+<a href="#sec-rfsd-quality" id="toc-sec-rfsd-quality" class="nav-link" data-scroll-target="#sec-rfsd-quality"><span class="header-section-number">5.5</span> Качество данных</a>
+  <ul class="collapse">
+<li><a href="#%D1%81%D1%85%D0%BE%D0%B4%D0%B8%D1%82%D1%81%D1%8F-%D0%BB%D0%B8-%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81" id="toc-сходится-ли-баланс" class="nav-link" data-scroll-target="#%D1%81%D1%85%D0%BE%D0%B4%D0%B8%D1%82%D1%81%D1%8F-%D0%BB%D0%B8-%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81"><span class="header-section-number">5.5.1</span> Сходится ли баланс</a></li>
+  <li><a href="#%D1%81%D0%BA%D1%80%D1%8B%D1%82%D0%B0%D1%8F-%D0%BE%D1%82%D1%87%D1%91%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C" id="toc-скрытая-отчётность" class="nav-link" data-scroll-target="#%D1%81%D0%BA%D1%80%D1%8B%D1%82%D0%B0%D1%8F-%D0%BE%D1%82%D1%87%D1%91%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C"><span class="header-section-number">5.5.2</span> Скрытая отчётность</a></li>
+  <li><a href="#%D0%BE%D1%82%D1%87%D1%91%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%8E%D1%80%D0%BB%D0%B8%D1%86%D0%B0-%D0%B0-%D0%BD%D0%B5-%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D1%8B" id="toc-отчётность-юрлица-а-не-группы" class="nav-link" data-scroll-target="#%D0%BE%D1%82%D1%87%D1%91%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D1%8E%D1%80%D0%BB%D0%B8%D1%86%D0%B0-%D0%B0-%D0%BD%D0%B5-%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D1%8B"><span class="header-section-number">5.5.3</span> Отчётность юрлица, а не группы</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ratios" id="toc-sec-ratios" class="nav-link" data-scroll-target="#sec-ratios"><span class="header-section-number">5.6</span> Финансовые коэффициенты</a>
+  <ul class="collapse">
+<li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5" id="toc-почему-медиана-а-не-среднее" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BC%D0%B5%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0-%D0%B0-%D0%BD%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B5"><span class="header-section-number">5.6.1</span> Почему медиана, а не среднее</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-articulation" id="toc-sec-articulation" class="nav-link" data-scroll-target="#sec-articulation"><span class="header-section-number">5.7</span> Связь форм отчётности</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-rfsd" id="toc-sec-exercises-rfsd" class="nav-link" data-scroll-target="#sec-exercises-rfsd"><span class="header-section-number">5.8</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">5.8.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%BE%D1%82%D1%80%D0%B0%D1%81%D0%BB%D0%B8" id="toc-б.-практика-на-своей-отрасли" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%BE%D1%82%D1%80%D0%B0%D1%81%D0%BB%D0%B8"><span class="header-section-number">5.8.2</span> Б. Практика на своей отрасли</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">5.8.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">5.8.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-accounting-data.html">Корпоративная отчётность</a></li><li class="breadcrumb-item"><a href="./05-accounting-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-accounting-data.html">Корпоративная отчётность</a></li><li class="breadcrumb-item"><a href="./05-accounting-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span>
+</h1>
 </div>
 
 
@@ -384,42 +441,611 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбуки Russian_corporate_data_RFSD_2025 и RFSD_2025_solution; rfsd.py; py/merge_egrul_to_parquet.py; pdf/rfsd-paper.pdf. Идеи: косвенный ОДДС и FCF (Рыбин, М3_1).
-
-Идеи из курса Рыбина (2025; только идеи и постановки, текст не переносить):
-- Связь трёх форм отчётности: косвенный ОДДС, CAPEX против амортизации, FCF ≈ −Δ чистого долга (Рыбин, Модуль3_1, с. 26–40). Упражнение: сверка форм на данных RFSD.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><!--
+Материалы: ноутбуки Russian_corporate_data_RFSD_2025 и RFSD_2025_solution; rfsd.py;
+данные – из проекта ../rfsd (RFSD v3, выгрузка scripts/build_data.py --rfsd-only).
+Идеи из курса Рыбина (2025; только идеи): связь трёх форм, косвенный ОДДС, FCF ≈ −Δ чистого долга
+(Модуль3_1, с. 26–40).
+--><p>Выручка ПАО «Магнит» по бухгалтерской отчётности за 2023 г. – 0,56 млрд руб. Не триллионы, как можно было бы ожидать от одной из крупнейших розничных сетей страны, а меньше миллиарда. При этом чистая прибыль той же компании – 98,3 млрд руб., в сотню с лишним раз больше выручки. Ошибка в данных? Нет. ПАО «Магнит» – холдинговая компания: магазины сети принадлежат его дочерней компании АО «Тандер», выручка которой за тот же год составила 2,31 трлн руб. Прибыль холдинга почти целиком состоит из дивидендов дочерних компаний: 97,6 млрд руб. доходов от участия в других организациях.</p>
+<p>Этот пример показывает главное, что нужно знать о бухгалтерской отчётности российских компаний: она описывает <strong>отдельное юридическое лицо</strong>, а не группу компаний. Чтобы проанализировать бизнес, нужно понимать, какое юрлицо его ведёт, как устроены формы отчётности и какие ловушки в них встречаются. Зато в обмен на эту сложность мы получаем уникальный источник: отчётность <strong>всех</strong> российских организаций – 2,1 млн отчётов только за 2023 г. Открытые данные такого охвата о частных, а не только о публичных компаниях есть лишь в немногих странах.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Открытый набор отчётности российских компаний RFSD</li>
-<li>Формы РСБУ: баланс и отчёт о финансовых результатах, коды строк</li>
-<li>Polars и ленивые вычисления: работа с миллионами строк</li>
-<li>Классификатор ОКВЭД и отбор компаний отрасли</li>
-<li>Финансовые коэффициенты: рентабельность, ликвидность, долговая нагрузка</li>
-<li>Связь трёх форм отчётности</li>
+<li>Узнаём, откуда берётся отчётность российских компаний и что такое набор данных RFSD.</li>
+<li>Разбираемся в формах отчётности: баланс, отчёт о финансовых результатах, отчёт о движении денежных средств.</li>
+<li>Учимся работать с большими таблицами в Polars: ленивые вычисления, фильтры, группировки.</li>
+<li>Отбираем компании отрасли по классификатору ОКВЭД.</li>
+<li>Проверяем качество отчётности и считаем финансовые коэффициенты.</li>
 </ul>
+<p><strong>Данные:</strong> <code>rfsd_sample.parquet</code> (выборка отчётности), <code>rfsd_summary.parquet</code>, <code>rfsd_cases.parquet</code>, <code>okved.csv</code>, <code>rfsd_lines.csv</code>. <strong>Нужно знать:</strong> основы бухгалтерского учёта (что такое активы, обязательства, выручка, прибыль), работа с pandas.</p>
 </div>
 </div>
+<section id="sec-rfsd-source" class="level2 page-columns page-full" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="sec-rfsd-source">
+<span class="header-section-number">5.1</span> Откуда берётся отчётность</h2>
+<p>Российские организации обязаны ежегодно сдавать бухгалтерскую отчётность в налоговую службу. Исключения – банки и некоторые другие финансовые организации (они отчитываются перед Банком России), а также организации государственного сектора. Отчётность составляется по российским стандартам бухгалтерского учёта (<strong>РСБУ</strong>) на стандартных формах, где у каждой строки есть свой код. С 2019 г. эта отчётность собирается в государственном информационном ресурсе бухгалтерской отчётности (ГИР БО) и открыто публикуется на сайте ФНС.</p>
+<p>Скачать с сайта ФНС отчётность одной компании просто, а отчётность трёх миллионов компаний за полтора десятилетия – очень трудоёмко: данные нужно собрать, разобрать, привести к единому виду и очистить от ошибок. Эту работу проделали исследователи Европейского университета в Санкт-Петербурге и опубликовали результат как открытый набор данных <strong>RFSD</strong> (Russian Financial Statements Database) <span class="citation" data-cites="bondarkov2025">(<a href="references.html#ref-bondarkov2025" role="doc-biblioref">Bondarkov и др. 2025 г.</a>)</span>. Набор распространяется по лицензии CC BY 4.0 и доступен на платформе Hugging Face.</p>
+<div class="no-row-height column-margin column-container"></div><div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> summary[summary[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2012</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ax.bar(s[<span class="st">"year"</span>], s[<span class="st">"filed"</span>] <span class="op">/</span> <span class="fl">1e6</span>, color<span class="op">=</span><span class="st">"#34699A"</span>, label<span class="op">=</span><span class="st">"поданные отчёты"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ax.plot(s[<span class="st">"year"</span>], s[<span class="st">"firms"</span>] <span class="op">/</span> <span class="fl">1e6</span>, color<span class="op">=</span><span class="st">"#C8702A"</span>, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"все организации в наборе"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"млн"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"RFSD"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-rfsd-coverage" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rfsd-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-accounting-data_files/figure-html/fig-rfsd-coverage-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rfsd-coverage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5.1: Число отчётов в RFSD по годам
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>В 2023 г. в наборе 3,2 млн организаций, из них отчётность подали 2,1 млн, а положительную выручку показали только 1,5 млн. Остальные – компании, освобождённые от сдачи отчётности, «спящие» юрлица без деятельности, фирмы в процессе ликвидации. Для анализа почти всегда нужны только поданные отчёты – в данных они отмечены флагом <code>filed = 1</code>.</p>
+<p>Полный набор RFSD занимает около 8 ГБ: один год – это таблица примерно из 3 млн строк и более чем 200 столбцов. Для примеров этой главы мы используем выборку: компании пяти отраслей, выручка которых хотя бы в одном году 2018–2024 гг. превышала 1 млрд руб. Обратите внимание на «хотя бы в одном году»: так в выборку попадают и компании, которые потом сократились или ушли с рынка, и мы избегаем ошибки выжившего (глава «Подготовка данных»).</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rfsd <span class="op">=</span> data.load_rfsd()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rfsd.groupby(rfsd[<span class="st">"okved"</span>].<span class="bu">str</span>[:<span class="dv">2</span>])[<span class="st">"inn"</span>].nunique()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; okved</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10    2209</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41    4550</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47    2580</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49    1610</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62    1138</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: inn, dtype: int64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="sec-forms" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-forms">
+<span class="header-section-number">5.2</span> Формы отчётности</h2>
+<p>Бухгалтерская отчётность состоит из нескольких форм. Для анализа важны три.</p>
+<p><strong>Бухгалтерский баланс</strong> – снимок на конец года: что у компании есть (активы) и за счёт чего это финансируется (пассивы: капитал и обязательства). Активы всегда равны пассивам. <strong>Отчёт о финансовых результатах</strong> показывает, как из выручки через вычет расходов получается чистая прибыль. <strong>Отчёт о движении денежных средств</strong> показывает реальные поступления и платежи денег, разделённые на три вида деятельности: текущую (операционную), инвестиционную и финансовую.</p>
+<p>В RFSD каждая строка формы – отдельный столбец с кодом строки: <code>line_1600</code> – итог баланса, <code>line_2110</code> – выручка. Основные строки:</p>
+<div id="tbl-lines" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;5.1: Основные строки бухгалтерской отчётности
+</figcaption><div aria-describedby="tbl-lines-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Код</th>
+<th>Строка</th>
+<th>Форма</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1100 / 1200</td>
+<td>Внеоборотные / оборотные активы</td>
+<td>баланс</td>
+</tr>
+<tr class="even">
+<td>1250</td>
+<td>Денежные средства и эквиваленты</td>
+<td>баланс</td>
+</tr>
+<tr class="odd">
+<td>1600</td>
+<td>Итого активы (баланс)</td>
+<td>баланс</td>
+</tr>
+<tr class="even">
+<td>1300</td>
+<td>Капитал и резервы</td>
+<td>баланс</td>
+</tr>
+<tr class="odd">
+<td>1400 / 1500</td>
+<td>Долгосрочные / краткосрочные обязательства</td>
+<td>баланс</td>
+</tr>
+<tr class="even">
+<td>1410 / 1510</td>
+<td>Заёмные средства (долгосрочные / краткосрочные)</td>
+<td>баланс</td>
+</tr>
+<tr class="odd">
+<td>2110</td>
+<td>Выручка</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="even">
+<td>2120</td>
+<td>Себестоимость продаж</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="odd">
+<td>2200</td>
+<td>Прибыль от продаж</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="even">
+<td>2330</td>
+<td>Проценты к уплате</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="odd">
+<td>2300</td>
+<td>Прибыль до налогообложения</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="even">
+<td>2400</td>
+<td>Чистая прибыль</td>
+<td>финансовые результаты</td>
+</tr>
+<tr class="odd">
+<td>4100</td>
+<td>Сальдо денежных потоков от текущих операций</td>
+<td>движение денежных средств</td>
+</tr>
+<tr class="even">
+<td>4500</td>
+<td>Остаток денежных средств на конец периода</td>
+<td>движение денежных средств</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Полный справочник строк с названиями – в файле <code>rfsd_lines.csv</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> data.load_rfsd_lines()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lines[lines[<span class="st">"code"</span>].isin([<span class="st">"line_2110"</span>, <span class="st">"line_2120"</span>, <span class="st">"line_2330"</span>, <span class="st">"line_2400"</span>])][[<span class="st">"code"</span>, <span class="st">"name_ru"</span>, <span class="st">"sign"</span>]]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          code                  name_ru                       sign</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  line_2110                  Выручка              положительная</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  line_2120     Себестоимость продаж  в скобках (отрицательная)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48  line_2330        Проценты к уплате  в скобках (отрицательная)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 60  line_2400  Чистая прибыль (убыток)                 любой знак</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Два соглашения нужно запомнить сразу.</p>
+<p><strong>Единицы измерения – тысячи рублей.</strong> Выручка «Магнита» из введения записана в данных как 558&nbsp;670 – это 558&nbsp;670 тыс. руб., или 0,56 млрд руб.</p>
+<p><strong>Расходы хранятся со знаком минус.</strong> В бумажных формах некоторые строки пишутся в скобках: себестоимость, коммерческие расходы, проценты к уплате. В RFSD такие строки хранятся отрицательными числами. Поэтому валовая прибыль – это <code>line_2110 + line_2120</code>, а не разность.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Использовать формулы, написанные для другой версии данных. В ранних версиях RFSD знаки строк «в скобках» были непоследовательны; после их исправления изменилась, в частности, чистая прибыль у 6–25% отчётов (в зависимости от года). Код, в котором прибыль до вычета процентов считается как <code>line_2300 + line_2330</code>, давал правильный ответ на старых данных и неправильный – на новых: теперь проценты отрицательны, и EBIT равен <code>line_2300 − line_2330</code>. Всегда проверяйте, какую версию данных вы используете, и знаки ключевых строк.</p>
+</div>
+</div>
+</section><section id="sec-polars" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="sec-polars">
+<span class="header-section-number">5.3</span> Большие таблицы: Polars</h2>
+<p>С таблицей в сотню тысяч строк pandas справляется легко. С таблицей в 3 млн строк и 200 столбцов – уже с трудом: pandas читает всё в память и выполняет каждую операцию по очереди. Для больших данных удобнее библиотека <strong>Polars</strong>. Она быстрее за счёт параллельных вычислений, но главное её преимущество – <strong>ленивые вычисления</strong>.</p>
+<p>В ленивом режиме Polars не выполняет операции сразу, а строит <strong>план запроса</strong>. Когда результат действительно нужен (метод <code>collect()</code>), библиотека оптимизирует план: читает из файла только нужные столбцы, применяет фильтры прямо при чтении и не создаёт промежуточных таблиц. Посмотрим на примере: крупнейшие розничные компании в 2023 г.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> pl.scan_parquet(<span class="st">"data/rfsd_sample.parquet"</span>)      <span class="co"># ничего не прочитано</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>top_retail <span class="op">=</span> (</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    lf.<span class="bu">filter</span>((pl.col(<span class="st">"year"</span>) <span class="op">==</span> <span class="dv">2023</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"filed"</span>) <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="op">&amp;</span> pl.col(<span class="st">"okved"</span>).<span class="bu">str</span>.starts_with(<span class="st">"47"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      .select(<span class="st">"name"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      .with_columns((pl.col(<span class="st">"line_2110"</span>) <span class="op">/</span> <span class="fl">1e6</span>).alias(<span class="st">"выручка, млрд"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                    (pl.col(<span class="st">"line_2400"</span>) <span class="op">/</span> <span class="fl">1e6</span>).alias(<span class="st">"прибыль, млрд"</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      .sort(<span class="st">"line_2110"</span>, descending<span class="op">=</span><span class="va">True</span>, nulls_last<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      .head(<span class="dv">5</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>top_retail.collect()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 6)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">okved</th>
+<th data-quarto-table-cell-role="th">line_2110</th>
+<th data-quarto-table-cell-role="th">line_2400</th>
+<th data-quarto-table-cell-role="th">выручка, млрд</th>
+<th data-quarto-table-cell-role="th">прибыль, млрд</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>str</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+<td>f64</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"ООО "АГРОТОРГ""</td>
+<td>"47.19"</td>
+<td>2.3635e9</td>
+<td>3.5409084e7</td>
+<td>2363.462814</td>
+<td>35.409084</td>
+</tr>
+<tr class="even">
+<td>"АО "ТАНДЕР""</td>
+<td>"47.11"</td>
+<td>2.3144e9</td>
+<td>6.4868767e7</td>
+<td>2314.387227</td>
+<td>64.868767</td>
+</tr>
+<tr class="odd">
+<td>null</td>
+<td>"47.11"</td>
+<td>8.18667841e8</td>
+<td>1.3156871e7</td>
+<td>818.667841</td>
+<td>13.156871</td>
+</tr>
+<tr class="even">
+<td>"ООО "ДНС РИТЕЙЛ""</td>
+<td>"47.42"</td>
+<td>7.26822689e8</td>
+<td>4.3627651e7</td>
+<td>726.822689</td>
+<td>43.627651</td>
+</tr>
+<tr class="odd">
+<td>null</td>
+<td>"47.91.20"</td>
+<td>5.38731599e8</td>
+<td>1.9685072e7</td>
+<td>538.731599</td>
+<td>19.685072</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Обратите внимание на <code>nulls_last=True</code>: по умолчанию Polars при сортировке по убыванию ставит пропуски в начало, и без этого параметра «крупнейшими» оказались бы компании, не раскрывшие выручку.</p>
+<p>До вызова <code>collect()</code> в переменной <code>top_retail</code> лежит не таблица, а описание запроса. Его можно посмотреть методом <code>top_retail.explain()</code>: в плане видно, что фильтр по году и коду выполняется при чтении файла, а из почти полусотни столбцов читаются только нужные для запроса.</p>
+<p>Синтаксис Polars построен на <strong>выражениях</strong>: <code>pl.col("line_2110") / 1e6</code> – это не вычисление, а описание того, что нужно сделать со столбцом. Выражения передаются в методы <code>filter</code> (отбор строк), <code>select</code> (отбор и вычисление столбцов), <code>with_columns</code> (добавление столбцов), <code>group_by(...).agg(...)</code> (группировка). Та же задача в pandas выглядела бы так:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df23 <span class="op">=</span> rfsd[(rfsd[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2023</span>) <span class="op">&amp;</span> (rfsd[<span class="st">"filed"</span>] <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> rfsd[<span class="st">"okved"</span>].<span class="bu">str</span>.startswith(<span class="st">"47"</span>)]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df23.nlargest(<span class="dv">5</span>, <span class="st">"line_2110"</span>)[[<span class="st">"name"</span>, <span class="st">"okved"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    name     okved     line_2110   line_2400</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62353    ООО "АГРОТОРГ"     47.19  2.363463e+09  35409084.0</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8114        АО "ТАНДЕР"     47.11  2.314387e+09  64868767.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53503              None     47.11  8.186678e+08  13156871.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12116  ООО "ДНС РИТЕЙЛ"     47.42  7.268227e+08  43627651.0</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50208              None  47.91.20  5.387316e+08  19685072.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>На небольшой выборке разницы в скорости не заметно. Но полный RFSD в pandas пришлось бы целиком загрузить в память, а Polars может читать его прямо с сервера, скачивая только нужные столбцы. Так выглядит запрос к полному набору за 2023 г. на Hugging Face (при сборке книги он не выполняется: файл за один год весит около 550 МБ):</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"hf://datasets/irlspbru/RFSD/RFSD/year=2023/part-0.parquet"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>retail <span class="op">=</span> (</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    pl.scan_parquet(url)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">filter</span>((pl.col(<span class="st">"filed"</span>) <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> pl.col(<span class="st">"okved"</span>).<span class="bu">str</span>.starts_with(<span class="st">"47"</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      .select(<span class="st">"inn"</span>, <span class="st">"okved"</span>, <span class="st">"region"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>, <span class="st">"line_1600"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      .collect()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Этим способом вы будете работать с полными данными в проекте по анализу отрасли.</p>
+</section><section id="sec-okved" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="sec-okved">
+<span class="header-section-number">5.4</span> Классификатор ОКВЭД</h2>
+<p>Чтобы сравнивать компании, их нужно разделить на отрасли. В России для этого используется <strong>ОКВЭД 2</strong> – общероссийский классификатор видов экономической деятельности. Он иерархический: раздел (буква), класс (две цифры), подкласс, группа, подгруппа, вид.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>okv <span class="op">=</span> data.load_okved()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>okv[okv[<span class="st">"code"</span>].isin([<span class="st">"47"</span>, <span class="st">"47.1"</span>, <span class="st">"47.11"</span>, <span class="st">"47.19"</span>])][[<span class="st">"code"</span>, <span class="st">"section"</span>, <span class="st">"name"</span>]]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        code section                                               name</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1756     47       G  Торговля розничная, кроме торговли автотранспо...</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1757   47.1       G  Торговля розничная в неспециализированных мага...</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1758  47.11       G  Торговля розничная преимущественно пищевыми пр...</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1762  47.19       G  Торговля розничная прочая в неспециализированн...</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Код <code>47</code> – класс «Торговля розничная», <code>47.11</code> – розничная торговля преимущественно продуктами в неспециализированных магазинах (так классифицируются продуктовые сети). У каждой компании в RFSD указан <strong>основной</strong> код ОКВЭД. Это важно учитывать: многие компании занимаются несколькими видами деятельности, а основной код иногда меняется.</p>
+<p>В нашей выборке у 4,3% компаний основной код ОКВЭД менялся за 2018–2024 гг. Поэтому, отбирая компании отрасли, нужно решить, по какому году брать код, и описать это правило в работе.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В каком из пяти классов нашей выборки – производство пищевых продуктов (10), строительство зданий (41), розничная торговля (47), сухопутный транспорт (49), разработка программного обеспечения (62) – медианная рентабельность продаж выше всего? А где ниже всего? Запишите ответ, прежде чем читать дальше.</p>
+</div>
+</div>
+</section><section id="sec-rfsd-quality" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="sec-rfsd-quality">
+<span class="header-section-number">5.5</span> Качество данных</h2>
+<p>Отчётность составляют сами компании, и ошибок в ней немало. Авторы RFSD проверили данные и пометили проблемные наблюдения флагами:</p>
+<ul>
+<li>
+<code>filed</code> – отчёт действительно подан (а не восстановлен);</li>
+<li>
+<code>imputed</code> – значения восстановлены по отчёту следующего года;</li>
+<li>
+<code>outlier</code> – подозрительный отчёт, помеченный авторами набора после ручной проверки;</li>
+<li>
+<code>simplified</code> – упрощённая форма отчётности малого предприятия: в ней меньше строк.</li>
+</ul>
+<section id="сходится-ли-баланс" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="сходится-ли-баланс">
+<span class="header-section-number">5.5.1</span> Сходится ли баланс</h3>
+<p>Самая простая проверка – равенство активов и пассивов: <code>line_1600 = line_1700</code>. Нарушить его в правильно составленной отчётности невозможно.</p>
+<p>В полном наборе за 2023 г. баланс не сходится лишь в 0,13% отчётов – авторы RFSD исправили большинство ошибок. Но другая особенность встречается очень часто: у 17% поданных отчётов <strong>капитал неположительный</strong> – обязательства компании больше её активов. Для крупного бизнеса это редкость, а среди мелких компаний такие «фирмы с отрицательным капиталом» – обычное дело. Коэффициенты, в знаменателе которых стоит капитал (ROE, долг/капитал), для таких компаний теряют смысл, и их нужно исключать или рассматривать отдельно.</p>
+</section><section id="скрытая-отчётность" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="скрытая-отчётность">
+<span class="header-section-number">5.5.2</span> Скрытая отчётность</h3>
+<p>С 2022 г. часть компаний вправе не раскрывать отчётность публично. В данных у них пустые строки, а флаг <code>filed</code> равен нулю.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ozon <span class="op">=</span> cases[cases[<span class="st">"inn"</span>] <span class="op">==</span> <span class="st">"7704217370"</span>][[<span class="st">"year"</span>, <span class="st">"filed"</span>, <span class="st">"line_2110"</span>, <span class="st">"line_2400"</span>]]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ozon[ozon[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2019</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year  filed    line_2110   line_2400</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  2019    0.0          NaN         NaN</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  2020    0.0          NaN         NaN</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  2021    0.0  177823485.0         0.0</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  2022    1.0  261369829.0 -48695018.0</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  2023    0.0          NaN         NaN</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  2024    0.0          NaN         NaN</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  2025    0.0          NaN         NaN</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>ООО «Интернет Решения» – основная операционная компания Ozon – за 2022 г. отчётность раскрыла, а за следующие годы – уже нет. Для отраслевого анализа это означает смещение: из данных выпадают прежде всего крупные компании, в том числе под санкциями. Выводы о «всей отрасли» по таким данным нужно делать осторожно.</p>
+</section><section id="отчётность-юрлица-а-не-группы" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="отчётность-юрлица-а-не-группы">
+<span class="header-section-number">5.5.3</span> Отчётность юрлица, а не группы</h3>
+<p>Пример «Магнита» из начала главы – не исключение. Крупные группы компаний обычно состоят из десятков юрлиц: холдинга, операционных компаний, финансовых и управляющих компаний. Отчётность по РСБУ каждого из них – это часть картины. Отчётность группы в целом (консолидированная, по МСФО) в RFSD не входит. Поэтому, анализируя крупную компанию, сначала выясните, какое юрлицо ведёт основной бизнес.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Особенность данных: новые формы с 2025 г.">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Особенность данных: новые формы с 2025 г.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>С отчётности за 2025 г. в России действуют новые формы. Коды части строк изменились: например, в упрощённой форме дебиторская задолженность отражается по строке 1240 вместо 1230. RFSD сохраняет коды в том виде, в каком они были в формах соответствующего года, поэтому при анализе рядов, включающих 2025 г., нужно сверять коды. В нашей выборке 2025 г. нет.</p>
+</div>
+</div>
+</section></section><section id="sec-ratios" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="sec-ratios">
+<span class="header-section-number">5.6</span> Финансовые коэффициенты</h2>
+<p>Абсолютные показатели компаний разного размера сравнивать бессмысленно: выручка «Тандера» в тысячи раз больше выручки небольшой сети. Поэтому анализ отчётности строится на <strong>финансовых коэффициентах</strong> – отношениях показателей друг к другу.</p>
+<div id="tbl-ratios" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;5.2: Основные финансовые коэффициенты
+</figcaption><div aria-describedby="tbl-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Коэффициент</th>
+<th>Формула в RFSD</th>
+<th>Что показывает</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Рентабельность продаж (ROS)</td>
+<td><code>line_2400 / line_2110</code></td>
+<td>сколько чистой прибыли приносит рубль выручки</td>
+</tr>
+<tr class="even">
+<td>Рентабельность активов (ROA)</td>
+<td><code>line_2400 / line_1600</code></td>
+<td>сколько прибыли приносит рубль активов</td>
+</tr>
+<tr class="odd">
+<td>Рентабельность капитала (ROE)</td>
+<td><code>line_2400 / line_1300</code></td>
+<td>сколько прибыли приносит рубль капитала собственников</td>
+</tr>
+<tr class="even">
+<td>Оборачиваемость активов</td>
+<td><code>line_2110 / line_1600</code></td>
+<td>сколько выручки приносит рубль активов</td>
+</tr>
+<tr class="odd">
+<td>Текущая ликвидность</td>
+<td><code>line_1200 / line_1500</code></td>
+<td>хватает ли оборотных активов на краткосрочные обязательства</td>
+</tr>
+<tr class="even">
+<td>Долг / капитал</td>
+<td><code>(line_1410 + line_1510) / line_1300</code></td>
+<td>долговая нагрузка</td>
+</tr>
+<tr class="odd">
+<td>Покрытие процентов</td>
+<td><code>(line_2300 − line_2330) / (−line_2330)</code></td>
+<td>во сколько раз операционная прибыль превышает проценты</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Посчитаем их для всех компаний выборки в 2023 г.:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> data.load_rfsd(years<span class="op">=</span><span class="dv">2023</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> d[d[<span class="st">"filed"</span>] <span class="op">==</span> <span class="dv">1</span>].copy()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> <span class="kw">lambda</span> x: x.where(x <span class="op">&gt;</span> <span class="dv">0</span>)                    <span class="co"># знаменатель должен быть положительным</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"ros"</span>] <span class="op">=</span> d[<span class="st">"line_2400"</span>] <span class="op">/</span> pos(d[<span class="st">"line_2110"</span>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"roa"</span>] <span class="op">=</span> d[<span class="st">"line_2400"</span>] <span class="op">/</span> pos(d[<span class="st">"line_1600"</span>])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"roe"</span>] <span class="op">=</span> d[<span class="st">"line_2400"</span>] <span class="op">/</span> pos(d[<span class="st">"line_1300"</span>])</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"turnover"</span>] <span class="op">=</span> d[<span class="st">"line_2110"</span>] <span class="op">/</span> pos(d[<span class="st">"line_1600"</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"current"</span>] <span class="op">=</span> d[<span class="st">"line_1200"</span>] <span class="op">/</span> pos(d[<span class="st">"line_1500"</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"ebit"</span>] <span class="op">=</span> d[<span class="st">"line_2300"</span>] <span class="op">-</span> d[<span class="st">"line_2330"</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"coverage"</span>] <span class="op">=</span> d[<span class="st">"ebit"</span>] <span class="op">/</span> pos(<span class="op">-</span>d[<span class="st">"line_2330"</span>])</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"div"</span>] <span class="op">=</span> d[<span class="st">"okved"</span>].<span class="bu">str</span>[:<span class="dv">2</span>]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ratios <span class="op">=</span> [<span class="st">"ros"</span>, <span class="st">"roa"</span>, <span class="st">"roe"</span>, <span class="st">"turnover"</span>, <span class="st">"current"</span>, <span class="st">"coverage"</span>]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>d.groupby(<span class="st">"div"</span>)[ratios].median().<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        ros    roa    roe  turnover  current  coverage</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; div                                                  </span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.028  0.059  0.228     1.953    1.506     6.126</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41   0.012  0.013  0.294     1.155    1.088     5.255</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47   0.015  0.037  0.267     2.442    1.210     3.296</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49   0.023  0.042  0.288     1.480    1.200     4.558</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62   0.074  0.108  0.423     1.465    1.515    18.971</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Медианная рентабельность продаж выше всего в классе 62 (разработка программного обеспечения) – 7,4%, ниже всего в классе 41 (строительство зданий) – 1,2%. Разница объясняется бизнес-моделью: разработчику программ почти не нужны материальные активы и закупки, а строитель и розничная сеть работают с большими объёмами при небольшой наценке. Зато у розницы высокая оборачиваемость активов: магазин быстро продаёт товар и снова закупает его. Эту связь маржи и оборачиваемости мы разберём в следующей главе с помощью разложения DuPont.</p>
+<section id="почему-медиана-а-не-среднее" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="почему-медиана-а-не-среднее">
+<span class="header-section-number">5.6.1</span> Почему медиана, а не среднее</h3>
+<p>Распределения финансовых коэффициентов очень неравномерны. Посмотрим на ROE:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>roe <span class="op">=</span> d[<span class="st">"roe"</span>].dropna()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ax.hist(roe.clip(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), bins<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"#34699A"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ax.axvline(roe.median(), color<span class="op">=</span><span class="st">"#B8412E"</span>, lw<span class="op">=</span><span class="fl">1.2</span>, label<span class="op">=</span><span class="ss">f"медиана </span><span class="sc">{</span>roe<span class="sc">.</span>median()<span class="sc">:.0%}</span><span class="ss">"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ax.axvline(roe.mean(), color<span class="op">=</span><span class="st">"#C8702A"</span>, lw<span class="op">=</span><span class="fl">1.2</span>, ls<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="ss">f"среднее </span><span class="sc">{</span>roe<span class="sc">.</span>mean()<span class="sc">:.0%}</span><span class="ss">"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"ROE (значения за пределами от −100% до 200% прижаты к краям)"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(plt.FuncFormatter(<span class="kw">lambda</span> x, _: <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">:.0%}</span><span class="ss">"</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"RFSD, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-roe-dist" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-roe-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-accounting-data_files/figure-html/fig-roe-dist-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-roe-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5.2: Распределение рентабельности капитала (ROE) компаний выборки в 2023 г.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Один процент компаний с самой низкой ROE имеет рентабельность ниже −280%, один процент с самой высокой – выше 1&nbsp;619%. Такие значения возникают, когда капитал компании очень мал: небольшая прибыль, делённая на почти нулевой капитал, даёт тысячи процентов. Среднее значение по отрасли оказывается во власти этих крайних случаев, а медиана и квантили – устойчивы. Поэтому для отраслевых сравнений используют медиану и межквартильный размах, а крайние значения либо исключают, либо «прижимают» к заданным квантилям (<strong>винсоризация</strong>).</p>
+</section></section><section id="sec-articulation" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="sec-articulation">
+<span class="header-section-number">5.7</span> Связь форм отчётности</h2>
+<p>Формы отчётности связаны между собой, и эти связи – ещё одна проверка данных и источник содержательных выводов.</p>
+<p><strong>Деньги в двух формах.</strong> Остаток денежных средств на конец года в отчёте о движении денежных средств (<code>line_4500</code>) должен совпадать с денежными средствами в балансе (<code>line_1250</code>).</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>both <span class="op">=</span> d[d[<span class="st">"line_4500"</span>].notna() <span class="op">&amp;</span> d[<span class="st">"line_1250"</span>].notna()]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>match <span class="op">=</span> (both[<span class="st">"line_4500"</span>] <span class="op">-</span> both[<span class="st">"line_1250"</span>]).<span class="bu">abs</span>() <span class="op">&lt;=</span> <span class="dv">5</span>      <span class="co"># допуск на округление</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>match.mean()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.8791487205472511</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Совпадение – в 88% отчётов. Остальные расхождения – это ошибки при заполнении форм или разные подходы к тому, что считать денежными эквивалентами. Прежде чем строить выводы на денежных потоках, стоит проверить, к каким компаниям относятся расхождения.</p>
+<p><strong>Прибыль и деньги.</strong> Чистая прибыль – это не деньги. Прибыль отражает доходы и расходы в момент их признания, а денежный поток – в момент оплаты. Компания может показывать прибыль, но не получать денег: например, если покупатели платят с большой отсрочкой или деньги оседают в запасах.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>flows <span class="op">=</span> d.groupby(<span class="st">"div"</span>).<span class="bu">apply</span>(<span class="kw">lambda</span> g: pd.Series({</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"доля с прибылью"</span>: (g[<span class="st">"line_2400"</span>] <span class="op">&gt;</span> <span class="dv">0</span>).mean(),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"доля с положительным CFO"</span>: (g[<span class="st">"line_4100"</span>] <span class="op">&gt;</span> <span class="dv">0</span>).mean(),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}), include_groups<span class="op">=</span><span class="va">False</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>flows</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      доля с прибылью  доля с положительным CFO</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; div                                           </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10              0.88                      0.60</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41              0.80                      0.37</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47              0.80                      0.53</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49              0.86                      0.51</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 62              0.85                      0.58</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Разница особенно велика в строительстве: прибыль показывают 80% компаний, а положительный денежный поток от текущих операций – только 37%. Застройщик годами вкладывает деньги в строительство, а выручку и прибыль признаёт при сдаче объекта. Кроме того, с 2019 г. деньги покупателей жилья поступают не застройщику, а на эскроу-счета в банке и раскрываются только после ввода дома. Сравнение прибыли с денежным потоком – один из главных инструментов проверки «качества прибыли», к нему мы вернёмся при анализе кредитного риска.</p>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Бухгалтерская отчётность (РСБУ) всех российских организаций публикуется ФНС; набор RFSD собирает и очищает её с 2011 г. – около 2 млн отчётов в год.</li>
+<li>Отчётность описывает отдельное юрлицо, а не группу: выручка холдинга может быть в тысячи раз меньше выручки операционной компании.</li>
+<li>В RFSD строки форм – это столбцы с кодами; единицы – тысячи рублей; расходы («строки в скобках») хранятся отрицательными. Формулы зависят от версии данных.</li>
+<li>Для больших таблиц удобен Polars: ленивые вычисления читают только нужные столбцы и строки, в том числе прямо с сервера.</li>
+<li>Компании отрасли отбираются по основному коду ОКВЭД; правило отбора нужно явно описать.</li>
+<li>Качество данных: проверка баланса, флаги RFSD, отрицательный капитал, скрытая отчётность, новые формы с 2025 г.</li>
+<li>Распределения коэффициентов имеют тяжёлые хвосты – для сравнений используют медианы и квантили.</li>
+<li>Формы отчётности связаны: сверка денег в балансе и отчёте о движении денежных средств, сравнение прибыли и денежного потока.</li>
+</ul></section><section id="sec-exercises-rfsd" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="sec-exercises-rfsd">
+<span class="header-section-number">5.8</span> Упражнения</h2>
+<section id="а.-понимание" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">5.8.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Почему у холдинговой компании чистая прибыль может быть больше выручки? В какой строке отчёта о финансовых результатах это видно?</li>
+<li>В RFSD <code>line_2110 = 500 000</code>, <code>line_2120 = −380 000</code>. Чему равна валовая прибыль в рублях? Что было бы, если бы вы посчитали её как <code>line_2110 − line_2120</code>?</li>
+<li>У компании капитал 1 млн руб., чистая прибыль 3 млн руб. Чему равна ROE? Что эта цифра говорит о компании, а что – нет?</li>
+<li>Почему для сравнения рентабельности компаний отрасли используют медиану, а не среднее?</li>
+</ol></section><section id="б.-практика-на-своей-отрасли" class="level3" data-number="5.8.2"><h3 data-number="5.8.2" class="anchored" data-anchor-id="б.-практика-на-своей-отрасли">
+<span class="header-section-number">5.8.2</span> Б. Практика на своей отрасли</h3>
+<ol start="5" type="1">
+<li>Загрузите из полного RFSD (Hugging Face) отчётность компаний своей отрасли (код ОКВЭД назначает преподаватель) за 2023 г. Сколько компаний подали отчётность? Сколько из них с выручкой больше 100 млн руб.?</li>
+<li>Для своей отрасли проверьте: у какой доли компаний не сходится баланс, отрицательный капитал, скрытая отчётность (компании, которые отчитывались в 2021 г., но не в 2023 г.)?</li>
+<li>Посчитайте медианы и квартили коэффициентов из таблицы <a href="#tbl-ratios" class="quarto-xref"><span>5.2</span></a> для своей отрасли. Сравните с классами выборки книги.</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="5.8.3"><h3 data-number="5.8.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">5.8.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="8" type="1">
+<li>Попросите ИИ-ассистента написать функцию расчёта EBIT и коэффициента покрытия процентов по данным RFSD. Проверьте на отчётности «Тандера» из <code>data.load_rfsd_cases()</code>: учёл ли ассистент, что проценты к уплате в RFSD отрицательны? Какой результат получился бы без учёта знака?</li>
+<li>Спросите ассистента, какова выручка «Магнита» за 2023 г. Сравните ответ с данными RFSD по ПАО «Магнит» и АО «Тандер». Какую отчётность – РСБУ или МСФО, какого юрлица – подразумевал ассистент?</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="5.8.4"><h3 data-number="5.8.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">5.8.4</span> Г. Мини-исследование</h3>
+<ol start="10" type="1">
+<li>Какая доля компаний вашей отрасли, отчитывавшихся в 2021 г., перестала раскрывать отчётность к 2023 г.? Отличаются ли они (по выручке и рентабельности 2021 г.) от тех, кто продолжил отчитываться? Какие выводы об отрасли по данным 2023 г. из-за этого могут быть смещены? Подготовьте короткий устный рассказ.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Чем отчётность по РСБУ отличается от консолидированной отчётности группы по МСФО?</li>
+<li>В каких единицах записаны денежные показатели в RFSD и с каким знаком хранятся расходы?</li>
+<li>Что делает метод <code>collect()</code> в Polars и почему ленивые вычисления ускоряют работу с большими файлами?</li>
+<li>Какие проверки качества отчётности вы знаете?</li>
+<li>Почему прибыль компании может быть положительной, а денежный поток от текущих операций – отрицательным?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>РСБУ – отчётность отдельного юрлица по российским стандартам; МСФО – консолидированная отчётность группы по международным стандартам, где внутригрупповые обороты исключаются.</li>
+<li>В тысячах рублей; строки, которые в формах пишутся в скобках (расходы, выбытия), – отрицательными числами.</li>
+<li>Запускает выполнение построенного плана запроса. Ленивые вычисления позволяют оптимизировать план: читать только нужные столбцы, применять фильтры при чтении, не создавать промежуточных таблиц.</li>
+<li>Равенство активов и пассивов; суммы разделов; совпадение денег в балансе и отчёте о движении денежных средств; флаги RFSD (<code>filed</code>, <code>imputed</code>, <code>outlier</code>); неположительный капитал.</li>
+<li>Прибыль признаётся в момент продажи, а деньги поступают при оплате: отсрочка платежа покупателям, рост запасов, специфика отрасли (например, строительство с эскроу-счетами).</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="bondarkov2025">Bondarkov и др. (<a href="references.html#ref-bondarkov2025" role="doc-biblioref">2025 г.</a>)</span> – описание набора данных RFSD: источники, методы очистки, ограничения.</li>
+<li>
+<span class="citation" data-cites="tidyfinance2024">Scheuch и др. (<a href="references.html#ref-tidyfinance2024" role="doc-biblioref">2024 г.</a>)</span>, раздел о работе с базами данных – организация больших финансовых данных в исследовательском проекте.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div class="no-row-height column-margin column-container"><div id="ref-bondarkov2025" class="csl-entry" role="listitem">
+Bondarkov, Sergey, Victor Ledenev, и Dmitriy Skougarevskiy. 2025 г. <span>«Russian Financial Statements Database»</span>. <em>Scientific Data</em> 12. <a href="https://doi.org/10.1038/s41597-025-05150-1">https://doi.org/10.1038/s41597-025-05150-1</a>.
+</div><div id="ref-tidyfinance2024" class="csl-entry" role="listitem">
+Scheuch, Christoph, Stefan Voigt, Patrick Weiss, и Christoph Frey. 2024 г. <em>Tidy Finance with <span>Python</span></em>. Chapman; Hall/CRC. <a href="https://www.tidy-finance.org">https://www.tidy-finance.org</a>.
+</div></div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -818,9 +1444,7 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./04-returns-risk.html" class="pagination-link" aria-label="Доходность и риск">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Доходность и риск</span></span>
       </a>          
@@ -832,7 +1456,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
