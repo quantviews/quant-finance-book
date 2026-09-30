@@ -41,3 +41,12 @@ num <- function(x, digits = 1) {
 }
 pct <- function(x, digits = 1) paste0(num(100 * x, digits), "%")
 dt <- function(x) format(as.Date(x), "%d.%m.%Y")
+
+# Согласование слова с числом: plural(22, "год", "года", "лет") -> "22 года".
+plural <- function(n, one, few, many, digits = 0) {
+  k <- abs(round(n)) %% 100
+  word <- if (k %% 10 == 1 && k != 11) one
+          else if (k %% 10 %in% 2:4 && !(k %in% 12:14)) few
+          else many
+  paste(num(n, digits), word)
+}
