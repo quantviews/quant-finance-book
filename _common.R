@@ -8,7 +8,8 @@
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
-  fig.align = "center"
+  fig.align = "center",
+  jupyter_compat = TRUE   # Python-чанк печатает только последнее выражение, как в Jupyter
 )
 
 # Python-чанки выполняются через reticulate в conda-окружении py312.
@@ -20,11 +21,34 @@ source(file.path("R", "qf.R"), encoding = "UTF-8")
 
 # Единый стиль графиков: matplotlib (qf/plot.py) и ggplot2.
 reticulate::py_run_string("from qf import plot as _qfplot; _qfplot.use_book_style()")
+# Шрифт графиков – IBM Plex Sans Condensed (fonts/), как в Python-графиках.
+# Если шрифт не установлен в системе, регистрируем файлы из fonts/.
+local({
+  if ("IBM Plex Sans Condensed" %in% systemfonts::system_fonts()$family) return()
+  d <- file.path("fonts", "ibm-plex-sans-condensed")
+  systemfonts::register_font(
+    name = "IBM Plex Sans Condensed",
+    plain = file.path(d, "IBMPlexSansCondensed-Regular.ttf"),
+    bold = file.path(d, "IBMPlexSansCondensed-SemiBold.ttf"),
+    italic = file.path(d, "IBMPlexSansCondensed-Italic.ttf"),
+    bolditalic = file.path(d, "IBMPlexSansCondensed-SemiBold.ttf")
+  )
+})
+
 ggplot2::theme_set(
-  ggplot2::theme_minimal(base_size = 10) +
+  ggplot2::theme_minimal(base_size = 8.5, base_family = "IBM Plex Sans Condensed") +
     ggplot2::theme(
-      plot.title = ggplot2::element_text(face = "bold", hjust = 0),
-      panel.grid.minor = ggplot2::element_blank()
+      text = ggplot2::element_text(colour = "#374151"),
+      plot.title = ggplot2::element_text(face = "bold", size = 10, hjust = 0),
+      plot.title.position = "plot",
+      plot.caption = ggplot2::element_text(colour = "#6B7280", size = 7.5, hjust = 0),
+      plot.caption.position = "plot",
+      axis.text = ggplot2::element_text(colour = "#6B7280"),
+      axis.title = ggplot2::element_text(colour = "#6B7280"),
+      panel.grid.major = ggplot2::element_line(colour = "#E3E6EA", linewidth = 0.3),
+      panel.grid.minor = ggplot2::element_blank(),
+      legend.position = "top",
+      legend.justification = "left"
     )
 )
 options(

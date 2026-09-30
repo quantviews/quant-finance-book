@@ -57,6 +57,16 @@ typography:
           weight: 600
           style: italic
 
+    - family: "IBM Plex Sans Condensed"
+      source: file
+      files:
+        - path: fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Regular.ttf
+          weight: 400
+          style: normal
+        - path: fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-SemiBold.ttf
+          weight: 600
+          style: normal
+
     - family: "JetBrains Mono"
       source: file
       files:

@@ -23,6 +23,14 @@ book:
     - references.qmd
 
 lang: ru
+language:
+  # Подписи перекрёстных ссылок в середине фразы – со строчной буквы.
+  crossref-sec-prefix: "раздел"
+  crossref-eq-prefix: "формула"
+
+# Графики: широкие и невысокие (по умолчанию knitr делает 7 × 5 дюймов).
+fig-width: 6.5
+fig-height: 3.2
 bibliography: references.bib
 # Одинаковое оформление списка литературы в HTML и PDF (через Pandoc citeproc).
 citeproc: true
@@ -43,8 +51,10 @@ format:
       - lumen
       - brand
       - styles/html.scss
-    # MathJax 4 (со шрифтом STIX Two) подключается в styles/mathjax.html.
-    html-math-method: plain
+    # MathJax 4 со шрифтом STIX Two: адрес здесь, настройки – в styles/mathjax.html.
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"
     include-in-header: styles/mathjax.html
     fig-format: svg
     code-copy: true
@@ -53,6 +63,10 @@ format:
     code-fold: show
     smooth-scroll: true
     reader-mode: true
+    # Поля в стиле Tufte: сноски и ссылки на литературу – на правом поле,
+    # короткие заметки – в блоках ::: {.column-margin}.
+    reference-location: margin
+    citation-location: margin
 
   typst:
     # Шаблон учебника: orange-book (встроен в Quarto) + собственные настройки.
