@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>11&nbsp; Портфельная теория – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main">
@@ -148,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -168,8 +218,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -188,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -197,8 +247,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -211,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -220,8 +270,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -240,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -249,8 +299,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -269,7 +319,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -278,8 +328,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -292,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -301,8 +351,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -321,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -336,8 +386,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -356,21 +406,58 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-portfolio-basics" id="toc-sec-portfolio-basics" class="nav-link active" data-scroll-target="#sec-portfolio-basics"><span class="header-section-number">11.1</span> Доходность и риск портфеля</a>
+  <ul class="collapse">
+<li><a href="#%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D1%8B" id="toc-формулы" class="nav-link" data-scroll-target="#%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D1%8B"><span class="header-section-number">11.1.1</span> Формулы</a></li>
+  <li><a href="#%D0%B0%D0%BA%D1%86%D0%B8%D0%B8-%D0%BE%D0%B1%D0%BB%D0%B8%D0%B3%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8-%D0%B4%D0%B5%D0%BD%D1%8C%D0%B3%D0%B8" id="toc-акции-облигации-и-деньги" class="nav-link" data-scroll-target="#%D0%B0%D0%BA%D1%86%D0%B8%D0%B8-%D0%BE%D0%B1%D0%BB%D0%B8%D0%B3%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8-%D0%B4%D0%B5%D0%BD%D1%8C%D0%B3%D0%B8"><span class="header-section-number">11.1.2</span> Акции, облигации и деньги</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-diversification" id="toc-sec-diversification" class="nav-link" data-scroll-target="#sec-diversification"><span class="header-section-number">11.2</span> Диверсификация</a></li>
+  <li>
+<a href="#sec-frontier" id="toc-sec-frontier" class="nav-link" data-scroll-target="#sec-frontier"><span class="header-section-number">11.3</span> Эффективная граница</a>
+  <ul class="collapse">
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-%D0%BC%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D0%B8%D1%86%D0%B0" id="toc-задача-марковица" class="nav-link" data-scroll-target="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-%D0%BC%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D0%B8%D1%86%D0%B0"><span class="header-section-number">11.3.1</span> Задача Марковица</a></li>
+  <li><a href="#%D0%B1%D0%B5%D0%B7%D1%80%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B0%D0%BA%D1%82%D0%B8%D0%B2-%D0%B8-%D0%BA%D0%B0%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8C" id="toc-безрисковый-актив-и-касательный-портфель" class="nav-link" data-scroll-target="#%D0%B1%D0%B5%D0%B7%D1%80%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9-%D0%B0%D0%BA%D1%82%D0%B8%D0%B2-%D0%B8-%D0%BA%D0%B0%D1%81%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8C"><span class="header-section-number">11.3.2</span> Безрисковый актив и касательный портфель</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-estimation-error" id="toc-sec-estimation-error" class="nav-link" data-scroll-target="#sec-estimation-error"><span class="header-section-number">11.4</span> Почему оптимальные веса неустойчивы</a>
+  <ul class="collapse">
+<li><a href="#%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B0-%D0%B2-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%85" id="toc-ошибка-в-оценке-средних" class="nav-link" data-scroll-target="#%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B0-%D0%B2-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B5-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%85"><span class="header-section-number">11.4.1</span> Ошибка в оценке средних</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D1%81-%D1%8D%D1%82%D0%B8%D0%BC-%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82" id="toc-что-с-этим-делают" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D1%81-%D1%8D%D1%82%D0%B8%D0%BC-%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82"><span class="header-section-number">11.4.2</span> Что с этим делают</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-portfolio-oos" id="toc-sec-portfolio-oos" class="nav-link" data-scroll-target="#sec-portfolio-oos"><span class="header-section-number">11.5</span> Проверка вне выборки</a></li>
+  <li><a href="#sec-asset-allocation" id="toc-sec-asset-allocation" class="nav-link" data-scroll-target="#sec-asset-allocation"><span class="header-section-number">11.6</span> Распределение капитала: правило 60/40</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-portfolio" id="toc-sec-exercises-portfolio" class="nav-link" data-scroll-target="#sec-exercises-portfolio"><span class="header-section-number">11.7</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">11.7.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">11.7.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">11.7.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">11.7.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./11-portfolio.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./11-portfolio.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Портфельная теория</span>
+</h1>
 </div>
 
 
@@ -384,41 +471,649 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбук Portfolio_optimization_&_CAPM_2024_2025 (перевести); moex-analytics/portfolio-analysis.py; проект «Оптимальный портфель ETF на Мосбирже» (quantviews.github.io/projects).
-
-Идеи из курса Рыбина (2025; только идеи и постановки, текст не переносить):
-- Эвристики «60/40» и «доля облигаций = возраст» (Рыбин, 1Модуль1_2, с. 15): проверить бэктестом против портфеля Марковица на IMOEX/MCFTR и RGBITR.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>В сентябре 2026 г. аналитик решает собрать портфель из 15 крупных российских акций по всем правилам учебника. Он берёт месячные доходности за последние пять лет, оценивает ожидаемые доходности и ковариации и находит портфель с максимальным коэффициентом Шарпа. Ответ оптимизатора: 100% капитала вложить в одну акцию, TATN (ПАО «Татнефть» им. В. Д. Шашина, ИНН 1644003838). Годом раньше та же процедура давала портфель из 3 акций: LKOH – 70%, TATN – 27%, PLZL – 3%.</p>
+<p>Теория, созданная, чтобы обосновать диверсификацию, советует сложить все яйца в одну корзину. Это не ошибка в коде, а известное свойство оптимизации по Марковицу: она максимально доверяет входным оценкам и усиливает их ошибки. Портфельная теория при этом остаётся одной из самых важных идей в финансах: она объясняет, почему диверсификация снижает риск, как соотносить рискованные активы с безрисковым и почему риск отдельной бумаги важен не сам по себе, а через её вклад в риск портфеля. В этой главе мы разберём и идеи, и то, что происходит, когда их применяют к реальным данным.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Риск и доходность портфеля, ковариация, диверсификация</li>
-<li>Модель Марковица и эффективная граница</li>
-<li>Безрисковый актив и портфель с максимальным коэффициентом Шарпа</li>
-<li>Оценка ковариаций: проблема шума, метод Ledoit – Wolf</li>
-<li>Ограничения подхода Марковица; эвристики 60/40 и равные веса</li>
+<li>Считаем доходность и риск портфеля; выясняем, как ковариации определяют выгоду диверсификации.</li>
+<li>Строим эффективную границу и портфель с максимальным коэффициентом Шарпа с учётом высокой безрисковой ставки.</li>
+<li>Разбираем, почему оптимальные веса неустойчивы, и как с этим бороться: сжатие ковариаций, ограничения, простые правила.</li>
+<li>Проверяем стратегии вне выборки: равные веса, веса по капитализации, минимальная дисперсия, максимальный Шарп.</li>
+<li>Сравниваем распределение капитала между акциями, облигациями и деньгами, включая правило 60/40.</li>
 </ul>
+<p><strong>Данные:</strong> <code>stocks.parquet</code>, <code>indexes.parquet</code>, <code>ruonia.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> доходность, волатильность и коэффициент Шарпа (глава «Доходность и риск»).</p>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.covariance <span class="im">import</span> LedoitWolf</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sec-portfolio-basics" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="sec-portfolio-basics">
+<span class="header-section-number">11.1</span> Доходность и риск портфеля</h2>
+<section id="формулы" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="формулы">
+<span class="header-section-number">11.1.1</span> Формулы</h3>
+<p>Портфель – это набор активов с весами <span class="math inline">\(w_1, \dots, w_n\)</span>, которые в сумме дают единицу. Доходность портфеля за период – взвешенная сумма доходностей активов (для простых, а не логарифмических доходностей):</p>
+<p><span id="eq-port-return"><span class="math display">\[
+r_p = \sum_{i=1}^n w_i r_i = w' r.
+\tag{11.1}\]</span></span></p>
+<p>Ожидаемая доходность портфеля – такое же взвешенное среднее: <span class="math inline">\(\mu_p = w'\mu\)</span>. С риском иначе. Дисперсия портфеля зависит не только от дисперсий активов, но и от их ковариаций:</p>
+<p><span id="eq-port-var"><span class="math display">\[
+\sigma_p^2 = \sum_{i=1}^n\sum_{j=1}^n w_i w_j \sigma_{ij} = w'\Sigma w,
+\tag{11.2}\]</span></span></p>
+<p>где <span class="math inline">\(\Sigma\)</span> – ковариационная матрица доходностей, <span class="math inline">\(\sigma_{ij} = \rho_{ij}\sigma_i\sigma_j\)</span>. Для двух активов:</p>
+<p><span id="eq-port-var2"><span class="math display">\[
+\sigma_p^2 = w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1w_2\rho_{12}\sigma_1\sigma_2.
+\tag{11.3}\]</span></span></p>
+<p>Если <span class="math inline">\(\rho_{12} &lt; 1\)</span>, волатильность портфеля меньше взвешенного среднего волатильностей. В этом и состоит выгода диверсификации: доходность усредняется, а риск – меньше чем усредняется.</p>
+</section><section id="акции-облигации-и-деньги" class="level3" data-number="11.1.2"><h3 data-number="11.1.2" class="anchored" data-anchor-id="акции-облигации-и-деньги">
+<span class="header-section-number">11.1.2</span> Акции, облигации и деньги</h3>
+<p>Возьмём три базовых класса российских активов: индекс акций с учётом дивидендов MCFTR, индекс государственных облигаций с учётом купонов RGBITR и денежный рынок – вложения под ставку RUONIA, которая начисляется за каждый календарный день. Посмотрим, какие портфели из акций и облигаций были доступны в 2012–2026 гг.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Месячные доходности индексов полной доходности</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ix <span class="op">=</span> data.load_index([<span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span>], start<span class="op">=</span><span class="st">"2011-12-01"</span>).pivot(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"close"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> ix.resample(<span class="st">"ME"</span>).last().pct_change().dropna()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Денежный рынок: RUONIA начисляется за календарные дни, в том числе выходные</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ruonia <span class="op">=</span> data.load_ruonia(start<span class="op">=</span><span class="st">"2011-01-01"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>] <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> ruonia.reindex(pd.date_range(ruonia.index.<span class="bu">min</span>(), M.index[<span class="op">-</span><span class="dv">1</span>]), method<span class="op">=</span><span class="st">"ffill"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> ((<span class="dv">1</span> <span class="op">+</span> daily <span class="op">/</span> <span class="dv">365</span>).resample(<span class="st">"ME"</span>).prod() <span class="op">-</span> <span class="dv">1</span>).reindex(M.index)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ann_return(x):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Среднегодовая (геометрическая) доходность по месячным доходностям."""</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">+</span> x).prod() <span class="op">**</span> (<span class="dv">12</span> <span class="op">/</span> <span class="bu">len</span>(x)) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perf(x, rf):</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Доходность, волатильность, коэффициент Шарпа (к RUONIA) и максимальная просадка."""</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    excess <span class="op">=</span> x <span class="op">-</span> rf</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    wealth <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> x).cumprod()</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"Доходность"</span>: ann_return(x), <span class="st">"Волатильность"</span>: x.std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Шарп"</span>: excess.mean() <span class="op">/</span> excess.std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Макс. просадка"</span>: (wealth <span class="op">/</span> wealth.cummax() <span class="op">-</span> <span class="dv">1</span>).<span class="bu">min</span>()}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Портфели с разной долей акций, ребалансировка раз в месяц</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>mixes <span class="op">=</span> {<span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(w <span class="op">*</span> <span class="dv">100</span>)<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">int</span>(<span class="dv">100</span> <span class="op">-</span> w <span class="op">*</span> <span class="dv">100</span>)<span class="sc">}</span><span class="ss">"</span>: w <span class="op">*</span> M[<span class="st">"MCFTR"</span>] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> w) <span class="op">*</span> M[<span class="st">"RGBITR"</span>]</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         <span class="cf">for</span> w <span class="kw">in</span> [<span class="dv">1</span>, <span class="fl">0.8</span>, <span class="fl">0.6</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="dv">0</span>]}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w_grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>curve <span class="op">=</span> pd.DataFrame([perf(w <span class="op">*</span> M[<span class="st">"MCFTR"</span>] <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> w) <span class="op">*</span> M[<span class="st">"RGBITR"</span>], rf) <span class="cf">for</span> w <span class="kw">in</span> w_grid], index<span class="op">=</span>w_grid)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax.plot(curve[<span class="st">"Волатильность"</span>] <span class="op">*</span> <span class="dv">100</span>, curve[<span class="st">"Доходность"</span>] <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span>plot.BLUE)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, x <span class="kw">in</span> mixes.items():</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> perf(x, rf)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(p[<span class="st">"Волатильность"</span>] <span class="op">*</span> <span class="dv">100</span>, p[<span class="st">"Доходность"</span>] <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span>plot.BLUE, s<span class="op">=</span><span class="dv">18</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.annotate(name, (p[<span class="st">"Волатильность"</span>] <span class="op">*</span> <span class="dv">100</span>, p[<span class="st">"Доходность"</span>] <span class="op">*</span> <span class="dv">100</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="op">-</span><span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>cash <span class="op">=</span> perf(rf, rf)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(cash[<span class="st">"Волатильность"</span>] <span class="op">*</span> <span class="dv">100</span>, cash[<span class="st">"Доходность"</span>] <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span>plot.ORANGE, s<span class="op">=</span><span class="dv">24</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">"RUONIA"</span>, (cash[<span class="st">"Волатильность"</span>] <span class="op">*</span> <span class="dv">100</span>, cash[<span class="st">"Доходность"</span>] <span class="op">*</span> <span class="dv">100</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="dv">7</span>, color<span class="op">=</span>plot.ORANGE)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Волатильность, % годовых"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Доходность, % годовых"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, Банк России, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-stocks-bonds" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-stocks-bonds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-portfolio_files/figure-html/fig-stocks-bonds-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stocks-bonds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11.1: Портфели из акций (MCFTR) и облигаций (RGBITR) с разной долей акций и денежный рынок (RUONIA), 2012–2026 гг., месячная ребалансировка
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Кривая показывает, как меняются риск и доходность при переходе от облигаций к акциям. Выгода диверсификации здесь скромная: корреляция месячных доходностей акций и облигаций равна 0,46, причём с 2020 г. она выше (0,51), чем в 2012–2019 гг. (0,34). На американском рынке в последние десятилетия корреляция акций и облигаций была в основном отрицательной, и облигации страховали портфель от падения акций. В России главный шок для обоих классов активов – резкое повышение ключевой ставки: оно одновременно снижает цены облигаций и оценки акций.</p>
+<p>Ещё важнее оранжевая точка. Денежный рынок за 2012–2026 гг. принёс 10,3% годовых при почти нулевой волатильности. Акции с дивидендами дали 10,0% при волатильности 20% и просадке до 51%, облигации – 7,2%. За полтора десятилетия инвестор в российские акции не получил премии за риск по отношению к деньгам. Это не закон природы, а итог конкретного периода с двумя тяжёлыми кризисами и долгими эпизодами высокой ключевой ставки. Но он напоминает, что ожидаемая премия за риск акций – оценка, а не гарантия, и что безрисковый актив в России – серьёзная альтернатива.</p>
+</section></section><section id="sec-diversification" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="sec-diversification">
+<span class="header-section-number">11.2</span> Диверсификация</h2>
+<p>Сколько акций нужно, чтобы диверсифицировать портфель? Для портфеля из <span class="math inline">\(N\)</span> акций с равными весами дисперсия равна</p>
+<p><span id="eq-div"><span class="math display">\[
+\sigma_p^2 = \frac{1}{N}\,\bar\sigma^2 + \left(1 - \frac{1}{N}\right)\overline{\sigma_{ij}},
+\tag{11.4}\]</span></span></p>
+<p>где <span class="math inline">\(\bar\sigma^2\)</span> – средняя дисперсия акций, а <span class="math inline">\(\overline{\sigma_{ij}}\)</span> – средняя ковариация пар. При росте <span class="math inline">\(N\)</span> первое слагаемое исчезает, второе остаётся. Индивидуальный (специфический) риск компаний диверсифицируется, общий для всех рыночный риск – нет. Проверим это на 15 крупных российских акциях: для каждого <span class="math inline">\(N\)</span> возьмём 300 случайных наборов по <span class="math inline">\(N\)</span> акций и посчитаем среднюю волатильность портфеля с равными весами.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TICKERS <span class="op">=</span> [<span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>, <span class="st">"GMKN"</span>, <span class="st">"ROSN"</span>, <span class="st">"NVTK"</span>, <span class="st">"TATN"</span>, <span class="st">"MTSS"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"MGNT"</span>, <span class="st">"SNGS"</span>, <span class="st">"CHMF"</span>, <span class="st">"NLMK"</span>, <span class="st">"PLZL"</span>, <span class="st">"ALRS"</span>, <span class="st">"VTBR"</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> data.load_prices(TICKERS, start<span class="op">=</span><span class="st">"2011-12-01"</span>).loc[:, TICKERS]   <span class="co"># adj_close: с дивидендами</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> prices.resample(<span class="st">"ME"</span>).last().pct_change().dropna()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>avg_vol <span class="op">=</span> {n: np.mean([R[rng.choice(TICKERS, n, replace<span class="op">=</span><span class="va">False</span>)].mean(axis<span class="op">=</span><span class="dv">1</span>).std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="cf">for</span> draw <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">300</span>)]) <span class="cf">for</span> n <span class="kw">in</span> sizes}</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> R.cov().values <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>avg_cov <span class="op">=</span> C[np.triu_indices(<span class="bu">len</span>(TICKERS), <span class="dv">1</span>)].mean()      <span class="co"># средняя ковариация пар</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ax.plot(sizes, np.array(<span class="bu">list</span>(avg_vol.values())) <span class="op">*</span> <span class="dv">100</span>, marker<span class="op">=</span><span class="st">"o"</span>, color<span class="op">=</span>plot.BLUE)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ax.axhline(np.sqrt(avg_cov) <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span>plot.LIGHT, ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Число акций в портфеле"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Волатильность, % годовых"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-diversification" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-diversification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-portfolio_files/figure-html/fig-diversification-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diversification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11.2: Средняя волатильность портфеля из N случайно выбранных акций с равными весами, месячные доходности 2012–2026 гг. Пунктир – предел при бесконечном N
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Одна акция в среднем имеет волатильность 32% годовых, портфель из пяти – 23%, из всех пятнадцати – 20%. Кривая быстро выходит на плато около 19%: средняя корреляция российских акций между собой – 0,40, и общий рыночный риск составляет большую часть риска каждой бумаги. Первые пять акций снижают риск сильнее, чем следующие десять. Но из этого не следует, что пяти акций достаточно: средняя волатильность скрывает разброс, и конкретный портфель из пяти бумаг может оказаться сильно сконцентрирован в одной отрасли.</p>
+</section><section id="sec-frontier" class="level2 page-columns page-full" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="sec-frontier">
+<span class="header-section-number">11.3</span> Эффективная граница</h2>
+<section id="задача-марковица" class="level3 page-columns page-full" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="задача-марковица">
+<span class="header-section-number">11.3.1</span> Задача Марковица</h3>
+<p><span class="citation" data-cites="markowitz1952">Markowitz (<a href="references.html#ref-markowitz1952" role="doc-biblioref">1952 г.</a>)</span> предложил формализовать выбор портфеля как задачу оптимизации. Для каждого уровня ожидаемой доходности <span class="math inline">\(m\)</span> найдём портфель с наименьшей дисперсией:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-markowitz"><span class="math display">\[
+\min_w\ w'\Sigma w \quad \text{при}\quad w'\mu = m,\ \ \sum_i w_i = 1,\ \ w_i \ge 0.
+\tag{11.5}\]</span></span></p>
+<p>Условие <span class="math inline">\(w_i \ge 0\)</span> запрещает короткие продажи; для частного инвестора и большинства фондов это реалистично. Множество решений для разных <span class="math inline">\(m\)</span> образует <strong>эффективную границу</strong>: портфели, для которых нельзя повысить ожидаемую доходность, не увеличив риск. Крайняя левая точка – <strong>портфель минимальной дисперсии</strong>.</p>
+</section><section id="безрисковый-актив-и-касательный-портфель" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="безрисковый-актив-и-касательный-портфель">
+<span class="header-section-number">11.3.2</span> Безрисковый актив и касательный портфель</h3>
+<p>Если можно вложиться в безрисковый актив со ставкой <span class="math inline">\(r_f\)</span>, то инвестор комбинирует его с одним рискованным портфелем. Все такие комбинации лежат на прямой, выходящей из точки <span class="math inline">\((0, r_f)\)</span>; наклон прямой – коэффициент Шарпа рискованного портфеля. Лучшая прямая касается эффективной границы, и точка касания – <strong>касательный портфель</strong> с максимальным коэффициентом Шарпа:</p>
+<p><span id="eq-max-sharpe"><span class="math display">\[
+\max_w\ \frac{w'\mu - r_f}{\sqrt{w'\Sigma w}}.
+\tag{11.6}\]</span></span></p>
+<p>Выбор между риском и доходностью сводится к выбору доли касательного портфеля: осторожный инвестор держит больше денег, смелый – меньше. Это теорема о разделении (two-fund separation): состав рискованной части не зависит от отношения инвестора к риску.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: нулевая безрисковая ставка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: нулевая безрисковая ставка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Во многих учебных примерах и в настройках библиотек по умолчанию <span class="math inline">\(r_f = 0\)</span> (например, в прошлогоднем учебном ноутбуке курса коэффициент Шарпа портфеля считался «assuming zero interest free rate»). Для американского рынка 2010-х годов, когда ставки были близки к нулю, это безобидно. Для России, где ставка денежного рынка в 2012–2026 гг. в среднем превышала 10% годовых, – нет. Касательный портфель, коэффициенты Шарпа и сам вывод о том, стоит ли вообще держать акции, зависят от <span class="math inline">\(r_f\)</span>. Ставку нужно брать того же периода и той же частоты, что и доходности, и начислять за календарные, а не торговые дни.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> optimize(mu, S, kind, rf<span class="op">=</span><span class="fl">0.0</span>, target<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Веса без коротких продаж: 'minvar' – минимум дисперсии (при заданной доходности target),</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    'sharpe' – максимум коэффициента Шарпа."""</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(mu)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    cons <span class="op">=</span> [{<span class="st">"type"</span>: <span class="st">"eq"</span>, <span class="st">"fun"</span>: <span class="kw">lambda</span> w: w.<span class="bu">sum</span>() <span class="op">-</span> <span class="dv">1</span>}]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        cons.append({<span class="st">"type"</span>: <span class="st">"eq"</span>, <span class="st">"fun"</span>: <span class="kw">lambda</span> w: w <span class="op">@</span> mu <span class="op">-</span> target})</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> kind <span class="op">==</span> <span class="st">"minvar"</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        objective <span class="op">=</span> <span class="kw">lambda</span> w: w <span class="op">@</span> S <span class="op">@</span> w</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        objective <span class="op">=</span> <span class="kw">lambda</span> w: <span class="op">-</span>(w <span class="op">@</span> mu <span class="op">-</span> rf) <span class="op">/</span> np.sqrt(w <span class="op">@</span> S <span class="op">@</span> w)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(objective, np.ones(n) <span class="op">/</span> n, bounds<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">1</span>)] <span class="op">*</span> n, constraints<span class="op">=</span>cons, method<span class="op">=</span><span class="st">"SLSQP"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.x</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> R.mean().values <span class="op">*</span> <span class="dv">12</span>                 <span class="co"># оценки ожидаемых доходностей, годовые</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> R.cov().values <span class="op">*</span> <span class="dv">12</span>                   <span class="co"># оценка ковариационной матрицы, годовая</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>rf_ann <span class="op">=</span> rf.reindex(R.index).mean() <span class="op">*</span> <span class="dv">12</span>  <span class="co"># средняя ставка RUONIA за тот же период</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>w_minvar <span class="op">=</span> optimize(mu, S, <span class="st">"minvar"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>w_tan <span class="op">=</span> optimize(mu, S, <span class="st">"sharpe"</span>, rf<span class="op">=</span>rf_ann)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> np.linspace(w_minvar <span class="op">@</span> mu, mu.<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.999</span>, <span class="dv">40</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>frontier <span class="op">=</span> [(np.sqrt(w <span class="op">@</span> S <span class="op">@</span> w), w <span class="op">@</span> mu) <span class="cf">for</span> w <span class="kw">in</span> (optimize(mu, S, <span class="st">"minvar"</span>, target<span class="op">=</span>m) <span class="cf">for</span> m <span class="kw">in</span> targets)]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quadprog</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tickers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>, <span class="st">"GMKN"</span>, <span class="st">"ROSN"</span>, <span class="st">"NVTK"</span>, <span class="st">"TATN"</span>, <span class="st">"MTSS"</span>,</span>
+<span>             <span class="st">"MGNT"</span>, <span class="st">"SNGS"</span>, <span class="st">"CHMF"</span>, <span class="st">"NLMK"</span>, <span class="st">"PLZL"</span>, <span class="st">"ALRS"</span>, <span class="st">"VTBR"</span><span class="op">)</span></span>
+<span><span class="va">monthly</span> <span class="op">&lt;-</span> <span class="fu">qf_load_stocks</span><span class="op">(</span><span class="va">tickers</span>, start <span class="op">=</span> <span class="st">"2011-12-01"</span><span class="op">)</span> <span class="op">|&gt;</span>   <span class="co"># длинный формат: date, ticker, ...</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y-%m"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ticker</span>, <span class="va">month</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span>          <span class="co"># цена на конец месяца</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ticker</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>r <span class="op">=</span> <span class="va">adj_close</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">adj_close</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">month</span>, <span class="va">ticker</span>, <span class="va">r</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">ticker</span>, values_from <span class="op">=</span> <span class="va">r</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">monthly</span><span class="op">[</span>, <span class="va">tickers</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span> <span class="op">*</span> <span class="fl">12</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span></span>
+<span><span class="co"># Минимум w'Sw при sum(w) = 1, w &gt;= 0: solve.QP минимизирует 1/2 w'Dw − d'w</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">qp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quadprog/man/solve.QP.html">solve.QP</a></span><span class="op">(</span>Dmat <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">S</span>, dvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span>, Amat <span class="op">=</span> <span class="va">A</span>, bvec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span>, meq <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">qp</span><span class="op">$</span><span class="va">solution</span>, <span class="va">tickers</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  SBER  GAZP  LKOH  GMKN  ROSN  NVTK  TATN  MTSS  MGNT  SNGS  CHMF  NLMK  PLZL </span></span>
+<span><span class="co">#&gt; 0.000 0.047 0.221 0.147 0.000 0.029 0.053 0.251 0.025 0.000 0.056 0.000 0.097 </span></span>
+<span><span class="co">#&gt;  ALRS  VTBR </span></span>
+<span><span class="co">#&gt; 0.000 0.074</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fvol, fret <span class="op">=</span> np.array(frontier).T</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vol_i, mu_i <span class="op">=</span> np.sqrt(np.diag(S)), mu</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">3.8</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax.scatter(vol_i <span class="op">*</span> <span class="dv">100</span>, mu_i <span class="op">*</span> <span class="dv">100</span>, s<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span>plot.GREY)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, x, y <span class="kw">in</span> <span class="bu">zip</span>(TICKERS, vol_i, mu_i):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ax.annotate(t, (x <span class="op">*</span> <span class="dv">100</span>, y <span class="op">*</span> <span class="dv">100</span>), xytext<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">2</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="fl">6.5</span>, color<span class="op">=</span>plot.LIGHT)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.plot(fvol <span class="op">*</span> <span class="dv">100</span>, fret <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span>plot.BLUE, label<span class="op">=</span><span class="st">"Эффективная граница"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> w, name, color <span class="kw">in</span> [(w_minvar, <span class="st">"Минимальная дисперсия"</span>, plot.GREEN), (w_tan, <span class="st">"Касательный"</span>, plot.ORANGE)]:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    ax.scatter(np.sqrt(w <span class="op">@</span> S <span class="op">@</span> w) <span class="op">*</span> <span class="dv">100</span>, w <span class="op">@</span> mu <span class="op">*</span> <span class="dv">100</span>, s<span class="op">=</span><span class="dv">40</span>, color<span class="op">=</span>color, zorder<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span>name)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>tan_vol, tan_ret <span class="op">=</span> np.sqrt(w_tan <span class="op">@</span> S <span class="op">@</span> w_tan), w_tan <span class="op">@</span> mu</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>x_line <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">0.45</span>, <span class="dv">50</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ax.plot(x_line <span class="op">*</span> <span class="dv">100</span>, (rf_ann <span class="op">+</span> (tan_ret <span class="op">-</span> rf_ann) <span class="op">/</span> tan_vol <span class="op">*</span> x_line) <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>plot.ORANGE, ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="fl">0.8</span>, label<span class="op">=</span><span class="st">"Линия рынка капитала"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">45</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Волатильность, % годовых"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Ожидаемая доходность, % годовых"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"lower right"</span>, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, Банк России, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-frontier" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-frontier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-portfolio_files/figure-html/fig-frontier-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-frontier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11.3: Эффективная граница 15 крупных российских акций без коротких продаж по данным 2012–2026 гг., портфель минимальной дисперсии, касательный портфель и линия рынка капитала от ставки RUONIA
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>По данным всего периода касательный портфель состоит из 3 акций: TATN – 40%, PLZL – 31%, LKOH – 29%. Портфель минимальной дисперсии разнообразнее (10 акций с заметным весом), его волатильность 19% против 20% у портфеля с равными весами. Но всё это оценки <em>в выборке</em>: оптимизатор знал доходности, которые ещё предстояло получить. Настоящий вопрос – как такие портфели работают, если строить их только по прошлым данным.</p>
+</section></section><section id="sec-estimation-error" class="level2 page-columns page-full" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="sec-estimation-error">
+<span class="header-section-number">11.4</span> Почему оптимальные веса неустойчивы</h2>
+<section id="ошибка-в-оценке-средних" class="level3 page-columns page-full" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="ошибка-в-оценке-средних">
+<span class="header-section-number">11.4.1</span> Ошибка в оценке средних</h3>
+<p>Для оптимизации нужны ожидаемые доходности <span class="math inline">\(\mu\)</span> и ковариации <span class="math inline">\(\Sigma\)</span>. Истинных значений никто не знает, и их заменяют выборочными оценками. С ковариациями это работает терпимо, со средними – плохо. Стандартная ошибка оценки среднегодовой доходности по <span class="math inline">\(T\)</span> годам наблюдений равна <span class="math inline">\(\sigma/\sqrt{T}\)</span> и не зависит от частоты данных: месячные или дневные наблюдения не помогают <span class="citation" data-cites="merton1980">(<a href="references.html#ref-merton1980" role="doc-biblioref">Merton 1980 г.</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"></div><p>Для типичной российской акции с волатильностью около 30% годовых пятилетняя история даёт стандартную ошибку среднегодовой доходности около 14% в год. Оценка «18% годовых» означает, что истинное значение с вероятностью около двух третей лежит где-то между 4% и 32%. Оптимизатор этого не знает. Он принимает оценки за точные и вкладывает максимум в бумаги, которым повезло в выборке. Поэтому <span class="citation" data-cites="michaud1989">Michaud (<a href="references.html#ref-michaud1989" role="doc-biblioref">1989 г.</a>)</span> назвал оптимизацию по Марковицу «максимизатором ошибок оценки».</p>
+<p>Посмотрим, как меняется касательный портфель, если каждый год пересчитывать его по последним пяти годам данных.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tangency(window):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Касательный портфель по окну месячных доходностей (ставка – средняя RUONIA за окно)."""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> optimize(window.mean().values <span class="op">*</span> <span class="dv">12</span>, window.cov().values <span class="op">*</span> <span class="dv">12</span>, <span class="st">"sharpe"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                    rf<span class="op">=</span>rf.reindex(window.index).mean() <span class="op">*</span> <span class="dv">12</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>rolling_w <span class="op">=</span> pd.DataFrame({year: tangency(R.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">5</span><span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>])</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                          <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2017</span>, <span class="dv">2027</span>)}, index<span class="op">=</span>TICKERS).T</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>shown <span class="op">=</span> rolling_w.loc[:, rolling_w.<span class="bu">max</span>() <span class="op">&gt;</span> <span class="fl">0.05</span>]            <span class="co"># акции, хоть раз получавшие заметный вес</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>bottom <span class="op">=</span> np.zeros(<span class="bu">len</span>(shown))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.tab20(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, shown.shape[<span class="dv">1</span>]))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t, col), c <span class="kw">in</span> <span class="bu">zip</span>(shown.items(), colors):</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ax.bar(shown.index, col.values <span class="op">*</span> <span class="dv">100</span>, bottom<span class="op">=</span>bottom, color<span class="op">=</span>c, label<span class="op">=</span>t, width<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    bottom <span class="op">+=</span> col.values <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Вес, %"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>ax.legend(ncol<span class="op">=</span><span class="dv">5</span>, fontsize<span class="op">=</span><span class="fl">6.5</span>, loc<span class="op">=</span><span class="st">"upper center"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.12</span>), frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(shown.index)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-weights-rolling" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-weights-rolling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-portfolio_files/figure-html/fig-weights-rolling-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-weights-rolling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11.4: Веса касательного портфеля, оценённого по месячным доходностям за предыдущие 5 лет, на начало каждого года
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>От года к году портфель меняется почти до неузнаваемости. В нём от 3 до 7 бумаг, в среднем за год перекладывается 35% капитала, а 4 акции из пятнадцати ни разу не получили заметного веса. Экономические характеристики компаний так быстро не меняются. Меняются оценки средних доходностей, в которые попадают и выпадают удачные и неудачные годы.</p>
+</section><section id="что-с-этим-делают" class="level3 page-columns page-full" data-number="11.4.2"><h3 data-number="11.4.2" class="anchored" data-anchor-id="что-с-этим-делают">
+<span class="header-section-number">11.4.2</span> Что с этим делают</h3>
+<p>Практика выработала несколько способов обуздать ошибки оценки.</p>
+<ul>
+<li>
+<strong>Не оценивать средние.</strong> Портфель минимальной дисперсии использует только ковариации, которые оцениваются точнее.</li>
+<li>
+<strong>Сжимать оценки.</strong> Метод Ledoit – Wolf <span class="citation" data-cites="ledoit2004">(<a href="references.html#ref-ledoit2004" role="doc-biblioref">Ledoit и Wolf 2004 г.</a>)</span> сдвигает выборочную ковариационную матрицу к простой структуре (например, одинаковые корреляции), уменьшая влияние случайных экстремальных оценок. Похожая идея для средних – сжатие к общему среднему.</li>
+<li>
+<strong>Ограничивать веса.</strong> Потолок веса одной бумаги, например 20%, не даёт оптимизатору уйти в угол.</li>
+<li>
+<strong>Отказаться от оптимизации.</strong> Равные веса (<span class="math inline">\(1/N\)</span>) или веса по капитализации не используют оценок вовсе.</li>
+</ul>
+<div class="no-row-height column-margin column-container"></div><p>Какой способ лучше, решает только проверка вне выборки.</p>
+</section></section><section id="sec-portfolio-oos" class="level2 page-columns page-full" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="sec-portfolio-oos">
+<span class="header-section-number">11.5</span> Проверка вне выборки</h2>
+<p>Сравним пять правил. Каждый год с 2017 по 2026 г. веса пересчитываются по месячным доходностям предыдущих пяти лет и держатся весь год (с ежемесячной ребалансировкой к этим весам). Бенчмарк – индекс MCFTR, в который входят все ликвидные акции рынка.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cap <span class="op">=</span> data.load_stocks(TICKERS, start<span class="op">=</span><span class="st">"2011-12-01"</span>, columns<span class="op">=</span>[<span class="st">"market_cap"</span>]).pivot(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"market_cap"</span>).loc[:, TICKERS].resample(<span class="st">"ME"</span>).last()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>rules <span class="op">=</span> [<span class="st">"1/N"</span>, <span class="st">"Капитализация"</span>, <span class="st">"Мин. дисперсия"</span>, <span class="st">"Мин. дисперсия (Ledoit – Wolf)"</span>, <span class="st">"Макс. Шарп"</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>oos <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>weights_by_year <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2017</span>, <span class="dv">2027</span>):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    est <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">5</span><span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]            <span class="co"># только прошлые данные</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    mu_e, S_e <span class="op">=</span> est.mean().values <span class="op">*</span> <span class="dv">12</span>, est.cov().values <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    S_lw <span class="op">=</span> LedoitWolf().fit(est.values).covariance_ <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    last_cap <span class="op">=</span> cap.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> {<span class="st">"1/N"</span>: np.ones(<span class="bu">len</span>(TICKERS)) <span class="op">/</span> <span class="bu">len</span>(TICKERS),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Капитализация"</span>: (last_cap <span class="op">/</span> last_cap.<span class="bu">sum</span>()).values,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия"</span>: optimize(mu_e, S_e, <span class="st">"minvar"</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия (Ledoit – Wolf)"</span>: optimize(mu_e, S_lw, <span class="st">"minvar"</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Макс. Шарп"</span>: optimize(mu_e, S_e, <span class="st">"sharpe"</span>, rf<span class="op">=</span>rf.reindex(est.index).mean() <span class="op">*</span> <span class="dv">12</span>)}</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    test <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> rules:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        oos[k].append(test <span class="op">@</span> w[k])</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        weights_by_year[k].append(w[k])</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {}</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> rules:</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pd.concat(oos[k])</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    W_k <span class="op">=</span> np.array(weights_by_year[k])</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    rows[k] <span class="op">=</span> perf(x, rf.reindex(x.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.<span class="bu">abs</span>(np.diff(W_k, axis<span class="op">=</span><span class="dv">0</span>)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>).mean() <span class="op">/</span> <span class="dv">2</span>}</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> M[<span class="st">"MCFTR"</span>].loc[<span class="st">"2017"</span>:]</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"Индекс MCFTR"</span>] <span class="op">=</span> perf(mc, rf.reindex(mc.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"RUONIA"</span>] <span class="op">=</span> perf(rf.loc[<span class="st">"2017"</span>:], rf.loc[<span class="st">"2017"</span>:]) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>ru_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>pct_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.1%}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame(rows).T</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>tab.style.<span class="bu">format</span>(pct_fmt).<span class="bu">format</span>(ru_fmt, subset<span class="op">=</span>[<span class="st">"Шарп"</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-portfolio-oos" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portfolio-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;11.1: Портфели из 15 акций вне выборки, 2017–2026 гг. Шарп – к ставке RUONIA; оборот – средняя доля капитала, перекладываемая при ежегодной ребалансировке
+</figcaption><div aria-describedby="tbl-portfolio-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_8f4f3" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_8f4f3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
+<th id="T_8f4f3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_8f4f3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_8f4f3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
+<th id="T_8f4f3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Оборот</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_8f4f3_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">1/N</th>
+<td id="T_8f4f3_row0_col0" class="data row0 col0">5,6%</td>
+<td id="T_8f4f3_row0_col1" class="data row0 col1">22,0%</td>
+<td id="T_8f4f3_row0_col2" class="data row0 col2">−0,11</td>
+<td id="T_8f4f3_row0_col3" class="data row0 col3">−47,4%</td>
+<td id="T_8f4f3_row0_col4" class="data row0 col4">0,0%</td>
+</tr>
+<tr class="even">
+<th id="T_8f4f3_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Капитализация</th>
+<td id="T_8f4f3_row1_col0" class="data row1 col0">7,2%</td>
+<td id="T_8f4f3_row1_col1" class="data row1 col1">23,4%</td>
+<td id="T_8f4f3_row1_col2" class="data row1 col2">−0,02</td>
+<td id="T_8f4f3_row1_col3" class="data row1 col3">−47,8%</td>
+<td id="T_8f4f3_row1_col4" class="data row1 col4">8,9%</td>
+</tr>
+<tr class="odd">
+<th id="T_8f4f3_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Мин. дисперсия</th>
+<td id="T_8f4f3_row2_col0" class="data row2 col0">5,1%</td>
+<td id="T_8f4f3_row2_col1" class="data row2 col1">22,1%</td>
+<td id="T_8f4f3_row2_col2" class="data row2 col2">−0,13</td>
+<td id="T_8f4f3_row2_col3" class="data row2 col3">−48,7%</td>
+<td id="T_8f4f3_row2_col4" class="data row2 col4">31,6%</td>
+</tr>
+<tr class="even">
+<th id="T_8f4f3_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Мин. дисперсия (Ledoit – Wolf)</th>
+<td id="T_8f4f3_row3_col0" class="data row3 col0">6,0%</td>
+<td id="T_8f4f3_row3_col1" class="data row3 col1">21,5%</td>
+<td id="T_8f4f3_row3_col2" class="data row3 col2">−0,10</td>
+<td id="T_8f4f3_row3_col3" class="data row3 col3">−47,4%</td>
+<td id="T_8f4f3_row3_col4" class="data row3 col4">20,2%</td>
+</tr>
+<tr class="odd">
+<th id="T_8f4f3_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. Шарп</th>
+<td id="T_8f4f3_row4_col0" class="data row4 col0">5,1%</td>
+<td id="T_8f4f3_row4_col1" class="data row4 col1">22,5%</td>
+<td id="T_8f4f3_row4_col2" class="data row4 col2">−0,12</td>
+<td id="T_8f4f3_row4_col3" class="data row4 col3">−53,1%</td>
+<td id="T_8f4f3_row4_col4" class="data row4 col4">35,4%</td>
+</tr>
+<tr class="even">
+<th id="T_8f4f3_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Индекс MCFTR</th>
+<td id="T_8f4f3_row5_col0" class="data row5 col0">7,7%</td>
+<td id="T_8f4f3_row5_col1" class="data row5 col1">21,3%</td>
+<td id="T_8f4f3_row5_col2" class="data row5 col2">−0,03</td>
+<td id="T_8f4f3_row5_col3" class="data row5 col3">−51,3%</td>
+<td id="T_8f4f3_row5_col4" class="data row5 col4">–</td>
+</tr>
+<tr class="odd">
+<th id="T_8f4f3_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">RUONIA</th>
+<td id="T_8f4f3_row6_col0" class="data row6 col0">10,9%</td>
+<td id="T_8f4f3_row6_col1" class="data row6 col1">1,5%</td>
+<td id="T_8f4f3_row6_col2" class="data row6 col2">–</td>
+<td id="T_8f4f3_row6_col3" class="data row6 col3">0,0%</td>
+<td id="T_8f4f3_row6_col4" class="data row6 col4">–</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Результат типичен для таких сравнений. Портфель с максимальным коэффициентом Шарпа, лучший <em>в выборке</em> по определению, вне выборки оказывается среди худших: 5,1% годовых при наибольшей просадке (53%) и наибольшем обороте. Равные веса дают 5,6%, веса по капитализации – 7,2%. Сжатие ковариационной матрицы улучшает портфель минимальной дисперсии, но не превращает его в победителя. <span class="citation" data-cites="demiguel2009">DeMiguel и др. (<a href="references.html#ref-demiguel2009" role="doc-biblioref">2009 г.</a>)</span> сравнили 14 оптимизационных моделей с правилом <span class="math inline">\(1/N\)</span> на данных развитых рынков и пришли к тому же выводу: при реальной длине истории выигрыш от оптимизации съедается ошибками оценки.</p>
+<div class="no-row-height column-margin column-container"></div><p>Второй вывод касается рынка в целом. За 2017–2026 гг. ни одно правило, ни индекс не обогнали денежный рынок: коэффициенты Шарпа относительно RUONIA отрицательны у всех. Это тот же урок, что в разделе <a href="#sec-portfolio-basics" class="quarto-xref"><span>11.1</span></a>: результат определяется не столько тем, как распределить деньги между акциями, сколько тем, сколько вложить в акции вообще.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Особенность данных: ошибка выжившего">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Особенность данных: ошибка выжившего
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Мы выбрали 15 акций, которые торгуются с 2011 г. <em>и до сих пор</em>. Компании, которые за это время ушли с биржи, обанкротились или были выкуплены, в выборку не попали. Это ошибка выжившего: выборка систематически лучше, чем были возможности инвестора в прошлом. Для сравнения правил между собой она не так важна, потому что все правила выбирают из одного набора, но абсолютные доходности завышены. Подробнее – в главе о бэктестинге.</p>
+</div>
+</div>
+</section><section id="sec-asset-allocation" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-asset-allocation">
+<span class="header-section-number">11.6</span> Распределение капитала: правило 60/40</h2>
+<p>Для частного инвестора главный вопрос – не какие акции купить, а какую долю сбережений держать в акциях, облигациях и деньгах. Популярные правила не используют оптимизацию. Правило 60/40 предлагает держать 60% в акциях и 40% в облигациях. Правило «доля облигаций равна возрасту» делает портфель консервативнее с годами: 30-летнему – 70% акций, 60-летнему – 40%.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alloc <span class="op">=</span> {<span class="ss">f"Акции </span><span class="sc">{</span>k<span class="sc">.</span>split(<span class="st">'/'</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">%"</span>: perf(x, rf) <span class="cf">for</span> k, x <span class="kw">in</span> mixes.items()}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>alloc[<span class="st">"Денежный рынок (RUONIA)"</span>] <span class="op">=</span> perf(rf, rf)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>alloc_tab <span class="op">=</span> pd.DataFrame(alloc).T</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>alloc_tab.style.<span class="bu">format</span>(pct_fmt).<span class="bu">format</span>(ru_fmt, subset<span class="op">=</span>[<span class="st">"Шарп"</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-allocation" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-allocation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;11.2: Портфели из индексов акций (MCFTR) и облигаций (RGBITR) с ежемесячной ребалансировкой и денежный рынок, 2012–2026 гг.
+</figcaption><div aria-describedby="tbl-allocation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_bb4b6" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_bb4b6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
+<th id="T_bb4b6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_bb4b6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_bb4b6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_bb4b6_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Акции 100%</th>
+<td id="T_bb4b6_row0_col0" class="data row0 col0">10,0%</td>
+<td id="T_bb4b6_row0_col1" class="data row0 col1">19,9%</td>
+<td id="T_bb4b6_row0_col2" class="data row0 col2">0,09</td>
+<td id="T_bb4b6_row0_col3" class="data row0 col3">−51,3%</td>
+</tr>
+<tr class="even">
+<th id="T_bb4b6_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Акции 80%</th>
+<td id="T_bb4b6_row1_col0" class="data row1 col0">9,7%</td>
+<td id="T_bb4b6_row1_col1" class="data row1 col1">16,9%</td>
+<td id="T_bb4b6_row1_col2" class="data row1 col2">0,06</td>
+<td id="T_bb4b6_row1_col3" class="data row1 col3">−43,3%</td>
+</tr>
+<tr class="odd">
+<th id="T_bb4b6_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Акции 60%</th>
+<td id="T_bb4b6_row2_col0" class="data row2 col0">9,3%</td>
+<td id="T_bb4b6_row2_col1" class="data row2 col1">14,0%</td>
+<td id="T_bb4b6_row2_col2" class="data row2 col2">0,01</td>
+<td id="T_bb4b6_row2_col3" class="data row2 col3">−34,7%</td>
+</tr>
+<tr class="even">
+<th id="T_bb4b6_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Акции 40%</th>
+<td id="T_bb4b6_row3_col0" class="data row3 col0">8,8%</td>
+<td id="T_bb4b6_row3_col1" class="data row3 col1">11,6%</td>
+<td id="T_bb4b6_row3_col2" class="data row3 col2">−0,06</td>
+<td id="T_bb4b6_row3_col3" class="data row3 col3">−28,3%</td>
+</tr>
+<tr class="odd">
+<th id="T_bb4b6_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Акции 20%</th>
+<td id="T_bb4b6_row4_col0" class="data row4 col0">8,1%</td>
+<td id="T_bb4b6_row4_col1" class="data row4 col1">9,8%</td>
+<td id="T_bb4b6_row4_col2" class="data row4 col2">−0,16</td>
+<td id="T_bb4b6_row4_col3" class="data row4 col3">−24,8%</td>
+</tr>
+<tr class="even">
+<th id="T_bb4b6_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Акции 0%</th>
+<td id="T_bb4b6_row5_col0" class="data row5 col0">7,2%</td>
+<td id="T_bb4b6_row5_col1" class="data row5 col1">9,2%</td>
+<td id="T_bb4b6_row5_col2" class="data row5 col2">−0,27</td>
+<td id="T_bb4b6_row5_col3" class="data row5 col3">−22,8%</td>
+</tr>
+<tr class="odd">
+<th id="T_bb4b6_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Денежный рынок (RUONIA)</th>
+<td id="T_bb4b6_row6_col0" class="data row6 col0">10,3%</td>
+<td id="T_bb4b6_row6_col1" class="data row6 col1">1,3%</td>
+<td id="T_bb4b6_row6_col2" class="data row6 col2">–</td>
+<td id="T_bb4b6_row6_col3" class="data row6 col3">0,0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>За 2012–2026 гг. все смеси акций и облигаций проиграли денежному рынку по доходности. По подпериодам картина разная: в 2012–2016 гг. акции принесли 14,8% годовых, а деньги – 9,0%; в 2017–2021 гг. – 18,1% и 7,0%; в 2022–2026 гг. – −2,3% и 15,2%. Весь проигрыш акций пришёлся на последние пять лет: в первые два подпериода акции обгоняли деньги на 6 и 11 п. п. в год, и вывод о «ненужности» акций, сделанный в конце 2021 г., был бы противоположным. Это ещё одна иллюстрация того, как сильно оценки средних доходностей зависят от выбранного периода.</p>
+<p>Правило 60/40 выросло на американском рынке, где облигации долго были хорошей страховкой для акций, а ставка денежного рынка – низкой. В России обе предпосылки не выполнялись, и механический перенос правила требует осторожности. Это не значит, что акции «не нужны»: на длинных горизонтах премия за риск акций в большинстве стран положительна. Но её величина и надёжность в российских данных – вопрос открытый, и честный анализ должен это показывать.</p>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Доходность портфеля – взвешенное среднее доходностей активов, а риск зависит от ковариаций: при корреляции ниже единицы волатильность портфеля меньше средней волатильности активов.</li>
+<li>Диверсификация устраняет специфический риск компаний, но не рыночный. Для российских акций со средней корреляцией около 0,4 волатильность портфеля быстро выходит на плато около 20% годовых.</li>
+<li>Эффективная граница Марковица и касательный портфель – основа теории выбора портфеля. Касательный портфель зависит от безрисковой ставки, и в России её нельзя считать нулевой.</li>
+<li>Оптимальные веса крайне чувствительны к оценкам средних доходностей, которые по пятилетней истории имеют ошибку порядка 14% годовых. Оптимизация усиливает эти ошибки: портфели концентрируются в немногих бумагах и резко меняются год от года.</li>
+<li>Вне выборки портфель с максимальным коэффициентом Шарпа проигрывает равным весам и весам по капитализации. Сжатие ковариаций, ограничения и отказ от оценки средних делают оптимизацию полезнее.</li>
+<li>Акции и облигации в России положительно коррелированы, а денежный рынок в 2012–2026 гг. обогнал и акции, и облигации. Правила вроде 60/40 нужно проверять на местных данных, а не переносить механически.</li>
+</ul></section><section id="sec-exercises-portfolio" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="sec-exercises-portfolio">
+<span class="header-section-number">11.7</span> Упражнения</h2>
+<p>Упражнения разделены на четыре типа. Задания <strong>А</strong> проверяют понимание и решаются без компьютера. Задания <strong>Б</strong> выполняются на данных вашей акции (тикер назначает преподаватель), поэтому готового ответа у них нет. Задания <strong>В</strong> учат работать с ИИ-ассистентом: не получать ответ, а проверять его. Задание <strong>Г</strong> – небольшое исследование, результаты которого нужно защитить устно.</p>
+<section id="а.-понимание" class="level3" data-number="11.7.1"><h3 data-number="11.7.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">11.7.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Волатильности двух акций – 30% и 20%, корреляция – 0,4. Найдите волатильность портфеля 50/50. При какой корреляции она равна 25%? А 5%?</li>
+<li>Средняя волатильность акций – 30%, средняя корреляция – 0,4. Оцените по формуле <a href="#eq-div" class="quarto-xref"><span>11.4</span></a> волатильность портфеля из 1, 5, 20 и бесконечного числа акций с равными весами.</li>
+<li>Безрисковая ставка – 15%, ожидаемая доходность рыночного портфеля – 18%, волатильность – 25%. Чему равен коэффициент Шарпа? Какую долю рыночного портфеля выберет инвестор, желающий волатильность 10%, и какую ожидаемую доходность получит?</li>
+<li>Почему стандартная ошибка оценки средней доходности не уменьшается при переходе от месячных данных к дневным, а ошибка оценки волатильности уменьшается?</li>
+<li>Почему портфель минимальной дисперсии вне выборки обычно устойчивее касательного?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="11.7.2"><h3 data-number="11.7.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">11.7.2</span> Б. Практика на своей акции</h3>
+<ol start="6" type="1">
+<li>Добавьте свою акцию к 15 акциям главы (если она уже там, замените её соседней по капитализации). Как изменились эффективная граница и касательный портфель? Получила ли ваша акция вес и почему?</li>
+<li>Постройте кривую портфелей «ваша акция – индекс MCFTR» по данным последних пяти лет. Какой вес вашей акции даёт минимальную дисперсию? Совпадает ли он с весом акции в индексе?</li>
+<li>Повторите проверку вне выборки из раздела <a href="#sec-portfolio-oos" class="quarto-xref"><span>11.5</span></a> с ограничением: вес одной акции не больше 15%. Как изменились результаты портфелей минимальной дисперсии и максимального Шарпа?</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="11.7.3"><h3 data-number="11.7.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">11.7.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="9" type="1">
+<li>Попросите ИИ-ассистента построить с помощью PyPortfolioOpt портфель с максимальным коэффициентом Шарпа из пяти российских акций. Проверьте: какая безрисковая ставка использована по умолчанию; по ценам с дивидендами или без; разрешены ли короткие продажи (<code>weight_bounds</code>); оценён ли результат вне выборки. Запишите, что нужно изменить.</li>
+<li>Спросите ассистента, работает ли правило 60/40 для российского инвестора. Сравните его ответ с результатами раздела <a href="#sec-asset-allocation" class="quarto-xref"><span>11.6</span></a>. На каких данных основаны его утверждения?</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="11.7.4"><h3 data-number="11.7.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">11.7.4</span> Г. Мини-исследование</h3>
+<ol start="11" type="1">
+<li>Сравните вне выборки три способа распределить капитал между MCFTR, RGBITR и денежным рынком: фиксированные 60/30/10, портфель минимальной дисперсии этих трёх активов и правило «держать долю акций тем выше, чем ниже доходность акций за прошлый год». Что выигрывает и насколько результат зависит от периода? Подготовьте короткий (3–5 минут) устный рассказ.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Почему дисперсия портфеля не равна взвешенной сумме дисперсий активов?</li>
+<li>Какой риск устраняется диверсификацией, а какой нет?</li>
+<li>Что такое эффективная граница и портфель минимальной дисперсии?</li>
+<li>Что такое касательный портфель и как он зависит от безрисковой ставки?</li>
+<li>Почему оптимизацию по Марковицу называют «максимизатором ошибок оценки»?</li>
+<li>Что делает метод Ledoit – Wolf?</li>
+<li>Почему правило <span class="math inline">\(1/N\)</span> трудно обыграть вне выборки?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Потому что в неё входят ковариации: <span class="math inline">\(\sigma_p^2 = w'\Sigma w\)</span>. При корреляциях ниже единицы колебания активов частично гасят друг друга.</li>
+<li>Устраняется специфический риск отдельных компаний; остаётся систематический (рыночный) риск, общий для всех бумаг.</li>
+<li>Эффективная граница – портфели с минимальной дисперсией при каждом уровне ожидаемой доходности (и максимальной доходностью при каждом уровне риска). Портфель минимальной дисперсии – её крайняя левая точка.</li>
+<li>Портфель рискованных активов с максимальным коэффициентом Шарпа; точка касания эффективной границы и прямой из точки <span class="math inline">\((0, r_f)\)</span>. При росте <span class="math inline">\(r_f\)</span> он смещается к более рискованным и доходным портфелям.</li>
+<li>Оптимизатор принимает оценки средних и ковариаций за точные и вкладывает больше всего в бумаги, которые в выборке выглядели лучше всего, в том числе из-за ошибки оценки.</li>
+<li>Сжимает выборочную ковариационную матрицу к простой целевой структуре с весом, который оценивается по данным, уменьшая влияние шумных оценок.</li>
+<li>Оно не использует оценок, поэтому не подвержено ошибкам оценки; выигрыш от оптимизации при реальной длине истории обычно меньше, чем потери от этих ошибок.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="markowitz1952">Markowitz (<a href="references.html#ref-markowitz1952" role="doc-biblioref">1952 г.</a>)</span> – исходная статья о выборе портфеля.</li>
+<li>
+<span class="citation" data-cites="bodie2021">Bodie и др. (<a href="references.html#ref-bodie2021" role="doc-biblioref">2021 г.</a>)</span>, гл. 6–8 – портфельная теория в учебном изложении.</li>
+<li>
+<span class="citation" data-cites="michaud1989">Michaud (<a href="references.html#ref-michaud1989" role="doc-biblioref">1989 г.</a>)</span> – почему оптимизация усиливает ошибки оценки.</li>
+<li>
+<span class="citation" data-cites="ledoit2004">Ledoit и Wolf (<a href="references.html#ref-ledoit2004" role="doc-biblioref">2004 г.</a>)</span> – сжатие ковариационной матрицы.</li>
+<li>
+<span class="citation" data-cites="demiguel2009">DeMiguel и др. (<a href="references.html#ref-demiguel2009" role="doc-biblioref">2009 г.</a>)</span> – сравнение оптимизационных моделей с правилом <span class="math inline">\(1/N\)</span>.</li>
+<li>
+<span class="citation" data-cites="merton1980">Merton (<a href="references.html#ref-merton1980" role="doc-biblioref">1980 г.</a>)</span> – почему ожидаемую доходность так трудно оценить.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script>
+<div class="no-row-height column-margin column-container"><div id="ref-markowitz1952" class="csl-entry" role="listitem">
+Markowitz, Harry. 1952 г. <span>«Portfolio Selection»</span>. <em>The Journal of Finance</em> 7 (1): 77–91.
+</div><div id="ref-bodie2021" class="csl-entry" role="listitem">
+Bodie, Zvi, Alex Kane, и Alan J. Marcus. 2021 г. <em>Investments</em>. 12-я изд. McGraw-Hill.
+</div><div id="ref-michaud1989" class="csl-entry" role="listitem">
+Michaud, Richard O. 1989 г. <span>«The <span>Markowitz</span> Optimization Enigma: Is <span>„Optimized“</span> Optimal?»</span> <em>Financial Analysts Journal</em> 45 (1): 31–42.
+</div><div id="ref-ledoit2004" class="csl-entry" role="listitem">
+Ledoit, Olivier, и Michael Wolf. 2004 г. <span>«Honey, <span>I</span> Shrunk the Sample Covariance Matrix»</span>. <em>The Journal of Portfolio Management</em> 30 (4): 110–19.
+</div><div id="ref-demiguel2009" class="csl-entry" role="listitem">
+DeMiguel, Victor, Lorenzo Garlappi, и Raman Uppal. 2009 г. <span>«Optimal Versus Naive Diversification: How Inefficient is the 1/<span>N</span> Portfolio Strategy?»</span> <em>The Review of Financial Studies</em> 22 (5): 1915–53.
+</div><div id="ref-merton1980" class="csl-entry" role="listitem">
+Merton, Robert C. 1980 г. <span>«On Estimating the Expected Return on the Market: An Exploratory Investigation»</span>. <em>Journal of Financial Economics</em> 8 (4): 323–61.
+</div></div>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -471,8 +1166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -871,9 +1565,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./10-var-es.html" class="pagination-link" aria-label="VaR и Expected Shortfall">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span>
       </a>          
@@ -885,7 +1577,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

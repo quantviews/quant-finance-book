@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>9&nbsp; Прогнозирование и машинное обучение – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main">
@@ -148,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -168,8 +218,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -188,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -197,8 +247,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -211,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -220,8 +270,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -240,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -249,8 +299,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -269,7 +319,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -278,8 +328,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -292,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -301,8 +351,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -321,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -336,8 +386,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -356,21 +406,63 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-ml-setup" id="toc-sec-ml-setup" class="nav-link active" data-scroll-target="#sec-ml-setup"><span class="header-section-number">9.1</span> Постановка задачи прогноза</a>
+  <ul class="collapse">
+<li><a href="#%D1%87%D1%82%D0%BE-%D0%B8%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%BD%D0%BE-%D0%B8-%D1%87%D1%82%D0%BE-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7%D0%B8%D1%80%D1%83%D0%B5%D0%BC" id="toc-что-известно-и-что-прогнозируем" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%B8%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%BD%D0%BE-%D0%B8-%D1%87%D1%82%D0%BE-%D0%BF%D1%80%D0%BE%D0%B3%D0%BD%D0%BE%D0%B7%D0%B8%D1%80%D1%83%D0%B5%D0%BC"><span class="header-section-number">9.1.1</span> Что известно и что прогнозируем</a></li>
+  <li><a href="#%D1%81-%D1%87%D0%B5%D0%BC-%D1%81%D1%80%D0%B0%D0%B2%D0%BD%D0%B8%D0%B2%D0%B0%D1%82%D1%8C" id="toc-с-чем-сравнивать" class="nav-link" data-scroll-target="#%D1%81-%D1%87%D0%B5%D0%BC-%D1%81%D1%80%D0%B0%D0%B2%D0%BD%D0%B8%D0%B2%D0%B0%D1%82%D1%8C"><span class="header-section-number">9.1.2</span> С чем сравнивать</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-leakage" id="toc-sec-leakage" class="nav-link" data-scroll-target="#sec-leakage"><span class="header-section-number">9.2</span> Утечка данных</a>
+  <ul class="collapse">
+<li><a href="#%D0%BA%D0%B0%D0%BA-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D1%83%D0%B3%D0%B0%D0%B4%D0%B0%D0%BB%D0%B0-85-%D0%B4%D0%BD%D0%B5%D0%B9" id="toc-как-модель-угадала-85-дней" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D1%83%D0%B3%D0%B0%D0%B4%D0%B0%D0%BB%D0%B0-85-%D0%B4%D0%BD%D0%B5%D0%B9"><span class="header-section-number">9.2.1</span> Как модель «угадала» 85% дней</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-time-cv" id="toc-sec-time-cv" class="nav-link" data-scroll-target="#sec-time-cv"><span class="header-section-number">9.3</span> Валидация во времени</a>
+  <ul class="collapse">
+<li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BD%D0%B5-%D0%BF%D0%BE%D0%B4%D1%85%D0%BE%D0%B4%D0%B8%D1%82-%D0%BE%D0%B1%D1%8B%D1%87%D0%BD%D0%B0%D1%8F-%D0%BA%D1%80%D0%BE%D1%81%D1%81-%D0%B2%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F" id="toc-почему-не-подходит-обычная-кросс-валидация" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-%D0%BD%D0%B5-%D0%BF%D0%BE%D0%B4%D1%85%D0%BE%D0%B4%D0%B8%D1%82-%D0%BE%D0%B1%D1%8B%D1%87%D0%BD%D0%B0%D1%8F-%D0%BA%D1%80%D0%BE%D1%81%D1%81-%D0%B2%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F"><span class="header-section-number">9.3.1</span> Почему не подходит обычная кросс-валидация</a></li>
+  <li><a href="#%D0%BD%D0%B0%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%BE%D0%B1%D0%BC%D0%B0%D0%BD%D1%8B%D0%B2%D0%B0%D0%B5%D1%82-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-насколько-обманывает-перемешивание" class="nav-link" data-scroll-target="#%D0%BD%D0%B0%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%BE%D0%B1%D0%BC%D0%B0%D0%BD%D1%8B%D0%B2%D0%B0%D0%B5%D1%82-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">9.3.2</span> Насколько обманывает перемешивание</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ml-returns" id="toc-sec-ml-returns" class="nav-link" data-scroll-target="#sec-ml-returns"><span class="header-section-number">9.4</span> Прогноз доходности: линейная модель и бустинг</a>
+  <ul class="collapse">
+<li><a href="#%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8" id="toc-модели" class="nav-link" data-scroll-target="#%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8"><span class="header-section-number">9.4.1</span> Модели</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BD%D0%B0-20122026-%D0%B3%D0%B3." id="toc-проверка-на-20122026-гг." class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BD%D0%B0-20122026-%D0%B3%D0%B3."><span class="header-section-number">9.4.2</span> Проверка на 2012–2026 гг.</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-ml-volatility" id="toc-sec-ml-volatility" class="nav-link" data-scroll-target="#sec-ml-volatility"><span class="header-section-number">9.5</span> Где сигнал есть: прогноз волатильности</a></li>
+  <li><a href="#sec-ml-strategy" id="toc-sec-ml-strategy" class="nav-link" data-scroll-target="#sec-ml-strategy"><span class="header-section-number">9.6</span> От прогноза к стратегии</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-ml" id="toc-sec-exercises-ml" class="nav-link" data-scroll-target="#sec-exercises-ml"><span class="header-section-number">9.7</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">9.7.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">9.7.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">9.7.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">9.7.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-arma.html">Временные ряды</a></li><li class="breadcrumb-item"><a href="./09-ml-forecasting.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-arma.html">Временные ряды</a></li><li class="breadcrumb-item"><a href="./09-ml-forecasting.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span>
+</h1>
 </div>
 
 
@@ -384,39 +476,581 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбук Time_series_models_ML_advanced_2026_ru; RL/nb (эмбарго, издержки); критерии проекта 2.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>Представьте, что студент приносит на семинар модель градиентного бустинга для дневной доходности индекса Мосбиржи. 15 признаков: лаги доходности, скользящие средние, волатильность, индекс относительной силы, оборот торгов, день недели. Модель проверена честно, на кросс-валидации для временных рядов, где каждый тестовый период идёт после обучающего. Результат на 4&nbsp;910 днях вне выборки: <span class="math inline">\(R^2 =\)</span> 0,59, знак доходности угадан в 86% дней. Если бы это было правдой, автор модели очень быстро стал бы очень богатым человеком.</p>
+<p>Это неправда. В предыдущих главах мы видели, что линейная автокорреляция дневных доходностей индекса близка к нулю, а простые модели вне выборки не превосходят историческое среднее. Нелинейная модель могла бы найти то, что пропустили линейные, но не в таком масштабе. Ошибка в данных: несколько признаков посчитаны по окну, которое включает тот самый день, доходность которого модель должна предсказать. Модель не прогнозирует, а вычисляет ответ из подсказки.</p>
+<p>Эта глава о том, как применять машинное обучение к финансовым рядам и не обмануть себя. Методы машинного обучения сами по себе не сложнее эконометрики, и современные библиотеки делают их применение делом нескольких строк. Трудность в другом: финансовые данные упорядочены во времени, сигнала в них мало, а шума много. Поэтому главная часть работы – правильно поставить задачу, построить признаки без заглядывания в будущее и проверить модель так, чтобы проверка имитировала реальное использование.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Почему обычная кросс-валидация не подходит для временных рядов</li>
-<li>Валидация во времени: расширяющееся и скользящее окно, эмбарго</li>
-<li>Признаки: лаги, скользящие статистики, технические индикаторы, календарь</li>
-<li>Модели: градиентный бустинг (LightGBM), SVR, нейросети</li>
-<li>Утечка данных и как её обнаружить</li>
-<li>Сравнение с простым бенчмарком</li>
+<li>Ставим задачу прогноза: что известно в момент прогноза, что прогнозируем, с чем сравниваем.</li>
+<li>Разбираем утечку данных на примере модели, которая «угадывает» 86% дней.</li>
+<li>Строим валидацию во времени: расширяющееся и скользящее окно, эмбарго при пересекающихся целях.</li>
+<li>Сравниваем линейную модель и градиентный бустинг в прогнозе доходности и волатильности.</li>
+<li>Выясняем, почему стратегия на прогнозах модели может обыгрывать рынок на бумаге и не обыгрывать в реальности.</li>
 </ul>
+<p><strong>Данные:</strong> <code>indexes.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> прогноз вне выборки и <span class="math inline">\(R^2_{OOS}\)</span> (глава «Свойства финансовых рядов и модели ARMA»), модели волатильности (глава «Волатильность: модели ARCH и GARCH»), основы регрессии.</p>
 </div>
 </div>
+<p>В главе используются пакеты scikit-learn и LightGBM.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lightgbm <span class="im">as</span> lgb</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression, Ridge</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> TimeSeriesSplit, KFold</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Числа в таблицах: запятая, типографский минус</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ru <span class="op">=</span> <span class="kw">lambda</span> v, d<span class="op">=</span><span class="dv">3</span>: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.</span>{d}f<span class="sc">}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sec-ml-setup" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-ml-setup">
+<span class="header-section-number">9.1</span> Постановка задачи прогноза</h2>
+<section id="что-известно-и-что-прогнозируем" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="что-известно-и-что-прогнозируем">
+<span class="header-section-number">9.1.1</span> Что известно и что прогнозируем</h3>
+<p>Любую задачу прогноза нужно начинать с временной оси. Пусть торги дня <span class="math inline">\(t\)</span> закончились, и мы знаем цены закрытия, обороты и всё, что произошло до этого момента. Это информационное множество <span class="math inline">\(\mathcal{F}_t\)</span>. Прогноз доходности следующего дня <span class="math inline">\(r_{t+1}\)</span> может использовать только то, что входит в <span class="math inline">\(\mathcal{F}_t\)</span>:</p>
+<p><span id="eq-ml-setup"><span class="math display">\[
+\hat r_{t+1} = f(x_t), \qquad x_t \in \mathcal{F}_t.
+\tag{9.1}\]</span></span></p>
+<p>В таблице данных это означает, что в строке с датой <span class="math inline">\(t\)</span> стоят признаки <span class="math inline">\(x_t\)</span>, посчитанные по данным до конца дня <span class="math inline">\(t\)</span> включительно, а целевая переменная – доходность <em>следующего</em> дня. В pandas цель получают сдвигом назад: <code>y = r.shift(-1)</code>. Если вместо этого в строке <span class="math inline">\(t\)</span> стоит доходность дня <span class="math inline">\(t\)</span>, то любой признак, использующий цену закрытия дня <span class="math inline">\(t\)</span>, уже содержит ответ.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Скользящее среднее доходности за 5 дней <code>r.rolling(5).mean()</code> в строке <span class="math inline">\(t\)</span> – это среднее каких дней? Можно ли использовать его как признак для прогноза <span class="math inline">\(r_t\)</span>? А для прогноза <span class="math inline">\(r_{t+1}\)</span>?</p>
+</div>
+</div>
+</section><section id="с-чем-сравнивать" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="с-чем-сравнивать">
+<span class="header-section-number">9.1.2</span> С чем сравнивать</h3>
+<p>Качество прогноза имеет смысл только по сравнению с простым эталоном. Для дневных доходностей естественные эталоны – нулевой прогноз и историческое среднее. Меры качества те же, что в главе о моделях ARMA:</p>
+<ul>
+<li>
+<span class="math inline">\(R^2\)</span> вне выборки относительно эталона: положительный – модель лучше эталона, отрицательный – хуже;</li>
+<li>доля верно угаданных знаков. Её нужно сравнивать не с 50%, а с долей дней роста: модель, которая всегда предсказывает рост, угадает знак во всех растущих днях.</li>
+</ul>
+<p>Для прогноза волатильности эталоном служит последнее наблюдённое значение или модель GARCH.</p>
+</section></section><section id="sec-leakage" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-leakage">
+<span class="header-section-number">9.2</span> Утечка данных</h2>
+<section id="как-модель-угадала-85-дней" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="как-модель-угадала-85-дней">
+<span class="header-section-number">9.2.1</span> Как модель «угадала» 85% дней</h3>
+<p>Вернёмся к модели из начала главы. Она воспроизводит признаки из прошлогоднего учебного ноутбука курса: цель – доходность дня <span class="math inline">\(t\)</span>, признаки – лаги доходности, скользящие средние <code>ma5</code>, <code>ma10</code>, <code>ma20</code>, скользящие стандартные отклонения, индекс относительной силы (RSI), оборот торгов, день недели и месяц. Лаги сдвинуты правильно, а скользящие статистики – нет: <code>r.rolling(5).mean()</code> в строке <span class="math inline">\(t\)</span> – это среднее доходностей дней с <span class="math inline">\(t-4\)</span> по <span class="math inline">\(t\)</span>, то есть включает цель.</p>
+<p>Насколько серьёзна такая подсказка, показывает обычная линейная регрессия. Скользящее среднее за 5 дней и четыре лага содержат цель точно:</p>
+<p><span id="eq-leak-identity"><span class="math display">\[
+r_t = 5 \cdot \text{ma5}_t - r_{t-1} - r_{t-2} - r_{t-3} - r_{t-4}.
+\tag{9.2}\]</span></span></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Признаки с утечкой: скользящее среднее включает день t, цель – доходность дня t</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>imoex <span class="op">=</span> data.load_index(<span class="st">"IMOEX"</span>, start<span class="op">=</span><span class="st">"2003-01-01"</span>).set_index(<span class="st">"date"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.log(imoex[<span class="st">"close"</span>]).diff()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>leaky <span class="op">=</span> pd.DataFrame({<span class="st">"y"</span>: r, <span class="st">"ma5"</span>: r.rolling(<span class="dv">5</span>).mean()})</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    leaky[<span class="ss">f"lag</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> r.shift(k)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>leaky <span class="op">=</span> leaky.dropna()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ols <span class="op">=</span> LinearRegression().fit(leaky.drop(columns<span class="op">=</span><span class="st">"y"</span>), leaky[<span class="st">"y"</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R² ="</span>, <span class="bu">round</span>(ols.score(leaky.drop(columns<span class="op">=</span><span class="st">"y"</span>), leaky[<span class="st">"y"</span>]), <span class="dv">6</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R² = 1.0</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Коэффициенты:"</span>, ols.coef_.<span class="bu">round</span>(<span class="dv">3</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Коэффициенты: [ 5. -1. -1. -1. -1.]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">imoex</span> <span class="op">&lt;-</span> <span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"IMOEX"</span>, start <span class="op">=</span> <span class="st">"2003-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
+<span><span class="va">leaky</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">imoex</span><span class="op">$</span><span class="va">close</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ma5 <span class="op">=</span> <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">rollmean</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">5</span>, fill <span class="op">=</span> <span class="cn">NA</span>, align <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span>,</span>
+<span>         lag1 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span>, lag2 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">2</span><span class="op">)</span>, lag3 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">3</span><span class="op">)</span>, lag4 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">r</span> <span class="op">~</span> <span class="va">ma5</span> <span class="op">+</span> <span class="va">lag1</span> <span class="op">+</span> <span class="va">lag2</span> <span class="op">+</span> <span class="va">lag3</span> <span class="op">+</span> <span class="va">lag4</span>, data <span class="op">=</span> <span class="va">leaky</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">$</span><span class="va">r.squared</span>   <span class="co"># 1: цель восстановлена точно</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; (Intercept)         ma5        lag1        lag2        lag3        lag4 </span></span>
+<span><span class="co">#&gt;           0           5          -1          -1          -1          -1</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(R^2\)</span> равен единице, коэффициенты – ровно 5 и −1. Бустинг не знает этого тождества, но быстро находит его приближённо, как и зависимость цели от RSI и скользящей волатильности, посчитанных по тем же окнам. Отсюда и 86% угаданных знаков.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: признак, который знает ответ">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: признак, который знает ответ
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Утечка данных (data leakage) – использование при обучении или проверке информации, которой не было бы в момент прогноза. Самые частые формы в финансовых задачах:</p>
+<ol type="1">
+<li>
+<strong>Скользящее окно включает цель.</strong> <code>rolling(...)</code> в строке <span class="math inline">\(t\)</span> включает наблюдение <span class="math inline">\(t\)</span>. Если цель – <span class="math inline">\(r_t\)</span>, признак нужно сдвинуть: <code>r.rolling(5).mean().shift(1)</code>. Если цель – <span class="math inline">\(r_{t+1}\)</span> (как в <a href="#eq-ml-setup" class="quarto-xref">формула&nbsp;<span>9.1</span></a>), сдвигать признаки не нужно, сдвигается цель.</li>
+<li>
+<strong>Данные того же дня.</strong> Оборот, максимум и минимум дня <span class="math inline">\(t\)</span> становятся известны только после закрытия. Для прогноза <span class="math inline">\(r_t\)</span> их использовать нельзя.</li>
+<li>
+<strong>Масштабирование по всей выборке.</strong> <code>StandardScaler</code> или <code>MinMaxScaler</code>, обученный на всех данных до разбиения, передаёт в обучающую часть среднее и разброс тестовой. Масштабирование – часть модели, и его параметры оцениваются только на обучающих данных (в scikit-learn это делает <code>Pipeline</code>).</li>
+<li>
+<strong>Подбор модели на тесте.</strong> Ранняя остановка бустинга по ошибке на тестовом фолде, выбор гиперпараметров или признаков по результату на тесте превращают тест в ещё одну обучающую выборку.</li>
+<li>
+<strong>Случайное разбиение.</strong> <code>train_test_split</code> по умолчанию перемешивает наблюдения, и модель учится на будущем, чтобы «предсказать» прошлое (см. раздел <a href="#sec-time-cv" class="quarto-xref"><span>9.3</span></a>).</li>
+</ol>
+<p>Главный признак утечки – результат, который слишком хорош. Прежде чем радоваться <span class="math inline">\(R^2 = 0{,}6\)</span> на дневных доходностях, ищите ошибку.</p>
+</div>
+</div>
+</section></section><section id="sec-time-cv" class="level2 page-columns page-full" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-time-cv">
+<span class="header-section-number">9.3</span> Валидация во времени</h2>
+<section id="почему-не-подходит-обычная-кросс-валидация" class="level3 page-columns page-full" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="почему-не-подходит-обычная-кросс-валидация">
+<span class="header-section-number">9.3.1</span> Почему не подходит обычная кросс-валидация</h3>
+<p>Обычная <span class="math inline">\(k\)</span>-кратная кросс-валидация делит данные на <span class="math inline">\(k\)</span> частей случайным образом, обучает модель на <span class="math inline">\(k-1\)</span> частях и проверяет на оставшейся. Для независимых наблюдений это разумно. Для временного ряда – нет, по двум причинам. Во-первых, модель обучается на данных, которые идут <em>после</em> тестовых, а в реальности будущее недоступно. Во-вторых, соседние наблюдения временного ряда похожи, и если одно попало в обучение, а соседнее – в тест, модель проверяется почти на тех же данных, на которых училась.</p>
+<p>Вместо этого используют схемы, в которых тест всегда идёт после обучения.</p>
+<ul>
+<li>
+<strong>Расширяющееся окно</strong> (expanding window): модель обучается на всех данных до начала теста; с каждым шагом обучающая выборка растёт. Так устроен <code>TimeSeriesSplit</code> в scikit-learn.</li>
+<li>
+<strong>Скользящее окно</strong> (sliding window): обучающая выборка фиксированной длины сдвигается вперёд. Это уместно, если старые данные устаревают, например после смены рыночного режима.</li>
+<li>
+<strong>Эмбарго</strong> (embargo): между обучением и тестом оставляют разрыв. Он нужен, когда цель охватывает несколько будущих дней и цели соседних наблюдений перекрываются <span class="citation" data-cites="lopezdeprado2018">(<a href="references.html#ref-lopezdeprado2018" role="doc-biblioref">López de Prado 2018 г.</a>)</span>.</li>
+</ul>
+<div class="no-row-height column-margin column-container"></div><div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n, k <span class="op">=</span> <span class="dv">100</span>, <span class="dv">4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>schemes <span class="op">=</span> {}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">3</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>folds <span class="op">=</span> rng.permutation(n) <span class="op">%</span> k</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>schemes[<span class="st">"Случайные</span><span class="ch">\n</span><span class="st">фолды"</span>] <span class="op">=</span> [(np.where(folds <span class="op">!=</span> i)[<span class="dv">0</span>], np.where(folds <span class="op">==</span> i)[<span class="dv">0</span>], []) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k)]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>test_len <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>starts <span class="op">=</span> [<span class="dv">36</span>, <span class="dv">52</span>, <span class="dv">68</span>, <span class="dv">84</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>schemes[<span class="st">"Расширяющееся</span><span class="ch">\n</span><span class="st">окно"</span>] <span class="op">=</span> [(np.arange(<span class="dv">0</span>, s), np.arange(s, s <span class="op">+</span> test_len), []) <span class="cf">for</span> s <span class="kw">in</span> starts]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>schemes[<span class="st">"Скользящее</span><span class="ch">\n</span><span class="st">окно"</span>] <span class="op">=</span> [(np.arange(s <span class="op">-</span> <span class="dv">36</span>, s), np.arange(s, s <span class="op">+</span> test_len), []) <span class="cf">for</span> s <span class="kw">in</span> starts]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>schemes[<span class="st">"С эмбарго"</span>] <span class="op">=</span> [(np.arange(<span class="dv">0</span>, s <span class="op">-</span> <span class="dv">5</span>), np.arange(s, s <span class="op">+</span> test_len), np.arange(s <span class="op">-</span> <span class="dv">5</span>, s)) <span class="cf">for</span> s <span class="kw">in</span> starts]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="bu">len</span>(schemes), <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">4.6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (name, splits) <span class="kw">in</span> <span class="bu">zip</span>(axes, schemes.items()):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row, (tr_i, te_i, gap_i) <span class="kw">in</span> <span class="bu">enumerate</span>(splits):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        ax.scatter(tr_i, [row] <span class="op">*</span> <span class="bu">len</span>(tr_i), marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">6</span>, color<span class="op">=</span>plot.BLUE, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        ax.scatter(te_i, [row] <span class="op">*</span> <span class="bu">len</span>(te_i), marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">6</span>, color<span class="op">=</span>plot.ORANGE, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        ax.scatter(gap_i, [row] <span class="op">*</span> <span class="bu">len</span>(gap_i), marker<span class="op">=</span><span class="st">"s"</span>, s<span class="op">=</span><span class="dv">6</span>, color<span class="op">=</span>plot.GREY, lw<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(name, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">"right"</span>, va<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">False</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>axes[<span class="op">-</span><span class="dv">1</span>].set_xlabel(<span class="st">"Время →"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-cv-schemes" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cv-schemes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="09-ml-forecasting_files/figure-html/fig-cv-schemes-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cv-schemes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.1: Схемы валидации: случайное разбиение, расширяющееся окно, скользящее окно и расширяющееся окно с эмбарго. Синий – обучение, оранжевый – тест, серый – эмбарго
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="насколько-обманывает-перемешивание" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="насколько-обманывает-перемешивание">
+<span class="header-section-number">9.3.2</span> Насколько обманывает перемешивание</h3>
+<p>Разница между схемами становится драматической, когда цели перекрываются. Возьмём в качестве цели доходность индекса за следующие 20 торговых дней. Цели двух соседних дней совпадают на 19 дней из 20. При случайном разбиении у каждого тестового наблюдения есть почти точная копия его цели в обучающей выборке, и модель, запомнившая обучающие данные, «предскажет» тест.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Признаки по данным до конца дня t (включительно)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_features(close, value):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> np.log(close).diff()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>close.index)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        f[<span class="ss">f"r_lag</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> r.shift(k)                   <span class="co"># r_t, r_{t−1}, ..., r_{t−4}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> w <span class="kw">in</span> (<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">60</span>):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        f[<span class="ss">f"mom</span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> r.rolling(w).<span class="bu">sum</span>()             <span class="co"># доходность за w дней</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        f[<span class="ss">f"vol</span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> r.rolling(w).std()             <span class="co"># волатильность за w дней</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">"rsi"</span>] <span class="op">=</span> rsi_of(close)                          <span class="co"># индекс относительной силы по ценам</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    log_value <span class="op">=</span> np.log(value.replace(<span class="dv">0</span>, np.nan))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">"dvalue"</span>] <span class="op">=</span> log_value <span class="op">-</span> log_value.rolling(<span class="dv">20</span>).mean()   <span class="co"># оборот относительно среднего</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">"dow"</span>] <span class="op">=</span> f.index.dayofweek</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rsi_of(x, n<span class="op">=</span><span class="dv">14</span>):</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Индекс относительной силы: средний рост к среднему падению за n дней, шкала 0–100."""</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> x.diff()</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    up, down <span class="op">=</span> d.clip(lower<span class="op">=</span><span class="dv">0</span>).rolling(n).mean(), (<span class="op">-</span>d.clip(upper<span class="op">=</span><span class="dv">0</span>)).rolling(n).mean()</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">100</span> <span class="op">-</span> <span class="dv">100</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> up <span class="op">/</span> down)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>feats <span class="op">=</span> make_features(imoex[<span class="st">"close"</span>], imoex[<span class="st">"value_rub"</span>])</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.log(imoex[<span class="st">"close"</span>]).diff()</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Цель: доходность за 20 следующих дней, r_{t+1} + ... + r_{t+20}</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>fwd20 <span class="op">=</span> r[::<span class="op">-</span><span class="dv">1</span>].rolling(<span class="dv">20</span>).<span class="bu">sum</span>()[::<span class="op">-</span><span class="dv">1</span>].shift(<span class="op">-</span><span class="dv">1</span>).rename(<span class="st">"y"</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>d20 <span class="op">=</span> pd.concat([feats, fwd20], axis<span class="op">=</span><span class="dv">1</span>).dropna().loc[<span class="st">"2005"</span>:]</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>X20, y20 <span class="op">=</span> d20.drop(columns<span class="op">=</span><span class="st">"y"</span>), d20[<span class="st">"y"</span>]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cv_r2(splitter, embargo<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""R² прогноза, собранного по тестовым фолдам; embargo – разрыв в днях до и после теста."""</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    pred <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>y20.index)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tr_i, te_i <span class="kw">in</span> splitter.split(X20):</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> embargo:</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>            tr_i <span class="op">=</span> tr_i[(tr_i <span class="op">&lt;</span> te_i.<span class="bu">min</span>() <span class="op">-</span> embargo) <span class="op">|</span> (tr_i <span class="op">&gt;</span> te_i.<span class="bu">max</span>() <span class="op">+</span> embargo)]</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> lgb.LGBMRegressor(<span class="op">**</span>gb_params).fit(X20.iloc[tr_i], y20.iloc[tr_i])</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        pred.iloc[te_i] <span class="op">=</span> m.predict(X20.iloc[te_i])</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    ok <span class="op">=</span> pred.notna()</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> ((y20[ok] <span class="op">-</span> pred[ok]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="op">/</span> ((y20[ok] <span class="op">-</span> y20[ok].mean()) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>cv_tab <span class="op">=</span> pd.Series({</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Случайные фолды (перемешивание)"</span>: cv_r2(KFold(<span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)),</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Расширяющееся окно"</span>: cv_r2(TimeSeriesSplit(<span class="dv">5</span>)),</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Расширяющееся окно, эмбарго 20 дней"</span>: cv_r2(TimeSeriesSplit(<span class="dv">5</span>), embargo<span class="op">=</span><span class="dv">20</span>),</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>}, name<span class="op">=</span><span class="st">"R² вне выборки"</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>cv_tab.to_frame().style.<span class="bu">format</span>(<span class="kw">lambda</span> v: ru(v, <span class="dv">2</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_8ba19" class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_8ba19_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² вне выборки</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_8ba19_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Случайные фолды (перемешивание)</th>
+<td id="T_8ba19_row0_col0" class="data row0 col0">0,31</td>
+</tr>
+<tr class="even">
+<th id="T_8ba19_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Расширяющееся окно</th>
+<td id="T_8ba19_row1_col0" class="data row1 col0">−0,29</td>
+</tr>
+<tr class="odd">
+<th id="T_8ba19_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Расширяющееся окно, эмбарго 20 дней</th>
+<td id="T_8ba19_row2_col0" class="data row2 col0">−0,30</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>При перемешивании модель показывает <span class="math inline">\(R^2 =\)</span> 0,31: как будто месячная доходность индекса предсказуема на треть. При проверке во времени <span class="math inline">\(R^2 =\)</span> −0,29, то есть модель хуже простого среднего. Ни одна из этих цифр не говорит, что признаки бесполезны или полезны, – только первая говорит неправду. Эмбарго здесь почти не меняет результат, потому что в <code>TimeSeriesSplit</code> обучающая выборка и так целиком предшествует тесту; перекрываются лишь последние 20 целей перед тестом. При более сложных схемах, где обучающие данные есть и до, и после теста, эмбарго обязательно.</p>
+</section></section><section id="sec-ml-returns" class="level2 page-columns page-full" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-ml-returns">
+<span class="header-section-number">9.4</span> Прогноз доходности: линейная модель и бустинг</h2>
+<section id="модели" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="модели">
+<span class="header-section-number">9.4.1</span> Модели</h3>
+<p>Сравним две модели разной природы.</p>
+<p><strong>Гребневая регрессия</strong> (ridge regression) – линейная регрессия со штрафом за размер коэффициентов:</p>
+<p><span id="eq-ridge"><span class="math display">\[
+\hat\beta = \arg\min_\beta \sum_t \left(y_t - x_t'\beta\right)^2 + \lambda \lVert\beta\rVert^2.
+\tag{9.3}\]</span></span></p>
+<p>Штраф <span class="math inline">\(\lambda\)</span> стягивает коэффициенты к нулю. Когда сигнал слаб, а признаков много, это защищает от переобучения: модель не подстраивается под случайные совпадения. Признаки перед оценкой приводят к одному масштабу.</p>
+<p><strong>Градиентный бустинг</strong> строит прогноз как сумму сотен небольших деревьев решений. Каждое новое дерево обучается на ошибках суммы предыдущих, а вклад каждого дерева умножается на малый шаг обучения. Деревья сами находят нелинейности и взаимодействия признаков, например что после сильного падения при высокой волатильности рынок ведёт себя иначе, чем при низкой. Библиотека LightGBM – одна из самых быстрых реализаций. Главные гиперпараметры: шаг обучения (<code>learning_rate</code>), число деревьев (<code>n_estimators</code>), размер дерева (<code>num_leaves</code>) и минимальное число наблюдений в листе (<code>min_data_in_leaf</code>). Чем крупнее деревья и чем меньше наблюдений в листе, тем гибче модель и тем легче она запоминает шум.</p>
+</section><section id="проверка-на-20122026-гг." class="level3 page-columns page-full" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="проверка-на-20122026-гг.">
+<span class="header-section-number">9.4.2</span> Проверка на 2012–2026 гг.</h3>
+<p>Цель – доходность индекса на следующий день. Признаки – те же, что в предыдущем разделе, но теперь все они посчитаны по данным до конца дня <span class="math inline">\(t\)</span>, а цель сдвинута на день вперёд. Каждый год с 2012 по 2026 г. модели заново обучаются на всех предыдущих годах (расширяющееся окно) и прогнозируют доходности текущего года.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="op">=</span> pd.concat([feats, r.shift(<span class="op">-</span><span class="dv">1</span>).rename(<span class="st">"y"</span>)], axis<span class="op">=</span><span class="dv">1</span>).dropna().loc[<span class="st">"2005"</span>:]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {<span class="st">"Историческое среднее"</span>: [], <span class="st">"Гребневая регрессия"</span>: [], <span class="st">"LightGBM"</span>: []}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> []</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2012</span>, <span class="dv">2027</span>):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    train <span class="op">=</span> d1.loc[: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    test <span class="op">=</span> d1.loc[<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    X_tr, y_tr, X_te <span class="op">=</span> train.drop(columns<span class="op">=</span><span class="st">"y"</span>), train[<span class="st">"y"</span>], test.drop(columns<span class="op">=</span><span class="st">"y"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Масштабирование внутри Pipeline: среднее и разброс – только по обучающим данным</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ridge <span class="op">=</span> make_pipeline(StandardScaler(), Ridge(alpha<span class="op">=</span><span class="dv">100</span>)).fit(X_tr, y_tr)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    booster <span class="op">=</span> lgb.LGBMRegressor(<span class="op">**</span>gb_params).fit(X_tr, y_tr)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    preds[<span class="st">"Историческое среднее"</span>].append(pd.Series(y_tr.mean(), index<span class="op">=</span>test.index))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    preds[<span class="st">"Гребневая регрессия"</span>].append(pd.Series(ridge.predict(X_te), index<span class="op">=</span>test.index))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    preds[<span class="st">"LightGBM"</span>].append(pd.Series(booster.predict(X_te), index<span class="op">=</span>test.index))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    actual.append(test[<span class="st">"y"</span>])</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>y_oos <span class="op">=</span> pd.concat(actual)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>pred_oos <span class="op">=</span> {name: pd.concat(p) <span class="cf">for</span> name, p <span class="kw">in</span> preds.items()}</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>sse <span class="op">=</span> <span class="kw">lambda</span> p: ((y_oos <span class="op">-</span> p) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ret_tab <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    name: {<span class="st">"R² против нуля"</span>: <span class="dv">1</span> <span class="op">-</span> sse(p) <span class="op">/</span> (y_oos <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>           <span class="st">"R² против среднего"</span>: <span class="dv">1</span> <span class="op">-</span> sse(p) <span class="op">/</span> sse(pred_oos[<span class="st">"Историческое среднее"</span>]),</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Доля угаданных знаков"</span>: (np.sign(p) <span class="op">==</span> np.sign(y_oos)).mean()}</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, p <span class="kw">in</span> pred_oos.items()}).T</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>ret_tab.style.<span class="bu">format</span>(ru)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-ml-returns" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ml-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;9.1: Прогноз дневной доходности IMOEX вне выборки, 2012–2026 гг., переобучение раз в год
+</figcaption><div aria-describedby="tbl-ml-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_4d9ca" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_4d9ca_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² против нуля</th>
+<th id="T_4d9ca_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R² против среднего</th>
+<th id="T_4d9ca_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Доля угаданных знаков</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_4d9ca_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое среднее</th>
+<td id="T_4d9ca_row0_col0" class="data row0 col0">−0,001</td>
+<td id="T_4d9ca_row0_col1" class="data row0 col1">0,000</td>
+<td id="T_4d9ca_row0_col2" class="data row0 col2">0,520</td>
+</tr>
+<tr class="even">
+<th id="T_4d9ca_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Гребневая регрессия</th>
+<td id="T_4d9ca_row1_col0" class="data row1 col0">−0,015</td>
+<td id="T_4d9ca_row1_col1" class="data row1 col1">−0,014</td>
+<td id="T_4d9ca_row1_col2" class="data row1 col2">0,498</td>
+</tr>
+<tr class="odd">
+<th id="T_4d9ca_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM</th>
+<td id="T_4d9ca_row2_col0" class="data row2 col0">−0,044</td>
+<td id="T_4d9ca_row2_col1" class="data row2 col1">−0,044</td>
+<td id="T_4d9ca_row2_col2" class="data row2 col2">0,519</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Обе модели проигрывают даже нулевому прогнозу: <span class="math inline">\(R^2\)</span> гребневой регрессии – −0,015, бустинга – −0,044. Бустинг проигрывает сильнее: гибкая модель находит в обучающих данных больше закономерностей, которые оказываются шумом. Доля угаданных знаков у бустинга, 51,9%, почти совпадает с долей дней роста, 52,0%, – того же добился бы прогноз «завтра рост».</p>
+<p>Это ожидаемый результат, а не неудача метода. <span class="citation" data-cites="gu2020">Gu и др. (<a href="references.html#ref-gu2020" role="doc-biblioref">2020 г.</a>)</span> показали, что машинное обучение действительно помогает прогнозировать доходности американских акций. Но это прогноз в <em>поперечном</em> разрезе: какие из тысяч акций в следующем месяце вырастут сильнее других. Предсказать, куда пойдёт весь рынок завтра, гораздо труднее, и даже в лучших работах <span class="math inline">\(R^2\)</span> вне выборки измеряется долями процента.</p>
+<div class="no-row-height column-margin column-container"></div></section></section><section id="sec-ml-volatility" class="level2 page-columns page-full" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="sec-ml-volatility">
+<span class="header-section-number">9.5</span> Где сигнал есть: прогноз волатильности</h2>
+<p>В главе о GARCH мы видели, что волатильность, в отличие от доходности, хорошо предсказуема. Здесь у машинного обучения больше шансов. Будем прогнозировать среднюю дисперсию доходности на следующие 5 торговых дней. Её зашумлённая оценка – средний квадрат дневной доходности за эти дни.</p>
+<p>Стандартный эталон – модель HAR (heterogeneous autoregressive) <span class="citation" data-cites="corsi2009">(<a href="references.html#ref-corsi2009" role="doc-biblioref">Corsi 2009 г.</a>)</span>. Она объясняет будущую дисперсию тремя средними квадратов прошлых доходностей: за день, неделю и месяц:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-har"><span class="math display">\[
+\ln \mathrm{RV}_{t+1:t+5} = b_0 + b_d \ln \mathrm{RV}_t + b_w \ln \mathrm{RV}_{t-4:t} + b_m \ln \mathrm{RV}_{t-21:t} + u_t.
+\tag{9.4}\]</span></span></p>
+<p>Идея модели в том, что на рынке действуют участники с разными горизонтами: внутридневные спекулянты, недельные трейдеры, месячные инвесторы. Каждый реагирует на волатильность своего горизонта. Три средних с разными окнами дают длинную память, как у GARCH, но оцениваются обычной регрессией. Сравним HAR с бустингом на тех же трёх признаках и на расширенном наборе, куда добавлены доходность за неделю и квадраты отрицательных доходностей (асимметрия, как в модели GJR).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>r100 <span class="op">=</span> r.dropna() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sq <span class="op">=</span> r100 <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rv <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"d"</span>: np.log(sq <span class="op">+</span> <span class="fl">1e-4</span>),                           <span class="co"># последний день</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"w"</span>: np.log(sq.rolling(<span class="dv">5</span>).mean() <span class="op">+</span> <span class="fl">1e-4</span>),         <span class="co"># неделя</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: np.log(sq.rolling(<span class="dv">22</span>).mean() <span class="op">+</span> <span class="fl">1e-4</span>),        <span class="co"># месяц</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ret_w"</span>: r100.rolling(<span class="dv">5</span>).<span class="bu">sum</span>(),                   <span class="co"># доходность за неделю</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"neg"</span>: np.log((r100 <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">*</span> sq <span class="op">+</span> <span class="fl">1e-4</span>),            <span class="co"># квадрат отрицательной доходности</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Цель: логарифм среднего квадрата доходности за дни t+1, ..., t+5</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>rv[<span class="st">"y"</span>] <span class="op">=</span> np.log(sq[::<span class="op">-</span><span class="dv">1</span>].rolling(H).mean()[::<span class="op">-</span><span class="dv">1</span>].shift(<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>rv <span class="op">=</span> rv.dropna().loc[<span class="st">"2004"</span>:]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>har_cols <span class="op">=</span> [<span class="st">"d"</span>, <span class="st">"w"</span>, <span class="st">"m"</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>vol_preds <span class="op">=</span> {<span class="st">"Последняя неделя"</span>: [], <span class="st">"HAR"</span>: [], <span class="st">"LightGBM (d, w, m)"</span>: [], <span class="st">"LightGBM (все признаки)"</span>: []}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>vol_actual <span class="op">=</span> []</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>vol_params <span class="op">=</span> <span class="bu">dict</span>(learning_rate<span class="op">=</span><span class="fl">0.03</span>, num_leaves<span class="op">=</span><span class="dv">15</span>, min_data_in_leaf<span class="op">=</span><span class="dv">100</span>, n_estimators<span class="op">=</span><span class="dv">300</span>, verbose<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2012</span>, <span class="dv">2027</span>):</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Эмбарго: последние H целей обучающей выборки заходят в тестовый год</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    train <span class="op">=</span> rv.loc[: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>].iloc[:<span class="op">-</span>H]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    test <span class="op">=</span> rv.loc[<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    har <span class="op">=</span> LinearRegression().fit(train[har_cols], train[<span class="st">"y"</span>])</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    gb3 <span class="op">=</span> lgb.LGBMRegressor(<span class="op">**</span>vol_params).fit(train[har_cols], train[<span class="st">"y"</span>])</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    gb_all <span class="op">=</span> lgb.LGBMRegressor(<span class="op">**</span>vol_params).fit(train.drop(columns<span class="op">=</span><span class="st">"y"</span>), train[<span class="st">"y"</span>])</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    vol_preds[<span class="st">"Последняя неделя"</span>].append(test[<span class="st">"w"</span>])</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    vol_preds[<span class="st">"HAR"</span>].append(pd.Series(har.predict(test[har_cols]), index<span class="op">=</span>test.index))</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    vol_preds[<span class="st">"LightGBM (d, w, m)"</span>].append(pd.Series(gb3.predict(test[har_cols]), index<span class="op">=</span>test.index))</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    vol_preds[<span class="st">"LightGBM (все признаки)"</span>].append(</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        pd.Series(gb_all.predict(test.drop(columns<span class="op">=</span><span class="st">"y"</span>)), index<span class="op">=</span>test.index))</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    vol_actual.append(test[<span class="st">"y"</span>])</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>yv <span class="op">=</span> pd.concat(vol_actual)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>vol_tab <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    name: {<span class="st">"RMSE"</span>: np.sqrt(((yv <span class="op">-</span> pd.concat(p)) <span class="op">**</span> <span class="dv">2</span>).mean()),</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>           <span class="st">"R²"</span>: <span class="dv">1</span> <span class="op">-</span> ((yv <span class="op">-</span> pd.concat(p)) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="op">/</span> ((yv <span class="op">-</span> yv.mean()) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()}</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, p <span class="kw">in</span> vol_preds.items()}).T</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>vol_tab.style.<span class="bu">format</span>(ru)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-ml-vol" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ml-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;9.2: Прогноз средней дисперсии на 5 дней вперёд вне выборки, 2012–2026 гг. Ошибки – в логарифмах дисперсии
+</figcaption><div aria-describedby="tbl-ml-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_cf2c6" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_cf2c6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">RMSE</th>
+<th id="T_cf2c6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R²</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_cf2c6_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Последняя неделя</th>
+<td id="T_cf2c6_row0_col0" class="data row0 col0">1,086</td>
+<td id="T_cf2c6_row0_col1" class="data row0 col1">−0,000</td>
+</tr>
+<tr class="even">
+<th id="T_cf2c6_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">HAR</th>
+<td id="T_cf2c6_row1_col0" class="data row1 col0">0,897</td>
+<td id="T_cf2c6_row1_col1" class="data row1 col1">0,317</td>
+</tr>
+<tr class="odd">
+<th id="T_cf2c6_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM (d, w, m)</th>
+<td id="T_cf2c6_row2_col0" class="data row2 col0">0,925</td>
+<td id="T_cf2c6_row2_col1" class="data row2 col1">0,274</td>
+</tr>
+<tr class="even">
+<th id="T_cf2c6_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">LightGBM (все признаки)</th>
+<td id="T_cf2c6_row3_col0" class="data row3 col0">0,913</td>
+<td id="T_cf2c6_row3_col1" class="data row3 col1">0,293</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r100</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">imoex</span><span class="op">$</span><span class="va">close</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sq</span> <span class="op">&lt;-</span> <span class="va">r100</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">roll_mean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">k</span><span class="op">)</span> <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">rollmeanr</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">k</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="va">har_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">sq</span> <span class="op">+</span> <span class="fl">1e-4</span><span class="op">)</span>,</span>
+<span>  w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu">roll_mean</span><span class="op">(</span><span class="va">sq</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1e-4</span><span class="op">)</span>,</span>
+<span>  m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu">roll_mean</span><span class="op">(</span><span class="va">sq</span>, <span class="fl">22</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1e-4</span><span class="op">)</span>,</span>
+<span>  <span class="co"># цель: логарифм среднего квадрата за следующие 5 дней</span></span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lead</a></span><span class="op">(</span><span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">rollmean</a></span><span class="op">(</span><span class="va">sq</span>, <span class="fl">5</span>, fill <span class="op">=</span> <span class="cn">NA</span>, align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">har</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">d</span> <span class="op">+</span> <span class="va">w</span> <span class="op">+</span> <span class="va">m</span>, data <span class="op">=</span> <span class="va">har_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">har</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>   <span class="co"># вес месячной компоненты – наибольший</span></span>
+<span><span class="co">#&gt; (Intercept)           d           w           m </span></span>
+<span><span class="co">#&gt;      -0.071       0.006       0.184       0.606</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Картина противоположна прогнозу доходности. Волатильность предсказуема: модель HAR объясняет вне выборки 32% дисперсии логарифма будущей волатильности. Бустинг на тех же трёх признаках даёт 27%, на расширенном наборе – 29%. Три коэффициента линейной регрессии оказываются не хуже сотен деревьев. В последней оценке HAR наибольший вес у месячной компоненты (0,61), затем у недельной (0,18), а у дневной он почти нулевой: один день – слишком шумная оценка волатильности.</p>
+<p>Отсюда общий урок. Машинное обучение выигрывает там, где зависимость сложная и нелинейная, а данных много. Когда главная зависимость проста и хорошо известна, как долгая память волатильности, правильно выбранные признаки важнее выбора алгоритма. Модели вроде HAR служат эталоном, который сложная модель должна превзойти, чтобы оправдать свою сложность.</p>
+</section><section id="sec-ml-strategy" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="sec-ml-strategy">
+<span class="header-section-number">9.6</span> От прогноза к стратегии</h2>
+<p>Прогноз сам по себе не приносит денег, деньги приносит основанное на нём решение. Простейшее решение – быть в рынке, когда модель прогнозирует рост, и вне рынка, когда падение. Посчитаем среднегодовую лог-доходность такой стратегии для бустинга из раздела <a href="#sec-ml-returns" class="quarto-xref"><span>9.4</span></a> и сравним с покупкой и удержанием индекса.</p>
+<p>Результат удивляет. При <span class="math inline">\(R^2\)</span> ниже нуля стратегия на прогнозах LightGBM приносит 7,0% в год против 3,6% у индекса. Мы перебрали 18 сочетаний гиперпараметров, и в 16 из них стратегия обгоняет индекс; годовая доходность колеблется от 2,9% до 10,1%. Неужели модель всё-таки что-то нашла?</p>
+<p>Разберём, откуда преимущество. Из 3,3 п. п. годового преимущества 2,8 п. п. даёт один-единственный день: накануне 24 февраля 2022 г. модель оказалась вне рынка, и стратегия избежала падения индекса на 33% (лог-доходность −0,40). После сильного падения и всплеска волатильности 21–22 февраля модель прогнозировала отрицательную доходность, и это совпало с одним из крупнейших обвалов в истории рынка. Совпадение осмысленное (при высокой волатильности модель осторожнее), но построено на одном эпизоде, который не повторится в той же форме.</p>
+<p>Кроме того, стратегия меняет позицию около 99 раз в год. Если каждая смена позиции стоит 0,1% (комиссии и спред), годовая доходность стратегии падает до −2,9%, ниже, чем у индекса. И наконец, сравнение неполное: индекс IMOEX не учитывает дивиденды, которые получает держатель акций, а деньги вне рынка в нашем расчёте не приносят дохода, хотя на самом деле их можно разместить по ставке денежного рынка. Как правильно учитывать бенчмарк, издержки и множественность перебранных вариантов, разбирается в главе о бэктестинге и переобучении.</p>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Задача прогноза начинается с временной оси: признаки строки <span class="math inline">\(t\)</span> используют только данные до конца дня <span class="math inline">\(t\)</span>, цель – величина из будущего, например <code>r.shift(-1)</code>.</li>
+<li>Утечка данных – главная опасность машинного обучения в финансах. Скользящие окна, включающие цель, данные того же дня, масштабирование по всей выборке и подбор модели на тесте дают правдоподобные, но ложные результаты. Слишком хороший результат – повод искать ошибку.</li>
+<li>Для временных рядов нужна валидация во времени: расширяющееся или скользящее окно, эмбарго при пересекающихся целях. Случайное разбиение при 20-дневной цели превращает отрицательный <span class="math inline">\(R^2\)</span> в положительный.</li>
+<li>В прогнозе дневной доходности индекса ни гребневая регрессия, ни бустинг не превосходят нулевой прогноз. Бустинг проигрывает сильнее: гибкость без сигнала – это переобучение.</li>
+<li>Волатильность предсказуема, но простая модель HAR на трёх признаках не уступает бустингу. Правильные признаки важнее сложного алгоритма.</li>
+<li>Стратегия на прогнозах может обыграть рынок на бумаге за счёт одного эпизода и без учёта издержек. Прежде чем верить таким результатам, их нужно проверить методами бэктестинга.</li>
+</ul></section><section id="sec-exercises-ml" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="sec-exercises-ml">
+<span class="header-section-number">9.7</span> Упражнения</h2>
+<p>Упражнения разделены на четыре типа. Задания <strong>А</strong> проверяют понимание и решаются без компьютера. Задания <strong>Б</strong> выполняются на данных вашей акции (тикер назначает преподаватель), поэтому готового ответа у них нет. Задания <strong>В</strong> учат работать с ИИ-ассистентом: не получать ответ, а проверять его. Задание <strong>Г</strong> – небольшое исследование, результаты которого нужно защитить устно.</p>
+<section id="а.-понимание" class="level3" data-number="9.7.1"><h3 data-number="9.7.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">9.7.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Для каждого признака определите, можно ли использовать его в строке <span class="math inline">\(t\)</span> для прогноза <span class="math inline">\(r_{t+1}\)</span> и для прогноза <span class="math inline">\(r_t\)</span>: (а) <code>r.shift(1)</code>; (б) <code>r.rolling(20).std()</code>; (в) объём торгов дня <span class="math inline">\(t\)</span>; (г) цена открытия дня <span class="math inline">\(t+1\)</span>; (д) день недели дня <span class="math inline">\(t+1\)</span>.</li>
+<li>Почему модель, которая всегда прогнозирует рост, может угадывать знак доходности в 53% дней? Какой эталон нужен для доли угаданных знаков?</li>
+<li>Цель – доходность за следующие 10 дней, признаки считаются ежедневно. Почему случайное разбиение на обучающую и тестовую выборки завышает качество модели? Какой длины нужно эмбарго?</li>
+<li>Что произойдёт, если стандартизовать признаки по всей выборке до разбиения? Почему это утечка, хотя целевая переменная не используется?</li>
+<li>В чём разница между гребневой регрессией и градиентным бустингом с точки зрения переобучения? Почему при слабом сигнале бустинг часто проигрывает линейной модели?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="9.7.2"><h3 data-number="9.7.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">9.7.2</span> Б. Практика на своей акции</h3>
+<ol start="6" type="1">
+<li>Постройте признаки из раздела <a href="#sec-time-cv" class="quarto-xref"><span>9.3</span></a> для своей акции. Специально внесите утечку, заменив цель на доходность того же дня, и оцените <span class="math inline">\(R^2\)</span> бустинга. Затем исправьте постановку и сравните.</li>
+<li>Повторите сравнение гребневой регрессии и LightGBM из раздела <a href="#sec-ml-returns" class="quarto-xref"><span>9.4</span></a> для своей акции. Добавьте в признаки доходность индекса IMOEX за последние дни. Улучшился ли прогноз?</li>
+<li>Оцените модель HAR для волатильности своей акции и сравните её с бустингом. Совпадают ли выводы с результатами для индекса?</li>
+<li>Постройте важность признаков бустинга (<code>feature_importance</code>) в модели с утечкой и в честной модели. Какой признак «самый важный» в первом случае и почему этому нельзя верить?</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="9.7.3"><h3 data-number="9.7.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">9.7.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="10" type="1">
+<li>Попросите ИИ-ассистента написать код прогноза дневной доходности акции с помощью LightGBM с набором технических индикаторов. Проверьте код по списку из врезки «Признак, который знает ответ»: как сдвинута цель, какие окна включают день <span class="math inline">\(t\)</span>, как разбиты данные, где обучается масштабирование, по какой выборке делается ранняя остановка. Запишите найденные ошибки.</li>
+<li>Попросите ассистента объяснить, почему модель на ваших данных дала <span class="math inline">\(R^2 = 0{,}6\)</span> для дневных доходностей. Предложил ли он проверить утечку или начал объяснять «силу модели»?</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="9.7.4"><h3 data-number="9.7.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">9.7.4</span> Г. Мини-исследование</h3>
+<ol start="12" type="1">
+<li>Стратегия из раздела <a href="#sec-ml-strategy" class="quarto-xref"><span>9.6</span></a> опережает индекс в большинстве сочетаний гиперпараметров. Проверьте устойчивость результата: (а) исключите 2022 г.; (б) учтите издержки 0,05% и 0,1% на смену позиции; (в) сравните с индексом полной доходности MCFTR и начислите деньгам вне рынка ставку RUONIA; (г) замените бустинг на правило «вне рынка, если волатильность за 20 дней выше медианы». Что остаётся от преимущества? Подготовьте короткий (3–5 минут) устный рассказ.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Что такое утечка данных? Приведите три примера из финансовых задач.</li>
+<li>Почему обычная <span class="math inline">\(k\)</span>-кратная кросс-валидация не подходит для временных рядов?</li>
+<li>Чем расширяющееся окно отличается от скользящего и когда уместно каждое?</li>
+<li>Зачем нужно эмбарго и от чего зависит его длина?</li>
+<li>Что делает штраф в гребневой регрессии?</li>
+<li>Почему модель HAR при трёх параметрах не уступает градиентному бустингу в прогнозе волатильности?</li>
+<li>Почему положительная доходность стратегии на прогнозах модели ещё не доказывает, что модель что-то предсказывает?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Использование при обучении или проверке информации, недоступной в момент прогноза: скользящее окно, включающее цель; данные того же дня (объём, максимум, цена закрытия); масштабирование по всей выборке; подбор гиперпараметров или ранняя остановка по тесту; случайное перемешивание временного ряда.</li>
+<li>Модель обучается на данных, которые идут после тестовых, а соседние, похожие друг на друга наблюдения попадают одновременно в обучение и в тест.</li>
+<li>Расширяющееся окно использует всю доступную историю, скользящее – только последние наблюдения фиксированной длины. Скользящее окно уместно, если старые данные устарели из-за смены режима; расширяющееся – если закономерность стабильна и важен объём данных.</li>
+<li>Когда цели соседних наблюдений перекрываются (например, доходность за 20 дней), обучающие наблюдения рядом с тестом содержат почти ту же цель. Длина эмбарго не меньше горизонта цели.</li>
+<li>Стягивает коэффициенты к нулю, уменьшая дисперсию оценок и подгонку под шум ценой небольшого смещения.</li>
+<li>Главная зависимость в волатильности – долгая память – почти линейна в логарифмах и хорошо описывается средними за день, неделю и месяц. Сложной модели нечего добавить, а гибкость увеличивает ошибку.</li>
+<li>Результат может определяться одним-двумя эпизодами, исчезать после учёта издержек, дивидендов и дохода от денег вне рынка и быть лучшим из многих перебранных вариантов.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="lopezdeprado2018">López de Prado (<a href="references.html#ref-lopezdeprado2018" role="doc-biblioref">2018 г.</a>)</span>, гл. 7 – кросс-валидация в финансах: очистка (purging) и эмбарго.</li>
+<li>
+<span class="citation" data-cites="gu2020">Gu и др. (<a href="references.html#ref-gu2020" role="doc-biblioref">2020 г.</a>)</span> – сравнение методов машинного обучения в прогнозе доходностей акций в поперечном разрезе.</li>
+<li>
+<span class="citation" data-cites="corsi2009">Corsi (<a href="references.html#ref-corsi2009" role="doc-biblioref">2009 г.</a>)</span> – модель HAR для реализованной волатильности.</li>
+<li>
+<span class="citation" data-cites="welch2008">Welch и Goyal (<a href="references.html#ref-welch2008" role="doc-biblioref">2008 г.</a>)</span> – почему прогнозы доходности рынка вне выборки редко превосходят историческое среднее.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script>
+<div class="no-row-height column-margin column-container"><div id="ref-lopezdeprado2018" class="csl-entry" role="listitem">
+López de Prado, Marcos. 2018 г. <em>Advances in Financial Machine Learning</em>. Wiley.
+</div><div id="ref-gu2020" class="csl-entry" role="listitem">
+Gu, Shihao, Bryan Kelly, и Dacheng Xiu. 2020 г. <span>«Empirical Asset Pricing via Machine Learning»</span>. <em>The Review of Financial Studies</em> 33 (5): 2223–73.
+</div><div id="ref-corsi2009" class="csl-entry" role="listitem">
+Corsi, Fulvio. 2009 г. <span>«A Simple Approximate Long-Memory Model of Realized Volatility»</span>. <em>Journal of Financial Econometrics</em> 7 (2): 174–96.
+</div><div id="ref-welch2008" class="csl-entry" role="listitem">
+Welch, Ivo, и Amit Goyal. 2008 г. <span>«A Comprehensive Look at the Empirical Performance of Equity Premium Prediction»</span>. <em>The Review of Financial Studies</em> 21 (4): 1455–508.
+</div></div>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -469,8 +1103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -869,9 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./08-volatility.html" class="pagination-link" aria-label="Волатильность: модели ARCH и GARCH">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Волатильность: модели ARCH и GARCH</span></span>
       </a>          
@@ -883,7 +1514,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
