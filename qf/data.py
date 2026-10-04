@@ -204,3 +204,41 @@ def load_okved() -> pd.DataFrame:
 def load_rfsd_lines() -> pd.DataFrame:
     """Справочник строк отчётности: код, форма, название, знак хранения в RFSD."""
     return pd.read_csv(DATA_DIR / "rfsd_lines.csv")
+
+
+# ---- Автономный практикум по ОФЗ-ПД -------------------------------------------
+
+def load_bonds(tickers=None, start=None, end=None, backend: Backend = "pandas"):
+    """Исторические котировки четырёх ОФЗ-ПД: чистая цена (%), НКД (руб.), номинал."""
+    return _read("bonds/quotes.parquet", tickers, start, end, backend=backend)
+
+
+def load_bond_coupons(tickers=None, start=None, end=None, backend: Backend = "pandas"):
+    """Известные купоны: payment_date, period_start, record_date, amount (руб.)."""
+    return _read("bonds/coupons.parquet", tickers, start, end, backend=backend, date_col="payment_date")
+
+
+def load_bond_principal(tickers=None, start=None, end=None, backend: Backend = "pandas"):
+    """Погашение номинала: payment_date, amount (руб.), kind."""
+    return _read("bonds/principal.parquet", tickers, start, end, backend=backend, date_col="payment_date")
+
+
+def load_bond_curve(backend: Backend = "pandas"):
+    """КБД именно на дату практикума: years (лет), yield_pct (% годовых)."""
+    return _read("bonds/curve.parquet", backend=backend)
+
+
+def verify_bond_snapshot():
+    """Проверить хеши учебных данных и автономного расчётного модуля; вернуть паспорт."""
+    import hashlib
+    import json
+    root = DATA_DIR / "bonds"
+    metadata = json.loads((root / "snapshot.json").read_text(encoding="utf-8"))
+    for name in ("quotes", "coupons", "principal", "curve"):
+        path = root / f"{name}.parquet"
+        if hashlib.sha256(path.read_bytes()).hexdigest() != metadata["files"][path.name]["sha256"]:
+            raise ValueError(f"Нарушена целостность снимка: {path.name}")
+    code = Path(__file__).with_name("bonds.py")
+    if hashlib.sha256(code.read_bytes()).hexdigest() != metadata["calculation_sha256"]:
+        raise ValueError("Расчётный модуль отличается от версии учебного снимка")
+    return metadata

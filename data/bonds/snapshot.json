@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "valuation_date": "2026-09-30",
+  "secids": [
+    "SU26232RMFS7",
+    "SU26236RMFS8",
+    "SU26243RMFS4",
+    "SU26238RMFS4"
+  ],
+  "snapshot_id": 5052,
+  "snapshot_time": "2026-10-03T00:45:13.054891+03:00",
+  "built_at_utc": "2026-10-04T14:41:15.754680+00:00",
+  "moexutils_version": "1.0.0",
+  "source": "MOEX ISS via moexutils DuckLake",
+  "source_url": "https://www.moex.com/ru/indices",
+  "yield_convention": "annual effective, ACT/365F, valuation date = quote date (T+0 model)",
+  "curve_convention": "annual effective zero yields; log-discount interpolation; no long extrapolation",
+  "schedule_vintage": "Known fixed payments in lake snapshot; not historical point-in-time schedules",
+  "files": {
+    "quotes.parquet": {
+      "sha256": "695080446670c05dec2e2b10f6dbbde817abf23b2fb4f875a10f994590456fd3",
+      "rows": 2796
+    },
+    "coupons.parquet": {
+      "sha256": "0251ea2d8e25fcb608a7414ff9ae6c956de868d19d687008a6e27a6cf344849a",
+      "rows": 101
+    },
+    "principal.parquet": {
+      "sha256": "149f05f98b1e29522d24d458f783e2f4517366e7c45dcacc89cf250f2cde01d2",
+      "rows": 4
+    },
+    "curve.parquet": {
+      "sha256": "cdd6626626573e49f31830584942f83b8fd80b05d0b0c1784b05dd409b8c3b7b",
+      "rows": 11
+    }
+  },
+  "calculation_sha256": "0b46913eb99d1e3c5b6cb1a0e4468dc142fcc333aa5943a527bacb4eb8723014"
+}
