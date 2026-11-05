@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Приложение A — Основы Python для финансиста – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -149,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -169,8 +219,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -189,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -198,8 +248,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -212,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -221,8 +271,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -241,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -250,8 +300,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -270,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -279,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -293,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -302,8 +352,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -322,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -337,8 +387,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -357,20 +407,98 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-py-env" id="toc-sec-py-env" class="nav-link active" data-scroll-target="#sec-py-env"><span class="header-section-number">A.1</span> Где запускать код</a>
+  <ul class="collapse">
+<li><a href="#%D0%BD%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA-%D0%B8-%D1%8F%D1%87%D0%B5%D0%B9%D0%BA%D0%B8" id="toc-ноутбук-и-ячейки" class="nav-link" data-scroll-target="#%D0%BD%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA-%D0%B8-%D1%8F%D1%87%D0%B5%D0%B9%D0%BA%D0%B8"><span class="header-section-number">A.1.1</span> Ноутбук и ячейки</a></li>
+  <li><a href="#%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D0%BA%D1%80%D1%8B%D1%82%D0%BE%D0%B5-%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5" id="toc-порядок-выполнения-и-скрытое-состояние" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D0%BA%D1%80%D1%8B%D1%82%D0%BE%D0%B5-%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5"><span class="header-section-number">A.1.2</span> Порядок выполнения и скрытое состояние</a></li>
+  <li><a href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0" id="toc-установка" class="nav-link" data-scroll-target="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0"><span class="header-section-number">A.1.3</span> Установка</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-py-types" id="toc-sec-py-types" class="nav-link" data-scroll-target="#sec-py-types"><span class="header-section-number">A.2</span> Значения, переменные и типы</a>
+  <ul class="collapse">
+<li><a href="#%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5" id="toc-переменные" class="nav-link" data-scroll-target="#%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5"><span class="header-section-number">A.2.1</span> Переменные</a></li>
+  <li><a href="#%D1%87%D0%B8%D1%81%D0%BB%D0%B0-%D0%B8-%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0" id="toc-числа-и-арифметика" class="nav-link" data-scroll-target="#%D1%87%D0%B8%D1%81%D0%BB%D0%B0-%D0%B8-%D0%B0%D1%80%D0%B8%D1%84%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0"><span class="header-section-number">A.2.2</span> Числа и арифметика</a></li>
+  <li><a href="#%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B8-%D0%B8-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-строки-и-форматирование" class="nav-link" data-scroll-target="#%D1%81%D1%82%D1%80%D0%BE%D0%BA%D0%B8-%D0%B8-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">A.2.3</span> Строки и форматирование</a></li>
+  <li><a href="#%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F" id="toc-логические-значения-и-сравнения" class="nav-link" data-scroll-target="#%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">A.2.4</span> Логические значения и сравнения</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-py-containers" id="toc-sec-py-containers" class="nav-link" data-scroll-target="#sec-py-containers"><span class="header-section-number">A.3</span> Контейнеры</a>
+  <ul class="collapse">
+<li><a href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8" id="toc-списки" class="nav-link" data-scroll-target="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8"><span class="header-section-number">A.3.1</span> Списки</a></li>
+  <li><a href="#%D0%BA%D0%BE%D1%80%D1%82%D0%B5%D0%B6%D0%B8" id="toc-кортежи" class="nav-link" data-scroll-target="#%D0%BA%D0%BE%D1%80%D1%82%D0%B5%D0%B6%D0%B8"><span class="header-section-number">A.3.2</span> Кортежи</a></li>
+  <li><a href="#%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8" id="toc-словари" class="nav-link" data-scroll-target="#%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8"><span class="header-section-number">A.3.3</span> Словари</a></li>
+  <li><a href="#%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0" id="toc-множества" class="nav-link" data-scroll-target="#%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0"><span class="header-section-number">A.3.4</span> Множества</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-py-flow" id="toc-sec-py-flow" class="nav-link" data-scroll-target="#sec-py-flow"><span class="header-section-number">A.4</span> Условия и циклы</a>
+  <ul class="collapse">
+<li><a href="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F-if-elif-else" id="toc-условия-if-elif-else" class="nav-link" data-scroll-target="#%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F-if-elif-else"><span class="header-section-number">A.4.1</span> Условия: if, elif, else</a></li>
+  <li><a href="#%D1%86%D0%B8%D0%BA%D0%BB-for" id="toc-цикл-for" class="nav-link" data-scroll-target="#%D1%86%D0%B8%D0%BA%D0%BB-for"><span class="header-section-number">A.4.2</span> Цикл for</a></li>
+  <li><a href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F" id="toc-списковые-включения" class="nav-link" data-scroll-target="#%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">A.4.3</span> Списковые включения</a></li>
+  <li><a href="#%D1%86%D0%B8%D0%BA%D0%BB-while" id="toc-цикл-while" class="nav-link" data-scroll-target="#%D1%86%D0%B8%D0%BA%D0%BB-while"><span class="header-section-number">A.4.4</span> Цикл while</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-py-functions" id="toc-sec-py-functions" class="nav-link" data-scroll-target="#sec-py-functions"><span class="header-section-number">A.5</span> Функции</a>
+  <ul class="collapse">
+<li><a href="#%D0%B7%D0%B0%D1%87%D0%B5%D0%BC-%D0%BD%D1%83%D0%B6%D0%BD%D1%8B-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8" id="toc-зачем-нужны-функции" class="nav-link" data-scroll-target="#%D0%B7%D0%B0%D1%87%D0%B5%D0%BC-%D0%BD%D1%83%D0%B6%D0%BD%D1%8B-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">A.5.1</span> Зачем нужны функции</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-npv-%D0%B8-irr" id="toc-пример-npv-и-irr" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-npv-%D0%B8-irr"><span class="header-section-number">A.5.2</span> Пример: NPV и IRR</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9" id="toc-проверка-функций" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9"><span class="header-section-number">A.5.3</span> Проверка функций</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-py-errors" id="toc-sec-py-errors" class="nav-link" data-scroll-target="#sec-py-errors"><span class="header-section-number">A.6</span> Ошибки и как их читать</a></li>
+  <li><a href="#sec-py-modules" id="toc-sec-py-modules" class="nav-link" data-scroll-target="#sec-py-modules"><span class="header-section-number">A.7</span> Модули и пакеты</a></li>
+  <li>
+<a href="#sec-py-numpy" id="toc-sec-py-numpy" class="nav-link" data-scroll-target="#sec-py-numpy"><span class="header-section-number">A.8</span> NumPy: вычисления над массивами</a>
+  <ul class="collapse">
+<li><a href="#%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B" id="toc-массивы" class="nav-link" data-scroll-target="#%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B"><span class="header-section-number">A.8.1</span> Массивы</a></li>
+  <li><a href="#%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BC%D0%B0%D1%81%D0%BA%D0%B8" id="toc-логические-маски" class="nav-link" data-scroll-target="#%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BC%D0%B0%D1%81%D0%BA%D0%B8"><span class="header-section-number">A.8.2</span> Логические маски</a></li>
+  <li><a href="#%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D1%8B%D0%B5-%D1%87%D0%B8%D1%81%D0%BB%D0%B0" id="toc-случайные-числа" class="nav-link" data-scroll-target="#%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D1%8B%D0%B5-%D1%87%D0%B8%D1%81%D0%BB%D0%B0"><span class="header-section-number">A.8.3</span> Случайные числа</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-py-pandas" id="toc-sec-py-pandas" class="nav-link" data-scroll-target="#sec-py-pandas"><span class="header-section-number">A.9</span> pandas: таблицы с данными</a>
+  <ul class="collapse">
+<li><a href="#series-%D0%B8-dataframe" id="toc-series-и-dataframe" class="nav-link" data-scroll-target="#series-%D0%B8-dataframe"><span class="header-section-number">A.9.1</span> Series и DataFrame</a></li>
+  <li><a href="#%D0%B2%D1%8B%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D1%86%D0%BE%D0%B2-%D0%B8-%D1%81%D1%82%D1%80%D0%BE%D0%BA" id="toc-выбор-столбцов-и-строк" class="nav-link" data-scroll-target="#%D0%B2%D1%8B%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D1%86%D0%BE%D0%B2-%D0%B8-%D1%81%D1%82%D1%80%D0%BE%D0%BA"><span class="header-section-number">A.9.2</span> Выбор столбцов и строк</a></li>
+  <li><a href="#%D1%88%D0%B8%D1%80%D0%BE%D0%BA%D0%B8%D0%B9-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D0%B8-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B0%D1%82" id="toc-широкий-формат-и-индекс-дат" class="nav-link" data-scroll-target="#%D1%88%D0%B8%D1%80%D0%BE%D0%BA%D0%B8%D0%B9-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D0%B8-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B0%D1%82"><span class="header-section-number">A.9.3</span> Широкий формат и индекс дат</a></li>
+  <li><a href="#%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D1%86%D0%B0%D0%BC" id="toc-вычисления-по-столбцам" class="nav-link" data-scroll-target="#%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D1%86%D0%B0%D0%BC"><span class="header-section-number">A.9.4</span> Вычисления по столбцам</a></li>
+  <li><a href="#%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D1%81%D0%BC%D0%B5%D0%BD%D0%B0-%D1%87%D0%B0%D1%81%D1%82%D0%BE%D1%82%D1%8B" id="toc-группировка-и-смена-частоты" class="nav-link" data-scroll-target="#%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D1%81%D0%BC%D0%B5%D0%BD%D0%B0-%D1%87%D0%B0%D1%81%D1%82%D0%BE%D1%82%D1%8B"><span class="header-section-number">A.9.5</span> Группировка и смена частоты</a></li>
+  <li><a href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86" id="toc-объединение-таблиц" class="nav-link" data-scroll-target="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86"><span class="header-section-number">A.9.6</span> Объединение таблиц</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D0%BF%D1%83%D1%81%D0%BA%D0%B8" id="toc-пропуски" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D0%BF%D1%83%D1%81%D0%BA%D0%B8"><span class="header-section-number">A.9.7</span> Пропуски</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-py-plots" id="toc-sec-py-plots" class="nav-link" data-scroll-target="#sec-py-plots"><span class="header-section-number">A.10</span> matplotlib: графики</a></li>
+  <li><a href="#sec-py-next" id="toc-sec-py-next" class="nav-link" data-scroll-target="#sec-py-next"><span class="header-section-number">A.11</span> Как учиться дальше</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-python" id="toc-sec-exercises-python" class="nav-link" data-scroll-target="#sec-exercises-python"><span class="header-section-number">A.12</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">A.12.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">A.12.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">A.12.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">A.12.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-python.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></a></li></ol></nav>
-<div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-python.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Приложение A — Основы Python для финансиста</h1>
 </div>
 
@@ -385,38 +513,875 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Ноутбук Python_introduction_2025_ru.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>Код в этой книге короткий: обычно это 5–15 строк, которые загружают данные, что-то считают и строят график. Чтобы читать и менять такой код, не нужно быть программистом. Достаточно понимать несколько десятков конструкций языка и трёх библиотек: NumPy для вычислений, pandas для таблиц и matplotlib для графиков. Это приложение собирает их в одном месте.</p>
+<p>Приложение не заменяет учебник по Python. Оно отвечает на практический вопрос: что нужно знать, чтобы уверенно работать с кодом глав и ноутбуков курса. Каждый пример стоит запустить у себя и немного изменить: поменять тикер, дату, ставку. Перед запуском полезно предсказать результат. Если предсказание не совпало с выводом, вы нашли место, которое пока понимаете неточно, и это самая ценная информация при обучении.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этом приложении">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этом приложении
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Типы данных и контейнеры</li>
-<li>Управление потоком и функции</li>
-<li>NumPy и pandas: основные операции</li>
-<li>Графики в matplotlib</li>
-<li>Окружение: conda, Jupyter, Colab</li>
+<li>Где запускать код и почему важен порядок выполнения ячеек.</li>
+<li>Числа, строки, логические значения; списки, словари и другие контейнеры.</li>
+<li>Условия, циклы и функции на финансовых примерах: налог, сложный процент, NPV и IRR.</li>
+<li>Как читать сообщения об ошибках.</li>
+<li>NumPy, pandas и matplotlib: от массива чисел до графика цен акций.</li>
 </ul>
+<p><strong>Данные:</strong> <code>stocks.parquet</code>, <code>sectors.csv</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> ничего; приложение рассчитано на тех, кто начинает с нуля.</p>
 </div>
 </div>
+<section id="sec-py-env" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="sec-py-env">
+<span class="header-section-number">A.1</span> Где запускать код</h2>
+<section id="ноутбук-и-ячейки" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="ноутбук-и-ячейки">
+<span class="header-section-number">A.1.1</span> Ноутбук и ячейки</h3>
+<p>Код курса удобнее всего запускать в <strong>ноутбуке</strong> (notebook) – документе, который состоит из ячеек. Ячейка бывает двух видов: с кодом и с текстом в формате Markdown. Ноутбуки открываются в Jupyter на своём компьютере или в Google Colab в браузере. Расширение файла – <code>.ipynb</code>.</p>
+<p>Ячейку с кодом запускает сочетание <strong>Shift + Enter</strong>. Под ячейкой появляется результат: всё, что напечатано функцией <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>, и значение последней строки ячейки. Предыдущие строки ячейки тоже выполняются, но их значения не выводятся:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="fl">280.0</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>quantity <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>price <span class="op">*</span> quantity</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28000.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>За выполнением кода стоит <strong>ядро</strong> (kernel) – запущенный процесс Python, который хранит в памяти все созданные переменные. Переменная <code>price</code> из ячейки выше останется доступной во всех следующих ячейках, пока ядро работает.</p>
+</section><section id="порядок-выполнения-и-скрытое-состояние" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="порядок-выполнения-и-скрытое-состояние">
+<span class="header-section-number">A.1.2</span> Порядок выполнения и скрытое состояние</h3>
+<p>Ядро помнит не то, что написано в ноутбуке сейчас, а то, что было выполнено. Это главный источник путаницы у начинающих. Допустим, вы выполнили ячейку <code>price = 280.0</code>, затем исправили её на <code>price = 300.0</code>, но не запустили заново. В памяти осталось 280, и все последующие расчёты будут использовать старое число, хотя на экране написано 300. Бывает и обратное: вы удалили ячейку, в которой создавалась переменная, а ноутбук продолжает работать – до первого перезапуска.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ноутбук работает у автора, но падает у проверяющего. Почти всегда причина в том, что ячейки выполнялись не по порядку или какая-то переменная осталась в памяти от удалённого кода. Перед сдачей работы перезапустите ядро и выполните все ячейки сверху вниз: в Jupyter – <strong>Kernel → Restart Kernel and Run All Cells</strong>, в Colab – <strong>Среда выполнения → Перезапустить сеанс и выполнить все</strong>. Если ноутбук дошёл до конца без ошибок, его результат воспроизводим.</p>
+</div>
+</div>
+</section><section id="установка" class="level3" data-number="A.1.3"><h3 data-number="A.1.3" class="anchored" data-anchor-id="установка">
+<span class="header-section-number">A.1.3</span> Установка</h3>
+<p>В <strong>Google Colab</strong> ничего устанавливать не нужно: Python и основные библиотеки уже есть, достаточно Google-аккаунта и браузера. Это самый быстрый способ начать. Минус в том, что сеанс Colab временный: после перезапуска все переменные и скачанные файлы пропадают, и ноутбук нужно выполнить заново.</p>
+<p>На своём компьютере нужен Python 3.11 или новее. Проще всего установить дистрибутив <a href="https://docs.anaconda.com/miniconda/">Miniconda</a> и создать для курса отдельное <strong>окружение</strong> – изолированную копию Python со своим набором пакетов. Тогда пакеты курса не будут конфликтовать с другими программами:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> qf python=3.12</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qf</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> lab</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Файл <code>requirements.txt</code> лежит в корне репозитория книги и перечисляет все нужные пакеты. Как скачать репозиторий и данные, описано в разделе <a href="01-intro.html#sec-run-code" class="quarto-xref"><span>1.3</span></a>. Кроме Jupyter, ноутбуки открывают редакторы VS Code и Positron; на результат расчётов выбор редактора не влияет.</p>
+</section></section><section id="sec-py-types" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="sec-py-types">
+<span class="header-section-number">A.2</span> Значения, переменные и типы</h2>
+<section id="переменные" class="level3" data-number="A.2.1"><h3 data-number="A.2.1" class="anchored" data-anchor-id="переменные">
+<span class="header-section-number">A.2.1</span> Переменные</h3>
+<p><strong>Переменная</strong> – это имя, связанное со значением. Знак <code>=</code> в Python означает не равенство, а присваивание: вычисли выражение справа и запомни результат под именем слева. Поэтому запись, бессмысленная в математике, в коде совершенно нормальна:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cash <span class="op">=</span> <span class="dv">100_000</span>          <span class="co"># подчёркивание разделяет разряды и не влияет на число</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cash <span class="op">=</span> cash <span class="op">-</span> <span class="dv">28_000</span>    <span class="co"># купили акций на 28 тыс. руб.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cash</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 72000</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Имена переменных пишут строчными буквами, слова разделяют подчёркиванием: <code>start_date</code>, <code>risk_free_rate</code>. Хорошее имя объясняет, что лежит в переменной, и избавляет от комментариев. Сравните <code>x = 0.16</code> и <code>key_rate = 0.16</code>.</p>
+</section><section id="числа-и-арифметика" class="level3" data-number="A.2.2"><h3 data-number="A.2.2" class="anchored" data-anchor-id="числа-и-арифметика">
+<span class="header-section-number">A.2.2</span> Числа и арифметика</h3>
+<p>У каждого значения есть <strong>тип</strong>. Числа бывают целыми (<code>int</code>) и дробными (<code>float</code>, от <em>floating point</em> – число с плавающей точкой). Тип можно узнать функцией <code>type()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="dv">100</span>), <span class="bu">type</span>(<span class="fl">280.5</span>), <span class="bu">type</span>(<span class="st">"SBER"</span>), <span class="bu">type</span>(<span class="va">True</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt;</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Арифметические операции привычны, кроме двух: возведение в степень записывается как <code>**</code>, а не <code>^</code>, и есть отдельное целочисленное деление.</p>
+<div id="tbl-py-ops" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-py-ops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;A.1: Арифметические операции
+</figcaption><div aria-describedby="tbl-py-ops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="header">
+<th>Операция</th>
+<th>Запись</th>
+<th>Пример</th>
+<th>Результат</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>сложение, вычитание</td>
+<td>
+<code>+</code>, <code>-</code>
+</td>
+<td><code>280 - 275</code></td>
+<td><code>5</code></td>
+</tr>
+<tr class="even">
+<td>умножение, деление</td>
+<td>
+<code>*</code>, <code>/</code>
+</td>
+<td><code>7 / 2</code></td>
+<td><code>3.5</code></td>
+</tr>
+<tr class="odd">
+<td>целочисленное деление, остаток</td>
+<td>
+<code>//</code>, <code>%</code>
+</td>
+<td>
+<code>7 // 2</code>, <code>7 % 2</code>
+</td>
+<td>
+<code>3</code>, <code>1</code>
+</td>
+</tr>
+<tr class="even">
+<td>степень</td>
+<td><code>**</code></td>
+<td><code>1.16 ** 3</code></td>
+<td><code>1.560896</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Например, вклад 100 тыс. руб. под 16% годовых с ежегодной капитализацией через три года вырастет до:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100_000</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.16</span>) <span class="op">**</span> <span class="dv">3</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 156089.59999999995</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Что вернёт сравнение <code>0.1 + 0.2 == 0.3</code>: <code>True</code> или <code>False</code>? Запишите ответ, потом запустите код.</p>
+</div>
+</div>
+<p>Дробные числа хранятся в компьютере в двоичном виде, поэтому многие десятичные дроби представлены не точно. Отсюда известный результат:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span> <span class="op">==</span> <span class="fl">0.3</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; False</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Для финансовых расчётов это почти никогда не важно: погрешность составляет около <span class="math inline">\(10^{-16}\)</span>. Но сравнивать дробные числа через <code>==</code> не стоит. Для сравнения есть функция <code>math.isclose()</code>, а в pandas и NumPy – <code>np.isclose()</code>.</p>
+</section><section id="строки-и-форматирование" class="level3" data-number="A.2.3"><h3 data-number="A.2.3" class="anchored" data-anchor-id="строки-и-форматирование">
+<span class="header-section-number">A.2.3</span> Строки и форматирование</h3>
+<p><strong>Строка</strong> (<code>str</code>) – текст в кавычках: <code>"SBER"</code>, <code>'2026-01-01'</code>. Строки можно складывать (<code>"SB" + "ER"</code>), узнавать их длину функцией <code>len()</code> и менять методами вроде <code>.upper()</code> и <code>.lower()</code>.</p>
+<p>На практике со строками чаще всего приходится выводить числа в читаемом виде. Для этого служат <strong>f-строки</strong>: перед кавычкой ставится буква <code>f</code>, а внутри фигурных скобок пишется выражение и, через двоеточие, формат:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="fl">28_045.5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> <span class="fl">0.0842</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Стоимость пакета: </span><span class="sc">{</span>value<span class="sc">:,.0f}</span><span class="ss"> руб."</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Стоимость пакета: 28,046 руб.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Доходность: </span><span class="sc">{</span>ret<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Доходность: 8.4%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Формат <code>:,.0f</code> означает «разделить тысячи запятой, без знаков после точки», <code>:.1%</code> – «умножить на 100 и показать один знак после точки со знаком процента». Формат меняет только вид числа: в переменной <code>ret</code> по-прежнему хранится 0.0842, а не 8,4.</p>
+</section><section id="логические-значения-и-сравнения" class="level3" data-number="A.2.4"><h3 data-number="A.2.4" class="anchored" data-anchor-id="логические-значения-и-сравнения">
+<span class="header-section-number">A.2.4</span> Логические значения и сравнения</h3>
+<p>Сравнение возвращает <strong>логическое значение</strong> (<code>bool</code>): <code>True</code> или <code>False</code>. Операторы сравнения – <code>==</code> (равно), <code>!=</code> (не равно), <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>. Условия объединяют словами <code>and</code>, <code>or</code>, <code>not</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="fl">280.0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>price <span class="op">&gt;</span> <span class="dv">250</span> <span class="kw">and</span> price <span class="op">&lt;</span> <span class="dv">300</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; True</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Не путайте <code>=</code> и <code>==</code>. Первое присваивает значение, второе сравнивает два значения. Ошибка <code>if price = 250:</code> вызовет <code>SyntaxError</code>.</p>
+<p>Особое значение <code>None</code> означает «ничего»: например, функцию, которая ничего не возвращает, или ещё не заданный параметр. С <code>None</code> нельзя производить вычисления.</p>
+</section></section><section id="sec-py-containers" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="sec-py-containers">
+<span class="header-section-number">A.3</span> Контейнеры</h2>
+<p>Отдельные числа встречаются редко. Обычно у нас набор тикеров, ряд цен, состав портфеля. Для хранения нескольких значений в Python есть <strong>контейнеры</strong>. В финансовых расчётах чаще всего нужны четыре.</p>
+<section id="списки" class="level3" data-number="A.3.1"><h3 data-number="A.3.1" class="anchored" data-anchor-id="списки">
+<span class="header-section-number">A.3.1</span> Списки</h3>
+<p><strong>Список</strong> (<code>list</code>) – упорядоченный набор значений в квадратных скобках:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tickers <span class="op">=</span> [<span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>, <span class="st">"MGNT"</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tickers)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Какой тикер вернёт <code>tickers[1]</code>? Сколько элементов и какие вернёт <code>tickers[1:3]</code>? Ответьте до того, как прочитаете следующий абзац.</p>
+</div>
+</div>
+<p>Элементы списка нумеруются <strong>с нуля</strong>: первый элемент – <code>tickers[0]</code>, второй – <code>tickers[1]</code>. Отрицательный номер считает с конца: <code>tickers[-1]</code> – последний элемент. Срез <code>tickers[1:3]</code> возвращает элементы с номерами 1 и 2: левая граница включается, правая – нет.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tickers[<span class="dv">0</span>], tickers[<span class="op">-</span><span class="dv">1</span>], tickers[<span class="dv">1</span>:<span class="dv">3</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SBER MGNT ['GAZP', 'LKOH']</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Нумерация с нуля и правило «правая граница не включается» сначала кажутся неудобными, но к ним быстро привыкают. Они согласованы: <code>tickers[:2]</code> и <code>tickers[2:]</code> вместе дают весь список без повторов и пропусков.</p>
+<p>Список можно изменять: менять элементы, добавлять новые методом <code>.append()</code>, сортировать функцией <code>sorted()</code>. Функции <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> работают со списками чисел:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>closes <span class="op">=</span> [<span class="fl">280.74</span>, <span class="fl">279.33</span>, <span class="fl">276.35</span>, <span class="fl">272.45</span>]   <span class="co"># SBER, закрытие 23–28.09.2026</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>closes.append(<span class="fl">274.65</span>)                       <span class="co"># добавили 29.09.2026</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(closes) <span class="op">/</span> <span class="bu">len</span>(closes)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 276.704</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="кортежи" class="level3" data-number="A.3.2"><h3 data-number="A.3.2" class="anchored" data-anchor-id="кортежи">
+<span class="header-section-number">A.3.2</span> Кортежи</h3>
+<p><strong>Кортеж</strong> (<code>tuple</code>) похож на список, но записывается в круглых скобках и не может быть изменён после создания. Кортеж удобен для небольшой группы связанных значений: тикер и цена, начальная и конечная дата периода. Кортеж можно <strong>распаковать</strong> в несколько переменных:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> (<span class="st">"2021-01-04"</span>, <span class="st">"2026-11-03"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>start, end <span class="op">=</span> period</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>start</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; '2021-01-04'</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="словари" class="level3" data-number="A.3.3"><h3 data-number="A.3.3" class="anchored" data-anchor-id="словари">
+<span class="header-section-number">A.3.3</span> Словари</h3>
+<p><strong>Словарь</strong> (<code>dict</code>) хранит пары «ключ – значение» и позволяет найти значение по ключу. Это естественный способ записать портфель: тикер → число акций.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>portfolio <span class="op">=</span> {<span class="st">"SBER"</span>: <span class="dv">100</span>, <span class="st">"LKOH"</span>: <span class="dv">5</span>, <span class="st">"GAZP"</span>: <span class="dv">300</span>}</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> {<span class="st">"SBER"</span>: <span class="fl">274.65</span>, <span class="st">"LKOH"</span>: <span class="fl">5_369.0</span>, <span class="st">"GAZP"</span>: <span class="fl">97.58</span>}   <span class="co"># закрытие 29.09.2026</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>portfolio[<span class="st">"LKOH"</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Ключи в словаре уникальны. Если присвоить значение существующему ключу, старое значение будет заменено; если ключа нет, он будет добавлен: <code>portfolio["MGNT"] = 2</code>. Обращение к отсутствующему ключу вызывает ошибку <code>KeyError</code>. Методы <code>.keys()</code>, <code>.values()</code> и <code>.items()</code> возвращают ключи, значения и пары; мы воспользуемся ими в разделе о циклах.</p>
+</section><section id="множества" class="level3" data-number="A.3.4"><h3 data-number="A.3.4" class="anchored" data-anchor-id="множества">
+<span class="header-section-number">A.3.4</span> Множества</h3>
+<p><strong>Множество</strong> (<code>set</code>) хранит только уникальные значения, без порядка. Оно полезно, когда нужно убрать повторы или сравнить два набора. Например, какие бумаги портфеля отсутствуют в списке тикеров, по которым у нас есть данные?</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(portfolio) <span class="op">-</span> <span class="bu">set</span>(tickers)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; set()</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Ответ пуст: все три бумаги портфеля есть в списке. Если добавить в портфель бумагу, которой нет в <code>tickers</code>, она появится в результате. Такая проверка часто нужна перед расчётом: она ловит опечатки в тикерах и бумаги, которые выпали из данных.</p>
+<div id="tbl-py-containers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-py-containers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;A.2: Основные контейнеры Python
+</figcaption><div aria-describedby="tbl-py-containers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="header">
+<th>Контейнер</th>
+<th>Запись</th>
+<th>Изменяемый</th>
+<th>Когда использовать</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>список</td>
+<td><code>[1, 2, 3]</code></td>
+<td>да</td>
+<td>упорядоченный ряд значений</td>
+</tr>
+<tr class="even">
+<td>кортеж</td>
+<td><code>(1, 2)</code></td>
+<td>нет</td>
+<td>несколько связанных значений, распаковка</td>
+</tr>
+<tr class="odd">
+<td>словарь</td>
+<td><code>{"SBER": 100}</code></td>
+<td>да</td>
+<td>поиск значения по ключу</td>
+</tr>
+<tr class="even">
+<td>множество</td>
+<td><code>{1, 2, 3}</code></td>
+<td>да</td>
+<td>уникальные значения, сравнение наборов</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section></section><section id="sec-py-flow" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="sec-py-flow">
+<span class="header-section-number">A.4</span> Условия и циклы</h2>
+<section id="условия-if-elif-else" class="level3" data-number="A.4.1"><h3 data-number="A.4.1" class="anchored" data-anchor-id="условия-if-elif-else">
+<span class="header-section-number">A.4.1</span> Условия: if, elif, else</h3>
+<p>Код не всегда должен выполняться одинаково. Конструкция <code>if</code> выполняет блок строк, только если условие истинно. Блок выделяется <strong>отступом</strong> в четыре пробела – в Python отступы являются частью синтаксиса, а не оформлением.</p>
+<p>Упрощённый пример: налог с прибыли от продажи акций по ставке 13%; при убытке налога нет.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>profit <span class="op">=</span> <span class="op">-</span><span class="dv">15_000</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> profit <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> <span class="fl">0.13</span> <span class="op">*</span> profit</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>tax</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Если вариантов больше двух, добавляют ветки <code>elif</code> («иначе если»). Python проверяет условия сверху вниз и выполняет первую подходящую ветку:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> <span class="op">-</span><span class="fl">0.12</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ret <span class="op">&gt;</span> <span class="fl">0.10</span>:</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">"сильный рост"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> ret <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">"рост"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> ret <span class="op">&gt;</span> <span class="op">-</span><span class="fl">0.10</span>:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">"снижение"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">"сильное снижение"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>label</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'сильное снижение'</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="цикл-for" class="level3" data-number="A.4.2"><h3 data-number="A.4.2" class="anchored" data-anchor-id="цикл-for">
+<span class="header-section-number">A.4.2</span> Цикл for</h3>
+<p>Цикл <code>for</code> повторяет блок кода для каждого элемента контейнера. Посчитаем стоимость портфеля: для каждой бумаги умножим число акций на цену и накопим сумму.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ticker, quantity <span class="kw">in</span> portfolio.items():</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> total <span class="op">+</span> quantity <span class="op">*</span> prices[ticker]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>total</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 83584.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Метод <code>.items()</code> возвращает пары «ключ – значение», и на каждом шаге цикла пара распаковывается в переменные <code>ticker</code> и <code>quantity</code>. Если нужен номер шага, используют <code>enumerate()</code>, а для повторения заданное число раз – <code><a href="https://rdrr.io/r/base/range.html">range()</a></code>: <code>range(5)</code> даёт числа 0, 1, 2, 3, 4.</p>
+<p>Цикл естественно описывает рост капитала по годам. Пусть годовые доходности были +10%, −5% и +20%:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>wealth <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year, r <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="fl">0.10</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.20</span>], start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    wealth <span class="op">=</span> wealth <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> r)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Год </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>wealth<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Год 1: 110.0</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Год 2: 104.5</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Год 3: 125.4</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Итог – 125,4, а не 125, как дала бы сумма доходностей. Доходность каждого года начисляется на уже изменившийся капитал. Подробнее об этом – в главе о доходности и риске (раздел <a href="04-returns-risk.html#sec-returns" class="quarto-xref"><span>4.1</span></a>).</p>
+</section><section id="списковые-включения" class="level3" data-number="A.4.3"><h3 data-number="A.4.3" class="anchored" data-anchor-id="списковые-включения">
+<span class="header-section-number">A.4.3</span> Списковые включения</h3>
+<p>Частая задача – построить новый список, применив операцию к каждому элементу старого. Это можно сделать циклом, но в Python есть более короткая запись – <strong>списковое включение</strong> (list comprehension):</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> [<span class="fl">0.10</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.20</span>, <span class="op">-</span><span class="fl">0.15</span>, <span class="fl">0.08</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>growth <span class="op">=</span> [<span class="dv">1</span> <span class="op">+</span> r <span class="cf">for</span> r <span class="kw">in</span> returns]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> returns <span class="cf">if</span> r <span class="op">&lt;</span> <span class="dv">0</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(growth)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1.1, 0.95, 1.2, 0.85, 1.08]</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(losses)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [-0.05, -0.15]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Читать эту запись удобно справа налево: «для каждого <code>r</code> из <code>returns</code>, если <code>r</code> меньше нуля, взять <code>r</code>».</p>
+</section><section id="цикл-while" class="level3" data-number="A.4.4"><h3 data-number="A.4.4" class="anchored" data-anchor-id="цикл-while">
+<span class="header-section-number">A.4.4</span> Цикл while</h3>
+<p>Цикл <code>while</code> повторяет блок, пока условие истинно. Он нужен, когда число повторений заранее неизвестно. За сколько лет вклад под 16% годовых удвоится?</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wealth, years <span class="op">=</span> <span class="fl">1.0</span>, <span class="dv">0</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> wealth <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    wealth <span class="op">=</span> wealth <span class="op">*</span> <span class="fl">1.16</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    years <span class="op">=</span> years <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>years</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Если условие никогда не станет ложным, цикл будет выполняться бесконечно. В Jupyter его останавливает кнопка <strong>Interrupt</strong> (■).</p>
+</section></section><section id="sec-py-functions" class="level2" data-number="A.5"><h2 data-number="A.5" class="anchored" data-anchor-id="sec-py-functions">
+<span class="header-section-number">A.5</span> Функции</h2>
+<section id="зачем-нужны-функции" class="level3" data-number="A.5.1"><h3 data-number="A.5.1" class="anchored" data-anchor-id="зачем-нужны-функции">
+<span class="header-section-number">A.5.1</span> Зачем нужны функции</h3>
+<p><strong>Функция</strong> – именованный фрагмент кода, который принимает входные значения (<strong>аргументы</strong>) и возвращает результат. Встроенными функциями вы уже пользовались: <code>len()</code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>. Свою функцию стоит написать, когда один и тот же расчёт повторяется несколько раз: код становится короче, а ошибку достаточно исправить в одном месте.</p>
+<p>Функция объявляется словом <code>def</code>, результат возвращается словом <code>return</code>. Строка в тройных кавычках сразу после объявления – <strong>документация</strong> функции; её показывает <code><a href="https://rdrr.io/r/utils/help.html">help()</a></code>.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> future_value(amount, rate, years, periods_per_year<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Будущая стоимость вклада при капитализации periods_per_year раз в год."""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> periods_per_year</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> amount <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate <span class="op">/</span> n) <span class="op">**</span> (n <span class="op">*</span> years)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(future_value(<span class="dv">100_000</span>, <span class="fl">0.16</span>, <span class="dv">3</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 156089.59999999995</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(future_value(<span class="dv">100_000</span>, <span class="fl">0.16</span>, <span class="dv">3</span>, periods_per_year<span class="op">=</span><span class="dv">12</span>))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 161095.6598320968</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Аргумент <code>periods_per_year</code> имеет <strong>значение по умолчанию</strong>: если его не указать, капитализация ежегодная. При ежемесячной капитализации вклад за три года вырастет сильнее – на 5&nbsp;006 руб. Аргументы можно передавать по порядку или по имени. Именованная запись длиннее, но защищает от перепутанных местами ставки и срока.</p>
+</section><section id="пример-npv-и-irr" class="level3" data-number="A.5.2"><h3 data-number="A.5.2" class="anchored" data-anchor-id="пример-npv-и-irr">
+<span class="header-section-number">A.5.2</span> Пример: NPV и IRR</h3>
+<p><strong>Чистая приведённая стоимость</strong> (net present value, NPV) проекта – сумма его денежных потоков, дисконтированных по ставке <span class="math inline">\(r\)</span>:</p>
+<p><span id="eq-py-npv"><span class="math display">\[
+\text{NPV} = \sum_{t=0}^{T} \frac{CF_t}{(1 + r)^t}.
+\tag{A.1}\]</span></span></p>
+<p>Запишем формулу функцией. Номер периода <span class="math inline">\(t\)</span> даёт <code>enumerate()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> npv(rate, cashflows):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""NPV потоков cashflows[0], cashflows[1], ... при ставке rate."""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(cf <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> t <span class="cf">for</span> t, cf <span class="kw">in</span> <span class="bu">enumerate</span>(cashflows))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>cashflows <span class="op">=</span> [<span class="op">-</span><span class="dv">100</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">0</span>, <span class="dv">40</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>npv(<span class="fl">0.12</span>, cashflows)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -6.977236047480236</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Проект с вложением 100 и тремя поступлениями по 40 при ставке 12% имеет отрицательную NPV: дисконтированные поступления не покрывают вложение.</p>
+<p><strong>Внутренняя норма доходности</strong> (IRR) – ставка, при которой NPV равна нулю. Решить уравнение явно нельзя, но его можно решить численно. Функция <code>brentq</code> из библиотеки SciPy ищет корень функции на отрезке, где она меняет знак. Ей передаётся сама функция – в Python функцию можно передать как аргумент, как любое другое значение:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> brentq</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> irr(cashflows):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> brentq(<span class="kw">lambda</span> r: npv(r, cashflows), <span class="op">-</span><span class="fl">0.99</span>, <span class="fl">1.0</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"IRR = </span><span class="sc">{</span>irr(cashflows)<span class="sc">:.2%}</span><span class="ss">"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; IRR = 8.36%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Запись <code>lambda r: npv(r, cashflows)</code> создаёт короткую безымянную функцию одного аргумента <span class="math inline">\(r\)</span>. IRR ниже 12%, что согласуется с отрицательной NPV при этой ставке.</p>
+</section><section id="проверка-функций" class="level3" data-number="A.5.3"><h3 data-number="A.5.3" class="anchored" data-anchor-id="проверка-функций">
+<span class="header-section-number">A.5.3</span> Проверка функций</h3>
+<p>Функцию полезно проверить на примере, ответ которого известен заранее. Для этого есть оператор <code>assert</code>: он ничего не делает, если условие истинно, и останавливает программу с ошибкой, если ложно.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">abs</span>(npv(<span class="fl">0.0</span>, [<span class="op">-</span><span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">50</span>])) <span class="op">&lt;</span> <span class="fl">1e-12</span>           <span class="co"># без дисконтирования NPV = сумма потоков</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">abs</span>(npv(irr(cashflows), cashflows)) <span class="op">&lt;</span> <span class="fl">1e-9</span>      <span class="co"># в точке IRR NPV равна нулю</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Такие проверки занимают одну строку, а ловят ошибки, которые иначе прошли бы незамеченными: перепутанный знак, индекс, начинающийся с единицы, процент вместо доли.</p>
+</section></section><section id="sec-py-errors" class="level2" data-number="A.6"><h2 data-number="A.6" class="anchored" data-anchor-id="sec-py-errors">
+<span class="header-section-number">A.6</span> Ошибки и как их читать</h2>
+<p>Ошибки – нормальная часть работы с кодом. Когда Python не может выполнить строку, он останавливается и печатает <strong>трассировку</strong> (traceback). Читать её нужно снизу вверх: последняя строка сообщает тип ошибки и её описание, выше указано место, где она произошла.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>portfolio[<span class="st">"MOEX"</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; KeyError: 'MOEX'</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>В книге показана только последняя строка сообщения; в Jupyter над ней будет трассировка с номером строки и фрагментом кода. <code>KeyError: 'MOEX'</code> означает, что в словаре <code>portfolio</code> нет ключа <code>"MOEX"</code>. Причина почти всегда в опечатке или в том, что значение не было добавлено.</p>
+<div id="tbl-py-errors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-py-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;A.3: Частые ошибки и их причины
+</figcaption><div aria-describedby="tbl-py-errors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Ошибка</th>
+<th>Что означает</th>
+<th>Типичная причина в ноутбуке</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>SyntaxError</code></td>
+<td>Python не может разобрать строку</td>
+<td>пропущена скобка, кавычка или двоеточие; <code>=</code> вместо <code>==</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>IndentationError</code></td>
+<td>неверный отступ</td>
+<td>смешаны пробелы и табуляция, лишний отступ</td>
+</tr>
+<tr class="odd">
+<td><code>NameError</code></td>
+<td>имя не найдено</td>
+<td>не выполнена ячейка, где создаётся переменная; опечатка</td>
+</tr>
+<tr class="even">
+<td><code>TypeError</code></td>
+<td>операция не подходит для типа</td>
+<td>сложение строки с числом; вызов функции с лишним аргументом</td>
+</tr>
+<tr class="odd">
+<td><code>KeyError</code></td>
+<td>нет такого ключа</td>
+<td>опечатка в тикере или названии столбца, регистр букв</td>
+</tr>
+<tr class="even">
+<td><code>IndexError</code></td>
+<td>нет элемента с таким номером</td>
+<td>список короче, чем ожидалось; пустая выборка</td>
+</tr>
+<tr class="odd">
+<td><code>ValueError</code></td>
+<td>недопустимое значение</td>
+<td>неверный формат даты; пустые данные</td>
+</tr>
+<tr class="even">
+<td><code>ModuleNotFoundError</code></td>
+<td>пакет не установлен</td>
+<td>не выполнен <code>pip install</code>; ноутбук открыт не в той папке</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Если причина непонятна, помогает простая последовательность. Прочитайте последнюю строку сообщения. Проверьте, выполнены ли все предыдущие ячейки. Напечатайте значения переменных из строки с ошибкой: часто оказывается, что в переменной лежит не то, что вы ожидали. Скопировать сообщение об ошибке в поисковик или ИИ-ассистенту тоже полезно, но объяснение нужно проверить на своём коде, а не принимать на веру.</p>
+</section><section id="sec-py-modules" class="level2" data-number="A.7"><h2 data-number="A.7" class="anchored" data-anchor-id="sec-py-modules">
+<span class="header-section-number">A.7</span> Модули и пакеты</h2>
+<p>Базовый Python умеет немного. Основная сила языка – в <strong>пакетах</strong>: готовых библиотеках, которые устанавливаются отдельно. Пакет устанавливается один раз командой <code>pip install</code> в терминале (в ноутбуке – <code>!pip install</code>), а в каждом ноутбуке подключается командой <code>import</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>math.log(<span class="dv">2</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.6931471805599453</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Сокращения <code>np</code>, <code>pd</code> и <code>plt</code> – общепринятое соглашение; их используют в документации, книгах и ответах ИИ-ассистентов. Конструкция <code>from ... import ...</code> подключает отдельную часть пакета. Так в книге подключается модуль <code>qf</code>, который лежит в папке книги: <code>from qf import data</code>.</p>
+<p>Чтобы узнать, что делает функция, используйте <code>help(функция)</code> или, в Jupyter, вопросительный знак: <code>np.log?</code>. Список методов объекта показывает <code><a href="https://rdrr.io/r/base/list.files.html">dir()</a></code>. Документация основных библиотек подробная и содержит примеры; привычка заглядывать в неё экономит много времени.</p>
+</section><section id="sec-py-numpy" class="level2" data-number="A.8"><h2 data-number="A.8" class="anchored" data-anchor-id="sec-py-numpy">
+<span class="header-section-number">A.8</span> NumPy: вычисления над массивами</h2>
+<section id="массивы" class="level3" data-number="A.8.1"><h3 data-number="A.8.1" class="anchored" data-anchor-id="массивы">
+<span class="header-section-number">A.8.1</span> Массивы</h3>
+<p>Со списками неудобно считать. Прибавить 1 к каждому элементу списка нельзя: <code>[1, 2, 3] + 1</code> вызовет <code>TypeError</code>, а умножение списка на число повторяет список. Для вычислений служит <strong>массив</strong> NumPy (<code>np.array</code>): операции с ним применяются сразу ко всем элементам.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>prices_arr <span class="op">=</span> np.array(closes)      <span class="co"># пять цен SBER из раздела о списках</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>prices_arr[<span class="dv">1</span>:] <span class="op">/</span> prices_arr[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; array([-0.00502244, -0.01066839, -0.01411254,  0.00807488])</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Мы посчитали дневные доходности одной строкой, без цикла: каждый элемент, начиная со второго, разделили на предыдущий. Такой стиль называют <strong>векторизацией</strong>. Векторизованный код короче и работает в десятки раз быстрее цикла, что важно на рядах в тысячи наблюдений.</p>
+<p>NumPy содержит математические функции, которые тоже работают поэлементно (<code>np.log</code>, <code>np.exp</code>, <code>np.sqrt</code>), и статистические: <code>np.mean</code>, <code>np.std</code>, <code>np.percentile</code>. Функцию NPV из предыдущего раздела можно записать без цикла:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> np.array(cashflows)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.arange(<span class="bu">len</span>(cf))          <span class="co"># 0, 1, 2, 3, 4</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(cf <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.12</span>) <span class="op">**</span> t)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -6.977236047480236</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="логические-маски" class="level3" data-number="A.8.2"><h3 data-number="A.8.2" class="anchored" data-anchor-id="логические-маски">
+<span class="header-section-number">A.8.2</span> Логические маски</h3>
+<p>Сравнение массива с числом даёт массив логических значений – <strong>маску</strong>. По маске можно отобрать элементы:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rets <span class="op">=</span> prices_arr[<span class="dv">1</span>:] <span class="op">/</span> prices_arr[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rets <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [ True  True  True False]</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rets[rets <span class="op">&lt;</span> <span class="dv">0</span>])</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [-0.00502244 -0.01066839 -0.01411254]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Тот же приём работает в pandas и постоянно встречается в книге: отобрать дни с падением, бумаги с высокой капитализацией, годы с отрицательной доходностью.</p>
+</section><section id="случайные-числа" class="level3" data-number="A.8.3"><h3 data-number="A.8.3" class="anchored" data-anchor-id="случайные-числа">
+<span class="header-section-number">A.8.3</span> Случайные числа</h3>
+<p>Для моделирования нужны случайные числа. Генератор создаётся функцией <code>np.random.default_rng()</code>; аргумент <code>seed</code> фиксирует последовательность, чтобы результат повторялся при каждом запуске. Смоделируем год торговли акцией с дневной доходностью в среднем 0,05% и волатильностью 2%:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> rng.normal(loc<span class="op">=</span><span class="fl">0.0005</span>, scale<span class="op">=</span><span class="fl">0.02</span>, size<span class="op">=</span><span class="dv">252</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> np.cumprod(<span class="dv">1</span> <span class="op">+</span> daily)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Конец года: </span><span class="sc">{</span>path[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.1f}</span><span class="ss">, минимум: </span><span class="sc">{</span>path<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Конец года: 85.1, минимум: 79.3</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Функция <code>np.cumprod</code> считает накопленное произведение: каждый элемент <code>path</code> – стоимость вложения в соответствующий день. Запустите пример с другим <code>seed</code>, и путь окажется совсем другим при тех же параметрах. Это полезная интуиция: одна реализация случайного процесса мало говорит о его свойствах.</p>
+</section></section><section id="sec-py-pandas" class="level2" data-number="A.9"><h2 data-number="A.9" class="anchored" data-anchor-id="sec-py-pandas">
+<span class="header-section-number">A.9</span> pandas: таблицы с данными</h2>
+<section id="series-и-dataframe" class="level3" data-number="A.9.1"><h3 data-number="A.9.1" class="anchored" data-anchor-id="series-и-dataframe">
+<span class="header-section-number">A.9.1</span> Series и DataFrame</h3>
+<p>pandas – основная библиотека для работы с таблицами. В ней два главных объекта. <strong>Series</strong> – одномерный ряд значений с подписями (индексом), например цены одной акции по датам. <strong>DataFrame</strong> – таблица, каждый столбец которой является Series, а все столбцы имеют общий индекс.</p>
+<p>Загрузим данные двух акций за 2025–2026 гг. Функции модуля <code>qf</code> возвращают обычные таблицы pandas:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> data.load_stocks([<span class="st">"SBER"</span>, <span class="st">"LKOH"</span>], start<span class="op">=</span><span class="st">"2025-01-01"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>stocks.shape</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (884, 12)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Атрибут <code>.shape</code> показывает размер таблицы: число строк и столбцов. С новой таблицей всегда стоит начинать одинаково: посмотреть первые строки, названия и типы столбцов.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>stocks.head(<span class="dv">3</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         date ticker    open  ...    adj_close       shares    market_cap</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0 2025-01-03   LKOH  7255.0  ...  5807.169973  692865762.0  4.934590e+12</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2025-01-06   LKOH  7114.5  ...  5779.446892  692865762.0  4.911033e+12</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2025-01-08   LKOH  7090.0  ...  5780.262277  692865762.0  4.911725e+12</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3 rows x 12 columns]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>stocks.dtypes</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date          datetime64[ms]</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker                object</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; open                 float64</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; low                  float64</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; high                 float64</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; close                float64</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; waprice              float64</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; volume               float64</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; value_rub            float64</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; adj_close            float64</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; shares               float64</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; market_cap           float64</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dtype: object</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Таблица хранится в <strong>длинном формате</strong>: каждая строка – одна бумага в один день, тикер записан в отдельном столбце. Метод <code>.describe()</code> выводит основные статистики по числовым столбцам, а <code>.isna().sum()</code> – число пропусков в каждом столбце.</p>
+</section><section id="выбор-столбцов-и-строк" class="level3" data-number="A.9.2"><h3 data-number="A.9.2" class="anchored" data-anchor-id="выбор-столбцов-и-строк">
+<span class="header-section-number">A.9.2</span> Выбор столбцов и строк</h3>
+<p>Столбец выбирается по имени в квадратных скобках, несколько столбцов – списком имён. Строки отбирают по маске, как в NumPy:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sber <span class="op">=</span> stocks[stocks[<span class="st">"ticker"</span>] <span class="op">==</span> <span class="st">"SBER"</span>]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>sber[[<span class="st">"date"</span>, <span class="st">"close"</span>, <span class="st">"volume"</span>]].tail(<span class="dv">3</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           date   close      volume</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 881 2026-09-25  276.35  17573507.0</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 882 2026-09-28  272.45  25688835.0</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 883 2026-09-29  274.65  18505319.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Условия объединяют операторами <code>&amp;</code> (и) и <code>|</code> (или), каждое условие берётся в скобки: <code>stocks[(stocks["ticker"] == "SBER") &amp; (stocks["close"] &gt; 300)]</code>. Слова <code>and</code> и <code>or</code> с таблицами не работают.</p>
+<p>Для доступа по подписям индекса служит <code>.loc</code>, по номерам строк – <code>.iloc</code>. Запись <code>sber.iloc[0]</code> – первая строка, <code>sber.iloc[-1]</code> – последняя; <code>sber.loc[:, "close"]</code> – столбец <code>close</code> целиком.</p>
+</section><section id="широкий-формат-и-индекс-дат" class="level3" data-number="A.9.3"><h3 data-number="A.9.3" class="anchored" data-anchor-id="широкий-формат-и-индекс-дат">
+<span class="header-section-number">A.9.3</span> Широкий формат и индекс дат</h3>
+<p>Для расчётов по нескольким бумагам удобнее <strong>широкий формат</strong>: даты по строкам, тикеры по столбцам. Метод <code>.pivot()</code> переворачивает длинную таблицу в широкую:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>prices_df <span class="op">=</span> stocks.pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"adj_close"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>prices_df.tail(<span class="dv">3</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker        LKOH    SBER</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                      </span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-25  5374.0  276.35</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-28  5299.5  272.45</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-29  5369.0  274.65</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Теперь индекс таблицы – даты. Это открывает удобный отбор по периодам: <code>prices_df.loc["2026-03"]</code> вернёт все дни марта 2026 г., <code>prices_df.loc["2025-06-01":"2025-12-31"]</code> – второе полугодие 2025 г. Функция <code>data.load_prices()</code> сразу возвращает таблицу в широком формате; здесь мы проделали этот шаг сами, чтобы увидеть, как он устроен.</p>
+</section><section id="вычисления-по-столбцам" class="level3" data-number="A.9.4"><h3 data-number="A.9.4" class="anchored" data-anchor-id="вычисления-по-столбцам">
+<span class="header-section-number">A.9.4</span> Вычисления по столбцам</h3>
+<p>Арифметика с таблицами работает так же, как с массивами NumPy: поэлементно, с выравниванием по индексу. Метод <code>.pct_change()</code> считает изменение к предыдущей строке, то есть простую доходность:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>returns_df <span class="op">=</span> prices_df.pct_change().dropna()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>returns_df.describe().<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker      LKOH      SBER</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; count   441.0000  441.0000</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mean      0.0000    0.0007</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; std       0.0191    0.0131</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min      -0.0773   -0.0554</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25%      -0.0099   -0.0065</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50%      -0.0012    0.0000</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 75%       0.0088    0.0070</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max       0.0795    0.0772</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Первая строка доходностей пуста – для первого дня нет предыдущего, – поэтому её удаляет <code>.dropna()</code>. Накопленный рост вложения даёт <code>(1 + returns_df).cumprod()</code>, а нормированные цены с начальным значением 100 – <code>100 * prices_df / prices_df.iloc[0]</code>.</p>
+</section><section id="группировка-и-смена-частоты" class="level3" data-number="A.9.5"><h3 data-number="A.9.5" class="anchored" data-anchor-id="группировка-и-смена-частоты">
+<span class="header-section-number">A.9.5</span> Группировка и смена частоты</h3>
+<p>Многие вопросы требуют свести дневные данные к месяцам или годам. Для смены частоты временного ряда есть <code>.resample()</code>. Код <code>"ME"</code> означает конец месяца, <code>"YE"</code> – конец года. Цена на конец каждого месяца и месячные доходности:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> prices_df.resample(<span class="st">"ME"</span>).last()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>monthly.pct_change().tail(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker       LKOH   SBER</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; date                    </span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-07-31  0.017  0.037</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-08-31  0.017 -0.002</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2026-09-30  0.140 -0.004</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Метод <code>.groupby()</code> делит таблицу на группы по значению столбца и применяет к каждой группе одну и ту же операцию. Например, средний дневной оборот в рублях по каждой бумаге:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>stocks.groupby(<span class="st">"ticker"</span>)[<span class="st">"value_rub"</span>].mean() <span class="op">/</span> <span class="fl">1e9</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ticker</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LKOH     5.692325</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SBER    10.571860</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Name: value_rub, dtype: float64</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Результат – в миллиардах рублей. Оборот Сбербанка почти вдвое выше, чем у ЛУКОЙЛа: эта разница в ликвидности важна для торговых стратегий в главе о бэктестинге.</p>
+</section><section id="объединение-таблиц" class="level3" data-number="A.9.6"><h3 data-number="A.9.6" class="anchored" data-anchor-id="объединение-таблиц">
+<span class="header-section-number">A.9.6</span> Объединение таблиц</h3>
+<p>Данные из разных источников приходится объединять. Метод <code>.merge()</code> соединяет две таблицы по общему столбцу – так же, как функция ВПР в Excel, но сразу для всех строк. Добавим к бумагам отрасль из справочника книги:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sectors <span class="op">=</span> data.load_reference(<span class="st">"sectors"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>last_day <span class="op">=</span> stocks[stocks[<span class="st">"date"</span>] <span class="op">==</span> stocks[<span class="st">"date"</span>].<span class="bu">max</span>()]</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>last_day[[<span class="st">"ticker"</span>, <span class="st">"close"</span>, <span class="st">"market_cap"</span>]].merge(sectors, on<span class="op">=</span><span class="st">"ticker"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ticker    close    market_cap           sector</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0   LKOH  5369.00  3.719996e+12      Нефть и газ</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   SBER   274.65  5.928855e+12  Банки и финансы</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Аргумент <code>how="left"</code> сохраняет все строки левой таблицы, даже если для тикера не нашлось отрасли: в этом случае в столбце <code>sector</code> будет пропуск. Проверка числа строк до и после объединения – хорошая привычка: если оно выросло, в правой таблице есть повторяющиеся ключи.</p>
+</section><section id="пропуски" class="level3" data-number="A.9.7"><h3 data-number="A.9.7" class="anchored" data-anchor-id="пропуски">
+<span class="header-section-number">A.9.7</span> Пропуски</h3>
+<p>Пропущенные значения в pandas обозначаются <code>NaN</code> (not a number). Метод <code>.isna()</code> находит их, <code>.dropna()</code> удаляет строки с пропусками, <code>.fillna()</code> и <code>.ffill()</code> заполняют их – последний переносит вперёд предыдущее известное значение. С заполнением нужно быть осторожным. Перенос вперёд использует только прошлое и обычно безопасен; заполнение средним по всей выборке или перенос назад (<code>.bfill()</code>) приносит в прошлое информацию из будущего. Почему это опасно, разбирается в разделе <a href="03-data-preparation.html#sec-lookahead" class="quarto-xref"><span>3.6</span></a>.</p>
+</section></section><section id="sec-py-plots" class="level2" data-number="A.10"><h2 data-number="A.10" class="anchored" data-anchor-id="sec-py-plots">
+<span class="header-section-number">A.10</span> matplotlib: графики</h2>
+<p>Графики в книге строятся библиотекой matplotlib. Стандартный способ: создать <strong>рисунок</strong> (figure) и <strong>оси</strong> (axes) функцией <code>plt.subplots()</code>, нарисовать на осях данные и подписать их.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plot.use_book_style()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>normalized <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> prices_df <span class="op">/</span> prices_df.iloc[<span class="dv">0</span>]</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>ax.plot(normalized.index, normalized[<span class="st">"SBER"</span>], label<span class="op">=</span><span class="st">"SBER"</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>ax.plot(normalized.index, normalized[<span class="st">"LKOH"</span>], label<span class="op">=</span><span class="st">"LKOH"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">100</span>, color<span class="op">=</span><span class="st">"grey"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Начальная величина = 100"</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёт автора"</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-py-normalized" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-py-normalized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="appendix-python_files/figure-html/fig-py-normalized-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-py-normalized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;A.1: Рост 100 руб., вложенных в акции SBER и LKOH в начале 2025 г. (с учётом дивидендов)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>У таблиц pandas есть метод <code>.plot()</code>, который делает то же короче: <code>normalized.plot()</code> рисует все столбцы с легендой. Его удобно использовать для быстрого взгляда на данные, а явное построение через <code>ax</code> – когда нужно настроить детали. Функции модуля <code>qf.plot</code> задают единый стиль графиков книги и добавляют подпись источника; без них графики получатся в стандартном стиле matplotlib.</p>
+<p>Распределение величины показывает гистограмма:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>ax.hist(returns_df[<span class="st">"SBER"</span>] <span class="op">*</span> <span class="dv">100</span>, bins<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Дневная доходность, %"</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Число дней"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-py-hist" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-py-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="appendix-python_files/figure-html/fig-py-hist-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-py-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;A.2: Распределение дневных доходностей SBER, 2025–2026 гг.
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Сохранить рисунок в файл можно методом <code>fig.savefig("chart.png", dpi=200)</code>. Для вставки в текст работы лучше подходит векторный формат: <code>fig.savefig("chart.svg")</code> или <code>.pdf</code>.</p>
+</section><section id="sec-py-next" class="level2" data-number="A.11"><h2 data-number="A.11" class="anchored" data-anchor-id="sec-py-next">
+<span class="header-section-number">A.11</span> Как учиться дальше</h2>
+<p>Чтобы читать код книги, описанного в приложении достаточно. Дальше навык растёт от практики, а не от чтения. Несколько привычек делают её эффективнее.</p>
+<ul>
+<li>
+<strong>Сначала предсказать, потом запустить.</strong> Перед выполнением ячейки ответьте себе, что она выведет. Расхождение показывает, что именно вы поняли неверно.</li>
+<li>
+<strong>Менять по одному.</strong> Изменили одну вещь – запустили – посмотрели результат. Если изменить сразу пять строк и получить ошибку, найти причину трудно.</li>
+<li>
+<strong>Проверять на маленьком примере.</strong> Прежде чем применять функцию к 20 годам данных, проверьте её на трёх числах, ответ для которых можно посчитать вручную.</li>
+<li>
+<strong>Работать с ИИ-ассистентом как с консультантом.</strong> Просите объяснить код построчно, найти ошибку, предложить способ. Но результат проверяйте сами: ассистенты уверенно ошибаются в деталях, например в формулах годового пересчёта или в работе с датами. Принципы работы с ассистентом в курсе описаны в разделе <a href="01-intro.html#sec-learn-ai" class="quarto-xref"><span>1.5</span></a>.</li>
+</ul></section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Ноутбук выполняет код в ядре, которое помнит выполненное, а не написанное. Перед сдачей работы ноутбук нужно перезапустить и выполнить сверху вниз.</li>
+<li>Основные типы значений – числа (<code>int</code>, <code>float</code>), строки, логические значения и <code>None</code>. Дробные числа нельзя сравнивать через <code>==</code>.</li>
+<li>Списки хранят упорядоченные значения и нумеруются с нуля; словари находят значение по ключу; множества помогают сравнивать наборы.</li>
+<li>Условия и циклы управляют порядком выполнения; блоки выделяются отступом. Функции избавляют от повторения кода, а <code>assert</code> проверяет их на известных примерах.</li>
+<li>Трассировку ошибки читают снизу вверх.</li>
+<li>NumPy выполняет вычисления сразу над всеми элементами массива; pandas добавляет к массивам подписи и даёт операции с таблицами: отбор, смену формата и частоты, группировку и объединение; matplotlib строит графики.</li>
+</ul></section><section id="sec-exercises-python" class="level2" data-number="A.12"><h2 data-number="A.12" class="anchored" data-anchor-id="sec-exercises-python">
+<span class="header-section-number">A.12</span> Упражнения</h2>
+<p>Задания <strong>А</strong> решаются без компьютера: предскажите результат, затем проверьте себя запуском. Задания <strong>Б</strong> выполняются на данных вашей акции. Задания <strong>В</strong> учат проверять ответы ИИ-ассистента. Задание <strong>Г</strong> – небольшой самостоятельный расчёт.</p>
+<section id="а.-понимание" class="level3" data-number="A.12.1"><h3 data-number="A.12.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">A.12.1</span> А. Понимание</h3>
+<ol type="1">
+<li>
+<p>Что выведет каждая строка?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(xs[<span class="dv">1</span>], xs[<span class="op">-</span><span class="dv">2</span>], xs[<span class="dv">1</span>:<span class="dv">3</span>], <span class="bu">len</span>(xs[<span class="dv">2</span>:]))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+<li>
+<p>Чему равна переменная <code>x</code> после выполнения кода? Почему?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> [<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>]:</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> r)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+<li><p>Почему код <code>if price = 250:</code> вызывает ошибку, а <code>if price == 250:</code> – нет?</p></li>
+<li><p>В ячейке 1 создаётся <code>rate = 0.16</code>, в ячейке 2 считается <code>npv(rate, cashflows)</code>. Студент исправил ячейку 1 на <code>rate = 0.12</code> и запустил только ячейку 2. Какую ставку использовал расчёт?</p></li>
+<li><p>Что вернёт <code>prices_df.loc["2026-03"]</code> и чем это отличается от <code>prices_df.iloc[3]</code>?</p></li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="A.12.2"><h3 data-number="A.12.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">A.12.2</span> Б. Практика на своей акции</h3>
+<ol start="6" type="1">
+<li>Загрузите данные своей акции с помощью <code>data.load_stocks()</code>. Сколько в таблице строк, какие первая и последняя даты, есть ли пропуски в столбцах <code>close</code> и <code>adj_close</code>?</li>
+<li>Посчитайте месячные доходности по <code>adj_close</code> и найдите три худших месяца. С какими событиями они связаны?</li>
+<li>Напишите функцию <code>period_return(prices, start, end)</code>, которая возвращает изменение цены между двумя датами. Проверьте её через <code>assert</code> на примере, ответ которого известен.</li>
+<li>Постройте на одном графике нормированные цены своей акции и индекса IMOEX (функция <code>data.load_index()</code>) за последние три года.</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="A.12.3"><h3 data-number="A.12.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">A.12.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="10" type="1">
+<li><p>Попросите ИИ-ассистента написать функцию IRR без сторонних библиотек. Проверьте её на потоках <code>[-100, 40, 40, 0, 40]</code> и сравните с результатом <code>brentq</code> из раздела <a href="#sec-py-functions" class="quarto-xref"><span>A.5</span></a>. Как функция ведёт себя на потоках <code>[-100, 230, -132]</code>, у которых две IRR (10% и 20%)? Запишите, какие допущения сделал ассистент.</p></li>
+<li>
+<p>Ассистент написал код для средней дневной доходности каждой бумаги в 2026 г. Найдите в нём три ошибки, не запуская его, а затем проверьте себя запуском. Подсказка: посмотрите, в каком порядке идут строки таблицы <code>df</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data.load_stocks([<span class="st">"SBER"</span>, <span class="st">"LKOH"</span>], start<span class="op">=</span><span class="st">"2026-01-01"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"ret"</span>] <span class="op">=</span> df[<span class="st">"close"</span>].pct_change()</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"date"</span>)[<span class="st">"ret"</span>].mean()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="A.12.4"><h3 data-number="A.12.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">A.12.4</span> Г. Мини-исследование</h3>
+<ol start="12" type="1">
+<li>Смоделируйте 1000 путей цены по образцу раздела <a href="#sec-py-numpy" class="quarto-xref"><span>A.8</span></a> с теми же параметрами. Какая доля путей заканчивается ниже 100? Какова медиана максимальной просадки? Сравните с просадками реальных акций из главы о доходности и риске.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Чем отличается результат <code>7 / 2</code> от <code>7 // 2</code>?</li>
+<li>Что выведет <code>f"{0.0842:.1%}"</code>?</li>
+<li>Какой контейнер подходит для хранения портфеля «тикер → число акций» и почему?</li>
+<li>Почему <code>[1, 2, 3] + 1</code> вызывает ошибку, а <code>np.array([1, 2, 3]) + 1</code> – нет?</li>
+<li>Чем длинный формат таблицы отличается от широкого? Какой метод pandas переводит первый во второй?</li>
+<li>Почему заполнение пропусков методом <code>.bfill()</code> опасно для финансовых данных?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>
+<code>7 / 2 = 3.5</code> – обычное деление; <code>7 // 2 = 3</code> – целая часть от деления.</li>
+<li>
+<code>8.4%</code>: формат умножает на 100 и добавляет знак процента.</li>
+<li>Словарь: значение (число акций) находится по ключу (тикеру), а тикеры не повторяются.</li>
+<li>Список – контейнер общего назначения, сложение для него означает склеивание двух списков, а число не является списком. Массив NumPy выполняет арифметику поэлементно.</li>
+<li>В длинном формате одна строка – одно наблюдение (бумага в день), тикер – отдельный столбец; в широком – даты по строкам, тикеры по столбцам. Перевод выполняет <code>.pivot()</code>.</li>
+<li>Он подставляет в прошлую дату значение из будущего. В бэктесте это создаёт заглядывание вперёд: стратегия «знает» цену, которой ещё не было.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="sargent2024">Sargent и Stachurski (<a href="references.html#ref-sargent2024" role="doc-biblioref">2024 г.</a>)</span> – открытый онлайн-курс QuantEcon: Python для экономистов от основ языка до NumPy, pandas и matplotlib.</li>
+<li>
+<span class="citation" data-cites="mckinney2022">McKinney (<a href="references.html#ref-mckinney2022" role="doc-biblioref">2022 г.</a>)</span> – книга автора pandas; подробно о работе с таблицами и временными рядами. Полный текст открыт на сайте автора.</li>
+<li>
+<span class="citation" data-cites="vanderplas2023">VanderPlas (<a href="references.html#ref-vanderplas2023" role="doc-biblioref">2023 г.</a>)</span> – справочник по NumPy, pandas, matplotlib и scikit-learn с примерами.</li>
+<li>
+<span class="citation" data-cites="hilpisch2018">Hilpisch (<a href="references.html#ref-hilpisch2018" role="doc-biblioref">2018 г.</a>)</span> – Python в прикладных финансовых задачах.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script>
+<div class="no-row-height column-margin column-container"><div id="ref-sargent2024" class="csl-entry" role="listitem">
+Sargent, Thomas J., и John Stachurski. 2024 г. <em>Python Programming for Economics and Finance</em>. QuantEcon. <a href="https://python-programming.quantecon.org">https://python-programming.quantecon.org</a>.
+</div><div id="ref-mckinney2022" class="csl-entry" role="listitem">
+McKinney, Wes. 2022 г. <em>Python for Data Analysis: Data Wrangling with pandas, <span>NumPy</span>, and <span>Jupyter</span></em>. 3-я изд. O’Reilly. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
+</div><div id="ref-vanderplas2023" class="csl-entry" role="listitem">
+VanderPlas, Jake. 2023 г. <em>Python Data Science Handbook: Essential Tools for Working with Data</em>. 2-я изд. O’Reilly.
+</div><div id="ref-hilpisch2018" class="csl-entry" role="listitem">
+Hilpisch, Yves. 2018 г. <em>Python for Finance: Mastering Data-Driven Finance</em>. 2-я изд. O’Reilly.
+</div></div>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -469,8 +1434,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -869,9 +1833,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./references.html" class="pagination-link" aria-label="Литература">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Литература</span>
       </a>          
@@ -883,7 +1845,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
