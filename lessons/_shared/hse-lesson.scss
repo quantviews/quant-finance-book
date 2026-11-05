@@ -51,3 +51,10 @@ $code-color: $hse-blue;
 // Questions and quotations use spacing, never a vertical coloured bar.
 .reveal blockquote, .reveal .callout { border: none; box-shadow: none; background: transparent; }
 .reveal .title-slide { font-family: "IBM Plex Sans", Arial, sans-serif; }
+
+// Survey: align text and QR at the top; no generated figure caption.
+.reveal .survey-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2em; align-items: start; }
+.reveal .survey-copy > p:first-child { margin-top: 0; }
+.reveal .survey-code { text-align: center; }
+.reveal .survey-code p { margin: 0; }
+.reveal .survey-code img { display: block; width: 330px; height: 330px; margin: 0 auto; }
