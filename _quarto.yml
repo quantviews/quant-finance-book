@@ -1,6 +1,12 @@
 project:
   type: book
   output-dir: _book
+  resources:
+    - lessons/index.html
+    - lessons/*/lecture.html
+    - lessons/*/practice-*.ipynb
+    - lessons/*/data/*.csv
+    - lessons/*/data/metadata.json
 
 book:
   title: "Количественные финансы"
@@ -13,6 +19,9 @@ book:
   repo-url: https://github.com/quantviews/quant-finance-book
   sidebar:
     tools:
+      - icon: easel
+        href: lessons/index.html
+        text: "Презентации и практика"
       - icon: file-earmark-pdf
         href: quant-finance-book.pdf
         text: "Скачать PDF"
