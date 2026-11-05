@@ -1,5 +1,11 @@
 {
   "source": "moexutils, MOEX and dividend adjustments",
   "exported": "2026-11-05",
-  "requested_end": "2026-11-04"
+  "requested_end": "2026-11-04",
+  "ruonia": {
+    "source": "Bank of Russia RUONIA via moexutils lake",
+    "exported": "2026-11-05",
+    "first": "2020-12-01",
+    "last": "2026-11-02"
+  }
 }

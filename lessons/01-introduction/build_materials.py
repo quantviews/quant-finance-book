@@ -22,7 +22,7 @@ BOOK = HERE.parents[1]
 sys.path.insert(0, str(BOOK))
 from qf import data
 
-BLUE, ORANGE = "#34699A", "#C8702A"
+BLUE, ORANGE, GREEN = "#34699A", "#C8702A", "#3F8F5B"
 font_dir = BOOK / "fonts" / "ibm-plex-sans"
 font_rules = []
 for source, target in [("IBMPlexSans-Regular.ttf", "plex-regular.ttf"),
@@ -59,6 +59,14 @@ export = pd.read_csv(HERE / "data" / "prices_2021_2026.csv", parse_dates=["date"
 prices = export[["SBER", "LKOH"]]
 wealth = 100 * prices / prices.iloc[0]
 drawdown = wealth / wealth.cummax() - 1
+# RUONIA: rate fixed on a business day accrues for every calendar day until the next fixing.
+ruonia = pd.read_parquet(HERE / "data" / "ruonia-source.parquet").set_index("date")["rate"]
+days = pd.date_range(prices.index[0], prices.index[-1])
+daily = ruonia.reindex(ruonia.index.union(days)).ffill().reindex(days)
+assert daily.notna().all()
+ruonia_wealth = (100 * (1 + daily / 100 / 365).cumprod().shift(1, fill_value=1)).reindex(prices.index)
+years = (prices.index[-1] - prices.index[0]).days / 365.25
+cagr = lambda end: (end / 100) ** (1 / years) - 1
 metadata = {"lesson_date": "2026-11-05", "source": source_info["source"],
             "snapshot_built": source_info["exported"],
             "start": str(prices.index.min().date()), "end": str(prices.index.max().date()),
@@ -69,21 +77,24 @@ metadata = {"lesson_date": "2026-11-05", "source": source_info["source"],
 
 def chart(series, filename, ylabel, baseline=None):
     fig, ax = plt.subplots(figsize=(11.8, 4.4), layout="constrained")
-    for (label, values), color in zip(series.items(), [BLUE, ORANGE]):
+    for (label, values), color in zip(series.items(), [BLUE, ORANGE, GREEN]):
         ax.plot(values.index, values, lw=2.2, label=label, color=color)
     if baseline is not None:
         ax.axhline(baseline, color="#64748B", lw=.8)
     ax.set_ylabel(ylabel)
     ax.set_xlim(prices.index[0], prices.index[-1])
-    ax.legend(frameon=False, ncol=2, loc="lower left", bbox_to_anchor=(0, 1.01))
+    ax.legend(frameon=False, ncol=len(series), loc="lower left", bbox_to_anchor=(0, 1.01))
     fig.savefig(HERE / "figures" / filename)
     plt.close(fig)
 
 chart({"Вложение А": wealth["SBER"], "Вложение Б": wealth["LKOH"]}, "paths.svg", "Начальная величина = 100", 100)
 chart({"Вложение А": 100*drawdown["SBER"], "Вложение Б": 100*drawdown["LKOH"]}, "drawdown.svg", "От максимума, %", 0)
 price_only = 100 * export["SBER_close"] / export["SBER_close"].iloc[0]
+chart({"SBER": wealth["SBER"], "LKOH": wealth["LKOH"], "RUONIA": ruonia_wealth},
+      "ruonia.svg", "Начальная величина = 100", 100)
 chart({"Цена SBER": price_only, "С поправкой на дивиденды": wealth["SBER"]}, "dividends.svg", "Начальная величина = 100", 100)
 fmt = lambda x: f"{x:.1f}".replace(".", ",")
+pct = lambda x: f"{100 * x:.1f}".replace(".", ",") + "%"
 period_label = prices.index.min().strftime("%d.%m.%Y") + "–" + prices.index.max().strftime("%d.%m.%Y")
 end_label = prices.index.max().strftime("%d.%m.%Y")
 export_label = pd.Timestamp(source_info["exported"]).strftime("%d.%m.%Y")
@@ -170,6 +181,16 @@ case = f'''## Два вложения: какое выберете?
 ::: {{.source}}
 SBER, {period_label}. adj_close – аналитическая корректировка; это приближение реинвестирования до налогов и издержек, а не цена сделки.
 :::
+
+## А если не рисковать?
+
+![](figures/ruonia.svg){{.chart}}
+
+Под ставку RUONIA 100 выросли бы до **{fmt(ruonia_wealth.iloc[-1])}** без единой просадки: {pct(cagr(ruonia_wealth.iloc[-1]))} в год. SBER – {pct(cagr(wealth['SBER'].iloc[-1]))}, LKOH – {pct(cagr(wealth['LKOH'].iloc[-1]))} в год.
+
+::: {{.source}}
+RUONIA – ставка однодневных межбанковских кредитов, Банк России; проценты начисляются каждый календарный день и реинвестируются. Вклады частных лиц обычно дают меньше. {period_label}, до налогов и издержек.
+:::
 '''
 (HERE / "_case.qmd").write_text(case,encoding="utf-8")
 
@@ -182,7 +203,7 @@ md('''# Практика 1. Первое исследование на фина�
 **Количественные финансы · НИУ ВШЭ · 5 ноября 2026**
 
 Сегодня сравниваем два исторических ряда, проверяем данные и учимся объяснять график.
-Основная часть рассчитана на 80 минут. Обязательные задания: 1–3. Дополнительное задание – по желанию.
+Основная часть рассчитана на 80 минут. Обязательные задания: 1–3. Дополнительные задания – по желанию.
 
 Сохраните свою копию, заполните имя и группу. Здесь нет токенов, API и персональных данных.
 Книга: https://quantviews.github.io/quant-finance-book/
@@ -241,6 +262,13 @@ print("Последняя дата:", df["date"].max().date())
 print("Повторяющихся дат:", df["date"].duplicated().sum())
 print("Пропусков по столбцам:")
 print(df.isna().sum())'''),
+md('''Теперь найдите **самый большой разрыв** между соседними датами. `df["date"].diff()` считает разницу с предыдущей строкой; найдите её максимум и строку, где он достигается (`.idxmax()`).
+Между какими датами этот разрыв и что тогда происходило на рынке?
+
+**Ваш вывод:** …'''),
+code('''# Найдите самый большой разрыв между соседними датами.
+gaps = df["date"].diff()
+'''),
 md('''## 3. Один график – одна понятная величина
 Сделаем даты индексом таблицы. До запуска предскажите: что означает деление на первую строку?
 
@@ -256,16 +284,22 @@ md('''## 4. Разобранный пример: изменение SBER за в
 Изменение за период = последнее значение / первое значение − 1.
 
 `.iloc[0]` выбирает первую строку, `.iloc[-1]` – последнюю. В расчётах доля 0.10 означает 10%. Формат `:.1%` меняет только отображение.
-Полученная величина относится ко всему периоду, а не к одному году.'''),
+Полученная величина относится ко всему периоду, а не к одному году.
+Чтобы сравнить её с годовой ставкой, пересчитаем в среднегодовую: (1 + изменение за период)^(1 / число лет) − 1. Делить на число лет нельзя: доход каждого года начисляется на уже выросшую сумму.'''),
 code('''ticker = "SBER"
 first = prices[ticker].iloc[0]
 last = prices[ticker].iloc[-1]
 period_return = last / first - 1
-print(f"{ticker}: изменение за весь период {period_return:.1%}")'''),
+print(f"{ticker}: изменение за весь период {period_return:.1%}")
+
+years = (prices.index[-1] - prices.index[0]).days / 365.25
+annual = (1 + period_return) ** (1 / years) - 1
+print(f"Лет: {years:.2f}; в среднем за год {annual:.1%}")'''),
 md('''### Задание 2. Повторите расчёт для LKOH
-1. Посчитайте изменение LKOH за тот же период.
+1. Посчитайте изменение LKOH за тот же период и среднегодовую величину.
 2. Сравните с результатом SBER и положением линий в конце графика.
-3. Объясните, почему из этого не следует, что LKOH обязательно будет лучше в будущем.
+3. Ставка RUONIA за тот же период дала бы в среднем {pct(cagr(ruonia_wealth.iloc[-1]))} в год без просадок. Что это говорит о результатах двух акций?
+4. Объясните, почему из этого не следует, что LKOH обязательно будет лучше в будущем.
 
 **Ваш вывод:** …'''),
 code('''# Напишите свой расчёт для LKOH.
@@ -303,6 +337,13 @@ md('''### Дополнительно. Падение от достигнутог
 
 **Ваш вывод:** …'''),
 code('''# Необязательное задание: рассчитайте просадку и дату её минимума.
+'''),
+md('''### Дополнительно. Что дали дивиденды
+Столбцы `SBER_close` и `LKOH_close` – цены без поправки на дивиденды. Посчитайте по ним изменение за весь период и сравните с результатом по `SBER` и `LKOH`.
+Какая часть итогового результата каждой акции пришлась на дивиденды? Постройте на одном графике нормированные `SBER` и `SBER_close`: почему разрыв между линиями растёт скачками и в какое время года?
+
+**Ваш вывод:** …'''),
+code('''# Необязательное задание: сравните результат с дивидендами и без них.
 '''),
 md('''## Перед сдачей
 - Перезапустите ядро и выполните все ячейки сверху вниз.
