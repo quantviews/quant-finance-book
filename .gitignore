@@ -39,3 +39,7 @@ _data_full/
 .positai
 Thumbs.db
 .DS_Store
+
+# Локальная сборка презентаций и проверок занятий
+/lessons/**/_slides/
+/lessons/**/.quarto/

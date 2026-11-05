@@ -1,0 +1,35 @@
+project:
+  type: default
+  output-dir: _slides
+  render:
+    - intro.qmd
+
+lang: ru
+format:
+  revealjs:
+    theme: [default, assets/hse-lesson.scss]
+    css: assets/fonts.css
+    logo: assets/hse-logo.png
+    footer: "НИУ ВШЭ · Количественные финансы · 05.11.2026"
+    slide-number: c/t
+    show-slide-number: all
+    width: 1280
+    height: 720
+    margin: 0.08
+    center: false
+    transition: none
+    background-transition: none
+    incremental: false
+    controls: true
+    progress: true
+    hash-type: number
+    navigation-mode: linear
+    menu: false
+    preview-links: false
+    embed-resources: true
+    html-math-method: plain
+    toc: false
+    code-line-numbers: false
+    highlight-style: github
+execute:
+  enabled: false

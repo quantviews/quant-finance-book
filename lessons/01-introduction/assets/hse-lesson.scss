@@ -1,0 +1,53 @@
+/* Adapted from the user's HSE dashboard seminar, 21 April 2026.
+   Original: Seminars-CEE-main/.../2026-04-21-Dashboards/hse-theme.scss.
+   Local fonts avoid dependence on Google Fonts during class. */
+/*-- scss:defaults --*/
+$hse-blue: #102D69;
+$book-blue: #34699A;
+$book-orange: #C8702A;
+$body-bg: #FFFFFF;
+$body-color: #0B1220;
+$link-color: $hse-blue;
+$presentation-heading-color: $hse-blue;
+$font-family-sans-serif: "IBM Plex Sans", Arial, sans-serif;
+$presentation-heading-font: $font-family-sans-serif;
+$presentation-heading-font-weight: 600;
+$presentation-font-size-root: 30px;
+$presentation-line-height: 1.35;
+$code-block-bg: #F3F6FA;
+$code-color: $hse-blue;
+/*-- scss:rules --*/
+.reveal .slides { text-align: left; font-family: "IBM Plex Sans", Arial, sans-serif; }
+.reveal h1, .reveal h2, .reveal h3, .reveal table, .reveal .source, .reveal .footer, .reveal .slide-number { font-family: "IBM Plex Sans", Arial, sans-serif; }
+.reveal h1 { font-size: 2.15em; line-height: 1.12; }
+.reveal h2 { font-size: 1.55em; padding-bottom: .3em; border-bottom: 1px solid #D6DDE6; margin-bottom: .65em; }
+.reveal h3 { font-size: 1.05em; color: #102D69; }
+.reveal p { margin: .55em 0; }
+.reveal li { margin: .32em 0; }
+.reveal ul li::marker { color: #102D69; }
+.reveal strong { color: #102D69; font-weight: 600; }
+.reveal .columns { gap: 2em; }
+.reveal .column { min-width: 0; }
+.reveal table { width: 100%; font-size: .82em; border-collapse: collapse; margin: .45em 0; }
+.reveal th { background: transparent; color: #102D69; border-bottom: 2px solid #34699A; font-weight: 600; padding: .4em .6em; }
+.reveal td { padding: .45em .6em; border-bottom: 1px solid #D6DDE6; }
+.reveal tr:nth-child(even) td { background: transparent; }
+.reveal .slide-logo { max-height: 48px !important; height: 48px !important; right: 30px !important; bottom: 18px !important; }
+.reveal .footer { color: #64748B; font-size: 14px; }
+.reveal .slide-number { color: #64748B; background: transparent; font-size: 15px; right: 108px; }
+.reveal .source { color: #64748B; font-size: .58em; margin-top: .5em; }
+.reveal .small { font-size: .82em; }
+.reveal .prompt { border: none; border-top: 1px solid #D6DDE6; padding: .35em 0 0; margin-top: .65em; background: transparent; color: #23415F; }
+.reveal .big { font-family: "IBM Plex Sans", Arial, sans-serif; font-size: 2.3em; color: #102D69; font-weight: 600; line-height: 1.15; }
+.reveal pre { font-size: .7em; box-shadow: none; border: none; }
+.reveal img.chart { display: block; margin: 0 auto; max-height: 435px; width: auto; }
+.reveal .title-slide h2 { border: none; color: white; font-size: 2.4em; max-width: 1050px; margin-top: 1em; }
+.reveal .title-slide p, .reveal .title-slide strong { color: white; }
+.reveal .title-slide .subtitle { color: #CBD5E1; font-size: 1.3em; }
+.reveal .title-slide .date-line { color: #CBD5E1; margin-top: 1.5em; }
+.reveal:has(.title-slide.present) .footer,
+.reveal:has(.title-slide.present) .slide-number { color: #CBD5E1; }
+
+// Questions and quotations use spacing, never a vertical coloured bar.
+.reveal blockquote, .reveal .callout { border: none; box-shadow: none; background: transparent; }
+.reveal .title-slide { font-family: "IBM Plex Sans", Arial, sans-serif; }
