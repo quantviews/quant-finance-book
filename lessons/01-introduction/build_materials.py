@@ -4,11 +4,8 @@ Run from the book root: python lessons/01-introduction/build_materials.py
 Requires the book environment and nbformat (installed with Jupyter).
 """
 from pathlib import Path
-import base64
 import hashlib
 import json
-import shutil
-import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -19,22 +16,11 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 BOOK = HERE.parents[1]
-sys.path.insert(0, str(BOOK))
-from qf import data
 
 BLUE, ORANGE, GREEN = "#34699A", "#C8702A", "#3F8F5B"
 font_dir = BOOK / "fonts" / "ibm-plex-sans"
-font_rules = []
-for source, target in [("IBMPlexSans-Regular.ttf", "plex-regular.ttf"),
-                       ("IBMPlexSans-SemiBold.ttf", "plex-semibold.ttf")]:
-    font_manager.fontManager.addfont(str(font_dir / source))
-    shutil.copyfile(font_dir / source, HERE / "assets" / target)
-    weight = "400" if "Regular" in source else "600 900"
-    encoded = base64.b64encode((font_dir / source).read_bytes()).decode()
-    font_rules.append('@font-face {font-family:"IBM Plex Sans"; font-weight:' + weight
-                      + ';src:url("data:font/ttf;base64,' + encoded + '") format("truetype");}')
-(HERE / "assets" / "fonts.css").write_text("\n".join(font_rules), encoding="utf-8")
-shutil.copyfile(font_dir / "LICENSE.txt", HERE / "assets" / "FONT-LICENSE.txt")
+for filename in ["IBMPlexSans-Regular.ttf", "IBMPlexSans-SemiBold.ttf"]:
+    font_manager.fontManager.addfont(str(font_dir / filename))
 plt.rcParams.update({"font.family": "IBM Plex Sans", "font.size": 15,
                      "axes.spines.top": False, "axes.spines.right": False,
                      "axes.spines.left": False, "axes.spines.bottom": False,
@@ -59,12 +45,23 @@ export = pd.read_csv(HERE / "data" / "prices_2021_2026.csv", parse_dates=["date"
 prices = export[["SBER", "LKOH"]]
 wealth = 100 * prices / prices.iloc[0]
 drawdown = wealth / wealth.cummax() - 1
-# RUONIA: rate fixed on a business day accrues for every calendar day until the next fixing.
-ruonia = pd.read_parquet(HERE / "data" / "ruonia-source.parquet").set_index("date")["rate"]
-days = pd.date_range(prices.index[0], prices.index[-1])
-daily = ruonia.reindex(ruonia.index.union(days)).ffill().reindex(days)
-assert daily.notna().all()
-ruonia_wealth = (100 * (1 + daily / 100 / 365).cumprod().shift(1, fill_value=1)).reindex(prices.index)
+# Reconstruct an index consistent with CBR accrual conventions:
+# compound at the next fixing, simple interest between fixings, actual/actual.
+# Start before the lesson period so an initial holiday interval is handled correctly.
+ruonia = pd.read_parquet(HERE / "data" / "ruonia-source.parquet").set_index("date")["rate"].sort_index()
+assert ruonia.index.is_unique and ruonia.notna().all()
+assert ruonia.index[0] <= prices.index[0]
+value, anchor, accrual, rate = 1.0, 1.0, 0.0, None
+levels = {}
+for day in pd.date_range(ruonia.index[0], prices.index[-1]):
+    if day in ruonia.index:
+        anchor, accrual, rate = value, 0.0, ruonia.loc[day] / 100
+    levels[day] = value  # Value at date day, before interest for that day.
+    accrual += 1 / (366 if day.is_leap_year else 365)
+    value = anchor * (1 + rate * accrual)
+ruonia_index = pd.Series(levels)
+ruonia_wealth = (100 * ruonia_index / ruonia_index.loc[prices.index[0]]).reindex(prices.index)
+assert ruonia_wealth.notna().all() and ruonia_wealth.iloc[0] == 100
 years = (prices.index[-1] - prices.index[0]).days / 365.25
 cagr = lambda end: (end / 100) ** (1 / years) - 1
 metadata = {"lesson_date": "2026-11-05", "source": source_info["source"],
@@ -182,14 +179,14 @@ case = f'''## Два вложения: какое выберете?
 SBER, {period_label}. adj_close – аналитическая корректировка; это приближение реинвестирования до налогов и издержек, а не цена сделки.
 :::
 
-## А если не рисковать?
+## Сравним с денежным рынком
 
 ![](figures/ruonia.svg){{.chart}}
 
-Под ставку RUONIA 100 выросли бы до **{fmt(ruonia_wealth.iloc[-1])}** без единой просадки: {pct(cagr(ruonia_wealth.iloc[-1]))} в год. SBER – {pct(cagr(wealth['SBER'].iloc[-1]))}, LKOH – {pct(cagr(wealth['LKOH'].iloc[-1]))} в год.
+Расчётный ориентир RUONIA: 100 → **{fmt(ruonia_wealth.iloc[-1])}**, {pct(cagr(ruonia_wealth.iloc[-1]))} в год. SBER – {pct(cagr(wealth['SBER'].iloc[-1]))}, LKOH – {pct(cagr(wealth['LKOH'].iloc[-1]))} в год.
 
 ::: {{.source}}
-RUONIA – ставка однодневных межбанковских кредитов, Банк России; проценты начисляются каждый календарный день и реинвестируются. Вклады частных лиц обычно дают меньше. {period_label}, до налогов и издержек.
+Расчёт по ставкам [RUONIA Банка России](https://cbr.ru/hd_base/ruonia/method/): капитализация по датам ставок, простые проценты между ними, база 365/366. Это ориентир, а не доступный вклад или гарантия дохода. {period_label}, до налогов и издержек.
 :::
 '''
 (HERE / "_case.qmd").write_text(case,encoding="utf-8")
@@ -295,10 +292,10 @@ print(f"{ticker}: изменение за весь период {period_return:.
 years = (prices.index[-1] - prices.index[0]).days / 365.25
 annual = (1 + period_return) ** (1 / years) - 1
 print(f"Лет: {years:.2f}; в среднем за год {annual:.1%}")'''),
-md('''### Задание 2. Повторите расчёт для LKOH
+md(f'''### Задание 2. Повторите расчёт для LKOH
 1. Посчитайте изменение LKOH за тот же период и среднегодовую величину.
 2. Сравните с результатом SBER и положением линий в конце графика.
-3. Ставка RUONIA за тот же период дала бы в среднем {pct(cagr(ruonia_wealth.iloc[-1]))} в год без просадок. Что это говорит о результатах двух акций?
+3. Расчётный ориентир по RUONIA за тот же период вырос в среднем на {pct(cagr(ruonia_wealth.iloc[-1]))} в год. Это не доходность доступного вклада и не гарантия результата. Что это говорит о результатах двух акций?
 4. Объясните, почему из этого не следует, что LKOH обязательно будет лучше в будущем.
 
 **Ваш вывод:** …'''),
@@ -340,7 +337,7 @@ code('''# Необязательное задание: рассчитайте п
 '''),
 md('''### Дополнительно. Что дали дивиденды
 Столбцы `SBER_close` и `LKOH_close` – цены без поправки на дивиденды. Посчитайте по ним изменение за весь период и сравните с результатом по `SBER` и `LKOH`.
-Какая часть итогового результата каждой акции пришлась на дивиденды? Постройте на одном графике нормированные `SBER` и `SBER_close`: почему разрыв между линиями растёт скачками и в какое время года?
+На сколько процентных пунктов различаются результаты с дивидендной корректировкой и без неё? Это разница двух расчётов, включающая эффект реинвестирования, а не сумма полученных дивидендов. Постройте на одном графике нормированные `SBER` и `SBER_close`: как меняется разрыв около дивидендных отсечек? Почему он может меняться и между ними?
 
 **Ваш вывод:** …'''),
 code('''# Необязательное задание: сравните результат с дивидендами и без них.

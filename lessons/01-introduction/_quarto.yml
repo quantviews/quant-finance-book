@@ -7,9 +7,9 @@ project:
 lang: ru
 format:
   revealjs:
-    theme: [default, assets/hse-lesson.scss]
-    css: assets/fonts.css
-    logo: assets/hse-logo.png
+    theme: [default, ../_shared/hse-lesson.scss]
+    css: ../_shared/fonts.css
+    logo: ../_shared/hse-logo.png
     footer: "НИУ ВШЭ · Количественные финансы · 05.11.2026"
     slide-number: c/t
     show-slide-number: all
