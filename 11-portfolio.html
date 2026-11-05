@@ -530,7 +530,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Денежный рынок: RUONIA начисляется за календарные дни, в том числе выходные</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ruonia <span class="op">=</span> data.load_ruonia(start<span class="op">=</span><span class="st">"2011-01-01"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>] <span class="op">/</span> <span class="dv">100</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> ruonia.reindex(pd.date_range(ruonia.index.<span class="bu">min</span>(), M.index[<span class="op">-</span><span class="dv">1</span>]), method<span class="op">=</span><span class="st">"ffill"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> ruonia.reindex(pd.date_range(ruonia.index.<span class="bu">min</span>(), ix.index.<span class="bu">max</span>()), method<span class="op">=</span><span class="st">"ffill"</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> ((<span class="dv">1</span> <span class="op">+</span> daily <span class="op">/</span> <span class="dv">365</span>).resample(<span class="st">"ME"</span>).prod() <span class="op">-</span> <span class="dv">1</span>).reindex(M.index)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ann_return(x):</span>
@@ -752,7 +752,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 <section id="ошибка-в-оценке-средних" class="level3 page-columns page-full" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="ошибка-в-оценке-средних">
 <span class="header-section-number">11.4.1</span> Ошибка в оценке средних</h3>
 <p>Для оптимизации нужны ожидаемые доходности <span class="math inline">\(\mu\)</span> и ковариации <span class="math inline">\(\Sigma\)</span>. Истинных значений никто не знает, и их заменяют выборочными оценками. С ковариациями это работает терпимо, со средними – плохо. Стандартная ошибка оценки среднегодовой доходности по <span class="math inline">\(T\)</span> годам наблюдений равна <span class="math inline">\(\sigma/\sqrt{T}\)</span> и не зависит от частоты данных: месячные или дневные наблюдения не помогают <span class="citation" data-cites="merton1980">(<a href="references.html#ref-merton1980" role="doc-biblioref">Merton 1980 г.</a>)</span>.</p>
-<div class="no-row-height column-margin column-container"></div><p>Для типичной российской акции с волатильностью около 30% годовых пятилетняя история даёт стандартную ошибку среднегодовой доходности около 14% в год. Оценка «18% годовых» означает, что истинное значение с вероятностью около двух третей лежит где-то между 4% и 32%. Оптимизатор этого не знает. Он принимает оценки за точные и вкладывает максимум в бумаги, которым повезло в выборке. Поэтому <span class="citation" data-cites="michaud1989">Michaud (<a href="references.html#ref-michaud1989" role="doc-biblioref">1989 г.</a>)</span> назвал оптимизацию по Марковицу «максимизатором ошибок оценки».</p>
+<div class="no-row-height column-margin column-container"></div><p>Для типичной российской акции с волатильностью около 30% годовых пятилетняя история даёт стандартную ошибку среднегодовой доходности около 14% в год. При оценке «18% годовых» интервал плюс-минус одна стандартная ошибка простирается от 4% до 32%. При независимых наблюдениях и нормальном приближении такие интервалы покрывали бы истинное среднее примерно в двух третях повторных выборок; это не вероятность для уже фиксированного параметра. Оптимизатор этого не знает. Он принимает оценки за точные и вкладывает максимум в бумаги, которым повезло в выборке. Поэтому <span class="citation" data-cites="michaud1989">Michaud (<a href="references.html#ref-michaud1989" role="doc-biblioref">1989 г.</a>)</span> назвал оптимизацию по Марковицу «максимизатором ошибок оценки».</p>
 <p>Посмотрим, как меняется касательный портфель, если каждый год пересчитывать его по последним пяти годам данных.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tangency(window):</span>
@@ -802,7 +802,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 <div class="no-row-height column-margin column-container"></div><p>Какой способ лучше, решает только проверка вне выборки.</p>
 </section></section><section id="sec-portfolio-oos" class="level2 page-columns page-full" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="sec-portfolio-oos">
 <span class="header-section-number">11.5</span> Проверка вне выборки</h2>
-<p>Сравним пять правил. Каждый год с 2017 по 2026 г. веса пересчитываются по месячным доходностям предыдущих пяти лет и держатся весь год (с ежемесячной ребалансировкой к этим весам). Бенчмарк – индекс MCFTR, в который входят все ликвидные акции рынка.</p>
+<p>Сравним пять правил. Каждый год с 2017 по 2026 г. веса пересчитываются по месячным доходностям предыдущих пяти лет и держатся весь год (с ежемесячной ребалансировкой к этим весам). Бенчмарк – индекс MCFTR, представляющий корзину крупных ликвидных акций. Результаты рассчитаны до последней доступной даты: заключительный месяц и 2026 год неполные. Издержки здесь не вычитаются; оборот показывает, насколько чувствительным может быть результат к их добавлению.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cap <span class="op">=</span> data.load_stocks(TICKERS, start<span class="op">=</span><span class="st">"2011-12-01"</span>, columns<span class="op">=</span>[<span class="st">"market_cap"</span>]).pivot(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"market_cap"</span>).loc[:, TICKERS].resample(<span class="st">"ME"</span>).last()</span>
@@ -810,106 +810,112 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>rules <span class="op">=</span> [<span class="st">"1/N"</span>, <span class="st">"Капитализация"</span>, <span class="st">"Мин. дисперсия"</span>, <span class="st">"Мин. дисперсия (Ledoit – Wolf)"</span>, <span class="st">"Макс. Шарп"</span>]</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>oos <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>weights_by_year <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2017</span>, <span class="dv">2027</span>):</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    est <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">5</span><span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]            <span class="co"># только прошлые данные</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    mu_e, S_e <span class="op">=</span> est.mean().values <span class="op">*</span> <span class="dv">12</span>, est.cov().values <span class="op">*</span> <span class="dv">12</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    S_lw <span class="op">=</span> LedoitWolf().fit(est.values).covariance_ <span class="op">*</span> <span class="dv">12</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    last_cap <span class="op">=</span> cap.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> {<span class="st">"1/N"</span>: np.ones(<span class="bu">len</span>(TICKERS)) <span class="op">/</span> <span class="bu">len</span>(TICKERS),</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Капитализация"</span>: (last_cap <span class="op">/</span> last_cap.<span class="bu">sum</span>()).values,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия"</span>: optimize(mu_e, S_e, <span class="st">"minvar"</span>),</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия (Ledoit – Wolf)"</span>: optimize(mu_e, S_lw, <span class="st">"minvar"</span>),</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Макс. Шарп"</span>: optimize(mu_e, S_e, <span class="st">"sharpe"</span>, rf<span class="op">=</span>rf.reindex(est.index).mean() <span class="op">*</span> <span class="dv">12</span>)}</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    test <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-12-31"</span>]</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> rules:</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        oos[k].append(test <span class="op">@</span> w[k])</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        weights_by_year[k].append(w[k])</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {}</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> rules:</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pd.concat(oos[k])</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    W_k <span class="op">=</span> np.array(weights_by_year[k])</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    rows[k] <span class="op">=</span> perf(x, rf.reindex(x.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.<span class="bu">abs</span>(np.diff(W_k, axis<span class="op">=</span><span class="dv">0</span>)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>).mean() <span class="op">/</span> <span class="dv">2</span>}</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> M[<span class="st">"MCFTR"</span>].loc[<span class="st">"2017"</span>:]</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"Индекс MCFTR"</span>] <span class="op">=</span> perf(mc, rf.reindex(mc.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"RUONIA"</span>] <span class="op">=</span> perf(rf.loc[<span class="st">"2017"</span>:], rf.loc[<span class="st">"2017"</span>:]) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>ru_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>pct_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.1%}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame(rows).T</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>tab.style.<span class="bu">format</span>(pct_fmt).<span class="bu">format</span>(ru_fmt, subset<span class="op">=</span>[<span class="st">"Шарп"</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>turns <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>drifted <span class="op">=</span> {k: <span class="va">None</span> <span class="cf">for</span> k <span class="kw">in</span> rules}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2017</span>, <span class="dv">2027</span>):</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    est <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">5</span><span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]            <span class="co"># только прошлые данные</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    mu_e, S_e <span class="op">=</span> est.mean().values <span class="op">*</span> <span class="dv">12</span>, est.cov().values <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    S_lw <span class="op">=</span> LedoitWolf().fit(est.values).covariance_ <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    last_cap <span class="op">=</span> cap.loc[<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> {<span class="st">"1/N"</span>: np.ones(<span class="bu">len</span>(TICKERS)) <span class="op">/</span> <span class="bu">len</span>(TICKERS),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Капитализация"</span>: (last_cap <span class="op">/</span> last_cap.<span class="bu">sum</span>()).values,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия"</span>: optimize(mu_e, S_e, <span class="st">"minvar"</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Мин. дисперсия (Ledoit – Wolf)"</span>: optimize(mu_e, S_lw, <span class="st">"minvar"</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Макс. Шарп"</span>: optimize(mu_e, S_e, <span class="st">"sharpe"</span>, rf<span class="op">=</span>rf.reindex(est.index).mean() <span class="op">*</span> <span class="dv">12</span>)}</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    test <span class="op">=</span> R.loc[<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-01-01"</span>: <span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">-12-31"</span>]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> rules:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        oos[k].append(test <span class="op">@</span> w[k])</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        weights_by_year[k].append(w[k])</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> date, asset_return <span class="kw">in</span> test.iterrows():</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> drifted[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                turns[k].append(<span class="bu">float</span>(np.<span class="bu">abs</span>(w[k] <span class="op">-</span> drifted[k]).<span class="bu">sum</span>() <span class="op">/</span> <span class="dv">2</span>))</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            gross <span class="op">=</span> w[k] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> asset_return.values)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>            drifted[k] <span class="op">=</span> gross <span class="op">/</span> gross.<span class="bu">sum</span>()</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {}</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> rules:</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> pd.concat(oos[k])</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    rows[k] <span class="op">=</span> perf(x, rf.reindex(x.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: <span class="bu">sum</span>(turns[k]) <span class="op">*</span> <span class="dv">12</span> <span class="op">/</span> <span class="bu">len</span>(x)}</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> M[<span class="st">"MCFTR"</span>].loc[<span class="st">"2017"</span>:]</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"Индекс MCFTR"</span>] <span class="op">=</span> perf(mc, rf.reindex(mc.index)) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>rows[<span class="st">"RUONIA"</span>] <span class="op">=</span> perf(rf.loc[<span class="st">"2017"</span>:], rf.loc[<span class="st">"2017"</span>:]) <span class="op">|</span> {<span class="st">"Оборот"</span>: np.nan}</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>ru_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>pct_fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="st">"–"</span> <span class="cf">if</span> pd.isna(v) <span class="cf">else</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.1%}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame(rows).T</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>tab.style.<span class="bu">format</span>(pct_fmt).<span class="bu">format</span>(ru_fmt, subset<span class="op">=</span>[<span class="st">"Шарп"</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-portfolio-oos" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portfolio-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;11.1: Портфели из 15 акций вне выборки, 2017–2026 гг. Шарп – к ставке RUONIA; оборот – средняя доля капитала, перекладываемая при ежегодной ребалансировке
+Таблица&nbsp;11.1: Портфели из 15 акций вне выборки, 2017–2026 гг. Шарп – к ставке RUONIA; оборот – односторонний оборот за год при ежемесячной ребалансировке, без первоначальной покупки
 </figcaption><div aria-describedby="tbl-portfolio-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_8f4f3" class="cell caption-top table table-sm table-striped small">
+<table id="T_c7230" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_8f4f3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
-<th id="T_8f4f3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_8f4f3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_8f4f3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
-<th id="T_8f4f3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Оборот</th>
+<th id="T_c7230_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
+<th id="T_c7230_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_c7230_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_c7230_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
+<th id="T_c7230_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Оборот</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_8f4f3_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">1/N</th>
-<td id="T_8f4f3_row0_col0" class="data row0 col0">5,6%</td>
-<td id="T_8f4f3_row0_col1" class="data row0 col1">22,0%</td>
-<td id="T_8f4f3_row0_col2" class="data row0 col2">−0,11</td>
-<td id="T_8f4f3_row0_col3" class="data row0 col3">−47,4%</td>
-<td id="T_8f4f3_row0_col4" class="data row0 col4">0,0%</td>
+<th id="T_c7230_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">1/N</th>
+<td id="T_c7230_row0_col0" class="data row0 col0">5,6%</td>
+<td id="T_c7230_row0_col1" class="data row0 col1">22,0%</td>
+<td id="T_c7230_row0_col2" class="data row0 col2">−0,11</td>
+<td id="T_c7230_row0_col3" class="data row0 col3">−47,4%</td>
+<td id="T_c7230_row0_col4" class="data row0 col4">29,6%</td>
 </tr>
 <tr class="even">
-<th id="T_8f4f3_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Капитализация</th>
-<td id="T_8f4f3_row1_col0" class="data row1 col0">7,2%</td>
-<td id="T_8f4f3_row1_col1" class="data row1 col1">23,4%</td>
-<td id="T_8f4f3_row1_col2" class="data row1 col2">−0,02</td>
-<td id="T_8f4f3_row1_col3" class="data row1 col3">−47,8%</td>
-<td id="T_8f4f3_row1_col4" class="data row1 col4">8,9%</td>
+<th id="T_c7230_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Капитализация</th>
+<td id="T_c7230_row1_col0" class="data row1 col0">7,2%</td>
+<td id="T_c7230_row1_col1" class="data row1 col1">23,4%</td>
+<td id="T_c7230_row1_col2" class="data row1 col2">−0,02</td>
+<td id="T_c7230_row1_col3" class="data row1 col3">−47,8%</td>
+<td id="T_c7230_row1_col4" class="data row1 col4">33,4%</td>
 </tr>
 <tr class="odd">
-<th id="T_8f4f3_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Мин. дисперсия</th>
-<td id="T_8f4f3_row2_col0" class="data row2 col0">5,1%</td>
-<td id="T_8f4f3_row2_col1" class="data row2 col1">22,1%</td>
-<td id="T_8f4f3_row2_col2" class="data row2 col2">−0,13</td>
-<td id="T_8f4f3_row2_col3" class="data row2 col3">−48,7%</td>
-<td id="T_8f4f3_row2_col4" class="data row2 col4">31,6%</td>
+<th id="T_c7230_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Мин. дисперсия</th>
+<td id="T_c7230_row2_col0" class="data row2 col0">5,1%</td>
+<td id="T_c7230_row2_col1" class="data row2 col1">22,1%</td>
+<td id="T_c7230_row2_col2" class="data row2 col2">−0,13</td>
+<td id="T_c7230_row2_col3" class="data row2 col3">−48,7%</td>
+<td id="T_c7230_row2_col4" class="data row2 col4">54,7%</td>
 </tr>
 <tr class="even">
-<th id="T_8f4f3_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Мин. дисперсия (Ledoit – Wolf)</th>
-<td id="T_8f4f3_row3_col0" class="data row3 col0">6,0%</td>
-<td id="T_8f4f3_row3_col1" class="data row3 col1">21,5%</td>
-<td id="T_8f4f3_row3_col2" class="data row3 col2">−0,10</td>
-<td id="T_8f4f3_row3_col3" class="data row3 col3">−47,4%</td>
-<td id="T_8f4f3_row3_col4" class="data row3 col4">20,2%</td>
+<th id="T_c7230_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Мин. дисперсия (Ledoit – Wolf)</th>
+<td id="T_c7230_row3_col0" class="data row3 col0">6,0%</td>
+<td id="T_c7230_row3_col1" class="data row3 col1">21,5%</td>
+<td id="T_c7230_row3_col2" class="data row3 col2">−0,10</td>
+<td id="T_c7230_row3_col3" class="data row3 col3">−47,4%</td>
+<td id="T_c7230_row3_col4" class="data row3 col4">45,8%</td>
 </tr>
 <tr class="odd">
-<th id="T_8f4f3_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. Шарп</th>
-<td id="T_8f4f3_row4_col0" class="data row4 col0">5,1%</td>
-<td id="T_8f4f3_row4_col1" class="data row4 col1">22,5%</td>
-<td id="T_8f4f3_row4_col2" class="data row4 col2">−0,12</td>
-<td id="T_8f4f3_row4_col3" class="data row4 col3">−53,1%</td>
-<td id="T_8f4f3_row4_col4" class="data row4 col4">35,4%</td>
+<th id="T_c7230_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. Шарп</th>
+<td id="T_c7230_row4_col0" class="data row4 col0">5,1%</td>
+<td id="T_c7230_row4_col1" class="data row4 col1">22,5%</td>
+<td id="T_c7230_row4_col2" class="data row4 col2">−0,12</td>
+<td id="T_c7230_row4_col3" class="data row4 col3">−53,1%</td>
+<td id="T_c7230_row4_col4" class="data row4 col4">60,9%</td>
 </tr>
 <tr class="even">
-<th id="T_8f4f3_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Индекс MCFTR</th>
-<td id="T_8f4f3_row5_col0" class="data row5 col0">7,7%</td>
-<td id="T_8f4f3_row5_col1" class="data row5 col1">21,3%</td>
-<td id="T_8f4f3_row5_col2" class="data row5 col2">−0,03</td>
-<td id="T_8f4f3_row5_col3" class="data row5 col3">−51,3%</td>
-<td id="T_8f4f3_row5_col4" class="data row5 col4">–</td>
+<th id="T_c7230_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Индекс MCFTR</th>
+<td id="T_c7230_row5_col0" class="data row5 col0">7,7%</td>
+<td id="T_c7230_row5_col1" class="data row5 col1">21,3%</td>
+<td id="T_c7230_row5_col2" class="data row5 col2">−0,03</td>
+<td id="T_c7230_row5_col3" class="data row5 col3">−51,3%</td>
+<td id="T_c7230_row5_col4" class="data row5 col4">–</td>
 </tr>
 <tr class="odd">
-<th id="T_8f4f3_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">RUONIA</th>
-<td id="T_8f4f3_row6_col0" class="data row6 col0">10,9%</td>
-<td id="T_8f4f3_row6_col1" class="data row6 col1">1,5%</td>
-<td id="T_8f4f3_row6_col2" class="data row6 col2">–</td>
-<td id="T_8f4f3_row6_col3" class="data row6 col3">0,0%</td>
-<td id="T_8f4f3_row6_col4" class="data row6 col4">–</td>
+<th id="T_c7230_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">RUONIA</th>
+<td id="T_c7230_row6_col0" class="data row6 col0">10,9%</td>
+<td id="T_c7230_row6_col1" class="data row6 col1">1,5%</td>
+<td id="T_c7230_row6_col2" class="data row6 col2">–</td>
+<td id="T_c7230_row6_col3" class="data row6 col3">0,0%</td>
+<td id="T_c7230_row6_col4" class="data row6 col4">–</td>
 </tr>
 </tbody>
 </table>
@@ -918,7 +924,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 </figure>
 </div>
 </div>
-<p>Результат типичен для таких сравнений. Портфель с максимальным коэффициентом Шарпа, лучший <em>в выборке</em> по определению, вне выборки оказывается среди худших: 5,1% годовых при наибольшей просадке (53%) и наибольшем обороте. Равные веса дают 5,6%, веса по капитализации – 7,2%. Сжатие ковариационной матрицы улучшает портфель минимальной дисперсии, но не превращает его в победителя. <span class="citation" data-cites="demiguel2009">DeMiguel и др. (<a href="references.html#ref-demiguel2009" role="doc-biblioref">2009 г.</a>)</span> сравнили 14 оптимизационных моделей с правилом <span class="math inline">\(1/N\)</span> на данных развитых рынков и пришли к тому же выводу: при реальной длине истории выигрыш от оптимизации съедается ошибками оценки.</p>
+<p>Результат типичен для таких сравнений. Портфель с максимальным коэффициентом Шарпа, лучший <em>в выборке</em> по определению, вне выборки оказывается среди худших: 5,1% годовых при наибольшей просадке (53%) и обороте 61% капитала в год. Равные веса дают 5,6%, веса по капитализации – 7,2%. Сжатие ковариационной матрицы улучшает портфель минимальной дисперсии, но не превращает его в победителя. <span class="citation" data-cites="demiguel2009">DeMiguel и др. (<a href="references.html#ref-demiguel2009" role="doc-biblioref">2009 г.</a>)</span> сравнили 14 оптимизационных моделей с правилом <span class="math inline">\(1/N\)</span> на данных развитых рынков и пришли к тому же выводу: при реальной длине истории выигрыш от оптимизации съедается ошибками оценки.</p>
 <div class="no-row-height column-margin column-container"></div><p>Второй вывод касается рынка в целом. За 2017–2026 гг. ни одно правило, ни индекс не обогнали денежный рынок: коэффициенты Шарпа относительно RUONIA отрицательны у всех. Это тот же урок, что в разделе <a href="#sec-portfolio-basics" class="quarto-xref"><span>11.1</span></a>: результат определяется не столько тем, как распределить деньги между акциями, сколько тем, сколько вложить в акции вообще.</p>
 <div class="callout callout-style-simple callout-important callout-titled" title="Особенность данных: ошибка выжившего">
 <div class="callout-header d-flex align-content-center">
@@ -930,7 +936,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Мы выбрали 15 акций, которые торгуются с 2011 г. <em>и до сих пор</em>. Компании, которые за это время ушли с биржи, обанкротились или были выкуплены, в выборку не попали. Это ошибка выжившего: выборка систематически лучше, чем были возможности инвестора в прошлом. Для сравнения правил между собой она не так важна, потому что все правила выбирают из одного набора, но абсолютные доходности завышены. Подробнее – в главе о бэктестинге.</p>
+<p>Мы выбрали 15 акций, которые торгуются с 2011 г. <em>и до сих пор</em>. Компании, которые за это время ушли с биржи, обанкротились или были выкуплены, в выборку не попали. Это ошибка выжившего: выборка систематически лучше, чем были возможности инвестора в прошлом. Общий набор бумаг не устраняет смещение: оно может менять и абсолютные результаты, и ранжирование правил. Направление и величину искажения именно этой выборки без истории выбывших компаний установить нельзя. Подробнее – в главе о бэктестинге.</p>
 </div>
 </div>
 </section><section id="sec-asset-allocation" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-asset-allocation">
@@ -948,63 +954,63 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_bb4b6" class="cell caption-top table table-sm table-striped small">
+<table id="T_6b6d0" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_bb4b6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
-<th id="T_bb4b6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_bb4b6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_bb4b6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
+<th id="T_6b6d0_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность</th>
+<th id="T_6b6d0_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_6b6d0_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_6b6d0_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Макс. просадка</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_bb4b6_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Акции 100%</th>
-<td id="T_bb4b6_row0_col0" class="data row0 col0">10,0%</td>
-<td id="T_bb4b6_row0_col1" class="data row0 col1">19,9%</td>
-<td id="T_bb4b6_row0_col2" class="data row0 col2">0,09</td>
-<td id="T_bb4b6_row0_col3" class="data row0 col3">−51,3%</td>
+<th id="T_6b6d0_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Акции 100%</th>
+<td id="T_6b6d0_row0_col0" class="data row0 col0">10,0%</td>
+<td id="T_6b6d0_row0_col1" class="data row0 col1">19,9%</td>
+<td id="T_6b6d0_row0_col2" class="data row0 col2">0,09</td>
+<td id="T_6b6d0_row0_col3" class="data row0 col3">−51,3%</td>
 </tr>
 <tr class="even">
-<th id="T_bb4b6_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Акции 80%</th>
-<td id="T_bb4b6_row1_col0" class="data row1 col0">9,7%</td>
-<td id="T_bb4b6_row1_col1" class="data row1 col1">16,9%</td>
-<td id="T_bb4b6_row1_col2" class="data row1 col2">0,06</td>
-<td id="T_bb4b6_row1_col3" class="data row1 col3">−43,3%</td>
+<th id="T_6b6d0_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Акции 80%</th>
+<td id="T_6b6d0_row1_col0" class="data row1 col0">9,7%</td>
+<td id="T_6b6d0_row1_col1" class="data row1 col1">16,9%</td>
+<td id="T_6b6d0_row1_col2" class="data row1 col2">0,06</td>
+<td id="T_6b6d0_row1_col3" class="data row1 col3">−43,3%</td>
 </tr>
 <tr class="odd">
-<th id="T_bb4b6_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Акции 60%</th>
-<td id="T_bb4b6_row2_col0" class="data row2 col0">9,3%</td>
-<td id="T_bb4b6_row2_col1" class="data row2 col1">14,0%</td>
-<td id="T_bb4b6_row2_col2" class="data row2 col2">0,01</td>
-<td id="T_bb4b6_row2_col3" class="data row2 col3">−34,7%</td>
+<th id="T_6b6d0_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Акции 60%</th>
+<td id="T_6b6d0_row2_col0" class="data row2 col0">9,3%</td>
+<td id="T_6b6d0_row2_col1" class="data row2 col1">14,0%</td>
+<td id="T_6b6d0_row2_col2" class="data row2 col2">0,01</td>
+<td id="T_6b6d0_row2_col3" class="data row2 col3">−34,7%</td>
 </tr>
 <tr class="even">
-<th id="T_bb4b6_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Акции 40%</th>
-<td id="T_bb4b6_row3_col0" class="data row3 col0">8,8%</td>
-<td id="T_bb4b6_row3_col1" class="data row3 col1">11,6%</td>
-<td id="T_bb4b6_row3_col2" class="data row3 col2">−0,06</td>
-<td id="T_bb4b6_row3_col3" class="data row3 col3">−28,3%</td>
+<th id="T_6b6d0_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Акции 40%</th>
+<td id="T_6b6d0_row3_col0" class="data row3 col0">8,8%</td>
+<td id="T_6b6d0_row3_col1" class="data row3 col1">11,6%</td>
+<td id="T_6b6d0_row3_col2" class="data row3 col2">−0,06</td>
+<td id="T_6b6d0_row3_col3" class="data row3 col3">−28,3%</td>
 </tr>
 <tr class="odd">
-<th id="T_bb4b6_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Акции 20%</th>
-<td id="T_bb4b6_row4_col0" class="data row4 col0">8,1%</td>
-<td id="T_bb4b6_row4_col1" class="data row4 col1">9,8%</td>
-<td id="T_bb4b6_row4_col2" class="data row4 col2">−0,16</td>
-<td id="T_bb4b6_row4_col3" class="data row4 col3">−24,8%</td>
+<th id="T_6b6d0_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Акции 20%</th>
+<td id="T_6b6d0_row4_col0" class="data row4 col0">8,1%</td>
+<td id="T_6b6d0_row4_col1" class="data row4 col1">9,8%</td>
+<td id="T_6b6d0_row4_col2" class="data row4 col2">−0,16</td>
+<td id="T_6b6d0_row4_col3" class="data row4 col3">−24,8%</td>
 </tr>
 <tr class="even">
-<th id="T_bb4b6_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Акции 0%</th>
-<td id="T_bb4b6_row5_col0" class="data row5 col0">7,2%</td>
-<td id="T_bb4b6_row5_col1" class="data row5 col1">9,2%</td>
-<td id="T_bb4b6_row5_col2" class="data row5 col2">−0,27</td>
-<td id="T_bb4b6_row5_col3" class="data row5 col3">−22,8%</td>
+<th id="T_6b6d0_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Акции 0%</th>
+<td id="T_6b6d0_row5_col0" class="data row5 col0">7,2%</td>
+<td id="T_6b6d0_row5_col1" class="data row5 col1">9,2%</td>
+<td id="T_6b6d0_row5_col2" class="data row5 col2">−0,27</td>
+<td id="T_6b6d0_row5_col3" class="data row5 col3">−22,8%</td>
 </tr>
 <tr class="odd">
-<th id="T_bb4b6_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Денежный рынок (RUONIA)</th>
-<td id="T_bb4b6_row6_col0" class="data row6 col0">10,3%</td>
-<td id="T_bb4b6_row6_col1" class="data row6 col1">1,3%</td>
-<td id="T_bb4b6_row6_col2" class="data row6 col2">–</td>
-<td id="T_bb4b6_row6_col3" class="data row6 col3">0,0%</td>
+<th id="T_6b6d0_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">Денежный рынок (RUONIA)</th>
+<td id="T_6b6d0_row6_col0" class="data row6 col0">10,3%</td>
+<td id="T_6b6d0_row6_col1" class="data row6 col1">1,3%</td>
+<td id="T_6b6d0_row6_col2" class="data row6 col2">–</td>
+<td id="T_6b6d0_row6_col3" class="data row6 col3">0,0%</td>
 </tr>
 </tbody>
 </table>
@@ -1013,7 +1019,7 @@ r_p = \sum_{i=1}^n w_i r_i = w' r.
 </figure>
 </div>
 </div>
-<p>За 2012–2026 гг. все смеси акций и облигаций проиграли денежному рынку по доходности. По подпериодам картина разная: в 2012–2016 гг. акции принесли 14,8% годовых, а деньги – 9,0%; в 2017–2021 гг. – 18,1% и 7,0%; в 2022–2026 гг. – −2,3% и 15,2%. Весь проигрыш акций пришёлся на последние пять лет: в первые два подпериода акции обгоняли деньги на 6 и 11 п. п. в год, и вывод о «ненужности» акций, сделанный в конце 2021 г., был бы противоположным. Это ещё одна иллюстрация того, как сильно оценки средних доходностей зависят от выбранного периода.</p>
+<p>За 2012–2026 гг. все смеси акций и облигаций проиграли денежному рынку по доходности. По подпериодам картина разная: в 2012–2016 гг. акции принесли 14,8% годовых, а деньги – 9,0%; в 2017–2021 гг. – 18,1% и 7,0%; в 2022–2026 гг. – −2,3% и 15,2%. Отставание на всём интервале связано с результатом последнего подпериода: в первые два подпериода акции обгоняли деньги на 6 и 11 п. п. в год, и вывод о «ненужности» акций, сделанный в конце 2021 г., был бы противоположным. Это ещё одна иллюстрация того, как сильно оценки средних доходностей зависят от выбранного периода.</p>
 <p>Правило 60/40 выросло на американском рынке, где облигации долго были хорошей страховкой для акций, а ставка денежного рынка – низкой. В России обе предпосылки не выполнялись, и механический перенос правила требует осторожности. Это не значит, что акции «не нужны»: на длинных горизонтах премия за риск акций в большинстве стран положительна. Но её величина и надёжность в российских данных – вопрос открытый, и честный анализ должен это показывать.</p>
 </section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
 <ul>
