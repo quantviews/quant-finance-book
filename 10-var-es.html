@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>10&nbsp; VaR и Expected Shortfall – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -149,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -169,8 +219,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -189,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -198,8 +248,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -212,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -221,8 +271,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -241,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -250,8 +300,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -270,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -279,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -293,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -302,8 +352,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -322,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -337,8 +387,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -357,21 +407,68 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li>
+<a href="#sec-var-def" id="toc-sec-var-def" class="nav-link active" data-scroll-target="#sec-var-def"><span class="header-section-number">10.1</span> Что измеряют VaR и ES</a>
+  <ul class="collapse">
+<li><a href="#%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D1%80%D0%B8%D1%81%D0%BA-%D0%BC%D1%8B-%D0%B8%D0%B7%D0%BC%D0%B5%D1%80%D1%8F%D0%B5%D0%BC" id="toc-какой-риск-мы-измеряем" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D1%80%D0%B8%D1%81%D0%BA-%D0%BC%D1%8B-%D0%B8%D0%B7%D0%BC%D0%B5%D1%80%D1%8F%D0%B5%D0%BC"><span class="header-section-number">10.1.1</span> Какой риск мы измеряем</a></li>
+  <li><a href="#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F" id="toc-определения" class="nav-link" data-scroll-target="#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">10.1.2</span> Определения</a></li>
+  <li><a href="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-es-%D0%BB%D1%83%D1%87%D1%88%D0%B5-var" id="toc-почему-es-лучше-var" class="nav-link" data-scroll-target="#%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-es-%D0%BB%D1%83%D1%87%D1%88%D0%B5-var"><span class="header-section-number">10.1.3</span> Почему ES лучше VaR</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-var-methods" id="toc-sec-var-methods" class="nav-link" data-scroll-target="#sec-var-methods"><span class="header-section-number">10.2</span> Исторический и параметрический методы</a>
+  <ul class="collapse">
+<li><a href="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-историческое-моделирование" class="nav-link" data-scroll-target="#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">10.2.1</span> Историческое моделирование</a></li>
+  <li><a href="#%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4" id="toc-параметрический-метод" class="nav-link" data-scroll-target="#%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4"><span class="header-section-number">10.2.2</span> Параметрический метод</a></li>
+  <li><a href="#%D0%BD%D0%B0%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%82%D0%BE%D1%87%D0%BD%D1%8B-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B8" id="toc-насколько-точны-оценки" class="nav-link" data-scroll-target="#%D0%BD%D0%B0%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D1%82%D0%BE%D1%87%D0%BD%D1%8B-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B8"><span class="header-section-number">10.2.3</span> Насколько точны оценки</a></li>
+  <li><a href="#%D0%B3%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%BD%D1%82-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5-%D0%B4%D0%BD%D1%8F" id="toc-горизонт-больше-дня" class="nav-link" data-scroll-target="#%D0%B3%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%BD%D1%82-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5-%D0%B4%D0%BD%D1%8F"><span class="header-section-number">10.2.4</span> Горизонт больше дня</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-var-dynamic" id="toc-sec-var-dynamic" class="nav-link" data-scroll-target="#sec-var-dynamic"><span class="header-section-number">10.3</span> VaR, который меняется во времени</a>
+  <ul class="collapse">
+<li><a href="#%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D0%B0" id="toc-четыре-способа" class="nav-link" data-scroll-target="#%D1%87%D0%B5%D1%82%D1%8B%D1%80%D0%B5-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D0%B0"><span class="header-section-number">10.3.1</span> Четыре способа</a></li>
+  <li><a href="#%D1%84%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C-2022-%D0%B3." id="toc-февраль-2022-г." class="nav-link" data-scroll-target="#%D1%84%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C-2022-%D0%B3."><span class="header-section-number">10.3.2</span> Февраль 2022 г.</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-var-backtest" id="toc-sec-var-backtest" class="nav-link" data-scroll-target="#sec-var-backtest"><span class="header-section-number">10.4</span> Бэктест VaR</a>
+  <ul class="collapse">
+<li><a href="#%D1%87%D0%B8%D1%81%D0%BB%D0%BE-%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B5%D0%B2-%D1%82%D0%B5%D1%81%D1%82-%D0%BA%D1%83%D0%BF%D0%B8%D0%BA%D0%B0" id="toc-число-пробоев-тест-купика" class="nav-link" data-scroll-target="#%D1%87%D0%B8%D1%81%D0%BB%D0%BE-%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B5%D0%B2-%D1%82%D0%B5%D1%81%D1%82-%D0%BA%D1%83%D0%BF%D0%B8%D0%BA%D0%B0"><span class="header-section-number">10.4.1</span> Число пробоев: тест Купика</a></li>
+  <li><a href="#%D0%BD%D0%B5%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B5%D0%B2-%D1%82%D0%B5%D1%81%D1%82-%D0%BA%D1%80%D0%B8%D1%81%D1%82%D0%BE%D1%84%D1%84%D0%B5%D1%80%D1%81%D0%B5%D0%BD%D0%B0" id="toc-независимость-пробоев-тест-кристофферсена" class="nav-link" data-scroll-target="#%D0%BD%D0%B5%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B5%D0%B2-%D1%82%D0%B5%D1%81%D1%82-%D0%BA%D1%80%D0%B8%D1%81%D1%82%D0%BE%D1%84%D1%84%D0%B5%D1%80%D1%81%D0%B5%D0%BD%D0%B0"><span class="header-section-number">10.4.2</span> Независимость пробоев: тест Кристофферсена</a></li>
+  <li><a href="#%D1%81%D0%B2%D0%B5%D1%82%D0%BE%D1%84%D0%BE%D1%80-%D0%B1%D0%B0%D0%B7%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%B5%D1%82%D0%B0" id="toc-светофор-базельского-комитета" class="nav-link" data-scroll-target="#%D1%81%D0%B2%D0%B5%D1%82%D0%BE%D1%84%D0%BE%D1%80-%D0%B1%D0%B0%D0%B7%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%B8%D1%82%D0%B5%D1%82%D0%B0"><span class="header-section-number">10.4.3</span> «Светофор» Базельского комитета</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-var-mc" id="toc-sec-var-mc" class="nav-link" data-scroll-target="#sec-var-mc"><span class="header-section-number">10.5</span> Метод Монте-Карло для портфеля</a></li>
+  <li><a href="#sec-es-portfolio" id="toc-sec-es-portfolio" class="nav-link" data-scroll-target="#sec-es-portfolio"><span class="header-section-number">10.6</span> ES и выбор портфеля</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-var" id="toc-sec-exercises-var" class="nav-link" data-scroll-target="#sec-exercises-var"><span class="header-section-number">10.7</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">10.7.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8" id="toc-б.-практика-на-своей-акции" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%81%D0%B2%D0%BE%D0%B5%D0%B9-%D0%B0%D0%BA%D1%86%D0%B8%D0%B8"><span class="header-section-number">10.7.2</span> Б. Практика на своей акции</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">10.7.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">10.7.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./10-var-es.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-var-es.html">Риск и портфели</a></li><li class="breadcrumb-item"><a href="./10-var-es.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span>
+</h1>
 </div>
 
 
@@ -385,38 +482,687 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-Материала в курсе нет – пишется с нуля; опирается на главы 4 и 8.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>Утром 24 февраля 2022 г. риск-менеджер, который держит в портфеле индекс Московской биржи, видит в отчёте: однодневный VaR 99% по историческим данным последнего года – 4,8% стоимости позиции. Это означает, что убыток больше этой величины за один день случается примерно раз в сто торговых дней. К вечеру индекс полной доходности MCFTR потерял 33,3% – в 7 раз больше, чем «худший случай из ста». На следующий день он вырос на 20,0%, а затем торги акциями остановились почти на месяц, и продать позицию по какой-либо цене было нельзя.</p>
+<p>Можно ли было это предвидеть? Точное время и масштаб шока – нет. Но то, что однодневный VaR по спокойному году не говорит ничего о таких событиях, известно заранее, и это не ошибка расчёта, а свойство меры. В этой главе мы разберём, что именно измеряют VaR и Expected Shortfall, научимся оценивать их несколькими способами, проверим, какие оценки на российском рынке оказывались честными, и посмотрим, чего эти меры в принципе не могут показать.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит во второй этап работы над книгой. Планируемое содержание:</p>
 <ul>
-<li>Меры хвостового риска: VaR и ES</li>
-<li>Историческая, параметрическая и Монте-Карло оценки</li>
-<li>VaR на основе GARCH</li>
-<li>Бэктест VaR: тесты Купика и Кристофферсена</li>
-<li>Кейс: риск российского рынка в 2022 г.</li>
+<li>Определяем VaR и Expected Shortfall и выясняем, чем ES лучше VaR как мера риска.</li>
+<li>Оцениваем VaR и ES историческим, параметрическим методом и методом Монте-Карло; измеряем точность оценок бутстрепом.</li>
+<li>Строим VaR на основе модели GARCH и фильтрованную историческую симуляцию.</li>
+<li>Проверяем оценки VaR на истории: тесты Купика и Кристофферсена, «светофор» Базельского комитета.</li>
+<li>Разбираем, что показали и чего не показали меры риска в феврале 2022 г.</li>
+<li>Используем ES как критерий выбора портфеля.</li>
 </ul>
+<p><strong>Данные:</strong> <code>indexes.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> доходность, волатильность и тяжёлые хвосты (глава 4); модели GARCH (глава 8).</p>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> arch <span class="im">import</span> arch_model</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sec-var-def" class="level2 page-columns page-full" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="sec-var-def">
+<span class="header-section-number">10.1</span> Что измеряют VaR и ES</h2>
+<section id="какой-риск-мы-измеряем" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="какой-риск-мы-измеряем">
+<span class="header-section-number">10.1.1</span> Какой риск мы измеряем</h3>
+<p>Финансовый риск обычно делят на четыре вида. <strong>Рыночный риск</strong> – возможные потери от изменения цен: акций, облигаций, валют, товаров. <strong>Кредитный риск</strong> – потери из-за того, что заёмщик или контрагент не выполнит обязательства (глава 14). <strong>Риск ликвидности</strong> – потери из-за того, что позицию нельзя быстро закрыть по справедливой цене. <strong>Операционный риск</strong> – ошибки сотрудников, мошенничество, сбои систем. VaR и ES в этой главе измеряют рыночный риск, но сами меры универсальны: те же понятия используют для кредитного и операционного риска, меняются только модель убытков и горизонт.</p>
+<p>Мера риска описывает распределение будущего убытка. Пусть сегодня куплено 1000 акций по 100 руб. Если завтрашняя цена – случайная величина <span class="math inline">\(P_1\)</span>, то убыток <span class="math inline">\(L = 1000 \cdot (100 - P_1)\)</span> тоже случаен. Мера риска сводит его распределение к одному числу, по которому можно сравнивать позиции, ставить лимиты и определять, сколько капитала нужно держать на случай потерь.</p>
+</section><section id="определения" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="определения">
+<span class="header-section-number">10.1.2</span> Определения</h3>
+<p>Пусть <span class="math inline">\(L\)</span> – убыток портфеля за выбранный горизонт: потеря стоимости, выраженная в рублях или в долях от стоимости позиции. Прибыль – это отрицательный убыток. <strong>Стоимость под риском</strong> (Value at Risk, VaR) с уровнем доверия <span class="math inline">\(\alpha\)</span> – это такой убыток, который за горизонт будет превышен с вероятностью не более <span class="math inline">\(1 - \alpha\)</span>:</p>
+<p><span id="eq-var"><span class="math display">\[
+\operatorname{VaR}_\alpha = \min\{\,\ell : P(L &gt; \ell) \le 1 - \alpha\,\}.
+\tag{10.1}\]</span></span></p>
+<p>Иначе говоря, VaR – это квантиль уровня <span class="math inline">\(\alpha\)</span> распределения убытков. Однодневный VaR 99% в 2 млн руб. означает: в 99 днях из 100 убыток не превысит 2 млн руб.</p>
+<p>VaR отвечает на вопрос «насколько плохим может быть обычный плохой день», но ничего не говорит о том, что происходит в оставшемся одном дне из ста. Убыток сверх VaR может быть чуть больше VaR, а может быть в десять раз больше. На этот вопрос отвечает <strong>ожидаемый недостаток</strong> (Expected Shortfall, ES, иначе CVaR) – средний убыток при условии, что он не меньше VaR:</p>
+<p><span id="eq-es"><span class="math display">\[
+\operatorname{ES}_\alpha = E\bigl[L \mid L \ge \operatorname{VaR}_\alpha\bigr].
+\tag{10.2}\]</span></span></p>
+<p>По определению ES не меньше VaR того же уровня. Разница между ними тем больше, чем тяжелее хвост распределения убытков.</p>
+<p>У обеих мер два параметра: <strong>горизонт</strong> и <strong>уровень доверия</strong>. По правилам Базеля II банки считали капитал под рыночный риск по VaR 99% на 10 дней, а под кредитный – по квантилю 99,9% на горизонте года. С реформой правил Базельского комитета (Fundamental Review of the Trading Book) регуляторы перешли на ES 97,5%: для нормального распределения он почти совпадает с VaR 99%, но учитывает форму хвоста.</p>
+</section><section id="почему-es-лучше-var" class="level3 page-columns page-full" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="почему-es-лучше-var">
+<span class="header-section-number">10.1.3</span> Почему ES лучше VaR</h3>
+<p>Разумная мера риска должна поощрять диверсификацию: риск портфеля не может быть больше суммы рисков его частей. Это свойство называют <strong>субаддитивностью</strong>. <span class="citation" data-cites="artzner1999">Artzner и др. (<a href="references.html#ref-artzner1999" role="doc-biblioref">1999 г.</a>)</span> назвали меры, обладающие им и несколькими другими естественными свойствами, <strong>когерентными</strong>. ES когерентна, VaR – нет.</p>
+<div class="no-row-height column-margin column-container"></div><div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Банк выдал два кредита по 100 млн руб. Каждый независимо от другого не возвращается с вероятностью 4%, и тогда банк теряет всю сумму. Чему равен VaR 95% каждого кредита? А портфеля из двух кредитов? Посчитайте до того, как читать дальше.</p>
+</div>
+</div>
+<p>Вероятность потерять по одному кредиту – 4%, меньше 5%, поэтому VaR 95% каждого кредита равен нулю. В портфеле вероятность хотя бы одного дефолта – <span class="math inline">\(1 - 0{,}96^2 = 7{,}84\%\)</span>, больше 5%, и VaR 95% портфеля – 100 млн руб. По VaR диверсифицированный портфель в бесконечное число раз рискованнее суммы своих частей. ES 95% каждого кредита – средний убыток в худших 5% исходов: <span class="math inline">\(0{,}04 \cdot 100 / 0{,}05 = 80\)</span> млн руб. ES портфеля – 103,2 млн руб., меньше суммы 160 млн руб. Пример искусственный, но такая ситуация типична для кредитного риска, опционов и других позиций с редкими крупными убытками.</p>
+</section></section><section id="sec-var-methods" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="sec-var-methods">
+<span class="header-section-number">10.2</span> Исторический и параметрический методы</h2>
+<p>Будем оценивать риск позиции в индексе полной доходности MCFTR. Убыток за день – доходность с обратным знаком, в долях стоимости позиции.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mcftr <span class="op">=</span> data.load_index(<span class="st">"MCFTR"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> mcftr.pct_change().dropna()        <span class="co"># простые дневные доходности</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="op">-</span>r</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>r.index[<span class="dv">0</span>].date(), r.index[<span class="op">-</span><span class="dv">1</span>].date(), <span class="bu">len</span>(r)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (datetime.date(2003, 2, 27), datetime.date(2026, 9, 29), 5878)</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="историческое-моделирование" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="историческое-моделирование">
+<span class="header-section-number">10.2.1</span> Историческое моделирование</h3>
+<p>Самый простой способ – <strong>историческое моделирование</strong> (historical simulation): считать, что завтрашний убыток распределён так же, как убытки за последние <span class="math inline">\(N\)</span> дней, и взять их эмпирический квантиль. ES – среднее убытков, не меньших VaR. Метод не требует предположений о форме распределения, но целиком зависит от того, какие дни попали в окно.</p>
+</section><section id="параметрический-метод" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="параметрический-метод">
+<span class="header-section-number">10.2.2</span> Параметрический метод</h3>
+<p><strong>Параметрический</strong> (дисперсионно-ковариационный) метод предполагает форму распределения доходности. Для нормального распределения со средним <span class="math inline">\(\mu\)</span> и стандартным отклонением <span class="math inline">\(\sigma\)</span>:</p>
+<p><span id="eq-var-normal"><span class="math display">\[
+\operatorname{VaR}_\alpha = -\mu + z_\alpha \sigma, \qquad
+\operatorname{ES}_\alpha = -\mu + \sigma\,\frac{\varphi(z_\alpha)}{1 - \alpha},
+\tag{10.3}\]</span></span></p>
+<p>где <span class="math inline">\(z_\alpha\)</span> – квантиль стандартного нормального распределения (<span class="math inline">\(z_{0{,}99} \approx 2{,}33\)</span>), <span class="math inline">\(\varphi\)</span> – его плотность. На горизонте одного дня среднее обычно пренебрежимо мало по сравнению с <span class="math inline">\(\sigma\)</span>.</p>
+<p>Чтобы учесть тяжёлые хвосты, вместо нормального берут <strong>распределение Стьюдента</strong> с <span class="math inline">\(\nu\)</span> степенями свободы, сдвигом <span class="math inline">\(m\)</span> и масштабом <span class="math inline">\(s\)</span>, оценёнными методом максимального правдоподобия. Если <span class="math inline">\(q = t_\nu^{-1}(\alpha)\)</span> – квантиль стандартного распределения Стьюдента, а <span class="math inline">\(f_\nu\)</span> – его плотность, то</p>
+<p><span id="eq-var-t"><span class="math display">\[
+\operatorname{VaR}_\alpha = -m + s\,q, \qquad
+\operatorname{ES}_\alpha = -m + s\,\frac{f_\nu(q)}{1-\alpha}\cdot\frac{\nu + q^2}{\nu - 1}.
+\tag{10.4}\]</span></span></p>
+<p>Масштаб <span class="math inline">\(s\)</span> – не стандартное отклонение: у распределения Стьюдента дисперсия равна <span class="math inline">\(s^2 \nu/(\nu-2)\)</span>. Если подставлять в формулы оценку стандартного отклонения <span class="math inline">\(\sigma\)</span>, её нужно умножить на <span class="math inline">\(\sqrt{(\nu-2)/\nu}\)</span>, причём одинаково и в VaR, и в ES.</p>
+<p>Сравним три метода на окне в 250 дней, предшествующих последней дате снимка.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> loss.iloc[<span class="op">-</span><span class="dv">250</span>:]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>var_hs <span class="op">=</span> window.quantile(alpha)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>es_hs <span class="op">=</span> window[window <span class="op">&gt;=</span> var_hs].mean()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mu, sigma <span class="op">=</span> r.iloc[<span class="op">-</span><span class="dv">250</span>:].mean(), r.iloc[<span class="op">-</span><span class="dv">250</span>:].std()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> stats.norm.ppf(alpha)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>var_n <span class="op">=</span> <span class="op">-</span>mu <span class="op">+</span> z <span class="op">*</span> sigma</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>es_n <span class="op">=</span> <span class="op">-</span>mu <span class="op">+</span> sigma <span class="op">*</span> stats.norm.pdf(z) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> alpha)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>nu, m, s <span class="op">=</span> stats.t.fit(r.iloc[<span class="op">-</span><span class="dv">250</span>:])            <span class="co"># степени свободы, сдвиг, масштаб</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> stats.t.ppf(alpha, nu)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>var_t <span class="op">=</span> <span class="op">-</span>m <span class="op">+</span> s <span class="op">*</span> q</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>es_t <span class="op">=</span> <span class="op">-</span>m <span class="op">+</span> s <span class="op">*</span> stats.t.pdf(q, nu) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> alpha) <span class="op">*</span> (nu <span class="op">+</span> q <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (nu <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"VaR 99%"</span>: [var_hs, var_n, var_t], <span class="st">"ES 99%"</span>: [es_hs, es_n, es_t]},</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>             index<span class="op">=</span>[<span class="st">"Историческое"</span>, <span class="st">"Нормальное"</span>, <span class="st">"Стьюдента"</span>]).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               VaR 99%  ES 99%</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Историческое   0.0409  0.0420</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Нормальное     0.0338  0.0387</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Стьюдента      0.0410  0.0588</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mcftr</span> <span class="op">&lt;-</span> <span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"MCFTR"</span><span class="op">)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">mcftr</span><span class="op">$</span><span class="va">close</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mcftr</span><span class="op">$</span><span class="va">close</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">250</span><span class="op">)</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.99</span></span>
+<span></span>
+<span><span class="va">var_hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">loss</span>, <span class="va">alpha</span>, type <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
+<span><span class="va">es_hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">loss</span><span class="op">[</span><span class="va">loss</span> <span class="op">&gt;=</span> <span class="va">var_hs</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span>; <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span></span>
+<span><span class="va">var_n</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">mu</span> <span class="op">+</span> <span class="va">z</span> <span class="op">*</span> <span class="va">sigma</span></span>
+<span><span class="va">es_n</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">mu</span> <span class="op">+</span> <span class="va">sigma</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>var_hs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="va">var_hs</span><span class="op">)</span>, es_hs <span class="op">=</span> <span class="va">es_hs</span>, var_n <span class="op">=</span> <span class="va">var_n</span>, es_n <span class="op">=</span> <span class="va">es_n</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; var_hs  es_hs  var_n   es_n </span></span>
+<span><span class="co">#&gt; 0.0409 0.0420 0.0338 0.0387</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>На последнем году данных оценки VaR близки: 4,1% по историческому методу, 3,4% по нормальному и 4,1% по распределению Стьюдента. ES различаются сильнее: по Стьюденту с 3,6 степенями свободы – 5,9%, по нормальному – 3,9%, по историческому – 4,2%. Исторический ES здесь – среднее всего двух-трёх худших дней года, и на такую оценку нельзя полагаться. Различие методов лучше видно на длинной истории. На всей истории с 27.02.2003 исторический VaR 99% – 5,3%, а ES 99% – 8,2%: средний убыток в худший день из ста в 1,6 раза больше порога. Нормальное распределение с той же волатильностью дало бы VaR 99% 4,4% и предсказывало бы гораздо более тонкий хвост. Как мы видели в разделе <a href="04-returns-risk.html#sec-fat-tails" class="quarto-xref"><span>4.4</span></a>, крайние движения российского рынка случаются намного чаще, чем допускает нормальное распределение. Это главная слабость параметрического метода с нормальным распределением.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: знаки и уровни">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: знаки и уровни
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В прошлогоднем учебном ноутбуке курса встречались три ошибки, которые легко повторить. Переменная <code>alpha = 0.05</code> называлась уровнем доверия, хотя уровень доверия – 95%, а 5% – вероятность превышения. VaR в одних ячейках получался отрицательным числом (квантиль доходности, умноженный на стоимость позиции), а в другой – положительным, но с ожидаемой доходностью, прибавленной к убытку вместо вычитания. В ES по распределению Стьюдента не было множителя <span class="math inline">\(\sqrt{(\nu-2)/\nu}\)</span>, который стоял в формуле VaR строкой выше. Договоритесь о соглашениях один раз и придерживайтесь их: в этой книге VaR и ES – положительные числа, убыток – доходность с обратным знаком, <span class="math inline">\(\alpha\)</span> – уровень доверия (0,99), а <span class="math inline">\(1-\alpha\)</span> – вероятность превышения.</p>
+</div>
+</div>
+</section><section id="насколько-точны-оценки" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="насколько-точны-оценки">
+<span class="header-section-number">10.2.3</span> Насколько точны оценки</h3>
+<p>VaR и ES – оценки по выборке, и у них есть ошибка. Измерить её можно <strong>бутстрепом</strong>: много раз выбрать из имеющихся дней случайную выборку того же размера с возвращением, пересчитать по каждой VaR и ES и посмотреть на разброс результатов.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bootstrap_var_es(losses, alpha<span class="op">=</span><span class="fl">0.99</span>, n_boot<span class="op">=</span><span class="dv">2000</span>, seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_boot):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        sample <span class="op">=</span> rng.choice(losses, size<span class="op">=</span><span class="bu">len</span>(losses), replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> np.quantile(sample, alpha)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        out.append((v, sample[sample <span class="op">&gt;=</span> v].mean()))   <span class="co"># ES – по той же подвыборке</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.percentile(np.array(out), [<span class="fl">2.5</span>, <span class="fl">97.5</span>], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ci_year <span class="op">=</span> bootstrap_var_es(loss.iloc[<span class="op">-</span><span class="dv">250</span>:].values)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ci_full <span class="op">=</span> bootstrap_var_es(loss.values)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">"VaR 99%, год"</span>: ci_year[:, <span class="dv">0</span>], <span class="st">"ES 99%, год"</span>: ci_year[:, <span class="dv">1</span>],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"VaR 99%, вся история"</span>: ci_full[:, <span class="dv">0</span>], <span class="st">"ES 99%, вся история"</span>: ci_full[:, <span class="dv">1</span>]},</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>             index<span class="op">=</span>[<span class="st">"2,5%"</span>, <span class="st">"97,5%"</span>]).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        VaR 99%, год  ES 99%, год  VaR 99%, вся история  ES 99%, вся история</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2,5%         0.0310       0.0380                0.0465               0.0700</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 97,5%        0.0425       0.0429                0.0573               0.0957</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>По всей истории 95%-й интервал для VaR 99% – от 4,6% до 5,7%, для ES 99% – от 7,0% до 9,6%: ES оценивается менее точно, потому что зависит от нескольких самых крайних наблюдений. На одном годе интервал для VaR – от 3,1% до 4,2%, а для ES – от 3,8% до 4,3%. Последний интервал обманчиво узок. Бутстреп перебирает только уже наблюдавшиеся дни и не может создать убыток больше худшего дня выборки, а в хвост 1% годовой выборки попадают всего два-три дня. Для крайних квантилей и коротких выборок бутстреп недооценивает неопределённость.</p>
+<p>Оценку ES нужно считать по той же подвыборке, по которой найден квантиль. Если взять квантиль из подвыборки, а среднее хвоста – по исходным данным, как в прошлогоднем ноутбуке курса, разброс ES окажется искусственно заниженным.</p>
+</section><section id="горизонт-больше-дня" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="горизонт-больше-дня">
+<span class="header-section-number">10.2.4</span> Горизонт больше дня</h3>
+<p>Для горизонта <span class="math inline">\(H\)</span> дней VaR часто получают из однодневного умножением на <span class="math inline">\(\sqrt{H}\)</span>. Правило верно, если дневные доходности независимы и одинаково нормально распределены, – то же допущение, что при переводе дневной волатильности в годовую.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>r10 <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> r).rolling(<span class="dv">10</span>).<span class="bu">apply</span>(np.prod, raw<span class="op">=</span><span class="va">True</span>) <span class="op">-</span> <span class="dv">1</span>      <span class="co"># доходность за 10 дней</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> {<span class="st">"one_day"</span>: loss.quantile(<span class="fl">0.99</span>), <span class="st">"sqrt10"</span>: loss.quantile(<span class="fl">0.99</span>) <span class="op">*</span> np.sqrt(<span class="dv">10</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"empirical"</span>: (<span class="op">-</span>r10).quantile(<span class="fl">0.99</span>)}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>{k: <span class="bu">round</span>(v, <span class="dv">4</span>) <span class="cf">for</span> k, v <span class="kw">in</span> scale.items()}</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {'one_day': 0.0526, 'sqrt10': 0.1663, 'empirical': 0.1637}</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>На MCFTR правило работает неплохо: 16,6% против эмпирического 10-дневного квантиля 16,4%. Два противоположных эффекта частично компенсируют друг друга: тяжёлые хвосты дневных доходностей при сложении за 10 дней ослабевают, а кластеры волатильности, наоборот, делают плохие дни соседями. Для отдельных бумаг и коротких периодов результат может оказаться заметно хуже, поэтому правило <span class="math inline">\(\sqrt{H}\)</span> стоит проверять, а не применять механически. Кроме того, 10-дневный VaR предполагает, что позицию можно держать или закрыть в течение 10 дней. В феврале – марте 2022 г. торгов не было почти месяц.</p>
+</section></section><section id="sec-var-dynamic" class="level2 page-columns page-full" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="sec-var-dynamic">
+<span class="header-section-number">10.3</span> VaR, который меняется во времени</h2>
+<section id="четыре-способа" class="level3 page-columns page-full" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="четыре-способа">
+<span class="header-section-number">10.3.1</span> Четыре способа</h3>
+<p>Риск меняется во времени (глава 8), и мера риска должна за ним следовать. Сравним четыре способа считать VaR 99% на следующий день в каждый торговый день с 2010 г.</p>
+<ol type="1">
+<li>
+<strong>Историческое моделирование</strong> на окне 250 дней.</li>
+<li>
+<strong>Нормальное распределение</strong> с волатильностью за 250 дней.</li>
+<li>
+<strong>EWMA</strong> (RiskMetrics): нормальное распределение с экспоненциально взвешенной волатильностью, <span class="math inline">\(\sigma_t^2 = \lambda \sigma_{t-1}^2 + (1 - \lambda) r_{t-1}^2\)</span>, <span class="math inline">\(\lambda = 0{,}94\)</span> <span class="citation" data-cites="riskmetrics1996">(<a href="references.html#ref-riskmetrics1996" role="doc-biblioref">J.P. Morgan/Reuters 1996 г.</a>)</span>. Последние дни получают больший вес, и оценка быстрее реагирует на шоки.</li>
+<li>
+<strong>GJR-GARCH со Стьюдентом</strong> из раздела <a href="08-volatility.html#sec-garch-extensions" class="quarto-xref"><span>8.3</span></a>: прогноз условной волатильности на день вперёд и квантиль распределения Стьюдента. Параметры модели переоцениваются раз в год только по данным до начала года, чтобы прогноз не использовал будущую информацию.</li>
+</ol>
+<div class="no-row-height column-margin column-container"></div><p>Добавим пятый, гибридный метод – <strong>фильтрованную историческую симуляцию</strong> (filtered historical simulation, FHS). Модель GARCH «отфильтровывает» из доходностей меняющуюся волатильность: стандартизованные остатки <span class="math inline">\(z_t = (r_t - \mu)/\sigma_t\)</span> распределены примерно одинаково во все периоды. Квантиль берётся не из теоретического распределения, а из эмпирического распределения этих остатков, и умножается на прогноз волатильности. FHS сочетает реакцию GARCH на текущий риск с реальной формой хвоста.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.99</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> r.loc[<span class="st">"2010-01-01"</span>:].index</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1–2. Скользящее окно 250 дней; shift(1) – оценка на день t использует данные до t-1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>var_hs <span class="op">=</span> loss.rolling(<span class="dv">250</span>).quantile(alpha).shift(<span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>var_norm <span class="op">=</span> (<span class="op">-</span>r.rolling(<span class="dv">250</span>).mean() <span class="op">+</span> stats.norm.ppf(alpha) <span class="op">*</span> r.rolling(<span class="dv">250</span>).std()).shift(<span class="dv">1</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. EWMA: дисперсия на день t по доходностям до t-1</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ewma_var <span class="op">=</span> (r <span class="op">**</span> <span class="dv">2</span>).ewm(alpha<span class="op">=</span><span class="dv">1</span> <span class="op">-</span> <span class="fl">0.94</span>, adjust<span class="op">=</span><span class="va">False</span>).mean().shift(<span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>var_ewma <span class="op">=</span> stats.norm.ppf(alpha) <span class="op">*</span> np.sqrt(ewma_var)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4–5. GJR-GARCH(1,1) со Стьюдентом и FHS; параметры – по данным до начала года</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>rp <span class="op">=</span> r <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>var_garch <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>r.index)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>var_fhs <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>r.index)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2010</span>, r.index[<span class="op">-</span><span class="dv">1</span>].year <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    last <span class="op">=</span> rp.loc[:<span class="ss">f"</span><span class="sc">{</span>year <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">-12-31"</span>].index[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    spec <span class="op">=</span> <span class="bu">dict</span>(mean<span class="op">=</span><span class="st">"Constant"</span>, vol<span class="op">=</span><span class="st">"GARCH"</span>, p<span class="op">=</span><span class="dv">1</span>, o<span class="op">=</span><span class="dv">1</span>, q<span class="op">=</span><span class="dv">1</span>, dist<span class="op">=</span><span class="st">"t"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    fit <span class="op">=</span> arch_model(rp.loc[:last], <span class="op">**</span>spec).fit(disp<span class="op">=</span><span class="st">"off"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    fc <span class="op">=</span> arch_model(rp, <span class="op">**</span>spec).fix(fit.params).forecast(start<span class="op">=</span>last, horizon<span class="op">=</span><span class="dv">1</span>, reindex<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># строка с датой t – прогноз на следующий торговый день</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    pos <span class="op">=</span> rp.index.get_indexer(fc.variance.index) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    keep <span class="op">=</span> pos <span class="op">&lt;</span> <span class="bu">len</span>(rp)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> rp.index[pos[keep]]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    this_year <span class="op">=</span> target.year <span class="op">==</span> year</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    mean_f <span class="op">=</span> fc.mean[<span class="st">"h.1"</span>].values[keep][this_year]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    vol_f <span class="op">=</span> np.sqrt(fc.variance[<span class="st">"h.1"</span>].values[keep][this_year])</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    nu <span class="op">=</span> fit.params[<span class="st">"nu"</span>]</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    q_t <span class="op">=</span> stats.t.ppf(<span class="dv">1</span> <span class="op">-</span> alpha, nu) <span class="op">*</span> np.sqrt((nu <span class="op">-</span> <span class="dv">2</span>) <span class="op">/</span> nu)   <span class="co"># квантиль t с единичной дисперсией</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    z_hist <span class="op">=</span> ((rp.loc[:last] <span class="op">-</span> fit.params[<span class="st">"mu"</span>]) <span class="op">/</span> fit.conditional_volatility).dropna()</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    q_fhs <span class="op">=</span> np.quantile(z_hist, <span class="dv">1</span> <span class="op">-</span> alpha)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    var_garch.loc[target[this_year]] <span class="op">=</span> <span class="op">-</span>(mean_f <span class="op">+</span> q_t <span class="op">*</span> vol_f) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    var_fhs.loc[target[this_year]] <span class="op">=</span> <span class="op">-</span>(mean_f <span class="op">+</span> q_fhs <span class="op">*</span> vol_f) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> pd.DataFrame({<span class="st">"Историческое"</span>: var_hs, <span class="st">"Нормальное"</span>: var_norm, <span class="st">"EWMA"</span>: var_ewma,</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"GJR-GARCH-t"</span>: var_garch, <span class="st">"FHS"</span>: var_fhs}).loc[test]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> V.loc[<span class="st">"2019"</span>:<span class="st">"2023"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ax.bar(period.index, loss.loc[period.index] <span class="op">*</span> <span class="dv">100</span>, width<span class="op">=</span><span class="fl">1.5</span>, color<span class="op">=</span><span class="st">"#B0B7C3"</span>, label<span class="op">=</span><span class="st">"Убыток за день"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> [<span class="st">"Историческое"</span>, <span class="st">"EWMA"</span>, <span class="st">"GJR-GARCH-t"</span>]:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    ax.plot(period.index, period[c] <span class="op">*</span> <span class="dv">100</span>, linewidth<span class="op">=</span><span class="fl">1.2</span>, label<span class="op">=</span>c)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>hits <span class="op">=</span> period.index[loss.loc[period.index] <span class="op">&gt;</span> period[<span class="st">"GJR-GARCH-t"</span>]]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(hits, loss.loc[hits] <span class="op">*</span> <span class="dv">100</span>, color<span class="op">=</span><span class="st">"#B8412E"</span>, s<span class="op">=</span><span class="dv">12</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="dv">2</span>, <span class="dv">14</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"% стоимости позиции"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax.legend(ncol<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-var-paths" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-var-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-var-es_files/figure-html/fig-var-paths-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-var-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.1: Убыток MCFTR за день и однодневный VaR 99%, 2019–2023 гг. Точки – дни, когда убыток превысил VaR по методу GJR-GARCH-t
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>На графике видно главное различие методов. Историческая оценка меняется ступеньками и запаздывает: крупный убыток сразу поднимает квантиль, а через 250 дней резко выпадает из окна. EWMA и GARCH реагируют на всплеск волатильности за день-два и так же постепенно возвращаются к обычному уровню. Ось обрезана на 14%: убыток 24 февраля 2022 г., 33,3%, на график не помещается.</p>
+</section><section id="февраль-2022-г." class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="февраль-2022-г.">
+<span class="header-section-number">10.3.2</span> Февраль 2022 г.</h3>
+<p>Что показывали методы утром 24 февраля? Исторический VaR 99% – 4,8%, нормальный – 3,4%, EWMA – 7,9%, GJR-GARCH-t – 10,9%, FHS – 11,5%. Модели волатильности успели отреагировать на падения 21 и 22 февраля: ещё 18 февраля GARCH-оценка была 6,3%. Но фактический убыток превысил даже самую высокую оценку втрое. Ни одна модель, оценённая по прошлым данным, не предскажет убыток такого масштаба: худший день MCFTR до этого, 06.10.2008, принёс убыток 18,7%. Для таких событий служат <strong>стресс-тесты</strong> – расчёт убытка по заданным сценариям («рынок падает на 30%, торги останавливаются на месяц»), без ссылки на вероятность.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Чего не видит однодневный VaR">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Чего не видит однодневный VaR
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Однодневный VaR предполагает, что позицию можно закрыть по рыночной цене за день. С 25 февраля по 23 марта 2022 г. торги акциями на Московской бирже не проводились, а иностранные инвесторы не могли продать бумаги и после возобновления торгов. Риск ликвидности – невозможность продать актив без большой потери или вообще продать его – в стандартный VaR не входит. Индексы в эти дни не рассчитывались: в данных книги доходность MCFTR за 25 февраля сразу сменяется доходностью за 25 марта, а значение за 24 марта, первый день торгов, в снимке отсутствует.</p>
+</div>
+</div>
+</section></section><section id="sec-var-backtest" class="level2 page-columns page-full" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="sec-var-backtest">
+<span class="header-section-number">10.4</span> Бэктест VaR</h2>
+<section id="число-пробоев-тест-купика" class="level3 page-columns page-full" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="число-пробоев-тест-купика">
+<span class="header-section-number">10.4.1</span> Число пробоев: тест Купика</h3>
+<p>Если VaR 99% оценён правильно, убыток должен превышать его в среднем в 1% дней. День, когда убыток больше VaR, называют <strong>пробоем</strong> (exception, violation). Пусть за <span class="math inline">\(n\)</span> дней было <span class="math inline">\(k\)</span> пробоев. Если модель верна, <span class="math inline">\(k\)</span> имеет биномиальное распределение с вероятностью успеха <span class="math inline">\(p = 1 - \alpha\)</span>. Тест <span class="citation" data-cites="kupiec1995">Kupiec (<a href="references.html#ref-kupiec1995" role="doc-biblioref">1995 г.</a>)</span> (proportion of failures, POF) сравнивает правдоподобие наблюдаемой доли пробоев <span class="math inline">\(\hat p = k/n\)</span> с теоретической:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-kupiec"><span class="math display">\[
+LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \chi^2(1).
+\tag{10.5}\]</span></span></p>
+<p>Слишком много пробоев означает, что риск занижен; слишком мало – что модель чрезмерно осторожна и требует лишнего капитала. Тест отвергает модель в обоих случаях.</p>
+</section><section id="независимость-пробоев-тест-кристофферсена" class="level3 page-columns page-full" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="независимость-пробоев-тест-кристофферсена">
+<span class="header-section-number">10.4.2</span> Независимость пробоев: тест Кристофферсена</h3>
+<p>Правильная доля пробоев ещё не всё. Если пробои идут сериями, модель плохо реагирует на изменение риска: после первого крупного убытка она продолжает показывать низкий VaR. Тест <span class="citation" data-cites="christoffersen1998">Christoffersen (<a href="references.html#ref-christoffersen1998" role="doc-biblioref">1998 г.</a>)</span> проверяет, зависит ли вероятность пробоя сегодня от того, был ли пробой вчера. Обозначим <span class="math inline">\(\pi_{01}\)</span> долю пробоев среди дней после дня без пробоя, <span class="math inline">\(\pi_{11}\)</span> – после дня с пробоем. При независимости они равны; статистика отношения правдоподобия также имеет распределение <span class="math inline">\(\chi^2(1)\)</span>.</p>
+<div class="no-row-height column-margin column-container"></div><div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kupiec(hits, alpha):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Тест Купика: число пробоев, их доля и p-значение."""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    n, k <span class="op">=</span> <span class="bu">len</span>(hits), <span class="bu">int</span>(hits.<span class="bu">sum</span>())</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    p, ph <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> alpha, k <span class="op">/</span> n</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ll_null <span class="op">=</span> (n <span class="op">-</span> k) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p) <span class="op">+</span> k <span class="op">*</span> np.log(p)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ll_alt <span class="op">=</span> (n <span class="op">-</span> k) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> ph) <span class="op">+</span> k <span class="op">*</span> np.log(ph) <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> k <span class="op">&lt;</span> n <span class="cf">else</span> <span class="fl">0.0</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> k, ph, stats.chi2.sf(<span class="op">-</span><span class="dv">2</span> <span class="op">*</span> (ll_null <span class="op">-</span> ll_alt), <span class="dv">1</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> christoffersen(hits):</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Тест независимости пробоев: число пробоев подряд и p-значение."""</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> hits.astype(<span class="bu">int</span>).values</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    prev, cur <span class="op">=</span> h[:<span class="op">-</span><span class="dv">1</span>], h[<span class="dv">1</span>:]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    n00, n01 <span class="op">=</span> ((prev <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (cur <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>(), ((prev <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (cur <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    n10, n11 <span class="op">=</span> ((prev <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (cur <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>(), ((prev <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (cur <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    pi01, pi11 <span class="op">=</span> n01 <span class="op">/</span> (n00 <span class="op">+</span> n01), n11 <span class="op">/</span> <span class="bu">max</span>(n10 <span class="op">+</span> n11, <span class="dv">1</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    pi <span class="op">=</span> (n01 <span class="op">+</span> n11) <span class="op">/</span> <span class="bu">len</span>(cur)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ll(p, a, b):                       <span class="co"># a наблюдений «нет», b наблюдений «да»</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (a <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p) <span class="cf">if</span> a <span class="cf">else</span> <span class="dv">0</span>) <span class="op">+</span> (b <span class="op">*</span> np.log(p) <span class="cf">if</span> b <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    lr <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> (ll(pi, n00 <span class="op">+</span> n10, n01 <span class="op">+</span> n11) <span class="op">-</span> ll(pi01, n00, n01) <span class="op">-</span> ll(pi11, n10, n11))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n11, stats.chi2.sf(lr, <span class="dv">1</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>realized <span class="op">=</span> loss.loc[V.index]</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {}</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> method <span class="kw">in</span> V.columns:</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> realized <span class="op">&gt;</span> V[method]</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    k, rate, p_k <span class="op">=</span> kupiec(hits, alpha)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    pairs, p_c <span class="op">=</span> christoffersen(hits)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    rows[method] <span class="op">=</span> {<span class="st">"Пробоев"</span>: k, <span class="st">"Доля, %"</span>: rate <span class="op">*</span> <span class="dv">100</span>, <span class="st">"p Купика"</span>: p_k,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Пробоев подряд"</span>: pairs, <span class="st">"p Кристофферсена"</span>: p_c,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Средний VaR, %"</span>: V[method].mean() <span class="op">*</span> <span class="dv">100</span>}</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>backtest <span class="op">=</span> pd.DataFrame(rows).T</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">kupiec</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">hits</span>, <span class="va">alpha</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span>; <span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">hits</span><span class="op">)</span>; <span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span>; <span class="va">ph</span> <span class="op">&lt;-</span> <span class="va">k</span> <span class="op">/</span> <span class="va">n</span></span>
+<span>  <span class="va">lr</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="va">k</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">p</span><span class="op">)</span> <span class="op">+</span> <span class="va">k</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="op">(</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="va">k</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">ph</span><span class="op">)</span> <span class="op">+</span> <span class="va">k</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">ph</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>k <span class="op">=</span> <span class="va">k</span>, rate <span class="op">=</span> <span class="va">ph</span>, p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">lr</span>, df <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># VaR по историческому методу на окне 250 дней (оценка на t – по данным до t-1)</span></span>
+<span><span class="va">loss_all</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">r</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">loss_all</span><span class="op">)</span></span>
+<span><span class="va">var_hs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">251</span><span class="op">:</span><span class="va">n</span>, <span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">loss_all</span><span class="op">[</span><span class="op">(</span><span class="va">t</span> <span class="op">-</span> <span class="fl">250</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="va">t</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">]</span>, <span class="fl">0.99</span>, type <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">loss_all</span><span class="op">[</span><span class="fl">251</span><span class="op">:</span><span class="va">n</span><span class="op">]</span> <span class="op">&gt;</span> <span class="va">var_hs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu">kupiec</span><span class="op">(</span><span class="va">hits</span>, <span class="fl">0.99</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       k    rate p_value </span></span>
+<span><span class="co">#&gt; 89.0000  0.0158  0.0001</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ru <span class="op">=</span> <span class="kw">lambda</span> v: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(backtest.style</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a> .<span class="bu">format</span>(ru, subset<span class="op">=</span>[<span class="st">"Доля, %"</span>, <span class="st">"Средний VaR, %"</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a> .<span class="bu">format</span>(<span class="kw">lambda</span> v: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.3f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>), subset<span class="op">=</span>[<span class="st">"p Купика"</span>, <span class="st">"p Кристофферсена"</span>])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a> .<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.0f}</span><span class="st">"</span>, subset<span class="op">=</span>[<span class="st">"Пробоев"</span>, <span class="st">"Пробоев подряд"</span>]))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-var-backtest" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-var-backtest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;10.1: Бэктест однодневного VaR 99% для MCFTR с 2010 г. Ожидаемая доля пробоев – 1%
+</figcaption><div aria-describedby="tbl-var-backtest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_a18a1" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_a18a1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Пробоев</th>
+<th id="T_a18a1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Доля, %</th>
+<th id="T_a18a1_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">p Купика</th>
+<th id="T_a18a1_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Пробоев подряд</th>
+<th id="T_a18a1_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">p Кристофферсена</th>
+<th id="T_a18a1_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Средний VaR, %</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_a18a1_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое</th>
+<td id="T_a18a1_row0_col0" class="data row0 col0">66</td>
+<td id="T_a18a1_row0_col1" class="data row0 col1">1,58</td>
+<td id="T_a18a1_row0_col2" class="data row0 col2">0,001</td>
+<td id="T_a18a1_row0_col3" class="data row0 col3">4</td>
+<td id="T_a18a1_row0_col4" class="data row0 col4">0,024</td>
+<td id="T_a18a1_row0_col5" class="data row0 col5">3,48</td>
+</tr>
+<tr class="even">
+<th id="T_a18a1_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Нормальное</th>
+<td id="T_a18a1_row1_col0" class="data row1 col0">81</td>
+<td id="T_a18a1_row1_col1" class="data row1 col1">1,94</td>
+<td id="T_a18a1_row1_col2" class="data row1 col2">0,000</td>
+<td id="T_a18a1_row1_col3" class="data row1 col3">10</td>
+<td id="T_a18a1_row1_col4" class="data row1 col4">0,000</td>
+<td id="T_a18a1_row1_col5" class="data row1 col5">3,17</td>
+</tr>
+<tr class="odd">
+<th id="T_a18a1_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">EWMA</th>
+<td id="T_a18a1_row2_col0" class="data row2 col0">76</td>
+<td id="T_a18a1_row2_col1" class="data row2 col1">1,82</td>
+<td id="T_a18a1_row2_col2" class="data row2 col2">0,000</td>
+<td id="T_a18a1_row2_col3" class="data row2 col3">3</td>
+<td id="T_a18a1_row2_col4" class="data row2 col4">0,222</td>
+<td id="T_a18a1_row2_col5" class="data row2 col5">2,93</td>
+</tr>
+<tr class="even">
+<th id="T_a18a1_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">GJR-GARCH-t</th>
+<td id="T_a18a1_row3_col0" class="data row3 col0">36</td>
+<td id="T_a18a1_row3_col1" class="data row3 col1">0,86</td>
+<td id="T_a18a1_row3_col2" class="data row3 col2">0,353</td>
+<td id="T_a18a1_row3_col3" class="data row3 col3">0</td>
+<td id="T_a18a1_row3_col4" class="data row3 col4">0,429</td>
+<td id="T_a18a1_row3_col5" class="data row3 col5">3,45</td>
+</tr>
+<tr class="odd">
+<th id="T_a18a1_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">FHS</th>
+<td id="T_a18a1_row4_col0" class="data row4 col0">28</td>
+<td id="T_a18a1_row4_col1" class="data row4 col1">0,67</td>
+<td id="T_a18a1_row4_col2" class="data row4 col2">0,022</td>
+<td id="T_a18a1_row4_col3" class="data row4 col3">0</td>
+<td id="T_a18a1_row4_col4" class="data row4 col4">0,539</td>
+<td id="T_a18a1_row4_col5" class="data row4 col5">3,67</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>За 4&nbsp;184 торговых дня при верной модели следовало ожидать около 42 пробоев. Три метода с нормальным распределением или коротким окном заметно занижают риск. Нормальное распределение дало 1,94% пробоев – почти вдвое больше нужного, и пробои шли сериями: тест Кристофферсена отвергает независимость. EWMA быстро реагирует на всплески волатильности, поэтому пробои у неё реже идут подряд, но нормальное распределение по-прежнему недооценивает хвост: доля пробоев 1,82%. Историческое моделирование учитывает форму хвоста, но запаздывает: 1,58%.</p>
+<p>Модель GJR-GARCH со Стьюдентом проходит оба теста: доля пробоев 0,86%, p-значения тестов Купика и Кристофферсена – 0,35 и 0,43. Обе составляющие важны: модель волатильности отвечает за реакцию на текущий риск, распределение Стьюдента – за толщину хвоста. FHS оказалась даже излишне осторожной: 0,67% пробоев, и тест Купика отвергает её на 5%-м уровне. Средний VaR у неё выше, чем у GARCH-t: эмпирический хвост стандартизованных остатков, куда вошли 2008 и 2014 гг., тяжелее, чем у подобранного распределения Стьюдента.</p>
+</section><section id="светофор-базельского-комитета" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="светофор-базельского-комитета">
+<span class="header-section-number">10.4.3</span> «Светофор» Базельского комитета</h3>
+<p>Регуляторы оценивают модели банков по числу пробоев однодневного VaR 99% за последние 250 торговых дней. Правила Базельского комитета делят результат на три зоны: <strong>зелёная</strong> – до 4 пробоев, <strong>жёлтая</strong> – от 5 до 9, <strong>красная</strong> – 10 и более. В жёлтой зоне банк увеличивает капитал под рыночный риск, в красной модель, как правило, нужно заменить.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>yearly <span class="op">=</span> (realized.values[:, <span class="va">None</span>] <span class="op">&gt;</span> V.values).astype(<span class="bu">int</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>yearly <span class="op">=</span> pd.DataFrame(yearly, index<span class="op">=</span>V.index, columns<span class="op">=</span>V.columns).groupby(V.index.year).<span class="bu">sum</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> yearly.index.values</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="st">"Нормальное"</span>, <span class="st">"Историческое"</span>, <span class="st">"GJR-GARCH-t"</span>]):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    ax.bar(years <span class="op">+</span> (i <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.27</span>, yearly[c], width<span class="op">=</span><span class="fl">0.27</span>, label<span class="op">=</span>c)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.axhspan(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">4.5</span>, color<span class="op">=</span><span class="st">"#3F8F5B"</span>, alpha<span class="op">=</span><span class="fl">0.08</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.axhspan(<span class="fl">4.5</span>, <span class="fl">9.5</span>, color<span class="op">=</span><span class="st">"#E3B23C"</span>, alpha<span class="op">=</span><span class="fl">0.12</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax.axhspan(<span class="fl">9.5</span>, <span class="dv">16</span>, color<span class="op">=</span><span class="st">"#B8412E"</span>, alpha<span class="op">=</span><span class="fl">0.08</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">16</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(years[::<span class="dv">2</span>], labels<span class="op">=</span>[<span class="bu">str</span>(y) <span class="cf">for</span> y <span class="kw">in</span> years[::<span class="dv">2</span>]])</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Пробоев за год"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-traffic-light" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-traffic-light-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-var-es_files/figure-html/fig-traffic-light-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-traffic-light-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.2: Число пробоев однодневного VaR 99% по календарным годам и зоны «светофора»
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Модель с нормальным распределением попадала в красную зону в 2011, 2020, 2022, 2024 гг. Особенно показателен 2024 г. с 15 пробоями: после спокойного 2023 г. волатильность выросла, а окно в 250 дней долго удерживало оценку на низком уровне спокойного года. Модель GJR-GARCH-t ни разу не вышла за пределы жёлтой зоны; больше всего пробоев у неё было в 2022 г. – 6.</p>
+<p>Несколько оговорок к бэктесту. Пробоев за 250 дней мало, и даже правильная модель с вероятностью около 11% попадает в жёлтую зону случайно. Тесты проверяют только частоту и независимость пробоев, но не их размер: модель, у которой пробои редкие, но огромные, тест Купика пройдёт. Именно поэтому регуляторы перешли к ES, а для ES разработаны отдельные, более сложные процедуры бэктеста.</p>
+</section></section><section id="sec-var-mc" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="sec-var-mc">
+<span class="header-section-number">10.5</span> Метод Монте-Карло для портфеля</h2>
+<p>Для портфеля из нескольких активов параметрический метод использует ковариационную матрицу: <span class="math inline">\(\sigma_p = \sqrt{w'\Sigma w}\)</span>, как в главе 11. Но если горизонт длиннее дня, распределение не нормальное или в портфеле есть инструменты с нелинейной зависимостью от цен (опционы, облигации с большой выпуклостью), формулы перестают работать. Тогда распределение убытка получают <strong>моделированием</strong>: генерируют много сценариев изменения факторов риска, переоценивают портфель в каждом и берут квантиль полученных убытков.</p>
+<p>Рассмотрим портфель на 1 млн руб.: 60% в акциях (MCFTR), 40% в ОФЗ (индекс полной доходности RGBITR). Найдём 10-дневные VaR 99% и ES 97,5% двумя способами моделирования: по многомерному нормальному распределению с оценёнными средними и ковариациями и бутстрепом – случайной выборкой реальных дней с сохранением совместного движения акций и облигаций.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ix <span class="op">=</span> data.load_index([<span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span>], start<span class="op">=</span><span class="st">"2024-10-01"</span>).pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"close"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>R2 <span class="op">=</span> ix[[<span class="st">"MCFTR"</span>, <span class="st">"RGBITR"</span>]].pct_change().dropna()          <span class="co"># последние два года</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="fl">0.6</span>, <span class="fl">0.4</span>])</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>value, H, N <span class="op">=</span> <span class="dv">1_000_000</span>, <span class="dv">10</span>, <span class="dv">100_000</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>normal_paths <span class="op">=</span> rng.multivariate_normal(R2.mean().values, R2.cov().values, size<span class="op">=</span>(N, H))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>boot_paths <span class="op">=</span> R2.values[rng.integers(<span class="dv">0</span>, <span class="bu">len</span>(R2), size<span class="op">=</span>(N, H))]   <span class="co"># случайные реальные дни</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> var_es(paths):</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    pnl <span class="op">=</span> value <span class="op">*</span> (((<span class="dv">1</span> <span class="op">+</span> paths).prod(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">-</span> <span class="dv">1</span>) <span class="op">@</span> w)          <span class="co"># результат за 10 дней, руб.</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    losses <span class="op">=</span> <span class="op">-</span>pnl</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"VaR 99%"</span>: np.quantile(losses, <span class="fl">0.99</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ES 97,5%"</span>: losses[losses <span class="op">&gt;=</span> np.quantile(losses, <span class="fl">0.975</span>)].mean()}</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> pd.DataFrame({<span class="st">"Нормальное"</span>: var_es(normal_paths), <span class="st">"Бутстреп"</span>: var_es(boot_paths)}).T</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>stocks_only <span class="op">=</span> value <span class="op">*</span> stats.norm.ppf(<span class="fl">0.99</span>) <span class="op">*</span> R2[<span class="st">"MCFTR"</span>].std() <span class="op">*</span> np.sqrt(H)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>mc.<span class="bu">round</span>(<span class="dv">0</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             VaR 99%  ES 97,5%</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Нормальное  70669.0   70817.0</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Бутстреп    68145.0   68457.0</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>10-дневный VaR 99% портфеля – около 71 тыс. руб. по нормальному моделированию и 68 тыс. руб. по бутстрепу. Если бы весь миллион был в акциях, VaR составил бы около 112 тыс. руб. Облигации снижают риск, но меньше, чем при независимых доходностях: за последние два года корреляция дневных доходностей MCFTR и RGBITR составила 0,54. Акции и ОФЗ одинаково реагировали на ожидания по ключевой ставке.</p>
+<p>Бутстреп сохраняет совместное распределение двух активов в отдельный день, но перемешивает дни и поэтому теряет кластеры волатильности. Если такие кластеры важны, дни выбирают блоками или моделируют траектории по модели GARCH. Результат моделирования зависит от окна данных не меньше, чем исторический VaR: два последних года не содержат ни 2008, ни 2022 гг.</p>
+</section><section id="sec-es-portfolio" class="level2 page-columns page-full" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="sec-es-portfolio">
+<span class="header-section-number">10.6</span> ES и выбор портфеля</h2>
+<p>В главе 11 портфель выбирался по дисперсии. Вместо неё можно минимизировать ES: такой критерий штрафует именно крупные убытки и не наказывает за сильный рост. <span class="citation" data-cites="rockafellar2000">Rockafellar и Uryasev (<a href="references.html#ref-rockafellar2000" role="doc-biblioref">2000 г.</a>)</span> показали, что на исторических сценариях задача минимизации ES сводится к линейному программированию. Если <span class="math inline">\(r_t\)</span> – вектор доходностей активов в день <span class="math inline">\(t\)</span>, <span class="math inline">\(T\)</span> – число дней, то</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-min-es"><span class="math display">\[
+\min_{w,\,\zeta,\,u}\ \zeta + \frac{1}{(1-\alpha)T}\sum_{t=1}^{T} u_t
+\quad\text{при}\quad u_t \ge -r_t'w - \zeta,\ \ u_t \ge 0,\ \ \sum_i w_i = 1,\ \ w_i \ge 0.
+\tag{10.6}\]</span></span></p>
+<p>В оптимальном решении <span class="math inline">\(\zeta\)</span> равна VaR портфеля, а значение целевой функции – его ES. Найдём портфель с минимальным ES 97,5% из 15 крупных акций главы 11 по дневным доходностям за последние три года и сравним его с портфелем минимальной дисперсии.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> linprog, minimize</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>TICKERS <span class="op">=</span> [<span class="st">"SBER"</span>, <span class="st">"GAZP"</span>, <span class="st">"LKOH"</span>, <span class="st">"GMKN"</span>, <span class="st">"ROSN"</span>, <span class="st">"NVTK"</span>, <span class="st">"TATN"</span>, <span class="st">"MTSS"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"MGNT"</span>, <span class="st">"SNGS"</span>, <span class="st">"CHMF"</span>, <span class="st">"NLMK"</span>, <span class="st">"PLZL"</span>, <span class="st">"ALRS"</span>, <span class="st">"VTBR"</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> (r.index[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> pd.DateOffset(years<span class="op">=</span><span class="dv">3</span>)).date()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Rs <span class="op">=</span> data.load_prices(TICKERS, start<span class="op">=</span>start)[TICKERS].pct_change().dropna()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>Rv <span class="op">=</span> Rs.values</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>T, n <span class="op">=</span> Rv.shape</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>a_es <span class="op">=</span> <span class="fl">0.975</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># переменные: веса w (n), порог zeta (1), превышения u (T)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.r_[np.zeros(n), <span class="fl">1.0</span>, np.full(T, <span class="dv">1</span> <span class="op">/</span> ((<span class="dv">1</span> <span class="op">-</span> a_es) <span class="op">*</span> T))]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>A_ub <span class="op">=</span> np.hstack([<span class="op">-</span>Rv, <span class="op">-</span>np.ones((T, <span class="dv">1</span>)), <span class="op">-</span>np.eye(T)])        <span class="co"># -r_t'w - zeta - u_t &lt;= 0</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>A_eq <span class="op">=</span> np.r_[np.ones(n), <span class="fl">0.0</span>, np.zeros(T)][<span class="va">None</span>, :]</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>bounds <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>)] <span class="op">*</span> n <span class="op">+</span> [(<span class="va">None</span>, <span class="va">None</span>)] <span class="op">+</span> [(<span class="dv">0</span>, <span class="va">None</span>)] <span class="op">*</span> T</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>lp <span class="op">=</span> linprog(c, A_ub<span class="op">=</span>A_ub, b_ub<span class="op">=</span>np.zeros(T), A_eq<span class="op">=</span>A_eq, b_eq<span class="op">=</span>[<span class="dv">1</span>], bounds<span class="op">=</span>bounds, method<span class="op">=</span><span class="st">"highs"</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>w_es <span class="op">=</span> lp.x[:n]</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> Rs.cov().values <span class="op">*</span> <span class="dv">252</span>                                   <span class="co"># годовая, для устойчивости оптимизатора</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>w_mv <span class="op">=</span> minimize(<span class="kw">lambda</span> w: w <span class="op">@</span> cov <span class="op">@</span> w, np.ones(n) <span class="op">/</span> n, bounds<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">1</span>)] <span class="op">*</span> n,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>                constraints<span class="op">=</span>[{<span class="st">"type"</span>: <span class="st">"eq"</span>, <span class="st">"fun"</span>: <span class="kw">lambda</span> w: w.<span class="bu">sum</span>() <span class="op">-</span> <span class="dv">1</span>}], method<span class="op">=</span><span class="st">"SLSQP"</span>).x</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> risk(w):</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    port_loss <span class="op">=</span> <span class="op">-</span>(Rv <span class="op">@</span> w)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> np.quantile(port_loss, a_es)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"ES 97,5%, %"</span>: port_loss[port_loss <span class="op">&gt;=</span> v].mean() <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Волатильность, % год."</span>: np.sqrt(w <span class="op">@</span> cov <span class="op">@</span> w) <span class="op">*</span> <span class="dv">100</span>}</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>ports <span class="op">=</span> {<span class="st">"Мин. ES"</span>: w_es, <span class="st">"Мин. дисперсия"</span>: w_mv, <span class="st">"Равные веса"</span>: np.ones(n) <span class="op">/</span> n}</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>comp <span class="op">=</span> pd.DataFrame({k: pd.Series(w, index<span class="op">=</span>TICKERS) <span class="cf">for</span> k, w <span class="kw">in</span> ports.items()})</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>comp <span class="op">=</span> comp[(comp <span class="op">&gt;</span> <span class="fl">0.01</span>).<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)].mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>pd.concat([comp, pd.DataFrame({k: risk(w) <span class="cf">for</span> k, w <span class="kw">in</span> ports.items()}).<span class="bu">round</span>(<span class="dv">2</span>)])</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                        Мин. ES  Мин. дисперсия  Равные веса</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SBER                     70.30           52.10         6.70</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GAZP                      1.90            0.00         6.70</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LKOH                     18.10           19.90         6.70</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; GMKN                      0.00            0.00         6.70</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ROSN                      0.00            0.00         6.70</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NVTK                      0.00            0.00         6.70</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TATN                      0.00            0.00         6.70</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MTSS                      9.80           17.30         6.70</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; MGNT                      0.00            0.00         6.70</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; SNGS                      0.00            0.00         6.70</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CHMF                      0.00            0.00         6.70</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; NLMK                      0.00            0.00         6.70</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PLZL                      0.00           10.60         6.70</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALRS                      0.00            0.00         6.70</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; VTBR                      0.00            0.00         6.70</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ES 97,5%, %               3.09            3.17         3.76</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Волатильность, % год.    21.17           20.66        24.45</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Портфель с минимальным ES содержит 4 бумаги, и на SBER приходится 70% капитала. Его ES 97,5% – 3,1% в день против 3,2% у портфеля минимальной дисперсии и 3,8% у портфеля с равными весами. Разница между двумя оптимальными портфелями невелика, и состав у них похож: на трёхлетнем окне бумаги с низкой дисперсией оказались и бумагами с лёгким левым хвостом.</p>
+<p>Оптимизация по ES наследует все проблемы, которые мы видели в главе 11 (раздел <a href="11-portfolio.html#sec-estimation-error" class="quarto-xref"><span>11.4</span></a>), и даже усиливает их: ES 97,5% по трём годам определяется примерно 19 худшими днями, и замена одного-двух из них может заметно изменить веса. Поэтому на практике к задаче добавляют ограничения на долю одной бумаги, а результат проверяют вне выборки, как в разделе <a href="11-portfolio.html#sec-portfolio-oos" class="quarto-xref"><span>11.5</span></a>.</p>
+</section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>VaR – квантиль распределения убытков: убыток, который превышается с заданной малой вероятностью. ES – средний убыток в этих худших случаях. ES учитывает форму хвоста и, в отличие от VaR, поощряет диверсификацию.</li>
+<li>Исторический метод не делает предположений о распределении, но запаздывает и зависит от окна. Нормальный параметрический метод занижает хвостовой риск российского рынка.</li>
+<li>Модели волатильности (EWMA, GARCH) позволяют VaR следовать за текущим уровнем риска. На MCFTR с 2010 г. бэктест прошла только модель, сочетающая GARCH с распределением с тяжёлыми хвостами.</li>
+<li>Бэктест проверяет долю пробоев (тест Купика) и их независимость (тест Кристофферсена). Регуляторы используют «светофор» по числу пробоев за 250 дней.</li>
+<li>Для портфелей, длинных горизонтов и нелинейных инструментов VaR и ES считают моделированием. Результат зависит от модели и окна данных.</li>
+<li>Оценки VaR и ES неточны, особенно ES и особенно на коротких выборках; бутстреп помогает измерить разброс, но для крайних квантилей его недооценивает.</li>
+<li>ES можно использовать как критерий выбора портфеля; задача сводится к линейному программированию, но страдает от тех же ошибок оценки, что и оптимизация по Марковицу.</li>
+<li>Модели, оценённые по истории, не предсказывают беспрецедентных шоков и не учитывают риск ликвидности. Убыток 24 февраля 2022 г. втрое превысил самую высокую оценку VaR, а продать позицию было нельзя почти месяц. Для таких событий нужны стресс-тесты.</li>
+</ul></section><section id="sec-exercises-var" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="sec-exercises-var">
+<span class="header-section-number">10.7</span> Упражнения</h2>
+<section id="а.-понимание" class="level3" data-number="10.7.1"><h3 data-number="10.7.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">10.7.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Однодневный VaR 99% портфеля – 3 млн руб. Сформулируйте, что это означает, одним предложением без слова «вероятность». Сколько дней с убытком больше 3 млн руб. стоит ожидать за год?</li>
+<li>Доходность актива распределена нормально, дневная волатильность 2%, среднее пренебрежимо мало. Найдите однодневные VaR 99% и ES 97,5% позиции в 10 млн руб.</li>
+<li>Однодневный VaR 99% – 2%. Чему равен 10-дневный VaR по правилу <span class="math inline">\(\sqrt{10}\)</span>? Назовите два свойства доходностей, при которых это правило занизит риск.</li>
+<li>За 250 дней модель VaR 99% дала 7 пробоев. В какой зоне «светофора» она находится? Можно ли по этим данным уверенно утверждать, что модель неверна?</li>
+<li>Почему модель, у которой пробои всегда идут парами, плоха, даже если их общее число соответствует 1%?</li>
+</ol></section><section id="б.-практика-на-своей-акции" class="level3" data-number="10.7.2"><h3 data-number="10.7.2" class="anchored" data-anchor-id="б.-практика-на-своей-акции">
+<span class="header-section-number">10.7.2</span> Б. Практика на своей акции</h3>
+<ol start="6" type="1">
+<li><p>Посчитайте для своей акции однодневные VaR 99% и ES 97,5% историческим и нормальным методами на последнем году и на всей истории. Как отношение ES к VaR связано с тяжестью хвоста?</p></li>
+<li><p>Проведите бэктест исторического VaR и VaR по GJR-GARCH-t для своей акции с 2015 г. Какие методы проходят тесты Купика и Кристофферсена?</p></li>
+<li><p>Найдите пять крупнейших пробоев VaR по GARCH-t для своей акции. С какими событиями они связаны? Можно ли было ожидать их по данным до этих дней?</p></li>
+<li><p>Проведите бэктест однодневного VaR 95% по нормальному распределению для своей акции за последние 1000 торговых дней (это домашнее задание прошлого года курса). Сколько пробоев ожидалось и сколько получилось? Занижает ли модель риск? Повторите для распределения Стьюдента.</p></li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="10.7.3"><h3 data-number="10.7.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">10.7.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="10" type="1">
+<li>Попросите ИИ-ассистента написать функцию исторического VaR для скользящего окна. Проверьте: использует ли оценка на день <span class="math inline">\(t\)</span> доходность того же дня? Какой знак у результата – убыток или доходность? Что функция возвращает в первые 250 дней?</li>
+<li>Ассистент утверждает, что «VaR 99% на 10 дней всегда равен однодневному, умноженному на <span class="math inline">\(\sqrt{10}\)</span>». Проверьте это на нескольких акциях снимка и на разных периодах. В каких случаях утверждение ближе всего к правде, а в каких – дальше всего?</li>
+</ol></section><section id="г.-мини-исследование" class="level3" data-number="10.7.4"><h3 data-number="10.7.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">10.7.4</span> Г. Мини-исследование</h3>
+<ol start="12" type="1">
+<li>Сравните ES 97,5% и VaR 99% для акций снимка: для каких бумаг ES существенно больше VaR и почему? Постройте простой стресс-тест для портфеля из пяти акций по сценарию 24 февраля 2022 г. и сопоставьте его с оценками VaR на 23 февраля. Подготовьте короткий устный рассказ о том, какую информацию дают эти два подхода.</li>
+</ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Чем ES отличается от VaR? Какую информацию о хвосте распределения даёт ES, но не даёт VaR?</li>
+<li>Что такое субаддитивность и почему её нарушение – недостаток меры риска?</li>
+<li>Почему исторический VaR реагирует на шоки ступеньками?</li>
+<li>Что проверяют тесты Купика и Кристофферсена?</li>
+<li>Что такое фильтрованная историческая симуляция и какие недостатки других методов она устраняет?</li>
+<li>Почему однодневный VaR не мог предупредить о риске, реализовавшемся в феврале – марте 2022 г.?</li>
+<li>Почему бутстреп-интервал для ES 99% по одному году данных нельзя считать надёжным?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>VaR – порог, который превышается с малой вероятностью; ES – средний убыток при превышении порога. ES показывает, насколько велики убытки в хвосте, а VaR – только где хвост начинается.</li>
+<li>Субаддитивность: риск портфеля не больше суммы рисков его частей. Мера, которая её нарушает, может показывать, что диверсификация увеличивает риск, и поощрять дробление позиций для формального снижения риска.</li>
+<li>Исторический квантиль определяется несколькими крайними наблюдениями в окне. Крупный убыток сразу входит в их число, а через <span class="math inline">\(N\)</span> дней выпадает из окна, и оценка скачком меняется.</li>
+<li>Тест Купика – совпадает ли доля пробоев с <span class="math inline">\(1-\alpha\)</span>. Тест Кристофферсена – независимы ли пробои во времени, не идут ли они сериями.</li>
+<li>Доходности стандартизуют прогнозом волатильности GARCH, квантиль берут из эмпирического распределения стандартизованных остатков и умножают на текущий прогноз волатильности. Метод быстро реагирует на изменение риска (в отличие от исторического) и не предполагает нормального хвоста (в отличие от параметрического).</li>
+<li>Убыток такого масштаба не встречался в истории, по которой оцениваются модели; кроме того, однодневный VaR предполагает возможность закрыть позицию за день, а торги были остановлены почти на месяц.</li>
+<li>В хвост 1% годовой выборки попадают два-три дня, а бутстреп не может сгенерировать убыток больше худшего наблюдённого. Разброс оценки ES поэтому сильно занижен.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="hull2023">Hull (<a href="references.html#ref-hull2023" role="doc-biblioref">2023 г.</a>)</span> – главы о VaR, ES и бэктесте в стандартном учебнике по рискам финансовых институтов.</li>
+<li>
+<span class="citation" data-cites="alexander2008">Alexander (<a href="references.html#ref-alexander2008" role="doc-biblioref">2008 г.</a>)</span> – подробное практическое руководство по оценке VaR, включая историческое моделирование и FHS.</li>
+<li>
+<span class="citation" data-cites="artzner1999">Artzner и др. (<a href="references.html#ref-artzner1999" role="doc-biblioref">1999 г.</a>)</span> – определение когерентных мер риска.</li>
+<li>
+<span class="citation" data-cites="rockafellar2000">Rockafellar и Uryasev (<a href="references.html#ref-rockafellar2000" role="doc-biblioref">2000 г.</a>)</span> – минимизация ES (CVaR) линейным программированием.</li>
+<li>
+<span class="citation" data-cites="kupiec1995">Kupiec (<a href="references.html#ref-kupiec1995" role="doc-biblioref">1995 г.</a>)</span> и <span class="citation" data-cites="christoffersen1998">Christoffersen (<a href="references.html#ref-christoffersen1998" role="doc-biblioref">1998 г.</a>)</span> – исходные статьи о бэктесте VaR.</li>
+<li>
+<span class="citation" data-cites="riskmetrics1996">J.P. Morgan/Reuters (<a href="references.html#ref-riskmetrics1996" role="doc-biblioref">1996 г.</a>)</span> – техническое описание метода RiskMetrics (EWMA).</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script>
+<div class="no-row-height column-margin column-container"><div id="ref-hull2023" class="csl-entry" role="listitem">
+Hull, John C. 2023 г. <em>Risk Management and Financial Institutions</em>. 6-я изд. Wiley.
+</div><div id="ref-alexander2008" class="csl-entry" role="listitem">
+Alexander, Carol. 2008 г. <em>Market Risk Analysis. Volume <span>II</span>: Practical Financial Econometrics</em>. Wiley.
+</div><div id="ref-artzner1999" class="csl-entry" role="listitem">
+Artzner, Philippe, Freddy Delbaen, Jean-Marc Eber, и David Heath. 1999 г. <span>«Coherent Measures of Risk»</span>. <em>Mathematical Finance</em> 9 (3): 203–28.
+</div><div id="ref-rockafellar2000" class="csl-entry" role="listitem">
+Rockafellar, R. Tyrrell, и Stanislav Uryasev. 2000 г. <span>«Optimization of Conditional Value-at-Risk»</span>. <em>Journal of Risk</em> 2 (3): 21–41.
+</div><div id="ref-kupiec1995" class="csl-entry" role="listitem">
+Kupiec, Paul H. 1995 г. <span>«Techniques for Verifying the Accuracy of Risk Measurement Models»</span>. <em>The Journal of Derivatives</em> 3 (2): 73–84.
+</div><div id="ref-christoffersen1998" class="csl-entry" role="listitem">
+Christoffersen, Peter F. 1998 г. <span>«Evaluating Interval Forecasts»</span>. <em>International Economic Review</em> 39 (4): 841–62.
+</div><div id="ref-riskmetrics1996" class="csl-entry" role="listitem">
+J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я изд. J.P. Morgan.
+</div></div>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -469,8 +1215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -869,9 +1614,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./09-ml-forecasting.html" class="pagination-link" aria-label="Прогнозирование и машинное обучение">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Прогнозирование и машинное обучение</span></span>
       </a>          
@@ -883,7 +1626,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
