@@ -780,6 +780,11 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 \sigma_t^2 = (1 - \lambda)\,\varepsilon_{t-1}^2 + \lambda\,\sigma_{t-1}^2, \qquad \lambda = 0{,}94.
 \tag{8.6}\]</span></span></p>
 <p>Это GARCH(1,1) с <span class="math inline">\(\omega = 0\)</span>, <span class="math inline">\(\alpha = 1 - \lambda\)</span> и <span class="math inline">\(\beta = \lambda\)</span>, то есть с персистентностью ровно 1. У такой модели нет безусловной дисперсии, к которой возвращается прогноз: сегодняшняя оценка служит прогнозом на любой горизонт. Параметр <span class="math inline">\(\lambda\)</span> не оценивают, а задают. В обмен на эти ограничения метод не требует оптимизации и одинаково работает для тысяч активов, поэтому его используют в системах расчёта рыночного риска (об этом – в главе о VaR и Expected Shortfall).</p>
+<p>У EWMA есть очевидный недостаток: после спокойного периода оценка опускается сколь угодно низко и не «помнит», что волатильность со временем возвращается к среднему. Если по ней определять размер позиции, позиция будет максимальной как раз перед очередным кризисом. Практики решают это без оценки GARCH. <span class="citation" data-cites="carver2023">Carver (<a href="references.html#ref-carver2023" role="doc-biblioref">2023 г.</a>, стратегия 3)</span> предлагает смесь: 70% экспоненциальной оценки стандартного отклонения с окном около 32 дней (период полураспада около 11 дней) и 30% её среднего за последние 10 лет:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-carver-blend"><span class="math display">\[
+\hat\sigma^{\text{смесь}}_t = 0{,}7\,\hat\sigma^{\text{EWMA}}_t + 0{,}3\,\overline{\hat\sigma^{\text{EWMA}}}_{10\ \text{лет}}.
+\tag{8.7}\]</span></span></p>
+<p>Долгосрочная составляющая играет ту же роль, что безусловная дисперсия в GARCH: тянет оценку к обычному уровню. Только этот уровень не оценивается по модели, а берётся как среднее за длинную историю. Ниже мы сравним такую смесь с GARCH и EWMA вне выборки.</p>
 </section></section><section id="sec-garch-extensions" class="level2 page-columns page-full" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="sec-garch-extensions">
 <span class="header-section-number">8.3</span> Тяжёлые хвосты и асимметрия</h2>
 <section id="распределение-стьюдента" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="распределение-стьюдента">
@@ -807,47 +812,47 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 </details><div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_87f79" class="caption-top table table-sm table-striped small">
+<table id="T_f95d1" class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_87f79_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Нормальное</th>
-<th id="T_87f79_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Стьюдента</th>
+<th id="T_f95d1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Нормальное</th>
+<th id="T_f95d1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Стьюдента</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_87f79_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mu</th>
-<td id="T_87f79_row0_col0" class="data row0 col0">0,083</td>
-<td id="T_87f79_row0_col1" class="data row0 col1">0,087</td>
+<th id="T_f95d1_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mu</th>
+<td id="T_f95d1_row0_col0" class="data row0 col0">0,083</td>
+<td id="T_f95d1_row0_col1" class="data row0 col1">0,087</td>
 </tr>
 <tr class="even">
-<th id="T_87f79_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">omega</th>
-<td id="T_87f79_row1_col0" class="data row1 col0">0,038</td>
-<td id="T_87f79_row1_col1" class="data row1 col1">0,028</td>
+<th id="T_f95d1_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">omega</th>
+<td id="T_f95d1_row1_col0" class="data row1 col0">0,038</td>
+<td id="T_f95d1_row1_col1" class="data row1 col1">0,028</td>
 </tr>
 <tr class="odd">
-<th id="T_87f79_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">alpha[1]</th>
-<td id="T_87f79_row2_col0" class="data row2 col0">0,123</td>
-<td id="T_87f79_row2_col1" class="data row2 col1">0,107</td>
+<th id="T_f95d1_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">alpha[1]</th>
+<td id="T_f95d1_row2_col0" class="data row2 col0">0,123</td>
+<td id="T_f95d1_row2_col1" class="data row2 col1">0,107</td>
 </tr>
 <tr class="even">
-<th id="T_87f79_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">beta[1]</th>
-<td id="T_87f79_row3_col0" class="data row3 col0">0,873</td>
-<td id="T_87f79_row3_col1" class="data row3 col1">0,888</td>
+<th id="T_f95d1_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">beta[1]</th>
+<td id="T_f95d1_row3_col0" class="data row3 col0">0,873</td>
+<td id="T_f95d1_row3_col1" class="data row3 col1">0,888</td>
 </tr>
 <tr class="odd">
-<th id="T_87f79_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">nu</th>
-<td id="T_87f79_row4_col0" class="data row4 col0">–</td>
-<td id="T_87f79_row4_col1" class="data row4 col1">5,682</td>
+<th id="T_f95d1_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">nu</th>
+<td id="T_f95d1_row4_col0" class="data row4 col0">–</td>
+<td id="T_f95d1_row4_col1" class="data row4 col1">5,682</td>
 </tr>
 <tr class="even">
-<th id="T_87f79_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Лог-правдоподобие</th>
-<td id="T_87f79_row5_col0" class="data row5 col0">−10&nbsp;472,154</td>
-<td id="T_87f79_row5_col1" class="data row5 col1">−10&nbsp;172,873</td>
+<th id="T_f95d1_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Лог-правдоподобие</th>
+<td id="T_f95d1_row5_col0" class="data row5 col0">−10&nbsp;472,154</td>
+<td id="T_f95d1_row5_col1" class="data row5 col1">−10&nbsp;172,873</td>
 </tr>
 <tr class="odd">
-<th id="T_87f79_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">BIC</th>
-<td id="T_87f79_row6_col0" class="data row6 col0">20&nbsp;979,048</td>
-<td id="T_87f79_row6_col1" class="data row6 col1">20&nbsp;389,172</td>
+<th id="T_f95d1_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">BIC</th>
+<td id="T_f95d1_row6_col0" class="data row6 col0">20&nbsp;979,048</td>
+<td id="T_f95d1_row6_col1" class="data row6 col1">20&nbsp;389,172</td>
 </tr>
 </tbody>
 </table>
@@ -915,7 +920,7 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 <p>Модель GJR-GARCH <span class="citation" data-cites="glosten1993">(<a href="references.html#ref-glosten1993" role="doc-biblioref">Glosten и др. 1993 г.</a>)</span> добавляет слагаемое, которое включается только при отрицательном шоке:</p>
 <div class="no-row-height column-margin column-container"></div><p><span id="eq-gjr"><span class="math display">\[
 \sigma_t^2 = \omega + \alpha\varepsilon_{t-1}^2 + \gamma\,\varepsilon_{t-1}^2\,\mathbb{1}[\varepsilon_{t-1} &lt; 0] + \beta\sigma_{t-1}^2.
-\tag{8.7}\]</span></span></p>
+\tag{8.8}\]</span></span></p>
 <p>После роста дисперсия реагирует с коэффициентом <span class="math inline">\(\alpha\)</span>, после падения – с коэффициентом <span class="math inline">\(\alpha + \gamma\)</span>. Если <span class="math inline">\(\gamma &gt; 0\)</span> и значим, асимметрия есть. Персистентность этой модели при симметричном распределении <span class="math inline">\(z_t\)</span> равна <span class="math inline">\(\alpha + \gamma/2 + \beta\)</span>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1016,88 +1021,88 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_718b3" class="cell caption-top table table-sm table-striped small">
+<table id="T_ffeac" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_718b3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">α</th>
-<th id="T_718b3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">γ</th>
-<th id="T_718b3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">β</th>
-<th id="T_718b3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">α + γ/2 + β</th>
-<th id="T_718b3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Полураспад, дней</th>
-<th id="T_718b3_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">ν</th>
+<th id="T_ffeac_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">α</th>
+<th id="T_ffeac_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">γ</th>
+<th id="T_ffeac_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">β</th>
+<th id="T_ffeac_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">α + γ/2 + β</th>
+<th id="T_ffeac_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Полураспад, дней</th>
+<th id="T_ffeac_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">ν</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_718b3_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">IMOEX</th>
-<td id="T_718b3_row0_col0" class="data row0 col0">0,043</td>
-<td id="T_718b3_row0_col1" class="data row0 col1">0,084</td>
-<td id="T_718b3_row0_col2" class="data row0 col2">0,892</td>
-<td id="T_718b3_row0_col3" class="data row0 col3">0,977</td>
-<td id="T_718b3_row0_col4" class="data row0 col4">30</td>
-<td id="T_718b3_row0_col5" class="data row0 col5">6,2</td>
+<th id="T_ffeac_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">IMOEX</th>
+<td id="T_ffeac_row0_col0" class="data row0 col0">0,043</td>
+<td id="T_ffeac_row0_col1" class="data row0 col1">0,084</td>
+<td id="T_ffeac_row0_col2" class="data row0 col2">0,892</td>
+<td id="T_ffeac_row0_col3" class="data row0 col3">0,977</td>
+<td id="T_ffeac_row0_col4" class="data row0 col4">30</td>
+<td id="T_ffeac_row0_col5" class="data row0 col5">6,2</td>
 </tr>
 <tr class="even">
-<th id="T_718b3_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">RGBI</th>
-<td id="T_718b3_row1_col0" class="data row1 col0">0,206</td>
-<td id="T_718b3_row1_col1" class="data row1 col1">0,170</td>
-<td id="T_718b3_row1_col2" class="data row1 col2">0,709</td>
-<td id="T_718b3_row1_col3" class="data row1 col3">1,000</td>
-<td id="T_718b3_row1_col4" class="data row1 col4">–</td>
-<td id="T_718b3_row1_col5" class="data row1 col5">4,0</td>
+<th id="T_ffeac_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">RGBI</th>
+<td id="T_ffeac_row1_col0" class="data row1 col0">0,206</td>
+<td id="T_ffeac_row1_col1" class="data row1 col1">0,170</td>
+<td id="T_ffeac_row1_col2" class="data row1 col2">0,709</td>
+<td id="T_ffeac_row1_col3" class="data row1 col3">1,000</td>
+<td id="T_ffeac_row1_col4" class="data row1 col4">–</td>
+<td id="T_ffeac_row1_col5" class="data row1 col5">4,0</td>
 </tr>
 <tr class="odd">
-<th id="T_718b3_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">GAZP</th>
-<td id="T_718b3_row2_col0" class="data row2 col0">0,062</td>
-<td id="T_718b3_row2_col1" class="data row2 col1">0,107</td>
-<td id="T_718b3_row2_col2" class="data row2 col2">0,858</td>
-<td id="T_718b3_row2_col3" class="data row2 col3">0,974</td>
-<td id="T_718b3_row2_col4" class="data row2 col4">26</td>
-<td id="T_718b3_row2_col5" class="data row2 col5">4,8</td>
+<th id="T_ffeac_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">GAZP</th>
+<td id="T_ffeac_row2_col0" class="data row2 col0">0,062</td>
+<td id="T_ffeac_row2_col1" class="data row2 col1">0,107</td>
+<td id="T_ffeac_row2_col2" class="data row2 col2">0,858</td>
+<td id="T_ffeac_row2_col3" class="data row2 col3">0,974</td>
+<td id="T_ffeac_row2_col4" class="data row2 col4">26</td>
+<td id="T_ffeac_row2_col5" class="data row2 col5">4,8</td>
 </tr>
 <tr class="even">
-<th id="T_718b3_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">GMKN</th>
-<td id="T_718b3_row3_col0" class="data row3 col0">0,061</td>
-<td id="T_718b3_row3_col1" class="data row3 col1">0,052</td>
-<td id="T_718b3_row3_col2" class="data row3 col2">0,889</td>
-<td id="T_718b3_row3_col3" class="data row3 col3">0,976</td>
-<td id="T_718b3_row3_col4" class="data row3 col4">29</td>
-<td id="T_718b3_row3_col5" class="data row3 col5">5,0</td>
+<th id="T_ffeac_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">GMKN</th>
+<td id="T_ffeac_row3_col0" class="data row3 col0">0,061</td>
+<td id="T_ffeac_row3_col1" class="data row3 col1">0,052</td>
+<td id="T_ffeac_row3_col2" class="data row3 col2">0,889</td>
+<td id="T_ffeac_row3_col3" class="data row3 col3">0,976</td>
+<td id="T_ffeac_row3_col4" class="data row3 col4">29</td>
+<td id="T_ffeac_row3_col5" class="data row3 col5">5,0</td>
 </tr>
 <tr class="odd">
-<th id="T_718b3_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">LKOH</th>
-<td id="T_718b3_row4_col0" class="data row4 col0">0,044</td>
-<td id="T_718b3_row4_col1" class="data row4 col1">0,102</td>
-<td id="T_718b3_row4_col2" class="data row4 col2">0,878</td>
-<td id="T_718b3_row4_col3" class="data row4 col3">0,973</td>
-<td id="T_718b3_row4_col4" class="data row4 col4">25</td>
-<td id="T_718b3_row4_col5" class="data row4 col5">5,6</td>
+<th id="T_ffeac_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">LKOH</th>
+<td id="T_ffeac_row4_col0" class="data row4 col0">0,044</td>
+<td id="T_ffeac_row4_col1" class="data row4 col1">0,102</td>
+<td id="T_ffeac_row4_col2" class="data row4 col2">0,878</td>
+<td id="T_ffeac_row4_col3" class="data row4 col3">0,973</td>
+<td id="T_ffeac_row4_col4" class="data row4 col4">25</td>
+<td id="T_ffeac_row4_col5" class="data row4 col5">5,6</td>
 </tr>
 <tr class="even">
-<th id="T_718b3_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">MGNT</th>
-<td id="T_718b3_row5_col0" class="data row5 col0">0,065</td>
-<td id="T_718b3_row5_col1" class="data row5 col1">0,127</td>
-<td id="T_718b3_row5_col2" class="data row5 col2">0,814</td>
-<td id="T_718b3_row5_col3" class="data row5 col3">0,943</td>
-<td id="T_718b3_row5_col4" class="data row5 col4">12</td>
-<td id="T_718b3_row5_col5" class="data row5 col5">4,6</td>
+<th id="T_ffeac_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">MGNT</th>
+<td id="T_ffeac_row5_col0" class="data row5 col0">0,065</td>
+<td id="T_ffeac_row5_col1" class="data row5 col1">0,127</td>
+<td id="T_ffeac_row5_col2" class="data row5 col2">0,814</td>
+<td id="T_ffeac_row5_col3" class="data row5 col3">0,943</td>
+<td id="T_ffeac_row5_col4" class="data row5 col4">12</td>
+<td id="T_ffeac_row5_col5" class="data row5 col5">4,6</td>
 </tr>
 <tr class="odd">
-<th id="T_718b3_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">MTSS</th>
-<td id="T_718b3_row6_col0" class="data row6 col0">0,046</td>
-<td id="T_718b3_row6_col1" class="data row6 col1">0,082</td>
-<td id="T_718b3_row6_col2" class="data row6 col2">0,903</td>
-<td id="T_718b3_row6_col3" class="data row6 col3">0,990</td>
-<td id="T_718b3_row6_col4" class="data row6 col4">70</td>
-<td id="T_718b3_row6_col5" class="data row6 col5">4,4</td>
+<th id="T_ffeac_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">MTSS</th>
+<td id="T_ffeac_row6_col0" class="data row6 col0">0,046</td>
+<td id="T_ffeac_row6_col1" class="data row6 col1">0,082</td>
+<td id="T_ffeac_row6_col2" class="data row6 col2">0,903</td>
+<td id="T_ffeac_row6_col3" class="data row6 col3">0,990</td>
+<td id="T_ffeac_row6_col4" class="data row6 col4">70</td>
+<td id="T_ffeac_row6_col5" class="data row6 col5">4,4</td>
 </tr>
 <tr class="even">
-<th id="T_718b3_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">SBER</th>
-<td id="T_718b3_row7_col0" class="data row7 col0">0,065</td>
-<td id="T_718b3_row7_col1" class="data row7 col1">0,090</td>
-<td id="T_718b3_row7_col2" class="data row7 col2">0,880</td>
-<td id="T_718b3_row7_col3" class="data row7 col3">0,990</td>
-<td id="T_718b3_row7_col4" class="data row7 col4">70</td>
-<td id="T_718b3_row7_col5" class="data row7 col5">4,8</td>
+<th id="T_ffeac_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">SBER</th>
+<td id="T_ffeac_row7_col0" class="data row7 col0">0,065</td>
+<td id="T_ffeac_row7_col1" class="data row7 col1">0,090</td>
+<td id="T_ffeac_row7_col2" class="data row7 col2">0,880</td>
+<td id="T_ffeac_row7_col3" class="data row7 col3">0,990</td>
+<td id="T_ffeac_row7_col4" class="data row7 col4">70</td>
+<td id="T_ffeac_row7_col5" class="data row7 col5">4,8</td>
 </tr>
 </tbody>
 </table>
@@ -1150,7 +1155,7 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 <p>Прогноз условной дисперсии GARCH(1,1) на <span class="math inline">\(h\)</span> дней вперёд из момента <span class="math inline">\(T\)</span> строится рекурсивно по уравнению <a href="#eq-garch" class="quarto-xref"><span>8.4</span></a>, в котором будущие <span class="math inline">\(\varepsilon^2\)</span> заменяются их ожиданием <span class="math inline">\(\sigma^2\)</span>:</p>
 <p><span id="eq-garch-forecast"><span class="math display">\[
 \hat\sigma_{T+h}^2 = \bar\sigma^2 + (\alpha + \beta)^{h-1}\left(\hat\sigma_{T+1}^2 - \bar\sigma^2\right).
-\tag{8.8}\]</span></span></p>
+\tag{8.9}\]</span></span></p>
 <p>Прогноз сходится к безусловной дисперсии <span class="math inline">\(\bar\sigma^2\)</span> со скоростью, заданной персистентностью. Если сейчас волатильность ниже среднего уровня, модель ожидает её роста, если выше – снижения. Прогноз волатильности за период из <span class="math inline">\(H\)</span> дней – корень из суммы прогнозов дисперсии на каждый из этих дней.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1204,11 +1209,11 @@ J.P. Morgan/Reuters. 1996 г. <em>RiskMetrics – Technical Document</em>. 4-я 
 <p>На 29.09.2026 условная волатильность индекса – около 24% годовых. Краткосрочные прогнозы двух моделей почти совпадают, потому что определяются текущим состоянием рынка. Долгосрочные расходятся даже по направлению. Модель, оценённая с 2003 г., ожидает роста волатильности: через год – до 30%. Модель, оценённая с 2010 г., ожидает снижения до 20%. Долгосрочный прогноз определяется безусловной дисперсией, то есть тем, сколько кризисов попало в выборку: с 2003 г. в неё входит 2008 г., с 2010 г. – нет. Прогноз GARCH на год вперёд – это по сути ответ на вопрос «какой была средняя волатильность в истории», и к нему нужно относиться как к допущению аналитика, а не как к свойству данных.</p>
 </section><section id="как-сравнивать-прогнозы-волатильности" class="level3 page-columns page-full" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="как-сравнивать-прогнозы-волатильности">
 <span class="header-section-number">8.5.2</span> Как сравнивать прогнозы волатильности</h3>
-<p>Проверим прогнозы вне выборки по той же схеме, что в предыдущей главе. Модели оценим на 2003–2019 гг., параметры зафиксируем и будем каждый день 2020–2026 гг. строить прогноз по данным, известным накануне. Сравним четыре метода: GJR-GARCH с распределением Стьюдента, EWMA с <span class="math inline">\(\lambda = 0{,}94\)</span>, скользящее окно в 63 дня и историческую дисперсию по всем прошлым данным.</p>
+<p>Проверим прогнозы вне выборки по той же схеме, что в предыдущей главе. Модели оценим на 2003–2019 гг., параметры зафиксируем и будем каждый день 2020–2026 гг. строить прогноз по данным, известным накануне. Сравним пять методов: GJR-GARCH с распределением Стьюдента, EWMA с <span class="math inline">\(\lambda = 0{,}94\)</span>, смесь Карвера (<a href="#eq-carver-blend" class="quarto-xref"><span>8.7</span></a>), скользящее окно в 63 дня и историческую дисперсию по всем прошлым данным.</p>
 <p>Сложность в том, что истинная волатильность ненаблюдаема. Сравнивать прогноз приходится с её зашумлённой оценкой: для прогноза на день – с квадратом доходности <span class="math inline">\(r_{t}^2\)</span>, для прогноза на месяц – с реализованной дисперсией, суммой квадратов доходностей за следующие 21 торговый день. <span class="citation" data-cites="patton2011">Patton (<a href="references.html#ref-patton2011" role="doc-biblioref">2011 г.</a>)</span> показал, что при зашумлённой оценке не всякая функция потерь ранжирует прогнозы правильно. Две функции потерь, которые ранжируют их верно, – среднеквадратичная ошибка по дисперсии и функция QLIKE:</p>
 <div class="no-row-height column-margin column-container"></div><p><span id="eq-qlike"><span class="math display">\[
 L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2},
-\tag{8.9}\]</span></span></p>
+\tag{8.10}\]</span></span></p>
 <p>где <span class="math inline">\(\hat\sigma^2\)</span> – прогноз дисперсии, а RV – её реализованная оценка. QLIKE штрафует за занижение волатильности сильнее, чем за завышение, и слабо реагирует на отдельные экстремальные наблюдения. Среднеквадратичная ошибка, напротив, почти целиком определяется несколькими днями с наибольшими доходностями.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>split, H <span class="op">=</span> <span class="st">"2019-12-31"</span>, <span class="dv">21</span></span>
@@ -1228,32 +1233,35 @@ L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>ewma <span class="op">=</span> eps2.ewm(alpha<span class="op">=</span><span class="dv">1</span> <span class="op">-</span> <span class="fl">0.94</span>, adjust<span class="op">=</span><span class="va">False</span>).mean()</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>roll <span class="op">=</span> r.rolling(<span class="dv">63</span>).var()                          <span class="co"># скользящее окно 63 дня</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>hist <span class="op">=</span> r.expanding().var()                          <span class="co"># вся доступная история</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, v <span class="kw">in</span> {<span class="st">"EWMA"</span>: ewma, <span class="st">"Окно 63 дня"</span>: roll, <span class="st">"Историческая"</span>: hist}.items():</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    fc_1[name], fc_H[name] <span class="op">=</span> v, v <span class="op">*</span> H</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Реализованные значения: r² дня t и сумма r² за дни t, ..., t+H−1</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>rv_H <span class="op">=</span> r2.rolling(H).<span class="bu">sum</span>().shift(<span class="op">-</span>(H <span class="op">-</span> <span class="dv">1</span>))</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(mask):</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> {}</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> fc_1:</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># прогноз для дня t сделан накануне: сдвигаем на один торговый день</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        f1 <span class="op">=</span> fc_1[name].shift(<span class="dv">1</span>).reindex(test_idx)[mask]</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        fH <span class="op">=</span> fc_H[name].shift(<span class="dv">1</span>).reindex(test_idx)[mask]</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        real1, realH <span class="op">=</span> r2.reindex(test_idx)[mask], rv_H.reindex(test_idx)[mask]</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        ok <span class="op">=</span> realH.notna()</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        rows[name] <span class="op">=</span> {</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">"QLIKE, 1 день"</span>: np.mean(np.log(f1) <span class="op">+</span> real1 <span class="op">/</span> f1),</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">"QLIKE, 21 день"</span>: np.mean(np.log(fH[ok]) <span class="op">+</span> realH[ok] <span class="op">/</span> fH[ok]),</span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RMSE, 21 день"</span>: np.sqrt(np.mean((np.sqrt(realH[ok] <span class="op">/</span> H <span class="op">*</span> <span class="dv">252</span>) <span class="op">-</span> np.sqrt(fH[ok] <span class="op">/</span> H <span class="op">*</span> <span class="dv">252</span>)) <span class="op">**</span> <span class="dv">2</span>)),</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows).T</span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>all_days <span class="op">=</span> np.ones(<span class="bu">len</span>(test_idx), dtype<span class="op">=</span><span class="bu">bool</span>)</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>no_2022 <span class="op">=</span> test_idx.year <span class="op">!=</span> <span class="dv">2022</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>oos <span class="op">=</span> pd.concat({<span class="st">"2020–2026"</span>: evaluate(all_days), <span class="st">"без 2022 г."</span>: evaluate(no_2022)}, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>oos.style.<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>, decimal<span class="op">=</span><span class="st">","</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>fast <span class="op">=</span> r.ewm(span<span class="op">=</span><span class="dv">32</span>).std()                         <span class="co"># смесь Карвера: 70% быстрой оценки</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>carver <span class="op">=</span> (<span class="fl">0.7</span> <span class="op">*</span> fast <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> fast.rolling(<span class="dv">2520</span>, min_periods<span class="op">=</span><span class="dv">500</span>).mean()) <span class="op">**</span> <span class="dv">2</span>   <span class="co"># + 30% среднего за 10 лет</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, v <span class="kw">in</span> {<span class="st">"EWMA"</span>: ewma, <span class="st">"Смесь 70/30"</span>: carver, <span class="st">"Окно 63 дня"</span>: roll,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Историческая"</span>: hist}.items():</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    fc_1[name], fc_H[name] <span class="op">=</span> v, v <span class="op">*</span> H</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Реализованные значения: r² дня t и сумма r² за дни t, ..., t+H−1</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>rv_H <span class="op">=</span> r2.rolling(H).<span class="bu">sum</span>().shift(<span class="op">-</span>(H <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(mask):</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> {}</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> fc_1:</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># прогноз для дня t сделан накануне: сдвигаем на один торговый день</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        f1 <span class="op">=</span> fc_1[name].shift(<span class="dv">1</span>).reindex(test_idx)[mask]</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        fH <span class="op">=</span> fc_H[name].shift(<span class="dv">1</span>).reindex(test_idx)[mask]</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        real1, realH <span class="op">=</span> r2.reindex(test_idx)[mask], rv_H.reindex(test_idx)[mask]</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>        ok <span class="op">=</span> realH.notna()</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>        rows[name] <span class="op">=</span> {</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">"QLIKE, 1 день"</span>: np.mean(np.log(f1) <span class="op">+</span> real1 <span class="op">/</span> f1),</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>            <span class="st">"QLIKE, 21 день"</span>: np.mean(np.log(fH[ok]) <span class="op">+</span> realH[ok] <span class="op">/</span> fH[ok]),</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RMSE, 21 день"</span>: np.sqrt(np.mean((np.sqrt(realH[ok] <span class="op">/</span> H <span class="op">*</span> <span class="dv">252</span>) <span class="op">-</span> np.sqrt(fH[ok] <span class="op">/</span> H <span class="op">*</span> <span class="dv">252</span>)) <span class="op">**</span> <span class="dv">2</span>)),</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(rows).T</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>all_days <span class="op">=</span> np.ones(<span class="bu">len</span>(test_idx), dtype<span class="op">=</span><span class="bu">bool</span>)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>no_2022 <span class="op">=</span> test_idx.year <span class="op">!=</span> <span class="dv">2022</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>oos <span class="op">=</span> pd.concat({<span class="st">"2020–2026"</span>: evaluate(all_days), <span class="st">"без 2022 г."</span>: evaluate(no_2022)}, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>oos.style.<span class="bu">format</span>(<span class="st">"</span><span class="sc">{:.2f}</span><span class="st">"</span>, decimal<span class="op">=</span><span class="st">","</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-vol-oos" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vol-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;8.3: Прогноз волатильности IMOEX вне выборки, 2020–2026 гг. QLIKE – средние потери (меньше – лучше), RMSE – среднеквадратичная ошибка прогноза волатильности на 21 день, п. п. годовых
@@ -1261,59 +1269,68 @@ L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_5d246" class="cell caption-top table table-sm table-striped small">
+<table id="T_d1c4f" class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th colspan="3" id="T_5d246_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">2020–2026</th>
-<th colspan="3" id="T_5d246_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">без 2022 г.</th>
+<th colspan="3" id="T_d1c4f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">2020–2026</th>
+<th colspan="3" id="T_d1c4f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">без 2022 г.</th>
 </tr>
 <tr class="even">
 <th class="blank level1" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_5d246_level1_col0" class="col_heading level1 col0" data-quarto-table-cell-role="th">QLIKE, 1 день</th>
-<th id="T_5d246_level1_col1" class="col_heading level1 col1" data-quarto-table-cell-role="th">QLIKE, 21 день</th>
-<th id="T_5d246_level1_col2" class="col_heading level1 col2" data-quarto-table-cell-role="th">RMSE, 21 день</th>
-<th id="T_5d246_level1_col3" class="col_heading level1 col3" data-quarto-table-cell-role="th">QLIKE, 1 день</th>
-<th id="T_5d246_level1_col4" class="col_heading level1 col4" data-quarto-table-cell-role="th">QLIKE, 21 день</th>
-<th id="T_5d246_level1_col5" class="col_heading level1 col5" data-quarto-table-cell-role="th">RMSE, 21 день</th>
+<th id="T_d1c4f_level1_col0" class="col_heading level1 col0" data-quarto-table-cell-role="th">QLIKE, 1 день</th>
+<th id="T_d1c4f_level1_col1" class="col_heading level1 col1" data-quarto-table-cell-role="th">QLIKE, 21 день</th>
+<th id="T_d1c4f_level1_col2" class="col_heading level1 col2" data-quarto-table-cell-role="th">RMSE, 21 день</th>
+<th id="T_d1c4f_level1_col3" class="col_heading level1 col3" data-quarto-table-cell-role="th">QLIKE, 1 день</th>
+<th id="T_d1c4f_level1_col4" class="col_heading level1 col4" data-quarto-table-cell-role="th">QLIKE, 21 день</th>
+<th id="T_d1c4f_level1_col5" class="col_heading level1 col5" data-quarto-table-cell-role="th">RMSE, 21 день</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_5d246_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">GJR-GARCH</th>
-<td id="T_5d246_row0_col0" class="data row0 col0">1,52</td>
-<td id="T_5d246_row0_col1" class="data row0 col1">4,85</td>
-<td id="T_5d246_row0_col2" class="data row0 col2">21,03</td>
-<td id="T_5d246_row0_col3" class="data row0 col3">1,26</td>
-<td id="T_5d246_row0_col4" class="data row0 col4">4,48</td>
-<td id="T_5d246_row0_col5" class="data row0 col5">8,38</td>
+<th id="T_d1c4f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">GJR-GARCH</th>
+<td id="T_d1c4f_row0_col0" class="data row0 col0">1,52</td>
+<td id="T_d1c4f_row0_col1" class="data row0 col1">4,85</td>
+<td id="T_d1c4f_row0_col2" class="data row0 col2">21,03</td>
+<td id="T_d1c4f_row0_col3" class="data row0 col3">1,26</td>
+<td id="T_d1c4f_row0_col4" class="data row0 col4">4,48</td>
+<td id="T_d1c4f_row0_col5" class="data row0 col5">8,38</td>
 </tr>
 <tr class="even">
-<th id="T_5d246_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">EWMA</th>
-<td id="T_5d246_row1_col0" class="data row1 col0">1,59</td>
-<td id="T_5d246_row1_col1" class="data row1 col1">5,01</td>
-<td id="T_5d246_row1_col2" class="data row1 col2">20,98</td>
-<td id="T_5d246_row1_col3" class="data row1 col3">1,30</td>
-<td id="T_5d246_row1_col4" class="data row1 col4">4,64</td>
-<td id="T_5d246_row1_col5" class="data row1 col5">8,81</td>
+<th id="T_d1c4f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">EWMA</th>
+<td id="T_d1c4f_row1_col0" class="data row1 col0">1,59</td>
+<td id="T_d1c4f_row1_col1" class="data row1 col1">5,01</td>
+<td id="T_d1c4f_row1_col2" class="data row1 col2">20,98</td>
+<td id="T_d1c4f_row1_col3" class="data row1 col3">1,30</td>
+<td id="T_d1c4f_row1_col4" class="data row1 col4">4,64</td>
+<td id="T_d1c4f_row1_col5" class="data row1 col5">8,81</td>
 </tr>
 <tr class="odd">
-<th id="T_5d246_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Окно 63 дня</th>
-<td id="T_5d246_row2_col0" class="data row2 col0">1,80</td>
-<td id="T_5d246_row2_col1" class="data row2 col1">5,22</td>
-<td id="T_5d246_row2_col2" class="data row2 col2">22,09</td>
-<td id="T_5d246_row2_col3" class="data row2 col3">1,43</td>
-<td id="T_5d246_row2_col4" class="data row2 col4">4,78</td>
-<td id="T_5d246_row2_col5" class="data row2 col5">9,86</td>
+<th id="T_d1c4f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Смесь 70/30</th>
+<td id="T_d1c4f_row2_col0" class="data row2 col0">1,64</td>
+<td id="T_d1c4f_row2_col1" class="data row2 col1">5,01</td>
+<td id="T_d1c4f_row2_col2" class="data row2 col2">18,80</td>
+<td id="T_d1c4f_row2_col3" class="data row2 col3">1,31</td>
+<td id="T_d1c4f_row2_col4" class="data row2 col4">4,55</td>
+<td id="T_d1c4f_row2_col5" class="data row2 col5">8,25</td>
 </tr>
 <tr class="even">
-<th id="T_5d246_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Историческая</th>
-<td id="T_5d246_row3_col0" class="data row3 col0">2,23</td>
-<td id="T_5d246_row3_col1" class="data row3 col1">5,29</td>
-<td id="T_5d246_row3_col2" class="data row3 col2">21,09</td>
-<td id="T_5d246_row3_col3" class="data row3 col3">1,78</td>
-<td id="T_5d246_row3_col4" class="data row3 col4">4,84</td>
-<td id="T_5d246_row3_col5" class="data row3 col5">15,10</td>
+<th id="T_d1c4f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Окно 63 дня</th>
+<td id="T_d1c4f_row3_col0" class="data row3 col0">1,80</td>
+<td id="T_d1c4f_row3_col1" class="data row3 col1">5,22</td>
+<td id="T_d1c4f_row3_col2" class="data row3 col2">22,09</td>
+<td id="T_d1c4f_row3_col3" class="data row3 col3">1,43</td>
+<td id="T_d1c4f_row3_col4" class="data row3 col4">4,78</td>
+<td id="T_d1c4f_row3_col5" class="data row3 col5">9,86</td>
+</tr>
+<tr class="odd">
+<th id="T_d1c4f_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Историческая</th>
+<td id="T_d1c4f_row4_col0" class="data row4 col0">2,23</td>
+<td id="T_d1c4f_row4_col1" class="data row4 col1">5,29</td>
+<td id="T_d1c4f_row4_col2" class="data row4 col2">21,09</td>
+<td id="T_d1c4f_row4_col3" class="data row4 col3">1,78</td>
+<td id="T_d1c4f_row4_col4" class="data row4 col4">4,84</td>
+<td id="T_d1c4f_row4_col5" class="data row4 col5">15,10</td>
 </tr>
 </tbody>
 </table>
@@ -1324,6 +1341,7 @@ L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2
 </div>
 <p>По QLIKE на обоих горизонтах лучше всех прогнозирует модель GJR-GARCH, за ней EWMA, затем скользящее окно, а историческая дисперсия – хуже всех. Модели, которые быстро реагируют на новую информацию, выигрывают у тех, кто усредняет длинную историю.</p>
 <p>Среднеквадратичная ошибка за весь период рисует другую картину: все методы оказываются примерно одинаковыми, и даже историческая дисперсия почти не уступает GARCH (21,1 против 21,0 п. п.). Причина – февраль и март 2022 г. Реализованная волатильность этих недель в разы превышает любой прогноз, и квадраты этих ошибок заглушают всё остальное. Без 2022 г. порядок восстанавливается: GJR-GARCH – 8,4 п. п., EWMA – 8,8, окно – 9,9, историческая дисперсия – 15,1.</p>
+<p>Смесь Карвера ведёт себя как промежуточный вариант. На горизонте дня она уступает EWMA (QLIKE 1,64 против 1,59): 30% оценки почти не реагируют на вчерашний шок. На горизонте месяца по QLIKE она совпадает с EWMA (5,01) и уступает GJR-GARCH (4,85), а по среднеквадратичной ошибке лучшая из пяти методов и за весь период (18,8 п. п.), и без 2022 г. (8,3 п. п. против 8,4 у GJR-GARCH). Долгосрочная составляющая оказывается дешёвой заменой возврата к среднему в GARCH: модель оценивать не нужно, а для месячного горизонта, на котором обычно пересматривают размер позиций, точность сопоставима. Применение смеси к управлению риском портфеля разобрано в главе 16 (раздел <a href="16-momentum.html#sec-mom-vol" class="quarto-xref"><span>16.6</span></a>).</p>
 <p>Вывод согласуется с большим исследованием <span class="citation" data-cites="hansen2005">Hansen и Lunde (<a href="references.html#ref-hansen2005" role="doc-biblioref">2005 г.</a>)</span>, где сотни моделей волатильности сравнивались на валютных курсах и акциях. Модели сложнее GARCH(1,1) редко дают заметное преимущество, но и сама GARCH(1,1) заметно лучше простых правил, которые не учитывают, как быстро затухают шоки.</p>
 <div class="no-row-height column-margin column-container"></div><div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: прогноз из одной точки вместо прогноза на каждый день">
 <div class="callout-header d-flex align-content-center">
@@ -1343,7 +1361,7 @@ L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2
 <ul>
 <li>Дисперсия доходностей меняется во времени и зависит от прошлых шоков. Тест ARCH-LM и тест Льюнга – Бокса для квадратов доходностей это подтверждают.</li>
 <li>В модели GARCH(1,1) сегодняшняя дисперсия складывается из константы, реакции на вчерашний шок (<span class="math inline">\(\alpha\)</span>) и инерции (<span class="math inline">\(\beta\)</span>). Персистентность <span class="math inline">\(\alpha + \beta\)</span> определяет, как быстро затухают шоки волатильности; для IMOEX она близка к единице.</li>
-<li>EWMA – частный случай GARCH(1,1) без возврата к среднему уровню.</li>
+<li>EWMA – частный случай GARCH(1,1) без возврата к среднему уровню. Простая замена возврата к среднему – смесь быстрой EWMA-оценки и её долгосрочного среднего; на горизонте месяца по среднеквадратичной ошибке она не уступает GARCH.</li>
 <li>Распределение Стьюдента для стандартизованных шоков заметно лучше нормального. Модель GJR-GARCH учитывает, что падения повышают волатильность сильнее роста; для российских акций асимметрия значима.</li>
 <li>Параметры GARCH, особенно безусловная дисперсия, зависят от выборки, и долгосрочный прогноз волатильности отражает прежде всего число кризисов в истории.</li>
 <li>Диагностику проводят по стандартизованным остаткам <span class="math inline">\(\hat\varepsilon_t/\hat\sigma_t\)</span>, а не по остаткам уравнения среднего.</li>
@@ -1424,6 +1442,8 @@ L(\hat\sigma^2, \mathrm{RV}) = \ln\hat\sigma^2 + \frac{\mathrm{RV}}{\hat\sigma^2
 <span class="citation" data-cites="hansen2005">Hansen и Lunde (<a href="references.html#ref-hansen2005" role="doc-biblioref">2005 г.</a>)</span> – сравнение сотен моделей волатильности с GARCH(1,1).</li>
 <li>
 <span class="citation" data-cites="patton2011">Patton (<a href="references.html#ref-patton2011" role="doc-biblioref">2011 г.</a>)</span> – как сравнивать прогнозы волатильности, когда истинная волатильность ненаблюдаема.</li>
+<li>
+<span class="citation" data-cites="carver2023">Carver (<a href="references.html#ref-carver2023" role="doc-biblioref">2023 г.</a>)</span>, стратегии 2–4 – оценка волатильности для определения размера позиций на практике, включая смесь быстрой и долгосрочной оценок.</li>
 </ul>
 
 
@@ -1441,6 +1461,8 @@ Glosten, Lawrence R., Ravi Jagannathan, и David E. Runkle. 1993 г. <span>«On 
 Hansen, Peter R., и Asger Lunde. 2005 г. <span>«A Forecast Comparison of Volatility Models: Does Anything Beat a <span>GARCH(1,1)</span>?»</span> <em>Journal of Applied Econometrics</em> 20 (7): 873–89.
 </div><div id="ref-patton2011" class="csl-entry" role="listitem">
 Patton, Andrew J. 2011 г. <span>«Volatility Forecast Comparison Using Imperfect Volatility Proxies»</span>. <em>Journal of Econometrics</em> 160 (1): 246–56.
+</div><div id="ref-carver2023" class="csl-entry" role="listitem">
+Carver, Robert. 2023 г. <em>Advanced Futures Trading Strategies: 30 Fully Tested Strategies for Multiple Trading Styles and Time Frames</em>. Harriman House.
 </div></div>
 </section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
