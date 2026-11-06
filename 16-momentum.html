@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>16&nbsp; Моментум и управление волатильностью – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -149,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -169,8 +219,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -189,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -198,8 +248,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -212,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -221,8 +271,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -241,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -250,8 +300,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -270,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -279,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -293,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -302,8 +352,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -322,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -337,8 +387,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -357,21 +407,48 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li><a href="#sec-mom-why" id="toc-sec-mom-why" class="nav-link active" data-scroll-target="#sec-mom-why"><span class="header-section-number">16.1</span> Откуда берётся моментум</a></li>
+  <li>
+<a href="#sec-mom-xs" id="toc-sec-mom-xs" class="nav-link" data-scroll-target="#sec-mom-xs"><span class="header-section-number">16.2</span> Моментум на российском рынке</a>
+  <ul class="collapse">
+<li><a href="#%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%BE" id="toc-правило" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%BE"><span class="header-section-number">16.2.1</span> Правило</a></li>
+  <li><a href="#%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82" id="toc-результат" class="nav-link" data-scroll-target="#%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82"><span class="header-section-number">16.2.2</span> Результат</a></li>
+  <li><a href="#sec-mom-grid" id="toc-sec-mom-grid" class="nav-link" data-scroll-target="#sec-mom-grid"><span class="header-section-number">16.2.3</span> Окно формирования и срок удержания</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-mom-crash" id="toc-sec-mom-crash" class="nav-link" data-scroll-target="#sec-mom-crash"><span class="header-section-number">16.3</span> Крахи моментума</a></li>
+  <li><a href="#sec-mom-practice" id="toc-sec-mom-practice" class="nav-link" data-scroll-target="#sec-mom-practice"><span class="header-section-number">16.4</span> Ликвидность, делистинги и издержки</a></li>
+  <li><a href="#sec-mom-trend" id="toc-sec-mom-trend" class="nav-link" data-scroll-target="#sec-mom-trend"><span class="header-section-number">16.5</span> Трендовый фильтр и деньги</a></li>
+  <li><a href="#sec-mom-vol" id="toc-sec-mom-vol" class="nav-link" data-scroll-target="#sec-mom-vol"><span class="header-section-number">16.6</span> Таргетирование волатильности</a></li>
+  <li><a href="#sec-mom-oos" id="toc-sec-mom-oos" class="nav-link" data-scroll-target="#sec-mom-oos"><span class="header-section-number">16.7</span> Проверка на новых данных</a></li>
+  <li><a href="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8" id="toc-итоги" class="nav-link" data-scroll-target="#%D0%B8%D1%82%D0%BE%D0%B3%D0%B8">Итоги</a></li>
+  <li>
+<a href="#sec-exercises-momentum" id="toc-sec-exercises-momentum" class="nav-link" data-scroll-target="#sec-exercises-momentum"><span class="header-section-number">16.8</span> Упражнения</a>
+  <ul class="collapse">
+<li><a href="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-а.-понимание" class="nav-link" data-scroll-target="#%D0%B0.-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">16.8.1</span> А. Понимание</a></li>
+  <li><a href="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85" id="toc-б.-практика-на-данных" class="nav-link" data-scroll-target="#%D0%B1.-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0-%D0%BD%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85"><span class="header-section-number">16.8.2</span> Б. Практика на данных</a></li>
+  <li><a href="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" id="toc-в.-работа-с-ии-ассистентом" class="nav-link" data-scroll-target="#%D0%B2.-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D0%B8%D0%B8-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC"><span class="header-section-number">16.8.3</span> В. Работа с ИИ-ассистентом</a></li>
+  <li><a href="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" id="toc-г.-мини-исследование" class="nav-link" data-scroll-target="#%D0%B3.-%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"><span class="header-section-number">16.8.4</span> Г. Мини-исследование</a></li>
+  </ul>
+</li>
+  <li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8">Вопросы для самопроверки</a></li>
+  <li><a href="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C" id="toc-что-почитать" class="nav-link" data-scroll-target="#%D1%87%D1%82%D0%BE-%D0%BF%D0%BE%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C">Что почитать</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-backtesting.html">Торговые стратегии</a></li><li class="breadcrumb-item"><a href="./16-momentum.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Моментум и управление волатильностью</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Моментум и управление волатильностью</span></h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-backtesting.html">Торговые стратегии</a></li><li class="breadcrumb-item"><a href="./16-momentum.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Моментум и управление волатильностью</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Моментум и управление волатильностью</span>
+</h1>
 </div>
 
 
@@ -385,38 +462,902 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-moex-analytics/momentum-strategy.py; vectorbt (strategies, experiments EXP-001).
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><!--
+Материалы: moex-analytics/marimo/momentum-strategy.py (moex_analytics/momentum.py);
+vectorbt (experiments.md: EXP-001 residual momentum, EXP-002 sector-residual, EXP-003 low-vol).
+--><p>Купить акции, которые больше всего выросли за последний год, и продать те, что сильнее всего упали. Правило выглядит наивным: оно противоречит совету «покупай дёшево, продавай дорого» и, казалось бы, гипотезе эффективного рынка, по которой прошлые цены не помогают предсказывать будущие. Тем не менее это одна из самых устойчивых закономерностей в финансах. <span class="citation" data-cites="jegadeesh1993">Jegadeesh и Titman (<a href="references.html#ref-jegadeesh1993" role="doc-biblioref">1993 г.</a>)</span> обнаружили её на американских акциях 1965–1989 гг., позднее её нашли на рынках акций почти всех стран, в облигациях, валютах и товарах <span class="citation" data-cites="asness2013">(<a href="references.html#ref-asness2013" role="doc-biblioref">Asness и др. 2013 г.</a>)</span>. В главе 12 моментум оказался единственным из факторов российского рынка, премия которого статистически отличалась от нуля.</p>
+<div class="no-row-height column-margin column-container"></div><p>В этой главе мы превратим фактор из главы 12 в торговое правило и посмотрим, что от него остаётся, когда в расчёт входят ликвидность, снятые с торгов бумаги, издержки и запрет на короткие продажи. Мы увидим и главную опасность моментума – редкие, но очень глубокие провалы – и простой способ сделать их мельче.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этой главе">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этой главе
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит во второй этап работы над книгой. Планируемое содержание:</p>
 <ul>
-<li>Кросс-секционный моментум на российском рынке</li>
-<li>Фильтр ликвидности, делистинги, издержки</li>
-<li>Трендовый фильтр и размещение денег на денежном рынке</li>
-<li>Таргетирование волатильности</li>
-<li>Проверка на новых данных</li>
+<li>Строим портфели победителей и проигравших на российском рынке и измеряем премию за моментум.</li>
+<li>Проверяем, как результат зависит от окна формирования, срока удержания и пропуска последнего месяца.</li>
+<li>Разбираем крахи моментума 2009 и 2015 гг. и их связь с разворотом рынка.</li>
+<li>Учитываем ликвидность, делистинги, оборот и издержки; сравниваем стратегию «только покупка» с рынком.</li>
+<li>Добавляем трендовый фильтр с выходом в деньги и таргетирование волатильности.</li>
+<li>Проверяем выбор параметров на новых данных.</li>
 </ul>
+<p><strong>Данные:</strong> <code>stocks.parquet</code>, <code>indexes.parquet</code>, <code>ruonia.parquet</code> (см. <a href="data/README.md">данные книги</a>). <strong>Нужно знать:</strong> доходность и коэффициент Шарпа (глава 4); факторные модели (глава 12, раздел <a href="12-capm-factors.html#sec-factors" class="quarto-xref"><span>12.6</span></a>); временная схема бэктеста и проблема перебора параметров (глава 15).</p>
 </div>
 </div>
+<section id="sec-mom-why" class="level2 page-columns page-full" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="sec-mom-why">
+<span class="header-section-number">16.1</span> Откуда берётся моментум</h2>
+<p><strong>Кросс-секционный моментум</strong> – сравнение бумаг друг с другом: в конце каждого месяца акции ранжируют по доходности за прошлые месяцы, покупают лучших (<strong>победителей</strong>, winners) и продают худших (<strong>проигравших</strong>, losers). Важно, что речь идёт об относительной доходности. Если упал весь рынок, победителями будут бумаги, которые упали меньше других. Портфель «победители минус проигравшие» (W − L, у Кархарта – WML) не требует собственного капитала: покупка оплачивается деньгами от короткой продажи. Поэтому его доходность – это премия, а не доходность вложений.</p>
+<p>Объяснений у моментума два, и спор между ними не закончен.</p>
+<ul>
+<li>
+<strong>Поведенческое.</strong> Инвесторы медленно учитывают новую информацию. Хорошие новости о компании отражаются в цене не сразу, и цена продолжает расти ещё несколько месяцев <span class="citation" data-cites="hong1999">(<a href="references.html#ref-hong1999" role="doc-biblioref">Hong и Stein 1999 г.</a>)</span>. Этому помогает <strong>эффект диспозиции</strong>: частные инвесторы охотно продают выросшие бумаги, фиксируя прибыль, и держат упавшие, не желая признавать убыток. Продажи сдерживают рост победителей, ожидание – падение проигравших, и цены приходят к справедливому уровню с опозданием <span class="citation" data-cites="grinblatt2005">(<a href="references.html#ref-grinblatt2005" role="doc-biblioref">Grinblatt и Han 2005 г.</a>)</span>.</li>
+<li>
+<strong>Рисковое.</strong> Победители и проигравшие различаются чувствительностью к общим рискам, и премия – компенсация за эти риски. Самый наглядный аргумент – редкие, но очень глубокие провалы моментума, которые мы увидим в разделе <a href="#sec-mom-crash" class="quarto-xref"><span>16.3</span></a>. Инвестор, который держит W − L, по сути продаёт страховку от резкого разворота рынка.</li>
+</ul>
+<div class="no-row-height column-margin column-container"></div><p>Для практики важно, что оба объяснения предсказывают <strong>временный</strong> характер эффекта: через год-два преимущество победителей исчезает. Поэтому портфель приходится часто пересматривать, а значит, платить за сделки.</p>
+</section><section id="sec-mom-xs" class="level2 page-columns page-full" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="sec-mom-xs">
+<span class="header-section-number">16.2</span> Моментум на российском рынке</h2>
+<section id="правило" class="level3 page-columns page-full" data-number="16.2.1"><h3 data-number="16.2.1" class="anchored" data-anchor-id="правило">
+<span class="header-section-number">16.2.1</span> Правило</h3>
+<p>Зафиксируем правило так, чтобы в нём не было места выбору задним числом.</p>
+<ul>
+<li>
+<strong>Сигнал</strong> – рост полной доходности (<code>adj_close</code>) с конца месяца <span class="math inline">\(t-12\)</span> до конца месяца <span class="math inline">\(t-1\)</span>: одиннадцать месяцев с пропуском последнего. Так строят фактор моментума Фама и Френч, и так мы строили WML в главе 12. Последний месяц пропускают, потому что на американском рынке месячные доходности слегка разворачиваются; на российском это не так, к этому мы ещё вернёмся.</li>
+<li>
+<strong>Выборка.</strong> В конце месяца <span class="math inline">\(t\)</span> берём бумаги, у которых есть цена на эту дату и сигнал. Исключаем 20% наименее ликвидных по среднему обороту за три месяца, закончившихся в месяце <span class="math inline">\(t-1\)</span>. Сортировку проводим, только если в выборке не меньше 24 бумаг.</li>
+<li>
+<strong>Портфели.</strong> Треть бумаг с наибольшим сигналом – победители (W), треть с наименьшим – проигравшие (L). Веса внутри портфеля равные. Выборка слишком мала для деления на децили, как у <span class="citation" data-cites="jegadeesh1993">Jegadeesh и Titman (<a href="references.html#ref-jegadeesh1993" role="doc-biblioref">1993 г.</a>)</span>: в каждом портфеле было бы по 5–7 бумаг.</li>
+<li>
+<strong>Время.</strong> Все признаки известны на конец месяца <span class="math inline">\(t-1\)</span>, сделка – на закрытии последнего торгового дня месяца <span class="math inline">\(t\)</span>, доход – за месяц <span class="math inline">\(t+1\)</span>. Пропуск месяца в сигнале здесь удобен и технически: решение можно принять заранее и спокойно исполнить на закрытии. Без пропуска сигнал зависел бы от той же цены закрытия, по которой совершается сделка (раздел <a href="15-backtesting.html#sec-backtest-timing" class="quarto-xref"><span>15.2</span></a>).</li>
+<li>
+<strong>Снятые с торгов бумаги.</strong> Если у бумаги в портфеле нет цены на конец следующего месяца, мы считаем, что она продана по последней цене, а деньги распределены между остальными бумагами.</li>
+</ul>
+<div class="no-row-height column-margin column-container"></div><div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Python</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qf <span class="im">import</span> data, plot</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> data.load_stocks(columns<span class="op">=</span>[<span class="st">"adj_close"</span>, <span class="st">"value_rub"</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wide(col):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> stocks.pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span>col)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    w.index <span class="op">=</span> w.index.astype(<span class="st">"datetime64[ns]"</span>)   <span class="co"># даты котировок хранятся с точностью до мс</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> wide(<span class="st">"adj_close"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>adj <span class="op">=</span> daily.resample(<span class="st">"ME"</span>).last()                                  <span class="co"># цена на конец месяца</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adj.pct_change(fill_method<span class="op">=</span><span class="va">None</span>)                             <span class="co"># доходность за месяц</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>liq <span class="op">=</span> wide(<span class="st">"value_rub"</span>).resample(<span class="st">"ME"</span>).<span class="bu">sum</span>().rolling(<span class="dv">3</span>).mean().shift(<span class="dv">1</span>)   <span class="co"># оборот до t−1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>mcftr <span class="op">=</span> data.load_index(<span class="st">"MCFTR"</span>).set_index(<span class="st">"date"</span>)[<span class="st">"close"</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>mcftr.index <span class="op">=</span> mcftr.index.astype(<span class="st">"datetime64[ns]"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>mkt <span class="op">=</span> mcftr.resample(<span class="st">"ME"</span>).last().pct_change()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>ru <span class="op">=</span> data.load_ruonia().set_index(<span class="st">"date"</span>)[<span class="st">"rate"</span>] <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ru <span class="op">=</span> ru.reindex(pd.date_range(ru.index.<span class="bu">min</span>(), daily.index.<span class="bu">max</span>())).ffill()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> ru <span class="op">/</span> <span class="dv">365</span>).resample(<span class="st">"ME"</span>).prod() <span class="op">-</span> <span class="dv">1</span>                      <span class="co"># RUONIA за месяц</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>rf.index <span class="op">=</span> rf.index.astype(<span class="st">"datetime64[ns]"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> momentum(J<span class="op">=</span><span class="dv">12</span>, skip<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Рост цены с конца месяца t−J до конца месяца t−skip."""</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> adj.shift(skip) <span class="op">/</span> adj.shift(J) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sort_portfolios(signal, q<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, drop_liq<span class="op">=</span><span class="fl">0.2</span>, min_n<span class="op">=</span><span class="dv">24</span>):</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Равные веса победителей (W) и проигравших (L) на конец каждого месяца."""</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    ok <span class="op">=</span> signal.notna() <span class="op">&amp;</span> adj.notna() <span class="op">&amp;</span> liq.notna()</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    ok <span class="op">&amp;=</span> liq.where(ok).rank(axis<span class="op">=</span><span class="dv">1</span>, pct<span class="op">=</span><span class="va">True</span>) <span class="op">&gt;</span> drop_liq      <span class="co"># без наименее ликвидных</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> signal.where(ok).rank(axis<span class="op">=</span><span class="dv">1</span>, pct<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    enough <span class="op">=</span> ok.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&gt;=</span> min_n</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> (rank <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">-</span> q).mul(enough, axis<span class="op">=</span><span class="dv">0</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> (rank <span class="op">&lt;=</span> q).mul(enough, axis<span class="op">=</span><span class="dv">0</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> W.div(W.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">0</span>).fillna(<span class="dv">0</span>), L.div(L.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">0</span>).fillna(<span class="dv">0</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hold(weights, K<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Доходность за месяц t+1 портфеля, сформированного в конце месяца t.</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">    При K &gt; 1 – среднее K последних портфелей (перекрывающиеся портфели)."""</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> weights.rolling(K).mean().shift(<span class="dv">1</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    alive <span class="op">=</span> w.where(ret.notna(), <span class="dv">0</span>)           <span class="co"># снятые с торгов бумаги выпадают</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> (alive <span class="op">*</span> ret.fillna(<span class="dv">0</span>)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> alive.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r[alive.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>W, L <span class="op">=</span> sort_portfolios(momentum())</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>wml <span class="op">=</span> (hold(W) <span class="op">-</span> hold(L)).dropna().loc[<span class="st">"2009"</span>:]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">qf_load_stocks</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"2025-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">ticker</span>, <span class="va">date</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y-%m"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ticker</span>, <span class="va">month</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>price <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">last</a></span><span class="op">(</span><span class="va">adj_close</span><span class="op">)</span>, turnover <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">value_rub</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>            .groups <span class="op">=</span> <span class="st">"drop_last"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mom <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">price</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">price</span>, <span class="fl">12</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span>
+<span>         liq <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">turnover</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">turnover</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">turnover</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Портфели на конец последнего месяца</span></span>
+<span><span class="va">m</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mom</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">liq</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">liq</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">mom</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>         group <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="va">r</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span> <span class="op">~</span> <span class="st">"W"</span>, <span class="va">r</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span> <span class="op">~</span> <span class="st">"L"</span>, <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"M"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">mom</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ticker</span>, <span class="va">group</span>, <span class="va">mom</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 40 x 3</span></span>
+<span><span class="co">#&gt;    ticker group    mom</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 CBOM   W     0.365 </span></span>
+<span><span class="co">#&gt;  2 SFIN   W     0.328 </span></span>
+<span><span class="co">#&gt;  3 UGLD   W     0.238 </span></span>
+<span><span class="co">#&gt;  4 CNRU   W     0.171 </span></span>
+<span><span class="co">#&gt;  5 MDMG   W     0.147 </span></span>
+<span><span class="co">#&gt;  6 SBERP  W     0.108 </span></span>
+<span><span class="co">#&gt;  7 SBER   W     0.105 </span></span>
+<span><span class="co">#&gt;  8 SNGSP  W     0.0894</span></span>
+<span><span class="co">#&gt;  9 MTSS   W     0.0826</span></span>
+<span><span class="co">#&gt; 10 PIKK   W     0.0746</span></span>
+<span><span class="co">#&gt; # i 30 more rows</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Функция <code>hold</code> с параметром <code>K</code> понадобится позже: она позволяет держать портфель несколько месяцев. В R показан только расчёт состава портфелей на последнюю дату. Пропуски в рядах здесь не проверяются: лаг на 12 строк равен лагу на 12 месяцев, только если бумага торговалась каждый месяц.</p>
+</section><section id="результат" class="level3" data-number="16.2.2"><h3 data-number="16.2.2" class="anchored" data-anchor-id="результат">
+<span class="header-section-number">16.2.2</span> Результат</h3>
+<p>Победители и проигравшие формируются с конца 2008 г.: раньше в снимке меньше 24 бумаг с годовой историей. В каждом портфеле от 9 до 21 акций. Бумага выпадала из портфеля из-за снятия с торгов 10 раз. Безрисковая ставка RUONIA доступна с 2010 г., поэтому сравнение с ней начинается оттуда.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Сначала предскажите">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Сначала предскажите
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В главе 12 премия за моментум, рассчитанная по портфелям, взвешенным капитализацией, составила около 15% в год. Победители и проигравшие здесь взвешены поровну. Какая часть премии придётся на победителей, а какая – на проигравших? Обгоняют ли победители денежный рынок?</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stats(x, rf<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Годовые показатели месячного ряда; при rf – доходность сверх безрисковой."""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x.dropna()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ex <span class="op">=</span> x <span class="cf">if</span> rf <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> x <span class="op">-</span> rf.reindex(x.index)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    wealth <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> x).cumprod()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({<span class="st">"Доходность, % год."</span>: ex.mean() <span class="op">*</span> <span class="dv">12</span> <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Волатильность, % год."</span>: x.std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>) <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Шарп"</span>: ex.mean() <span class="op">/</span> ex.std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"t-статистика"</span>: ex.mean() <span class="op">/</span> ex.std() <span class="op">*</span> np.sqrt(<span class="bu">len</span>(ex)),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Макс. просадка, %"</span>: (wealth <span class="op">/</span> wealth.cummax() <span class="op">-</span> <span class="dv">1</span>).<span class="bu">min</span>() <span class="op">*</span> <span class="dv">100</span>})</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ALL <span class="op">=</span> sort_portfolios(momentum(), q<span class="op">=</span><span class="fl">1.0</span>)[<span class="dv">0</span>]               <span class="co"># q = 1: все бумаги выборки</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> wml.loc[<span class="st">"2010"</span>:].index</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>legs <span class="op">=</span> pd.DataFrame({<span class="st">"Победители (W)"</span>: stats(hold(W).loc[period], rf),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Проигравшие (L)"</span>: stats(hold(L).loc[period], rf),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"W − L"</span>: stats(wml.loc[period]),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Все бумаги"</span>: stats(hold(ALL).loc[period], rf),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"MCFTR"</span>: stats(mkt.loc[period], rf)})</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> <span class="kw">lambda</span> v: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.1f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>fmt2 <span class="op">=</span> <span class="kw">lambda</span> v: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>legs.style.<span class="bu">format</span>(fmt).<span class="bu">format</span>(fmt2, subset<span class="op">=</span>pd.IndexSlice[[<span class="st">"Шарп"</span>, <span class="st">"t-статистика"</span>], :])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-legs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-legs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.1: Портфели моментума, 2010–2026 гг.: доходность сверх RUONIA (для W − L – сама разность), волатильность и риск. «Все бумаги» – равные веса всей выборки
+</figcaption><div aria-describedby="tbl-mom-legs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_43979" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_43979_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Победители (W)</th>
+<th id="T_43979_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Проигравшие (L)</th>
+<th id="T_43979_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">W − L</th>
+<th id="T_43979_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Все бумаги</th>
+<th id="T_43979_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">MCFTR</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_43979_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Доходность, % год.</th>
+<td id="T_43979_row0_col0" class="data row0 col0">7,1</td>
+<td id="T_43979_row0_col1" class="data row0 col1">−7,9</td>
+<td id="T_43979_row0_col2" class="data row0 col2">15,0</td>
+<td id="T_43979_row0_col3" class="data row0 col3">−0,1</td>
+<td id="T_43979_row0_col4" class="data row0 col4">1,9</td>
+</tr>
+<tr class="even">
+<th id="T_43979_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
+<td id="T_43979_row1_col0" class="data row1 col0">21,6</td>
+<td id="T_43979_row1_col1" class="data row1 col1">25,8</td>
+<td id="T_43979_row1_col2" class="data row1 col2">16,4</td>
+<td id="T_43979_row1_col3" class="data row1 col3">21,7</td>
+<td id="T_43979_row1_col4" class="data row1 col4">19,9</td>
+</tr>
+<tr class="odd">
+<th id="T_43979_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Шарп</th>
+<td id="T_43979_row2_col0" class="data row2 col0">0,32</td>
+<td id="T_43979_row2_col1" class="data row2 col1">−0,31</td>
+<td id="T_43979_row2_col2" class="data row2 col2">0,91</td>
+<td id="T_43979_row2_col3" class="data row2 col3">−0,01</td>
+<td id="T_43979_row2_col4" class="data row2 col4">0,09</td>
+</tr>
+<tr class="even">
+<th id="T_43979_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">t-статистика</th>
+<td id="T_43979_row3_col0" class="data row3 col0">1,33</td>
+<td id="T_43979_row3_col1" class="data row3 col1">−1,25</td>
+<td id="T_43979_row3_col2" class="data row3 col2">3,74</td>
+<td id="T_43979_row3_col3" class="data row3 col3">−0,02</td>
+<td id="T_43979_row3_col4" class="data row3 col4">0,38</td>
+</tr>
+<tr class="odd">
+<th id="T_43979_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. просадка, %</th>
+<td id="T_43979_row4_col0" class="data row4 col0">−41,6</td>
+<td id="T_43979_row4_col1" class="data row4 col1">−64,0</td>
+<td id="T_43979_row4_col2" class="data row4 col2">−37,4</td>
+<td id="T_43979_row4_col3" class="data row4 col3">−49,4</td>
+<td id="T_43979_row4_col4" class="data row4 col4">−51,3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>С 2010 г. победители приносили в среднем 7,1% в год сверх RUONIA, проигравшие – −7,9%. Разность W − L – 15,0% в год с t-статистикой 3,7: это близко к результату главы 12, хотя там портфели строились иначе. Премия делится между сторонами почти поровну. Выигрыш на проигравших доступен только тому, кто может продавать их без покрытия, – к этому вопросу мы вернёмся в разделе <a href="#sec-mom-practice" class="quarto-xref"><span>16.4</span></a>.</p>
+<p>Полезно сравнить с колонкой «Все бумаги». Равновзвешенный портфель той же выборки за эти годы не заработал больше денежного рынка (−0,1% в год), MCFTR – немногим больше (1,9%). На этом фоне 7,1% у победителей заметны, но t-статистика их избыточной доходности – всего 1,3. Волатильность в 20–25% в год скрывает и большую разницу средних. У W − L волатильность ниже (16%): общие колебания рынка в разности почти взаимно уничтожаются.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, x <span class="kw">in</span> [(<span class="st">"Победители (W)"</span>, hold(W)), (<span class="st">"Все бумаги"</span>, hold(ALL)),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                (<span class="st">"Проигравшие (L)"</span>, hold(L)), (<span class="st">"RUONIA"</span>, rf)]:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ax.plot((<span class="dv">1</span> <span class="op">+</span> x.loc[period]).cumprod(), label<span class="op">=</span>name)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">"log"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ax.minorticks_off()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>], labels<span class="op">=</span>[<span class="st">"0,5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"8"</span>, <span class="st">"16"</span>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ax.legend(ncol<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, Банк России, расчёты автора"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-mom-wealth" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mom-wealth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-momentum_files/figure-html/fig-mom-wealth-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mom-wealth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;16.1: Рост 1 руб. в портфелях победителей и проигравших, в равновзвешенном портфеле всех бумаг выборки и на денежном рынке (логарифмическая шкала)
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="sec-mom-grid" class="level3 page-columns page-full" data-number="16.2.3"><h3 data-number="16.2.3" class="anchored" data-anchor-id="sec-mom-grid">
+<span class="header-section-number">16.2.3</span> Окно формирования и срок удержания</h3>
+<p>У правила два главных параметра: окно <span class="math inline">\(J\)</span>, за которое измеряется рост, и срок <span class="math inline">\(K\)</span>, на который держится портфель. <span class="citation" data-cites="jegadeesh1993">Jegadeesh и Titman (<a href="references.html#ref-jegadeesh1993" role="doc-biblioref">1993 г.</a>)</span> держали портфели <span class="math inline">\(K\)</span> месяцев, а каждый месяц формировали новый. В любой момент инвестор владеет <span class="math inline">\(K\)</span> перекрывающимися портфелями, сформированными в разные месяцы, по <span class="math inline">\(1/K\)</span> капитала в каждом. При <span class="math inline">\(K &gt; 1\)</span> каждый месяц пересматривается лишь часть капитала, и оборот падает.</p>
+<div class="no-row-height column-margin column-container"></div><div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> []</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> J <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>]:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    Wj, Lj <span class="op">=</span> sort_portfolios(momentum(J))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> K <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">12</span>]:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> (hold(Wj, K) <span class="op">-</span> hold(Lj, K)).dropna().loc[<span class="st">"2009"</span>:]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        grid.append({<span class="st">"J"</span>: J, <span class="st">"K"</span>: K, <span class="st">"mean"</span>: d.mean() <span class="op">*</span> <span class="dv">12</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"t"</span>: d.mean() <span class="op">/</span> d.std() <span class="op">*</span> np.sqrt(<span class="bu">len</span>(d)),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"sr_in"</span>: d.loc[:<span class="st">"2017"</span>].mean() <span class="op">/</span> d.loc[:<span class="st">"2017"</span>].std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"sr_out"</span>: d.loc[<span class="st">"2018"</span>:].mean() <span class="op">/</span> d.loc[<span class="st">"2018"</span>:].std() <span class="op">*</span> np.sqrt(<span class="dv">12</span>)})</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> pd.DataFrame(grid)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>cells <span class="op">=</span> grid.<span class="bu">apply</span>(<span class="kw">lambda</span> r: <span class="ss">f"</span><span class="sc">{</span>fmt(r[<span class="st">'mean'</span>] <span class="op">*</span> <span class="dv">100</span>)<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>fmt(r[<span class="st">'t'</span>])<span class="sc">}</span><span class="ss">)"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> grid.assign(cell<span class="op">=</span>cells).pivot(index<span class="op">=</span><span class="st">"J"</span>, columns<span class="op">=</span><span class="st">"K"</span>, values<span class="op">=</span><span class="st">"cell"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>table.index <span class="op">=</span> [<span class="ss">f"J = </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> j <span class="kw">in</span> table.index]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>table.columns <span class="op">=</span> [<span class="ss">f"K = </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> table.columns]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>table.style</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-grid" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.2: Премия W − L, % годовых (в скобках – t-статистика), 2009–2026 гг. Строки – окно формирования J (последний месяц пропускается), столбцы – срок удержания K, мес.
+</figcaption><div aria-describedby="tbl-mom-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_0d453" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_0d453_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">K = 1</th>
+<th id="T_0d453_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">K = 3</th>
+<th id="T_0d453_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">K = 6</th>
+<th id="T_0d453_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">K = 12</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_0d453_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">J = 3</th>
+<td id="T_0d453_row0_col0" class="data row0 col0">6,9 (1,8)</td>
+<td id="T_0d453_row0_col1" class="data row0 col1">6,3 (2,1)</td>
+<td id="T_0d453_row0_col2" class="data row0 col2">5,8 (2,4)</td>
+<td id="T_0d453_row0_col3" class="data row0 col3">4,8 (2,4)</td>
+</tr>
+<tr class="even">
+<th id="T_0d453_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">J = 6</th>
+<td id="T_0d453_row1_col0" class="data row1 col0">10,8 (2,6)</td>
+<td id="T_0d453_row1_col1" class="data row1 col1">10,2 (2,7)</td>
+<td id="T_0d453_row1_col2" class="data row1 col2">8,7 (2,6)</td>
+<td id="T_0d453_row1_col3" class="data row1 col3">5,5 (1,9)</td>
+</tr>
+<tr class="odd">
+<th id="T_0d453_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">J = 9</th>
+<td id="T_0d453_row2_col0" class="data row2 col0">9,3 (2,0)</td>
+<td id="T_0d453_row2_col1" class="data row2 col1">8,4 (2,0)</td>
+<td id="T_0d453_row2_col2" class="data row2 col2">6,7 (1,6)</td>
+<td id="T_0d453_row2_col3" class="data row2 col3">2,6 (0,7)</td>
+</tr>
+<tr class="even">
+<th id="T_0d453_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">J = 12</th>
+<td id="T_0d453_row3_col0" class="data row3 col0">11,0 (2,3)</td>
+<td id="T_0d453_row3_col1" class="data row3 col1">8,0 (1,7)</td>
+<td id="T_0d453_row3_col2" class="data row3 col2">4,6 (1,0)</td>
+<td id="T_0d453_row3_col3" class="data row3 col3">1,4 (0,3)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Все варианты дают положительную премию, но её величина заметно меняется. При удержании в один месяц короткое окно <span class="math inline">\(J = 3\)</span> даёт 6,9% в год, окна 6 и 12 месяцев – 10,8% и 11,0%. При длинном удержании премия угасает: портфель, сформированный по росту за год и удерживаемый ещё год, приносит лишь 1,4%. Это согласуется с временным характером эффекта: через несколько месяцев после формирования победители перестают обгонять проигравших. Обратите внимание и на t-статистики: при выборке 2009–2026 гг. они ниже, чем в таблице <a href="#tbl-mom-legs" class="quarto-xref"><span>16.1</span></a>, потому что в неё входит 2009 г. Что тогда случилось, разберём в следующем разделе.</p>
+<p>Отдельный вопрос – пропуск последнего месяца. На американских данных доходность прошедшего месяца слегка разворачивается <span class="citation" data-cites="jegadeesh1993">(<a href="references.html#ref-jegadeesh1993" role="doc-biblioref">Jegadeesh и Titman 1993 г.</a>)</span>, и без пропуска премия моментума ниже. На российских данных разницы почти нет: без пропуска премия за 2009–2026 гг. – 10,8% в год (t = 2,2), с пропуском – 11,0% (t = 2,3). Более того, сортировка только по доходности последнего месяца даёт не разворот, а продолжение: 13,1% в год (t = 3,1). К этому результату нужно относиться осторожно. Сигнал по последнему месяцу зависит от цены закрытия, по которой совершается сделка, а такую сделку в реальности исполнить нельзя (раздел <a href="15-backtesting.html#sec-backtest-timing" class="quarto-xref"><span>15.2</span></a>). Проверить, сохраняется ли эффект при сделке на следующий день, предлагается в упражнении 8.</p>
+<div class="no-row-height column-margin column-container"></div></section></section><section id="sec-mom-crash" class="level2 page-columns page-full" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="sec-mom-crash">
+<span class="header-section-number">16.3</span> Крахи моментума</h2>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>by_year <span class="op">=</span> wml.groupby(wml.index.year).<span class="bu">apply</span>(<span class="kw">lambda</span> x: (<span class="dv">1</span> <span class="op">+</span> x).prod() <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax.bar(by_year.index, by_year <span class="op">*</span> <span class="dv">100</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span>np.where(by_year <span class="op">&lt;</span> <span class="dv">0</span>, plot.RED, plot.BLUE))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"% за год"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(by_year.index[::<span class="dv">2</span>])</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-mom-years" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mom-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-momentum_files/figure-html/fig-mom-years-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mom-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;16.2: Доходность W − L по годам. 2026 г. – январь–сентябрь
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Премия моментума распределена во времени очень неравномерно. Из 18 лет наблюдений W − L потерял деньги в 3, но два из этих лет перекрывают несколько хороших: в 2009 г. портфель потерял 51%, в 2015 г. – 34%. Распределение месячных доходностей сильно скошено влево: худший месяц выборки – −37%, тогда как лучший – 11%.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>crashes.style.<span class="bu">format</span>(fmt)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-crashes" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-crashes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.3: Пять худших месяцев W − L и поведение рынка
+</figcaption><div aria-describedby="tbl-mom-crashes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_a77ac" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_a77ac_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">W − L, %</th>
+<th id="T_a77ac_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">MCFTR в этот месяц, %</th>
+<th id="T_a77ac_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">MCFTR за 12 мес. до, %</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_a77ac_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">04.2009</th>
+<td id="T_a77ac_row0_col0" class="data row0 col0">−37,0</td>
+<td id="T_a77ac_row0_col1" class="data row0 col1">19,1</td>
+<td id="T_a77ac_row0_col2" class="data row0 col2">−51,0</td>
+</tr>
+<tr class="even">
+<th id="T_a77ac_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">09.2009</th>
+<td id="T_a77ac_row1_col0" class="data row1 col0">−30,0</td>
+<td id="T_a77ac_row1_col1" class="data row1 col1">9,6</td>
+<td id="T_a77ac_row1_col2" class="data row1 col2">−16,6</td>
+</tr>
+<tr class="odd">
+<th id="T_a77ac_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">02.2015</th>
+<td id="T_a77ac_row2_col0" class="data row2 col0">−24,9</td>
+<td id="T_a77ac_row2_col1" class="data row2 col1">6,8</td>
+<td id="T_a77ac_row2_col2" class="data row2 col2">19,7</td>
+</tr>
+<tr class="even">
+<th id="T_a77ac_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">04.2015</th>
+<td id="T_a77ac_row3_col0" class="data row3 col0">−15,2</td>
+<td id="T_a77ac_row3_col1" class="data row3 col1">3,9</td>
+<td id="T_a77ac_row3_col2" class="data row3 col2">25,0</td>
+</tr>
+<tr class="odd">
+<th id="T_a77ac_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">01.2012</th>
+<td id="T_a77ac_row4_col0" class="data row4 col0">−11,4</td>
+<td id="T_a77ac_row4_col1" class="data row4 col1">8,0</td>
+<td id="T_a77ac_row4_col2" class="data row4 col2">−14,5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>В таблице <a href="#tbl-mom-crashes" class="quarto-xref"><span>16.3</span></a> видна общая черта: все худшие месяцы моментума – месяцы <strong>роста</strong> рынка. Апрель и сентябрь 2009 г. пришлись на восстановление после обвала 2008 г., февраль 2015 г. – на отскок после валютного кризиса декабря 2014 г. Механизм описали <span class="citation" data-cites="daniel2016">Daniel и Moskowitz (<a href="references.html#ref-daniel2016" role="doc-biblioref">2016 г.</a>)</span>. После долгого падения рынка в проигравших оказываются бумаги, которые падали сильнее всех, – как правило, с высокой бетой и большим долгом. Победители – защитные бумаги с низкой бетой. Портфель W − L в этот момент имеет заметно отрицательную бету: он фактически сделал ставку на продолжение падения. Когда рынок разворачивается, проигравшие растут быстрее всех. В апреле 2009 г. акции из портфеля проигравших выросли в среднем на 54%; лидерами были MSNG (82%), TRMK (70%) и SVAV (67%). В феврале 2015 г. проигравшие выросли на 25%, а победители не изменились (−0,1%); сильнее всего выросли MTLR, RSTI и FEES.</p>
+<div class="no-row-height column-margin column-container"></div><p>Регрессия месячной доходности W − L на доходность MCFTR подтверждает картину. Бета W − L по всей выборке – −0,27. В 60 месяцев, когда рынок за предыдущий год упал, она – −0,41, в остальные месяцы – −0,11. Чем глубже падение, тем сильнее моментум сам превращается в короткую позицию по рынку, и тем больнее для него разворот.</p>
+<p>2022 г. – интересное исключение. Рынок упал более чем на треть, но W − L закончил год около нуля (0,4%). Одно из возможных объяснений: обвал февраля был внезапным, а не постепенным, а восстановление в 2023 г. – растянутым, без резкого разворота, который бьёт по моментуму.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Особенность российского рынка: короткие продажи">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Особенность российского рынка: короткие продажи
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Портфель W − L требует коротких продаж проигравших. На Московской бирже короткие продажи возможны только по бумагам из списка брокера, за заём бумаг взимается плата, а в отдельные периоды, например весной 2022 г., Банк России временно их запрещал. Кроме того, проигравшие – часто бумаги с самыми высокими издержками займа. Поэтому W − L – прежде всего <strong>фактор</strong>, инструмент измерения и анализа, а стратегия, доступная большинству инвесторов, – покупка победителей. Её мы и будем рассматривать дальше.</p>
+</div>
+</div>
+</section><section id="sec-mom-practice" class="level2 page-columns page-full" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="sec-mom-practice">
+<span class="header-section-number">16.4</span> Ликвидность, делистинги и издержки</h2>
+<p>Академический фактор и торговая стратегия различаются в деталях, которые легко пропустить. Три из них особенно важны для моментума.</p>
+<p><strong>Ликвидность.</strong> Малоликвидные бумаги делают бэктест красивее, чем он может быть на деле. Их цены закрытия часто отражают одну-две случайные сделки, а купить их по такой цене в нужном объёме нельзя. <span class="citation" data-cites="lesmond2004">Lesmond и др. (<a href="references.html#ref-lesmond2004" role="doc-biblioref">2004 г.</a>)</span> показали, что основная часть премии моментума на американском рынке приходится на бумаги с высокими издержками торговли. На российских данных картина обратная.</p>
+<div class="no-row-height column-margin column-container"></div><p>Без фильтра ликвидности премия W − L за 2009–2026 гг. – 9,7% в год (t = 1,9). Если оставить только более ликвидную половину бумаг, она вырастает до 15,7% (t = 2,8). На российском рынке моментум сильнее в крупных ликвидных бумагах. Одно из возможных объяснений – активность частных инвесторов. Они торгуют прежде всего ликвидными бумагами и подвержены эффекту диспозиции. Это объяснение мы не проверяли.</p>
+<p><strong>Делистинги.</strong> Бумаги, снятые с торгов, – источник <strong>ошибки выжившего</strong> (раздел <a href="03-data-preparation.html#sec-survivorship" class="quarto-xref"><span>3.4</span></a>). Если бы снимок содержал только торгующиеся сегодня акции, все провалившиеся компании выпали бы из прошлых портфелей, и проигравшие выглядели бы лучше, чем были. Снимок книги включает и снятые с торгов бумаги, а функция <code>hold</code> продаёт их по последней цене. Это допущение мягкое: при делистинге после банкротства последняя цена может быть недостижима. Но в нашей выборке делистинги связаны в основном с выкупом акций, реорганизацией или сменой юрисдикции эмитента, а не с банкротством.</p>
+<p><strong>Оборот и издержки.</strong> Каждый месяц часть победителей перестаёт быть победителями. Оборот считаем как долю капитала, которую нужно переложить, с учётом того, что за месяц веса бумаг сдвигаются вместе с ценами.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> turnover(weights):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Доля капитала, перекладываемая в конце месяца t, с учётом дрейфа весов за месяц."""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    grown <span class="op">=</span> weights.shift(<span class="dv">1</span>).fillna(<span class="dv">0</span>) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> ret.fillna(<span class="dv">0</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    drifted <span class="op">=</span> grown.div(grown.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">0</span>).fillna(<span class="dv">0</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (weights <span class="op">-</span> drifted).<span class="bu">abs</span>().<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> net_of_costs(weights, cost):</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Доходность за месяц t+1 за вычетом издержек cost на рубль сделки (с каждой стороны)."""</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    gross <span class="op">=</span> hold(weights)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gross <span class="op">-</span> cost <span class="op">*</span> turnover(weights).shift(<span class="dv">1</span>).reindex(gross.index)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>to_w <span class="op">=</span> turnover(W).loc[period]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>costs <span class="op">=</span> pd.DataFrame({<span class="ss">f"</span><span class="sc">{</span>c<span class="sc">:.1%}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>): stats(net_of_costs(W, c).loc[period], rf)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">for</span> c <span class="kw">in</span> [<span class="dv">0</span>, <span class="fl">0.001</span>, <span class="fl">0.003</span>, <span class="fl">0.005</span>]})</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>costs[<span class="st">"Все бумаги"</span>] <span class="op">=</span> stats(hold(ALL).loc[period], rf)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>costs[<span class="st">"MCFTR"</span>] <span class="op">=</span> stats(mkt.loc[period], rf)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>costs.style.<span class="bu">format</span>(fmt).<span class="bu">format</span>(fmt2, subset<span class="op">=</span>pd.IndexSlice[[<span class="st">"Шарп"</span>, <span class="st">"t-статистика"</span>], :])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-costs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.4: Портфель победителей при разных издержках на рубль сделки, 2010–2026 гг.: доходность сверх RUONIA
+</figcaption><div aria-describedby="tbl-mom-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_95def" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_95def_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">0,0%</th>
+<th id="T_95def_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">0,1%</th>
+<th id="T_95def_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">0,3%</th>
+<th id="T_95def_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">0,5%</th>
+<th id="T_95def_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Все бумаги</th>
+<th id="T_95def_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">MCFTR</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_95def_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Доходность, % год.</th>
+<td id="T_95def_row0_col0" class="data row0 col0">7,1</td>
+<td id="T_95def_row0_col1" class="data row0 col1">6,5</td>
+<td id="T_95def_row0_col2" class="data row0 col2">5,5</td>
+<td id="T_95def_row0_col3" class="data row0 col3">4,5</td>
+<td id="T_95def_row0_col4" class="data row0 col4">−0,1</td>
+<td id="T_95def_row0_col5" class="data row0 col5">1,9</td>
+</tr>
+<tr class="even">
+<th id="T_95def_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
+<td id="T_95def_row1_col0" class="data row1 col0">21,6</td>
+<td id="T_95def_row1_col1" class="data row1 col1">21,6</td>
+<td id="T_95def_row1_col2" class="data row1 col2">21,6</td>
+<td id="T_95def_row1_col3" class="data row1 col3">21,6</td>
+<td id="T_95def_row1_col4" class="data row1 col4">21,7</td>
+<td id="T_95def_row1_col5" class="data row1 col5">19,9</td>
+</tr>
+<tr class="odd">
+<th id="T_95def_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Шарп</th>
+<td id="T_95def_row2_col0" class="data row2 col0">0,32</td>
+<td id="T_95def_row2_col1" class="data row2 col1">0,30</td>
+<td id="T_95def_row2_col2" class="data row2 col2">0,25</td>
+<td id="T_95def_row2_col3" class="data row2 col3">0,21</td>
+<td id="T_95def_row2_col4" class="data row2 col4">−0,01</td>
+<td id="T_95def_row2_col5" class="data row2 col5">0,09</td>
+</tr>
+<tr class="even">
+<th id="T_95def_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">t-статистика</th>
+<td id="T_95def_row3_col0" class="data row3 col0">1,33</td>
+<td id="T_95def_row3_col1" class="data row3 col1">1,23</td>
+<td id="T_95def_row3_col2" class="data row3 col2">1,04</td>
+<td id="T_95def_row3_col3" class="data row3 col3">0,84</td>
+<td id="T_95def_row3_col4" class="data row3 col4">−0,02</td>
+<td id="T_95def_row3_col5" class="data row3 col5">0,38</td>
+</tr>
+<tr class="odd">
+<th id="T_95def_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. просадка, %</th>
+<td id="T_95def_row4_col0" class="data row4 col0">−41,6</td>
+<td id="T_95def_row4_col1" class="data row4 col1">−41,9</td>
+<td id="T_95def_row4_col2" class="data row4 col2">−42,4</td>
+<td id="T_95def_row4_col3" class="data row4 col3">−42,9</td>
+<td id="T_95def_row4_col4" class="data row4 col4">−49,4</td>
+<td id="T_95def_row4_col5" class="data row4 col5">−51,3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Средний месячный оборот портфеля победителей – 43% капитала, или около 5,1 капитала в год. При издержках 0,3% на рубль сделки (комиссия брокера и биржи плюс половина спреда для бумаг второго эшелона) это стоит примерно 1,5% доходности в год, и избыточная доходность снижается до 5,5%. Преимущество перед равновзвешенным портфелем той же выборки исчезает при издержках около 1,4% на рубль сделки. Для крупного инвестора к этому добавляется влияние на цену: заявки на десятки миллионов рублей в бумагах второго эшелона сдвигают котировки.</p>
+<p>Главный вывод таблицы, однако, не про издержки. Даже без них t-статистика избыточной доходности победителей невелика, а при издержках 0,3% – 1,0. Шестнадцать лет месячных данных не позволяют уверенно отличить такую стратегию от удачи. Статистически значима премия W − L, где рыночный риск взаимно погашается. У портфеля победителей этот риск остаётся и заглушает сигнал.</p>
+</section><section id="sec-mom-trend" class="level2 page-columns page-full" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="sec-mom-trend">
+<span class="header-section-number">16.5</span> Трендовый фильтр и деньги</h2>
+<p>Кросс-секционный моментум сравнивает бумаги между собой, но ничего не говорит о направлении рынка. В 2022 г. победители упали меньше проигравших, но всё равно упали. <strong>Временной моментум</strong> (time-series momentum) сравнивает актив с его собственным прошлым: держать, если за последний год он заработал больше денежного рынка, и выходить в деньги, если меньше <span class="citation" data-cites="moskowitz2012">(<a href="references.html#ref-moskowitz2012" role="doc-biblioref">Moskowitz и др. 2012 г.</a>)</span>. В главе 15 мы проверяли родственное правило – скользящую среднюю за 200 дней – на индексе MCFTR. Здесь применим временной моментум как фильтр к портфелю победителей.</p>
+<div class="no-row-height column-margin column-container"></div><p>Правило: если на конец месяца <span class="math inline">\(t-1\)</span> доходность MCFTR за 12 месяцев выше накопленной RUONIA за тот же срок, в конце месяца <span class="math inline">\(t\)</span> покупаем победителей; иначе держим деньги под RUONIA. Выход в деньги и возврат на рынок проходят через функцию <code>turnover</code> и оплачиваются по общему тарифу 0,3%.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> mcftr.resample(<span class="st">"ME"</span>).last()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rf12 <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> rf).rolling(<span class="dv">12</span>).<span class="bu">apply</span>(np.prod, raw<span class="op">=</span><span class="va">True</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>up <span class="op">=</span> (idx <span class="op">/</span> idx.shift(<span class="dv">12</span>) <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> rf12 <span class="op">&gt;</span> <span class="dv">0</span>).shift(<span class="dv">1</span>)                 <span class="co"># состояние на конец t−1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>up <span class="op">=</span> up.reindex(W.index).fillna(<span class="va">True</span>).astype(<span class="bu">bool</span>)                 <span class="co"># до 2011 г. фильтр не действует</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>W_trend <span class="op">=</span> W.mul(up, axis<span class="op">=</span><span class="dv">0</span>)                                        <span class="co"># вне тренда – нулевые веса</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>gross <span class="op">=</span> hold(W).loc[period]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> hold(W_trend).reindex(period).fillna(rf) <span class="op">\</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">-</span> <span class="fl">0.003</span> <span class="op">*</span> turnover(W_trend).shift(<span class="dv">1</span>).reindex(period)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>mkt_trend <span class="op">=</span> mkt.where(up.shift(<span class="dv">1</span>, fill_value<span class="op">=</span><span class="va">True</span>).reindex(mkt.index, fill_value<span class="op">=</span><span class="va">True</span>), rf)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>trend_tab <span class="op">=</span> pd.DataFrame({<span class="st">"Победители"</span>: stats(net_of_costs(W, <span class="fl">0.003</span>).loc[period], rf),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Победители + фильтр"</span>: stats(trend, rf),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"MCFTR"</span>: stats(mkt.loc[period], rf),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"MCFTR + фильтр"</span>: stats(mkt_trend.loc[period], rf)})</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>trend_tab.style.<span class="bu">format</span>(fmt).<span class="bu">format</span>(fmt2, subset<span class="op">=</span>pd.IndexSlice[[<span class="st">"Шарп"</span>, <span class="st">"t-статистика"</span>], :])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-trend" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.5: Трендовый фильтр для портфеля победителей и для индекса, 2010–2026 гг.: доходность сверх RUONIA, издержки 0,3%
+</figcaption><div aria-describedby="tbl-mom-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_86b31" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_86b31_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Победители</th>
+<th id="T_86b31_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Победители + фильтр</th>
+<th id="T_86b31_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">MCFTR</th>
+<th id="T_86b31_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">MCFTR + фильтр</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_86b31_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Доходность, % год.</th>
+<td id="T_86b31_row0_col0" class="data row0 col0">5,5</td>
+<td id="T_86b31_row0_col1" class="data row0 col1">2,9</td>
+<td id="T_86b31_row0_col2" class="data row0 col2">1,9</td>
+<td id="T_86b31_row0_col3" class="data row0 col3">−0,1</td>
+</tr>
+<tr class="even">
+<th id="T_86b31_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
+<td id="T_86b31_row1_col0" class="data row1 col0">21,6</td>
+<td id="T_86b31_row1_col1" class="data row1 col1">16,2</td>
+<td id="T_86b31_row1_col2" class="data row1 col2">19,9</td>
+<td id="T_86b31_row1_col3" class="data row1 col3">14,7</td>
+</tr>
+<tr class="odd">
+<th id="T_86b31_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Шарп</th>
+<td id="T_86b31_row2_col0" class="data row2 col0">0,25</td>
+<td id="T_86b31_row2_col1" class="data row2 col1">0,18</td>
+<td id="T_86b31_row2_col2" class="data row2 col2">0,09</td>
+<td id="T_86b31_row2_col3" class="data row2 col3">−0,01</td>
+</tr>
+<tr class="even">
+<th id="T_86b31_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">t-статистика</th>
+<td id="T_86b31_row3_col0" class="data row3 col0">1,04</td>
+<td id="T_86b31_row3_col1" class="data row3 col1">0,74</td>
+<td id="T_86b31_row3_col2" class="data row3 col2">0,38</td>
+<td id="T_86b31_row3_col3" class="data row3 col3">−0,04</td>
+</tr>
+<tr class="odd">
+<th id="T_86b31_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. просадка, %</th>
+<td id="T_86b31_row4_col0" class="data row4 col0">−42,4</td>
+<td id="T_86b31_row4_col1" class="data row4 col1">−33,1</td>
+<td id="T_86b31_row4_col2" class="data row4 col2">−51,3</td>
+<td id="T_86b31_row4_col3" class="data row4 col3">−39,6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Фильтр держал портфель в акциях 55% времени и переключался 28 раз за шестнадцать лет. Он сделал то, чего от него ждут: максимальная просадка уменьшилась с 42% до 33%, в 2022 г. потери сократились с 31% до 11%. Но за это пришлось заплатить. Избыточная доходность упала с 5,5% до 2,9% в год, у индекса – с 1,9% до −0,1%. Причина видна в 2023 г.: рынок вырос после падения 2022 г., а фильтр, смотрящий на прошлый год, вернул портфель в акции с опозданием (24% против 61% без фильтра).</p>
+<p>Результат согласуется с выводами главы 15: трендовый фильтр – инструмент управления риском, а не источник доходности. Он полезен инвестору, для которого глубокая просадка неприемлема, но за шестнадцать лет российского рынка не окупился. Высокие ставки делают деньги привлекательной альтернативой, но они же поднимают планку: чтобы фильтр вернул портфель в акции, рынок должен за год обогнать RUONIA, а при ставке 15–20% это происходит реже.</p>
+</section><section id="sec-mom-vol" class="level2 page-columns page-full" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="sec-mom-vol">
+<span class="header-section-number">16.6</span> Таргетирование волатильности</h2>
+<p>Провалы моментума предсказать трудно, а вот периоды высокой волатильности – намного легче: волатильность кластеризуется (глава 8). Худшие месяцы W − L пришлись на периоды, когда портфель уже несколько месяцев сильно колебался. <span class="citation" data-cites="barroso2015">Barroso и Santa-Clara (<a href="references.html#ref-barroso2015" role="doc-biblioref">2015 г.</a>)</span> предложили масштабировать позицию так, чтобы ожидаемая волатильность оставалась постоянной:</p>
+<div class="no-row-height column-margin column-container"></div><p><span id="eq-vol-target"><span class="math display">\[
+r^{*}_{t+1} = \frac{\sigma_{\text{цель}}}{\hat\sigma_t}\, r_{t+1},
+\tag{16.1}\]</span></span></p>
+<p>где <span class="math inline">\(\hat\sigma_t\)</span> – реализованная волатильность дневных доходностей W − L за последние 126 торговых дней (полгода), рассчитанная на конец месяца <span class="math inline">\(t\)</span>, а <span class="math inline">\(\sigma_{\text{цель}}\)</span> – целевая волатильность. Возьмём 15% в год и ограничим плечо двумя. Оценка известна на конец месяца <span class="math inline">\(t\)</span> и применяется к портфелю, который держится в месяце <span class="math inline">\(t+1\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dr <span class="op">=</span> daily.pct_change(fill_method<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> daily_returns(weights):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Дневные доходности портфеля: веса с конца месяца t действуют со следующего дня."""</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> weights.set_axis(weights.index <span class="op">+</span> pd.Timedelta(days<span class="op">=</span><span class="dv">1</span>)).reindex(dr.index, method<span class="op">=</span><span class="st">"ffill"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    alive <span class="op">=</span> w.where(dr.notna(), <span class="dv">0</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (alive <span class="op">*</span> dr.fillna(<span class="dv">0</span>)).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> alive.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>wml_d <span class="op">=</span> (daily_returns(W) <span class="op">-</span> daily_returns(L)).dropna()</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> (wml_d.rolling(<span class="dv">126</span>, min_periods<span class="op">=</span><span class="dv">60</span>).std() <span class="op">*</span> np.sqrt(<span class="dv">252</span>)).resample(<span class="st">"ME"</span>).last()</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>lev <span class="op">=</span> (<span class="fl">0.15</span> <span class="op">/</span> sigma).clip(upper<span class="op">=</span><span class="dv">2</span>).shift(<span class="dv">1</span>).reindex(wml.index).dropna()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>wml_scaled <span class="op">=</span> lev <span class="op">*</span> wml.loc[lev.index]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Дневная доходность здесь считается при постоянных равных весах внутри месяца. Для оценки волатильности такого приближения достаточно, а месячный результат берётся из функции <code>hold</code>. Первые 60 торговых дней уходят на накопление истории, поэтому сравнение начинается с апреля 2009 г.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax.plot((<span class="dv">1</span> <span class="op">+</span> wml.loc[lev.index]).cumprod(), label<span class="op">=</span><span class="st">"W − L"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.plot((<span class="dv">1</span> <span class="op">+</span> wml_scaled).cumprod(), label<span class="op">=</span><span class="st">"W − L, волатильность 15%"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">"log"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.minorticks_off()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>], labels<span class="op">=</span>[<span class="st">"0,5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"8"</span>, <span class="st">"16"</span>])</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-mom-vol" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mom-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-momentum_files/figure-html/fig-mom-vol-5.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mom-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;16.3: W − L без масштабирования и с таргетированием волатильности 15% годовых (рост 1 руб., логарифмическая шкала)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>vt <span class="op">=</span> pd.DataFrame({<span class="st">"W − L"</span>: stats(wml.loc[lev.index]), <span class="st">"W − L, волатильность 15%"</span>: stats(wml_scaled)})</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>vt.loc[<span class="st">"Асимметрия"</span>] <span class="op">=</span> [wml.loc[lev.index].skew(), wml_scaled.skew()]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>vt.style.<span class="bu">format</span>(fmt).<span class="bu">format</span>(fmt2, subset<span class="op">=</span>pd.IndexSlice[[<span class="st">"Шарп"</span>, <span class="st">"t-статистика"</span>, <span class="st">"Асимметрия"</span>], :])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-mom-vol" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mom-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;16.6: Таргетирование волатильности W − L, апрель 2009 – сентябрь 2026 г.
+</figcaption><div aria-describedby="tbl-mom-vol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_326db" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_326db_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">W − L</th>
+<th id="T_326db_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">W − L, волатильность 15%</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<th id="T_326db_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Доходность, % год.</th>
+<td id="T_326db_row0_col0" class="data row0 col0">10,5</td>
+<td id="T_326db_row0_col1" class="data row0 col1">17,0</td>
+</tr>
+<tr class="even">
+<th id="T_326db_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
+<td id="T_326db_row1_col0" class="data row1 col0">20,1</td>
+<td id="T_326db_row1_col1" class="data row1 col1">17,5</td>
+</tr>
+<tr class="odd">
+<th id="T_326db_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Шарп</th>
+<td id="T_326db_row2_col0" class="data row2 col0">0,52</td>
+<td id="T_326db_row2_col1" class="data row2 col1">0,97</td>
+</tr>
+<tr class="even">
+<th id="T_326db_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">t-статистика</th>
+<td id="T_326db_row3_col0" class="data row3 col0">2,20</td>
+<td id="T_326db_row3_col1" class="data row3 col1">4,05</td>
+</tr>
+<tr class="odd">
+<th id="T_326db_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Макс. просадка, %</th>
+<td id="T_326db_row4_col0" class="data row4 col0">−38,9</td>
+<td id="T_326db_row4_col1" class="data row4 col1">−19,4</td>
+</tr>
+<tr class="even">
+<th id="T_326db_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Асимметрия</th>
+<td id="T_326db_row5_col0" class="data row5 col0">−2,57</td>
+<td id="T_326db_row5_col1" class="data row5 col1">−0,35</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Эффект сильный. Коэффициент Шарпа вырос с 0,52 до 0,97, максимальная просадка сократилась с 39% до 19%, асимметрия – с −2,6 почти до нуля (−0,3). Перед крахами апреля 2009 г. и февраля 2015 г. волатильность уже была высокой, и масштаб позиции составлял 0,44 и 0,42. Потери в эти месяцы – −16% и −10% вместо −37% и −25%. В спокойные периоды позиция, наоборот, увеличивается; в среднем плечо – 1,11.</p>
+<p>Почему это работает? Масштабирование не предсказывает доходность. Оно использует то, что волатильность предсказуема, а ожидаемая доходность в бурные периоды растёт меньше, чем риск. Значит, отношение доходности к риску в такие периоды хуже, и разумно держать меньше <span class="citation" data-cites="moreira2017">(<a href="references.html#ref-moreira2017" role="doc-biblioref">Moreira и Muir 2017 г.</a>)</span>. Для моментума этот эффект особенно силён, потому что бурные периоды совпадают с опасными разворотами рынка.</p>
+<div class="no-row-height column-margin column-container"></div><p>У приёма есть ограничения. Плечо до двух означает заём денег или бумаг, а расчёт не учитывает ни стоимость заёмных средств, ни дополнительный оборот при изменении масштаба. Для портфеля победителей без плеча (масштаб не выше единицы, остаток – в деньгах, цель 20% годовых) эффект скромнее. Шарп растёт с 0,32 до 0,36, просадка сокращается с 42% до 28%, а в акциях в среднем находится 90% капитала.</p>
+</section><section id="sec-mom-oos" class="level2 page-columns page-full" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="sec-mom-oos">
+<span class="header-section-number">16.7</span> Проверка на новых данных</h2>
+<p>В этой главе мы испытали много вариантов правила: шестнадцать сочетаний окна и срока удержания, три фильтра ликвидности, фильтр тренда, масштабирование. Глава 15 предупреждает: чем больше вариантов перебрано, тем вероятнее, что лучший из них выглядит хорошо случайно (раздел <a href="15-backtesting.html#sec-backtest-search" class="quarto-xref"><span>15.5</span></a>). Проведём простую проверку. Разделим выборку на две части: 2009–2017 и 2018–2026 гг. Если бы мы выбирали параметры в 2017 г., какой вариант оказался бы лучшим и что дальше?</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(grid[<span class="st">"sr_in"</span>], grid[<span class="st">"sr_out"</span>], color<span class="op">=</span>plot.BLUE)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> grid.itertuples():</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    below <span class="op">=</span> (r.J, r.K) <span class="op">==</span> (<span class="dv">12</span>, <span class="dv">1</span>)                    <span class="co"># чтобы подписи не наложились</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="ss">f"</span><span class="sc">{</span>r<span class="sc">.</span>J<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>r<span class="sc">.</span>K<span class="sc">}</span><span class="ss">"</span>, (r.sr_in, r.sr_out), xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="op">-</span><span class="dv">9</span> <span class="cf">if</span> below <span class="cf">else</span> <span class="dv">2</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>comma <span class="op">=</span> plt.FuncFormatter(<span class="kw">lambda</span> v, pos: <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">"</span>.rstrip(<span class="st">"0"</span>).rstrip(<span class="st">"."</span>).replace(<span class="st">"."</span>, <span class="st">","</span>).replace(<span class="st">"-"</span>, <span class="st">"−"</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(comma)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(comma)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Шарп, 2009–2017 гг."</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Шарп, 2018–2026 гг."</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-mom-oos" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mom-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-momentum_files/figure-html/fig-mom-oos-7.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mom-oos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;16.4: Коэффициент Шарпа W − L для 16 сочетаний окна J и срока удержания K: 2009–2017 гг. (по горизонтали) и 2018–2026 гг. (по вертикали)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Картина поучительна в двух отношениях. Во-первых, в 2009–2017 гг. ни один вариант не выглядел привлекательно: лучший коэффициент Шарпа – 0,28, и тот у варианта J = 6, K = 6. Крах 2009 г. и провал 2015 г. испортили весь первый период. Исследователь, принимавший решение в 2017 г., вполне мог отказаться от моментума. Во-вторых, во втором периоде положительный Шарп у всех 16 вариантов, от 0,54 до 1,37. Лучший вариант первого периода показал 1,25 при медиане 1,17. Ранговая корреляция результатов двух периодов – 0,46.</p>
+<p>Вывод: устойчив сам эффект, а не конкретные параметры. Выбор лучшего окна по прошлому почти ничего не даёт, и разумнее держать стандартный вариант или усреднять несколько окон, чем искать оптимальный. Различия между вариантами в одном периоде в основном отражают шум. Это и есть практический смысл правила «сначала гипотеза, потом расчёт»: сигнал 12–1 был выбран до анализа, по литературе, и его результат не завышен перебором.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Что не сработало: эксперименты автора">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Что не сработало: эксперименты автора
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В отдельном исследовательском проекте на тех же данных (45 самых ликвидных бумаг, 10 бумаг в портфеле, 2012–2026 гг.) автор проверил несколько популярных улучшений моментума. Критерии успеха фиксировались до расчёта.</p>
+<ul>
+<li>
+<strong>Остаточный моментум</strong> <span class="citation" data-cites="blitz2011">(<a href="references.html#ref-blitz2011" role="doc-biblioref">Blitz и др. 2011 г.</a>)</span>: ранжирование по доходности, очищенной от рыночной беты. На американских данных он стабильнее обычного. Здесь разница коэффициентов Шарпа с обычным сигналом – +0,01 при p = 0,91, то есть эффекта нет.</li>
+<li>
+<strong>Отраслевая очистка</strong>: ранжирование по доходности сверх отраслевого индекса. Результат хуже обычного моментума. Значительная часть российского моментума – отраслевая, и её удаление убирает сигнал, а не шум. Это согласуется с выводом <span class="citation" data-cites="moskowitz1999">Moskowitz и Grinblatt (<a href="references.html#ref-moskowitz1999" role="doc-biblioref">1999 г.</a>)</span> о роли отраслей.</li>
+<li>
+<strong>Аномалия низкой волатильности</strong> как отдельная стратегия не подтвердилась: в 2022 г. «спокойные» бумаги упали сильнее равновзвешенного портфеля.</li>
+</ul>
+<p>Почти весь выигрыш сложных конструкций объяснялся двумя простыми надстройками: снижением риска в плохие периоды и доходом денежной позиции при высоких ставках. Отрицательный результат – тоже результат, и его стоит записывать так же тщательно, как положительный (глава 15).</p>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="ref-moskowitz1999" class="csl-entry" role="listitem">
+Moskowitz, Tobias J., и Mark Grinblatt. 1999 г. <span>«Do Industries Explain Momentum?»</span> <em>The Journal of Finance</em> 54 (4): 1249–90.
+</div></div><div class="no-row-height column-margin column-container"></div></section><section id="итоги" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="итоги">Итоги</h2>
+<ul>
+<li>Кросс-секционный моментум – покупка недавних победителей и продажа проигравших. На российском рынке с 2010 г. премия W − L составила около 15% в год и статистически значима; она делится между победителями и проигравшими примерно поровну.</li>
+<li>Премия угасает при удержании портфеля дольше полугода. Пропуск последнего месяца, обязательный на американских данных, на российских почти ничего не меняет.</li>
+<li>Моментум подвержен редким глубоким крахам. Они случаются при резком развороте рынка после падения, когда портфель проигравших состоит из высокобетовых бумаг.</li>
+<li>На российском рынке моментум сильнее в ликвидных бумагах. Оборот портфеля победителей – около пяти капиталов в год, и издержки 0,3% на сделку отнимают около полутора процентных пунктов доходности.</li>
+<li>Портфель только из победителей несёт рыночный риск, и его преимущество перед рынком статистически неубедительно. Трендовый фильтр снижает просадки, но за 2010–2026 гг. не окупился.</li>
+<li>Таргетирование волатильности почти вдвое повышает коэффициент Шарпа W − L и сокращает худшие потери. Оно работает потому, что волатильность предсказуема, а доходность нет.</li>
+<li>Устойчив сам эффект, а не конкретные параметры: лучший вариант прошлого периода не стал лучшим в следующем.</li>
+</ul></section><section id="sec-exercises-momentum" class="level2 page-columns page-full" data-number="16.8"><h2 data-number="16.8" class="anchored" data-anchor-id="sec-exercises-momentum">
+<span class="header-section-number">16.8</span> Упражнения</h2>
+<section id="а.-понимание" class="level3" data-number="16.8.1"><h3 data-number="16.8.1" class="anchored" data-anchor-id="а.-понимание">
+<span class="header-section-number">16.8.1</span> А. Понимание</h3>
+<ol type="1">
+<li>Портфель W − L не требует собственного капитала. Что тогда означает его «доходность 15% в год»? Как превратить её в доходность реального инвестора?</li>
+<li>Объясните, почему после долгого падения рынка бета портфеля W − L становится отрицательной. Какие бумаги в этот момент оказываются в проигравших?</li>
+<li>Почему при сроке удержания <span class="math inline">\(K &gt; 1\)</span> месячный оборот меньше? Во сколько примерно раз он уменьшится при <span class="math inline">\(K = 3\)</span>?</li>
+<li>Оборот портфеля – 40% в месяц, издержки – 0,3% на рубль сделки. Сколько стоят издержки в год? Как изменится ответ, если ребалансировать портфель раз в квартал?</li>
+<li>Таргетирование волатильности повышает коэффициент Шарпа, хотя не предсказывает доходность. Объясните, как это возможно. При каком поведении ожидаемой доходности приём перестал бы работать?</li>
+</ol></section><section id="б.-практика-на-данных" class="level3" data-number="16.8.2"><h3 data-number="16.8.2" class="anchored" data-anchor-id="б.-практика-на-данных">
+<span class="header-section-number">16.8.2</span> Б. Практика на данных</h3>
+<ol start="6" type="1">
+<li>Постройте W − L с весами, пропорциональными капитализации (поле <code>market_cap</code>), и сравните с равновзвешенным вариантом. Как изменятся премия и худшие месяцы? Сравните с WML из главы 12.</li>
+<li>Замените терции на квинтили (<code>q=0.2</code>). Растёт ли разность средних? Как меняется волатильность и почему?</li>
+<li>Проверьте, сохраняется ли продолжение месячных доходностей (раздел <a href="#sec-mom-grid" class="quarto-xref"><span>16.2.3</span></a>), если сигнал считать по цене предпоследнего торгового дня месяца, а сделку совершать на последнем.</li>
+<li>Замените в трендовом фильтре правило «12 месяцев против RUONIA» скользящей средней за 200 дней из главы 15. Изменится ли вывод раздела <a href="#sec-mom-trend" class="quarto-xref"><span>16.5</span></a>?</li>
+</ol></section><section id="в.-работа-с-ии-ассистентом" class="level3" data-number="16.8.3"><h3 data-number="16.8.3" class="anchored" data-anchor-id="в.-работа-с-ии-ассистентом">
+<span class="header-section-number">16.8.3</span> В. Работа с ИИ-ассистентом</h3>
+<ol start="10" type="1">
+<li>Попросите ИИ-ассистента написать бэктест стратегии моментума на данных книги. Проверьте его код по списку: какие цены используются для сигнала и когда совершается сделка; что происходит с бумагой, снятой с торгов (выпадает ли она или получает нулевую доходность); учитываются ли издержки и с каких весов считается оборот.</li>
+<li>Спросите ассистента, почему моментум существует, и попросите ссылки на исследования. Проверьте, что статьи существуют и в них написано то, что утверждает ассистент.</li>
+</ol></section><section id="г.-мини-исследование" class="level3 page-columns page-full" data-number="16.8.4"><h3 data-number="16.8.4" class="anchored" data-anchor-id="г.-мини-исследование">
+<span class="header-section-number">16.8.4</span> Г. Мини-исследование</h3>
+<ol start="12" type="1">
+<li>Постройте остаточный моментум <span class="citation" data-cites="blitz2011">(<a href="references.html#ref-blitz2011" role="doc-biblioref">Blitz и др. 2011 г.</a>)</span>: ранжируйте бумаги по сумме остатков регрессии месячных доходностей на MCFTR за 36 месяцев (без последнего месяца), делённой на стандартное отклонение остатков. Сравните его с обычным моментумом по премии, худшим месяцам и бете в периоды падения рынка. Сформулируйте критерий успеха до расчёта.</li>
+<li>В курсе прошлого года обсуждался показатель Херста: значение выше 0,5 указывает на персистентность ряда, то есть на тренды. Посчитайте показатель для дневных доходностей акций снимка по первой половине выборки и проверьте, обгоняли ли бумаги с высоким показателем остальные во второй половине. Насколько показатель Херста связан с кросс-секционным моментумом?</li>
+</ol><div class="no-row-height column-margin column-container"><div id="ref-blitz2011" class="csl-entry" role="listitem">
+Blitz, David, Joop Huij, и Martin Martens. 2011 г. <span>«Residual Momentum»</span>. <em>Journal of Empirical Finance</em> 18 (3): 506–21.
+</div></div></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
+<ol type="1">
+<li>Чем кросс-секционный моментум отличается от временного?</li>
+<li>Зачем при построении сигнала пропускают последний месяц?</li>
+<li>Почему крахи моментума случаются при росте рынка, а не при падении?</li>
+<li>Почему премия W − L статистически значима, а избыточная доходность портфеля победителей – нет?</li>
+<li>Как снятые с торгов бумаги могут исказить бэктест моментума?</li>
+<li>Что делает таргетирование волатильности и за счёт чего оно улучшает соотношение доходности и риска?</li>
+<li>Почему лучший вариант параметров на одном периоде не обязательно лучший на следующем?</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Кросс-секционный сравнивает бумаги между собой и покупает относительно лучших, даже если все падают. Временной сравнивает актив с его собственным прошлым (или с денежным рынком) и держит его, только если он растёт.</li>
+<li>На американском рынке доходность последнего месяца слегка разворачивается (из-за спреда и временного давления на цену), и её включение ослабляет сигнал. Кроме того, пропуск позволяет принять решение заранее, до цены закрытия, по которой совершается сделка.</li>
+<li>После долгого падения в проигравших оказываются бумаги с высокой бетой, и портфель W − L имеет отрицательную бету. Резкий рост рынка сильнее всего поднимает именно эти бумаги, а портфель держит их в короткой позиции.</li>
+<li>В W − L рыночный риск взаимно погашается, и волатильность разности меньше. Портфель победителей несёт рыночный риск с волатильностью около 20% в год, и на нескольких годах данных средняя избыточная доходность измеряется с большой ошибкой.</li>
+<li>Если выборка состоит только из торгующихся сегодня бумаг, провалившиеся компании исчезают из прошлых портфелей проигравших, и стратегия выглядит иначе, чем была на самом деле. Кроме того, важно, какая цена считается ценой выхода из делистингованной бумаги.</li>
+<li>Позиция уменьшается, когда недавняя волатильность высока, и увеличивается, когда она низка. Волатильность предсказуема, а ожидаемая доходность в бурные периоды растёт меньше, чем риск, поэтому меньшая позиция в эти периоды улучшает соотношение.</li>
+<li>Различия между близкими вариантами в основном отражают шум конкретного периода. Выбор лучшего – это поиск максимума шума, а шум не повторяется.</li>
+</ol>
+</div>
+</div>
+</div>
+</section><section id="что-почитать" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="что-почитать">Что почитать</h2>
+<ul>
+<li>
+<span class="citation" data-cites="jegadeesh1993">Jegadeesh и Titman (<a href="references.html#ref-jegadeesh1993" role="doc-biblioref">1993 г.</a>)</span> – исходная статья о кросс-секционном моментуме.</li>
+<li>
+<span class="citation" data-cites="asness2013">Asness и др. (<a href="references.html#ref-asness2013" role="doc-biblioref">2013 г.</a>)</span> – моментум и стоимость на рынках разных стран и классов активов.</li>
+<li>
+<span class="citation" data-cites="daniel2016">Daniel и Moskowitz (<a href="references.html#ref-daniel2016" role="doc-biblioref">2016 г.</a>)</span> – крахи моментума и их связь с разворотами рынка.</li>
+<li>
+<span class="citation" data-cites="barroso2015">Barroso и Santa-Clara (<a href="references.html#ref-barroso2015" role="doc-biblioref">2015 г.</a>)</span> и <span class="citation" data-cites="moreira2017">Moreira и Muir (<a href="references.html#ref-moreira2017" role="doc-biblioref">2017 г.</a>)</span> – таргетирование волатильности для моментума и для других факторов.</li>
+<li>
+<span class="citation" data-cites="moskowitz2012">Moskowitz и др. (<a href="references.html#ref-moskowitz2012" role="doc-biblioref">2012 г.</a>)</span> – временной моментум.</li>
+<li>
+<span class="citation" data-cites="hong1999">Hong и Stein (<a href="references.html#ref-hong1999" role="doc-biblioref">1999 г.</a>)</span> и <span class="citation" data-cites="grinblatt2005">Grinblatt и Han (<a href="references.html#ref-grinblatt2005" role="doc-biblioref">2005 г.</a>)</span> – поведенческие объяснения моментума.</li>
+<li>
+<span class="citation" data-cites="lesmond2004">Lesmond и др. (<a href="references.html#ref-lesmond2004" role="doc-biblioref">2004 г.</a>)</span> – как издержки торговли меняют оценку премии моментума.</li>
+</ul>
 
 
-
-</main> <!-- /main -->
-<script>
+<div class="no-row-height column-margin column-container"><div id="ref-jegadeesh1993" class="csl-entry" role="listitem">
+Jegadeesh, Narasimhan, и Sheridan Titman. 1993 г. <span>«Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency»</span>. <em>The Journal of Finance</em> 48 (1): 65–91.
+</div><div id="ref-asness2013" class="csl-entry" role="listitem">
+Asness, Clifford S., Tobias J. Moskowitz, и Lasse Heje Pedersen. 2013 г. <span>«Value and Momentum Everywhere»</span>. <em>The Journal of Finance</em> 68 (3): 929–85.
+</div><div id="ref-daniel2016" class="csl-entry" role="listitem">
+Daniel, Kent, и Tobias J. Moskowitz. 2016 г. <span>«Momentum Crashes»</span>. <em>Journal of Financial Economics</em> 122 (2): 221–47.
+</div><div id="ref-barroso2015" class="csl-entry" role="listitem">
+Barroso, Pedro, и Pedro Santa-Clara. 2015 г. <span>«Momentum Has Its Moments»</span>. <em>Journal of Financial Economics</em> 116 (1): 111–20.
+</div><div id="ref-moreira2017" class="csl-entry" role="listitem">
+Moreira, Alan, и Tyler Muir. 2017 г. <span>«Volatility-Managed Portfolios»</span>. <em>The Journal of Finance</em> 72 (4): 1611–44.
+</div><div id="ref-moskowitz2012" class="csl-entry" role="listitem">
+Moskowitz, Tobias J., Yao Hua Ooi, и Lasse Heje Pedersen. 2012 г. <span>«Time Series Momentum»</span>. <em>Journal of Financial Economics</em> 104 (2): 228–50.
+</div><div id="ref-hong1999" class="csl-entry" role="listitem">
+Hong, Harrison, и Jeremy C. Stein. 1999 г. <span>«A Unified Theory of Underreaction, Momentum Trading, and Overreaction in Asset Markets»</span>. <em>The Journal of Finance</em> 54 (6): 2143–84.
+</div><div id="ref-grinblatt2005" class="csl-entry" role="listitem">
+Grinblatt, Mark, и Bing Han. 2005 г. <span>«Prospect Theory, Mental Accounting, and Momentum»</span>. <em>Journal of Financial Economics</em> 78 (2): 311–39.
+</div><div id="ref-lesmond2004" class="csl-entry" role="listitem">
+Lesmond, David A., Michael J. Schill, и Chunsheng Zhou. 2004 г. <span>«The Illusory Nature of Momentum Profits»</span>. <em>Journal of Financial Economics</em> 71 (2): 349–80.
+</div></div>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -469,8 +1410,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -869,9 +1809,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./15-backtesting.html" class="pagination-link" aria-label="Бэктестинг и переобучение">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span>
       </a>          
@@ -883,7 +1821,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
