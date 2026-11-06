@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Приложение B — Справочник по данным – Количественные финансы</title>
 <style>
 /* Default styles provided by pandoc.
@@ -26,8 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -51,8 +101,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-40a39973876dc97ad54823b52a24ffce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-0c05c57a3ac6ecce481b1d5dedff5f54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -78,44 +127,49 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <!--
-
   Настройки MathJax 4: шрифт STIX Two в тон основному тексту.
-
   Сам MathJax 4 подключается через html-math-method в _quarto.yml
-
   (Quarto 1.10 по умолчанию берёт MathJax 3, где этого шрифта нет).
-
--->
-
-<script>
-
+--><script>
   window.MathJax = {
-
     output: {
-
       font: 'mathjax-stix2',
-
       displayOverflow: 'scroll'
-
     }
-
   };
-
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
-
-
-
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -126,13 +180,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Количественные финансы</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -149,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Предисловие</span></a>
@@ -169,8 +219,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-data-sources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Источники финансовых данных</span></span></a>
@@ -189,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -198,8 +248,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-accounting-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Большие данные корпоративной отчётности</span></span></a>
@@ -212,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -221,8 +271,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-arma.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Свойства финансовых рядов и модели ARMA</span></span></a>
@@ -241,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -250,8 +300,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-var-es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">VaR и Expected Shortfall</span></span></a>
@@ -270,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -279,8 +329,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bonds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Облигации</span></span></a>
@@ -293,7 +343,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -302,8 +352,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-backtesting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бэктестинг и переобучение</span></span></a>
@@ -322,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -337,8 +387,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span></a>
@@ -357,20 +407,37 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+<li><a href="#sec-data-layout" id="toc-sec-data-layout" class="nav-link active" data-scroll-target="#sec-data-layout"><span class="header-section-number">B.1</span> Как устроены данные книги</a></li>
+  <li>
+<a href="#sec-data-stocks" id="toc-sec-data-stocks" class="nav-link" data-scroll-target="#sec-data-stocks"><span class="header-section-number">B.2</span> Акции</a>
+  <ul class="collapse">
+<li><a href="#stocks.parquet" id="toc-stocks.parquet" class="nav-link" data-scroll-target="#stocks.parquet"><span class="header-section-number">B.2.1</span> <code>stocks.parquet</code></a></li>
+  <li><a href="#stocks_raw.parquet" id="toc-stocks_raw.parquet" class="nav-link" data-scroll-target="#stocks_raw.parquet"><span class="header-section-number">B.2.2</span> <code>stocks_raw.parquet</code></a></li>
+  </ul>
+</li>
+  <li><a href="#sec-data-indexes" id="toc-sec-data-indexes" class="nav-link" data-scroll-target="#sec-data-indexes"><span class="header-section-number">B.3</span> Индексы</a></li>
+  <li><a href="#sec-data-dividends" id="toc-sec-data-dividends" class="nav-link" data-scroll-target="#sec-data-dividends"><span class="header-section-number">B.4</span> Дивиденды</a></li>
+  <li><a href="#sec-data-rates" id="toc-sec-data-rates" class="nav-link" data-scroll-target="#sec-data-rates"><span class="header-section-number">B.5</span> Ставки и кривая доходности</a></li>
+  <li><a href="#sec-data-reference" id="toc-sec-data-reference" class="nav-link" data-scroll-target="#sec-data-reference"><span class="header-section-number">B.6</span> Справочники</a></li>
+  <li><a href="#sec-data-rfsd" id="toc-sec-data-rfsd" class="nav-link" data-scroll-target="#sec-data-rfsd"><span class="header-section-number">B.7</span> Отчётность компаний (RFSD)</a></li>
+  <li><a href="#sec-data-bonds" id="toc-sec-data-bonds" class="nav-link" data-scroll-target="#sec-data-bonds"><span class="header-section-number">B.8</span> Облигации</a></li>
+  <li><a href="#sec-data-full" id="toc-sec-data-full" class="nav-link" data-scroll-target="#sec-data-full"><span class="header-section-number">B.9</span> Полная история рынка акций</a></li>
+  <li><a href="#sec-data-functions" id="toc-sec-data-functions" class="nav-link" data-scroll-target="#sec-data-functions"><span class="header-section-number">B.10</span> Функции загрузки</a></li>
+  <li><a href="#sec-data-build" id="toc-sec-data-build" class="nav-link" data-scroll-target="#sec-data-build"><span class="header-section-number">B.11</span> Как собирается и обновляется снимок</a></li>
+  <li><a href="#sec-data-sources" id="toc-sec-data-sources" class="nav-link" data-scroll-target="#sec-data-sources"><span class="header-section-number">B.12</span> Источники и условия использования</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-data.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Справочник по данным</span></a></li></ol></nav>
-<div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-python.html">Приложения</a></li><li class="breadcrumb-item"><a href="./appendix-data.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Справочник по данным</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Приложение B — Справочник по данным</h1>
 </div>
 
@@ -385,37 +452,790 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<!--
-Заготовка главы. Материалы для работы:
-data/README.md; scripts/build_data.py; moexutils/docs/data-model.md.
--->
-<div class="callout callout-style-simple callout-note callout-titled" title="Глава готовится">
+</header><p>Все примеры книги работают на одном снимке данных. Обзор источников и короткая таблица файлов приведены в разделе <a href="02-data-sources.html#sec-book-data" class="quarto-xref"><span>2.7</span></a>. Это приложение – справочник: что лежит в каждом файле, в каких единицах записаны поля, какие соглашения приняты при сборке и какой функцией файл загружается. К нему стоит обращаться, когда результат расчёта выглядит странно: часто причина не в коде, а в том, что поле означает не то, что предполагалось.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="В этом приложении">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Уведомление</span>Глава готовится
+<span class="screen-reader-only">Уведомление</span>В этом приложении
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Эта глава входит в первую версию книги. Планируемое содержание:</p>
 <ul>
-<li>Состав снимка данных книги и полной истории рынка</li>
-<li>Описание таблиц и полей</li>
-<li>Функции модулей <code>qf</code> (Python) и <code>R/qf.R</code></li>
-<li>Как обновить данные</li>
+<li>Состав снимка книги, даты выгрузки и объём файлов.</li>
+<li>Поля таблиц: акции, индексы, дивиденды, ставки, справочники, отчётность RFSD, облигации, полная история рынка.</li>
+<li>Соглашения: поправки на сплиты и дивиденды, единицы измерения, знаки в отчётности.</li>
+<li>Функции загрузки на Python и R.</li>
+<li>Как снимок собирается и обновляется, источники и условия использования.</li>
 </ul>
 </div>
 </div>
+<section id="sec-data-layout" class="level2" data-number="B.1"><h2 data-number="B.1" class="anchored" data-anchor-id="sec-data-layout">
+<span class="header-section-number">B.1</span> Как устроены данные книги</h2>
+<p>Данные разделены на три слоя.</p>
+<ol type="1">
+<li>
+<strong>Базовый снимок</strong> в папке <code>data/</code> хранится в репозитории книги вместе с текстом. Его объём – около 20 МБ. Снимок рынка акций выгружен 30.09.2026, последняя дата котировок – 29.09.2026.</li>
+<li>
+<strong>Тематические наборы</strong> с собственной датой: выборка отчётности RFSD (глава 5) и практикум по облигациям (глава 13, подпапка <code>data/bonds/</code>). Они собраны отдельно и не меняются при обновлении снимка акций.</li>
+<li>
+<strong>Полная история рынка акций</strong> – около 2,5 тыс. бумаг с 1997 г. Она слишком велика для репозитория и раздаётся отдельным архивом (раздел <a href="#sec-data-full" class="quarto-xref"><span>B.9</span></a>).</li>
+</ol>
+<p>Снимок зафиксирован: при сборке книги код каждой главы читает одни и те же файлы, поэтому числа в тексте и в вашем ноутбуке совпадают. Обратная сторона – данные не обновляются сами. Чтобы проверить вывод на свежих данных, их нужно загрузить из первоисточника, как показано в главе 2.</p>
+<p>Файлы хранятся в формате <strong>Parquet</strong> – колоночном формате с сжатием и сохранёнными типами столбцов (о форматах см. раздел <a href="02-data-sources.html#sec-formats" class="quarto-xref"><span>2.6</span></a>). Небольшие справочники записаны в CSV, паспорта снимков – в JSON. Читать файлы удобнее всего через модуль <code>qf</code>, но можно и напрямую: <code>pd.read_parquet("data/stocks.parquet")</code>.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-data-files" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-files-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.1: Файлы базового снимка и тематических наборов
+</figcaption><div aria-describedby="tbl-data-files-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_655e3" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th id="T_655e3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Файл</th>
+<th id="T_655e3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Строк</th>
+<th id="T_655e3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Период</th>
+<th id="T_655e3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">КБ</th>
+<th id="T_655e3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Функция qf.data</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td id="T_655e3_row0_col0" class="data row0 col0">stocks.parquet</td>
+<td id="T_655e3_row0_col1" class="data row0 col1">311&nbsp;631</td>
+<td id="T_655e3_row0_col2" class="data row0 col2">31.07.2003–29.09.2026</td>
+<td id="T_655e3_row0_col3" class="data row0 col3">9&nbsp;533</td>
+<td id="T_655e3_row0_col4" class="data row0 col4">load_stocks(), load_prices()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row1_col0" class="data row1 col0">stocks_raw.parquet</td>
+<td id="T_655e3_row1_col1" class="data row1 col1">26&nbsp;696</td>
+<td id="T_655e3_row1_col2" class="data row1 col2">26.12.2006–29.09.2026</td>
+<td id="T_655e3_row1_col3" class="data row1 col3">929</td>
+<td id="T_655e3_row1_col4" class="data row1 col4">load_stocks_raw()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row2_col0" class="data row2 col0">indexes.parquet</td>
+<td id="T_655e3_row2_col1" class="data row2 col1">89&nbsp;853</td>
+<td id="T_655e3_row2_col2" class="data row2 col2">01.09.1995–29.09.2026</td>
+<td id="T_655e3_row2_col3" class="data row2 col3">709</td>
+<td id="T_655e3_row2_col4" class="data row2 col4">load_index()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row3_col0" class="data row3 col0">dividends.parquet</td>
+<td id="T_655e3_row3_col1" class="data row3 col1">3&nbsp;674</td>
+<td id="T_655e3_row3_col2" class="data row3 col2">01.12.1994–13.10.2026</td>
+<td id="T_655e3_row3_col3" class="data row3 col3">24</td>
+<td id="T_655e3_row3_col4" class="data row3 col4">load_dividends()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row4_col0" class="data row4 col0">key_rate.parquet</td>
+<td id="T_655e3_row4_col1" class="data row4 col1">96</td>
+<td id="T_655e3_row4_col2" class="data row4 col2">31.12.2003–27.07.2026</td>
+<td id="T_655e3_row4_col3" class="data row4 col3">1</td>
+<td id="T_655e3_row4_col4" class="data row4 col4">load_key_rate()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row5_col0" class="data row5 col0">ruonia.parquet</td>
+<td id="T_655e3_row5_col1" class="data row5 col1">4&nbsp;118</td>
+<td id="T_655e3_row5_col2" class="data row5 col2">11.01.2010–28.09.2026</td>
+<td id="T_655e3_row5_col3" class="data row5 col3">43</td>
+<td id="T_655e3_row5_col4" class="data row5 col4">load_ruonia()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row6_col0" class="data row6 col0">zcyc.parquet</td>
+<td id="T_655e3_row6_col1" class="data row6 col1">35&nbsp;145</td>
+<td id="T_655e3_row6_col2" class="data row6 col2">06.01.2014–29.09.2026</td>
+<td id="T_655e3_row6_col3" class="data row6 col3">114</td>
+<td id="T_655e3_row6_col4" class="data row6 col4">load_zcyc()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row7_col0" class="data row7 col0">rfsd_sample.parquet</td>
+<td id="T_655e3_row7_col1" class="data row7 col1">89&nbsp;335</td>
+<td id="T_655e3_row7_col2" class="data row7 col2">2018–2025 гг.</td>
+<td id="T_655e3_row7_col3" class="data row7 col3">8&nbsp;453</td>
+<td id="T_655e3_row7_col4" class="data row7 col4">load_rfsd()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row8_col0" class="data row8 col0">rfsd_summary.parquet</td>
+<td id="T_655e3_row8_col1" class="data row8 col1">15</td>
+<td id="T_655e3_row8_col2" class="data row8 col2">2011–2025 гг.</td>
+<td id="T_655e3_row8_col3" class="data row8 col3">5</td>
+<td id="T_655e3_row8_col4" class="data row8 col4">load_rfsd_summary()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row9_col0" class="data row9 col0">rfsd_cases.parquet</td>
+<td id="T_655e3_row9_col1" class="data row9 col1">90</td>
+<td id="T_655e3_row9_col2" class="data row9 col2">2011–2025 гг.</td>
+<td id="T_655e3_row9_col3" class="data row9 col3">31</td>
+<td id="T_655e3_row9_col4" class="data row9 col4">load_rfsd_cases()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row10_col0" class="data row10 col0">rfsd_revenue_okved.parquet</td>
+<td id="T_655e3_row10_col1" class="data row10 col1">1&nbsp;244</td>
+<td id="T_655e3_row10_col2" class="data row10 col2">2012–2025 гг.</td>
+<td id="T_655e3_row10_col3" class="data row10 col3">13</td>
+<td id="T_655e3_row10_col4" class="data row10 col4">load_rfsd_revenue_okved()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row11_col0" class="data row11 col0">rfsd_hidden.parquet</td>
+<td id="T_655e3_row11_col1" class="data row11 col1">9</td>
+<td id="T_655e3_row11_col2" class="data row11 col2">2017–2025 гг.</td>
+<td id="T_655e3_row11_col3" class="data row11 col3">2</td>
+<td id="T_655e3_row11_col4" class="data row11 col4">load_rfsd_hidden()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row12_col0" class="data row12 col0">rfsd_hidden_top.parquet</td>
+<td id="T_655e3_row12_col1" class="data row12 col1">30</td>
+<td id="T_655e3_row12_col2" class="data row12 col2">–</td>
+<td id="T_655e3_row12_col3" class="data row12 col3">3</td>
+<td id="T_655e3_row12_col4" class="data row12 col4">load_rfsd_hidden_top()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row13_col0" class="data row13 col0">rosstat_revenue.parquet</td>
+<td id="T_655e3_row13_col1" class="data row13 col1">765</td>
+<td id="T_655e3_row13_col2" class="data row13 col2">2017–2025 гг.</td>
+<td id="T_655e3_row13_col3" class="data row13 col3">14</td>
+<td id="T_655e3_row13_col4" class="data row13 col4">load_rosstat_revenue()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row14_col0" class="data row14 col0">bonds/quotes.parquet</td>
+<td id="T_655e3_row14_col1" class="data row14 col1">2&nbsp;796</td>
+<td id="T_655e3_row14_col2" class="data row14 col2">03.01.2024–30.09.2026</td>
+<td id="T_655e3_row14_col3" class="data row14 col3">40</td>
+<td id="T_655e3_row14_col4" class="data row14 col4">load_bonds()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row15_col0" class="data row15 col0">bonds/coupons.parquet</td>
+<td id="T_655e3_row15_col1" class="data row15 col1">101</td>
+<td id="T_655e3_row15_col2" class="data row15 col2">15.04.2020–15.05.2041</td>
+<td id="T_655e3_row15_col3" class="data row15 col3">4</td>
+<td id="T_655e3_row15_col4" class="data row15 col4">load_bond_coupons()</td>
+</tr>
+<tr class="odd">
+<td id="T_655e3_row16_col0" class="data row16 col0">bonds/principal.parquet</td>
+<td id="T_655e3_row16_col1" class="data row16 col1">4</td>
+<td id="T_655e3_row16_col2" class="data row16 col2">06.10.2027–15.05.2041</td>
+<td id="T_655e3_row16_col3" class="data row16 col3">2</td>
+<td id="T_655e3_row16_col4" class="data row16 col4">load_bond_principal()</td>
+</tr>
+<tr class="even">
+<td id="T_655e3_row17_col0" class="data row17 col0">bonds/curve.parquet</td>
+<td id="T_655e3_row17_col1" class="data row17 col1">11</td>
+<td id="T_655e3_row17_col2" class="data row17 col2">30.09.2026–30.09.2026</td>
+<td id="T_655e3_row17_col3" class="data row17 col3">1</td>
+<td id="T_655e3_row17_col4" class="data row17 col4">load_bond_curve()</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section><section id="sec-data-stocks" class="level2" data-number="B.2"><h2 data-number="B.2" class="anchored" data-anchor-id="sec-data-stocks">
+<span class="header-section-number">B.2</span> Акции</h2>
+<section id="stocks.parquet" class="level3" data-number="B.2.1"><h3 data-number="B.2.1" class="anchored" data-anchor-id="stocks.parquet">
+<span class="header-section-number">B.2.1</span> <code>stocks.parquet</code>
+</h3>
+<p>Главная таблица книги: дневные данные 94 акций Московской биржи, всего 311&nbsp;631 строка с 31.07.2003. Набор включает крупные и ликвидные бумаги, в том числе 19 снятых с торгов: без них выборка страдала бы ошибкой выжившего (раздел <a href="03-data-preparation.html#sec-survivorship" class="quarto-xref"><span>3.4</span></a>). История у бумаг разной длины: 58 из 94 торгуются с 2011 г. или раньше, остальные появились на бирже позже.</p>
+<p>Таблица хранится в <strong>длинном формате</strong>: одна строка – одна бумага в один день, ключ – пара (<code>date</code>, <code>ticker</code>). Если у бумаги в этот день были торги в нескольких режимах, берётся режим с наибольшим оборотом; <code>close</code> – цена закрытия основной сессии.</p>
+<div id="tbl-data-stocks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.2: Поля <code>stocks.parquet</code>
+</figcaption><div aria-describedby="tbl-data-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Поле</th>
+<th>Содержание</th>
+<th>Единицы</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>date</code></td>
+<td>дата торгов</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td><code>ticker</code></td>
+<td>тикер; для переименованных бумаг – текущий</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>
+<code>open</code>, <code>high</code>, <code>low</code>, <code>close</code>
+</td>
+<td>цены открытия, максимум, минимум, закрытие основной сессии с поправкой на сплиты</td>
+<td>руб. за акцию</td>
+</tr>
+<tr class="even">
+<td><code>waprice</code></td>
+<td>средневзвешенная цена дня</td>
+<td>руб.</td>
+</tr>
+<tr class="odd">
+<td><code>volume</code></td>
+<td>объём торгов</td>
+<td>штук акций</td>
+</tr>
+<tr class="even">
+<td><code>value_rub</code></td>
+<td>оборот торгов</td>
+<td>руб.</td>
+</tr>
+<tr class="odd">
+<td><code>adj_close</code></td>
+<td>цена с поправкой на сплиты и дивиденды</td>
+<td>руб. в текущей базе</td>
+</tr>
+<tr class="even">
+<td><code>shares</code></td>
+<td>число акций в обращении</td>
+<td>штук</td>
+</tr>
+<tr class="odd">
+<td><code>market_cap</code></td>
+<td>капитализация: <code>close</code> × <code>shares</code>
+</td>
+<td>руб.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>При сборке приняты три соглашения.</p>
+<ul>
+<li>
+<strong>Сплиты.</strong> Цены до сплита или консолидации пересчитаны к текущей базе акции, объём – в обратную сторону. Поэтому <code>close</code> не имеет разрывов в даты сплитов и сравним во времени. Список событий – в <code>splits.csv</code>, методика – в разделе <a href="03-data-preparation.html#sec-splits" class="quarto-xref"><span>3.1</span></a>.</li>
+<li>
+<strong>Переименования.</strong> История старого тикера склеена с новым: например, ряд <code>YDEX</code> начинается с истории <code>YNDX</code>. Список – в <code>renames.csv</code>, подробности – в разделе <a href="03-data-preparation.html#sec-renames" class="quarto-xref"><span>3.2</span></a>.</li>
+<li>
+<strong>Дивиденды.</strong> <code>adj_close</code> учитывает дивиденды так, как если бы они реинвестировались в ту же акцию. Каждая выплата умножает все цены строго до экс-дивидендной даты на <span class="math inline">\(1 - D/P\)</span>, где <span class="math inline">\(D\)</span> – дивиденд, <span class="math inline">\(P\)</span> – последнее закрытие с дивидендом. С 31.07.2023 (расчёты T+1) экс-дата совпадает с датой закрытия реестра, раньше (T+2) – предыдущий торговый день. Последняя цена <code>adj_close</code> совпадает с <code>close</code>, а более ранние ниже. Подробнее – в разделе <a href="03-data-preparation.html#sec-dividends" class="quarto-xref"><span>3.3</span></a>.</li>
+</ul>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>adj_close</code> нужен для доходностей, а не для уровней. Значение <code>adj_close</code> в прошлом – не цена, по которой можно было купить акцию, а пересчитанная величина, и при каждом новом дивиденде вся история <code>adj_close</code> сдвигается. Для цен сделок, капитализации и оборота используйте <code>close</code>.</p>
+</div>
+</div>
+<p>Капитализация <code>market_cap</code> рассчитана по числу акций из периодических срезов: между срезами действует последнее известное значение. Если данных о числе акций нет, поля <code>shares</code> и <code>market_cap</code> пусты.</p>
+</section><section id="stocks_raw.parquet" class="level3" data-number="B.2.2"><h3 data-number="B.2.2" class="anchored" data-anchor-id="stocks_raw.parquet">
+<span class="header-section-number">B.2.2</span> <code>stocks_raw.parquet</code>
+</h3>
+<p>Те же поля для нескольких бумаг со сплитами и переименованиями, но в том виде, в каком их отдаёт биржа: без поправок и без склейки тикеров. Файл нужен для упражнений главы 3, где поправки строятся самостоятельно.</p>
+<p>Тикеры в файле: GMKN, IRAO, PHOR, T, TCSG, TRNFP, VTBR, YDEX, YNDX.</p>
+</section></section><section id="sec-data-indexes" class="level2" data-number="B.3"><h2 data-number="B.3" class="anchored" data-anchor-id="sec-data-indexes">
+<span class="header-section-number">B.3</span> Индексы</h2>
+<p><code>indexes.parquet</code> содержит значения индексов Московской биржи на закрытие (<code>close</code>) и суммарный оборот по бумагам индекса (<code>value_rub</code>, руб.). Индексы акций и облигаций бывают ценовыми и <strong>индексами полной доходности</strong>: в последних купоны и дивиденды реинвестируются. Для сравнения стратегии на акциях с рынком нужен индекс полной доходности MCFTR, а не ценовой IMOEX (раздел <a href="04-returns-risk.html#sec-total-return" class="quarto-xref"><span>4.2</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-data-indexes" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-indexes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.3: Индексы в снимке книги
+</figcaption><div aria-describedby="tbl-data-indexes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<style type="text/css">
+</style>
+<table id="T_fbf16" class="cell caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th id="T_fbf16_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Индекс</th>
+<th id="T_fbf16_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Описание</th>
+<th id="T_fbf16_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Начало</th>
+<th id="T_fbf16_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Конец</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td id="T_fbf16_row0_col0" class="data row0 col0">IMOEX</td>
+<td id="T_fbf16_row0_col1" class="data row0 col1">Индекс МосБиржи (ценовой), руб.</td>
+<td id="T_fbf16_row0_col2" class="data row0 col2">22.09.1997</td>
+<td id="T_fbf16_row0_col3" class="data row0 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row1_col0" class="data row1 col0">MCFTR</td>
+<td id="T_fbf16_row1_col1" class="data row1 col1">Индекс МосБиржи полной доходности брутто</td>
+<td id="T_fbf16_row1_col2" class="data row1 col2">26.02.2003</td>
+<td id="T_fbf16_row1_col3" class="data row1 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row2_col0" class="data row2 col0">MCFTRR</td>
+<td id="T_fbf16_row2_col1" class="data row2 col1">Индекс МосБиржи полной доходности нетто (после налога на дивиденды)</td>
+<td id="T_fbf16_row2_col2" class="data row2 col2">26.02.2003</td>
+<td id="T_fbf16_row2_col3" class="data row2 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row3_col0" class="data row3 col0">RTSI</td>
+<td id="T_fbf16_row3_col1" class="data row3 col1">Индекс РТС (в долларах США)</td>
+<td id="T_fbf16_row3_col2" class="data row3 col2">01.09.1995</td>
+<td id="T_fbf16_row3_col3" class="data row3 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row4_col0" class="data row4 col0">MOEXBC</td>
+<td id="T_fbf16_row4_col1" class="data row4 col1">Индекс голубых фишек</td>
+<td id="T_fbf16_row4_col2" class="data row4 col2">24.04.2009</td>
+<td id="T_fbf16_row4_col3" class="data row4 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row5_col0" class="data row5 col0">RGBI</td>
+<td id="T_fbf16_row5_col1" class="data row5 col1">Индекс ОФЗ (ценовой)</td>
+<td id="T_fbf16_row5_col2" class="data row5 col2">30.12.2002</td>
+<td id="T_fbf16_row5_col3" class="data row5 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row6_col0" class="data row6 col0">RGBITR</td>
+<td id="T_fbf16_row6_col1" class="data row6 col1">Индекс ОФЗ полной доходности</td>
+<td id="T_fbf16_row6_col2" class="data row6 col2">30.12.2002</td>
+<td id="T_fbf16_row6_col3" class="data row6 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row7_col0" class="data row7 col0">RUCBTRNS</td>
+<td id="T_fbf16_row7_col1" class="data row7 col1">Индекс корпоративных облигаций полной доходности</td>
+<td id="T_fbf16_row7_col2" class="data row7 col2">03.01.2019</td>
+<td id="T_fbf16_row7_col3" class="data row7 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row8_col0" class="data row8 col0">MOEXOG</td>
+<td id="T_fbf16_row8_col1" class="data row8 col1">Нефть и газ</td>
+<td id="T_fbf16_row8_col2" class="data row8 col2">30.12.2004</td>
+<td id="T_fbf16_row8_col3" class="data row8 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row9_col0" class="data row9 col0">MOEXFN</td>
+<td id="T_fbf16_row9_col1" class="data row9 col1">Финансы</td>
+<td id="T_fbf16_row9_col2" class="data row9 col2">30.12.2004</td>
+<td id="T_fbf16_row9_col3" class="data row9 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row10_col0" class="data row10 col0">MOEXMM</td>
+<td id="T_fbf16_row10_col1" class="data row10 col1">Металлы и добыча</td>
+<td id="T_fbf16_row10_col2" class="data row10 col2">30.12.2004</td>
+<td id="T_fbf16_row10_col3" class="data row10 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row11_col0" class="data row11 col0">MOEXEU</td>
+<td id="T_fbf16_row11_col1" class="data row11 col1">Электроэнергетика</td>
+<td id="T_fbf16_row11_col2" class="data row11 col2">30.12.2004</td>
+<td id="T_fbf16_row11_col3" class="data row11 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row12_col0" class="data row12 col0">MOEXTL</td>
+<td id="T_fbf16_row12_col1" class="data row12 col1">Телекоммуникации</td>
+<td id="T_fbf16_row12_col2" class="data row12 col2">30.12.2004</td>
+<td id="T_fbf16_row12_col3" class="data row12 col3">19.03.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row13_col0" class="data row13 col0">MOEXCH</td>
+<td id="T_fbf16_row13_col1" class="data row13 col1">Химия и нефтехимия</td>
+<td id="T_fbf16_row13_col2" class="data row13 col2">29.12.2006</td>
+<td id="T_fbf16_row13_col3" class="data row13 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row14_col0" class="data row14 col0">MOEXCN</td>
+<td id="T_fbf16_row14_col1" class="data row14 col1">Потребительский сектор</td>
+<td id="T_fbf16_row14_col2" class="data row14 col2">31.12.2004</td>
+<td id="T_fbf16_row14_col3" class="data row14 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row15_col0" class="data row15 col0">MOEXTN</td>
+<td id="T_fbf16_row15_col1" class="data row15 col1">Транспорт</td>
+<td id="T_fbf16_row15_col2" class="data row15 col2">28.12.2007</td>
+<td id="T_fbf16_row15_col3" class="data row15 col3">29.09.2026</td>
+</tr>
+<tr class="odd">
+<td id="T_fbf16_row16_col0" class="data row16 col0">MOEXIT</td>
+<td id="T_fbf16_row16_col1" class="data row16 col1">Информационные технологии</td>
+<td id="T_fbf16_row16_col2" class="data row16 col2">25.12.2020</td>
+<td id="T_fbf16_row16_col3" class="data row16 col3">29.09.2026</td>
+</tr>
+<tr class="even">
+<td id="T_fbf16_row17_col0" class="data row17 col0">MOEXRE</td>
+<td id="T_fbf16_row17_col1" class="data row17 col1">Строительные компании</td>
+<td id="T_fbf16_row17_col2" class="data row17 col2">20.03.2020</td>
+<td id="T_fbf16_row17_col3" class="data row17 col3">29.09.2026</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Ряд IMOEX начинается в 1997 г.: до декабря 2017 г. индекс назывался индексом ММВБ, и биржа отдаёт всю его историю под кодом IMOEX. Отраслевые индексы ведутся с конца 2004 г. или позже. Индекс телекоммуникаций MOEXTL в снимке заканчивается 19.03.2026, раньше остальных: в таких случаях полезно проверить последнюю дату ряда до расчётов.</p>
+</section><section id="sec-data-dividends" class="level2" data-number="B.4"><h2 data-number="B.4" class="anchored" data-anchor-id="sec-data-dividends">
+<span class="header-section-number">B.4</span> Дивиденды</h2>
+<p><code>dividends.parquet</code> – история дивидендов по акциям, включая бумаги, которых нет в <code>stocks.parquet</code>.</p>
+<div id="tbl-data-dividends" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-dividends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.4: Поля <code>dividends.parquet</code>
+</figcaption><div aria-describedby="tbl-data-dividends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Поле</th>
+<th>Содержание</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>ticker</code></td>
+<td>тикер</td>
+</tr>
+<tr class="even">
+<td><code>closing_date</code></td>
+<td>дата закрытия реестра (дата отсечки)</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td>год, за который выплачивается дивиденд</td>
+</tr>
+<tr class="even">
+<td><code>period_type</code></td>
+<td>период выплаты: <code>full year</code>, <code>half year</code>, <code>9 months</code>
+</td>
+</tr>
+<tr class="odd">
+<td><code>dividend_value</code></td>
+<td>дивиденд на одну акцию, руб.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>В файле есть и объявленные выплаты с датой отсечки позже последнего дня котировок. На <code>adj_close</code> они не влияют: поправка применяется только к уже прошедшим отсечкам. Поле <code>year</code> не всегда совпадает с годом даты отсечки: дивиденд за 2025 г. обычно выплачивается летом 2026 г.</p>
+</section><section id="sec-data-rates" class="level2" data-number="B.5"><h2 data-number="B.5" class="anchored" data-anchor-id="sec-data-rates">
+<span class="header-section-number">B.5</span> Ставки и кривая доходности</h2>
+<p>Три таблицы описывают стоимость денег.</p>
+<ul>
+<li>
+<strong><code>key_rate.parquet</code></strong> – ключевая ставка Банка России, % годовых. Строка есть только на даты изменения ставки (<code>date</code>, <code>rate</code>); между ними действует последнее значение. Ключевая ставка введена 13.09.2013, для более ранних дат в файле приведена ставка рефинансирования (раздел <a href="02-data-sources.html#sec-cbr" class="quarto-xref"><span>2.3</span></a>). Чтобы получить дневной ряд, таблицу переиндексируют по нужным датам и заполняют вперёд (<code>.ffill()</code>).</li>
+<li>
+<strong><code>ruonia.parquet</code></strong> – ставка RUONIA, средневзвешенная ставка однодневных межбанковских кредитов, % годовых. Кроме ставки <code>rate</code>, в таблице есть объём сделок <code>volume_bn</code> (млрд руб.), число сделок <code>deals</code> и участников <code>participants</code>, процентили распределения ставок сделок (<code>rate_min</code>, <code>rate_p25</code>, <code>rate_p75</code>, <code>rate_max</code>), статус расчёта <code>status</code> и дата публикации <code>published</code>. Ставка за день <span class="math inline">\(t\)</span> публикуется на следующий рабочий день и начисляется за календарные дни до следующей ставки.</li>
+<li>
+<strong><code>zcyc.parquet</code></strong> – кривая бескупонной доходности ОФЗ, рассчитываемая Московской биржей. На каждую дату даны доходности <code>value</code> (% годовых) для сроков <code>period</code> от 0,25 до 20 лет; <code>tradetime</code> – время расчёта кривой.</li>
+</ul>
+<p>RUONIA в книге служит безрисковой ставкой для коэффициента Шарпа и для сравнения стратегий с денежным рынком. Пример её начисления по календарным дням есть в разделе <a href="04-returns-risk.html#sec-sharpe" class="quarto-xref"><span>4.7</span></a>.</p>
+</section><section id="sec-data-reference" class="level2" data-number="B.6"><h2 data-number="B.6" class="anchored" data-anchor-id="sec-data-reference">
+<span class="header-section-number">B.6</span> Справочники</h2>
+<p>Справочники записаны в CSV и загружаются функцией <code>data.load_reference(name)</code>.</p>
+<div id="tbl-data-reference" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.5: Справочники снимка
+</figcaption><div aria-describedby="tbl-data-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Файл</th>
+<th>Поля</th>
+<th>Содержание</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>sectors.csv</code></td>
+<td>
+<code>ticker</code>, <code>sector</code>
+</td>
+<td>отрасль бумаги</td>
+</tr>
+<tr class="even">
+<td><code>splits.csv</code></td>
+<td>
+<code>ticker</code>, <code>date</code>, <code>ratio</code>, <code>kind</code>
+</td>
+<td>сплиты и консолидации: <code>ratio</code> – во сколько раз выросло число акций (0,01 – консолидация 100 к 1)</td>
+</tr>
+<tr class="odd">
+<td><code>renames.csv</code></td>
+<td>
+<code>old</code>, <code>new</code>, <code>date</code>
+</td>
+<td>смены тикеров</td>
+</tr>
+<tr class="even">
+<td><code>delisted.csv</code></td>
+<td>
+<code>ticker</code>, <code>last_date</code>, <code>note</code>
+</td>
+<td>бумаги, снятые с торгов, и последняя дата торгов</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Справочники описывают события, учтённые в <code>stocks.parquet</code>, поэтому их не нужно применять повторно. Они полезны, чтобы понять происхождение скачка в данных или выбрать бумаги, которые торговались на всём периоде.</p>
+</section><section id="sec-data-rfsd" class="level2 page-columns page-full" data-number="B.7"><h2 data-number="B.7" class="anchored" data-anchor-id="sec-data-rfsd">
+<span class="header-section-number">B.7</span> Отчётность компаний (RFSD)</h2>
+<p>Данные бухгалтерской отчётности взяты из открытого набора RFSD <span class="citation" data-cites="bondarkov2025">(<a href="references.html#ref-bondarkov2025" role="doc-biblioref">Bondarkov и др. 2025 г.</a>)</span>, который собирает отчётность российских организаций по данным ФНС (раздел <a href="05-accounting-data.html#sec-rfsd-source" class="quarto-xref"><span>5.1</span></a>). Полный набор слишком велик для репозитория, поэтому в снимок книги вошли выборка и несколько сводных таблиц. Версия набора зафиксирована в <code>rfsd_snapshot.json</code>.</p>
+<div class="no-row-height column-margin column-container"></div><ul>
+<li>
+<strong><code>rfsd_sample.parquet</code></strong> – выборка: компании пяти классов ОКВЭД (10, 41, 47, 49, 62) с выручкой от 1 млрд руб. хотя бы в одном году 2018–2025, всего 13&nbsp;854 компаний и 89&nbsp;335 строк «компания – год».</li>
+<li>
+<strong><code>rfsd_cases.parquet</code></strong> – отчётность нескольких компаний, разобранных в тексте, за все годы.</li>
+<li>
+<strong><code>rfsd_summary.parquet</code></strong>, <strong><code>rfsd_revenue_okved.parquet</code></strong> – сводки по полному набору: число организаций и отчётов, проблемы качества, выручка по годам и классам ОКВЭД.</li>
+<li>
+<strong><code>rfsd_hidden.parquet</code></strong>, <strong><code>rfsd_hidden_top.parquet</code></strong> – крупные компании, которые перестали раскрывать отчётность.</li>
+<li>
+<strong><code>rosstat_revenue.parquet</code></strong> – выручка организаций по классам ОКВЭД по данным Росстата для сверки с RFSD; ряд получен через rustata (раздел <a href="02-data-sources.html#sec-rustata" class="quarto-xref"><span>2.4</span></a>).</li>
+<li>
+<strong><code>okved.csv</code></strong>, <strong><code>rfsd_lines.csv</code></strong> – классификатор ОКВЭД 2 и справочник строк отчётности.</li>
+</ul>
+<p>Каждая строка выборки – отчётность одной компании (<code>inn</code>) за один год (<code>year</code>). Служебные поля описывают компанию и качество отчёта: <code>okved</code>, <code>okved_section</code>, <code>region</code>, даты создания и ликвидации, а также признаки <code>filed</code> (отчёт подан), <code>imputed</code> (часть значений восстановлена составителями набора), <code>simplified</code> (упрощённая форма) и <code>outlier</code> (подозрение на ошибку в данных). Показатели отчётности записаны в столбцах <code>line_XXXX</code>, где <code>XXXX</code> – код строки формы: <code>line_2110</code> – выручка, <code>line_1600</code> – валюта баланса, <code>line_2400</code> – чистая прибыль. В выборке 39 таких столбцов, их названия – в <code>rfsd_lines.csv</code>.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Единицы и знаки">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Единицы и знаки
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Все денежные показатели RFSD – в <strong>тысячах рублей</strong>. Строки, которые в формах отчётности пишутся в скобках (себестоимость, коммерческие и управленческие расходы, проценты к уплате), хранятся <strong>с отрицательным знаком</strong>. Поэтому валовая прибыль – это сумма <code>line_2110 + line_2120</code>, а не разность. Знак хранения каждой строки указан в поле <code>sign</code> справочника <code>rfsd_lines.csv</code>. Амортизации в RFSD нет, поэтому показатель EBITDA по этим данным корректно не рассчитать (раздел <a href="05-accounting-data.html#sec-no-ebitda" class="quarto-xref"><span>5.6.1</span></a>).</p>
+</div>
+</div>
+</section><section id="sec-data-bonds" class="level2" data-number="B.8"><h2 data-number="B.8" class="anchored" data-anchor-id="sec-data-bonds">
+<span class="header-section-number">B.8</span> Облигации</h2>
+<p>Подпапка <code>data/bonds/</code> – отдельный снимок для практикума главы 13 на дату оценки 30.09.2026. В нём четыре выпуска ОФЗ с постоянным купоном (ОФЗ-ПД): SU26232RMFS7, SU26236RMFS8, SU26243RMFS4, SU26238RMFS4.</p>
+<div id="tbl-data-bonds" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-bonds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.6: Файлы практикума по облигациям
+</figcaption><div aria-describedby="tbl-data-bonds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Файл</th>
+<th>Поля</th>
+<th>Содержание</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>quotes.parquet</code></td>
+<td>
+<code>date</code>, <code>ticker</code>, <code>name</code>, <code>board</code>, <code>clean_pct</code>, <code>accrued</code>, <code>face_value</code>, <code>currency</code>, <code>maturity</code>, <code>iss_ytm_pct</code>, <code>iss_duration_days</code>, <code>volume</code>
+</td>
+<td>дневные котировки с 2024 г.: чистая цена в % номинала, НКД и номинал в рублях, доходность и дюрация по расчёту биржи</td>
+</tr>
+<tr class="even">
+<td><code>coupons.parquet</code></td>
+<td>
+<code>ticker</code>, <code>payment_date</code>, <code>period_start</code>, <code>record_date</code>, <code>amount</code>, <code>annual_coupon_pct</code>, <code>currency</code>
+</td>
+<td>график купонов: дата выплаты, начало купонного периода, дата фиксации владельцев, сумма в рублях</td>
+</tr>
+<tr class="odd">
+<td><code>principal.parquet</code></td>
+<td>
+<code>ticker</code>, <code>payment_date</code>, <code>amount</code>, <code>kind</code>
+</td>
+<td>погашение номинала</td>
+</tr>
+<tr class="even">
+<td><code>curve.parquet</code></td>
+<td>
+<code>date</code>, <code>years</code>, <code>yield_pct</code>
+</td>
+<td>кривая бескупонной доходности на дату оценки</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Доходности в снимке – годовые эффективные, срок считается по правилу ACT/365F. Паспорт <code>bonds/snapshot.json</code> хранит контрольные суммы SHA-256 всех файлов и расчётного модуля <code>qf/bonds.py</code>. Функция <code>data.verify_bond_snapshot()</code> сверяет их и останавливает расчёт, если данные или код изменились. График выплат соответствует дате выгрузки: если эмитент позже изменил условия выпуска, снимок этого не покажет.</p>
+</section><section id="sec-data-full" class="level2" data-number="B.9"><h2 data-number="B.9" class="anchored" data-anchor-id="sec-data-full">
+<span class="header-section-number">B.9</span> Полная история рынка акций</h2>
+<p>Для исследований, которым мало 94 бумаг основного снимка, есть полная история торгов всеми акциями Московской биржи с 1997 г. – около 2,5 тыс. бумаг во всех режимах торгов. Она нужна, например, для факторов размера и стоимости, моментума по широкому рынку и для честной оценки ошибки выжившего.</p>
+<p>Архив разбит по годам: <code>shares/year=YYYY/part-0.parquet</code>. Распакуйте его в любую папку и укажите путь в переменной окружения <code>QF_FULL_DATA</code> или положите в папку <code>_data_full/</code> в корне книги. Загрузка:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>shares <span class="op">=</span> data.load_shares_full(start<span class="op">=</span><span class="st">"2020-01-01"</span>, board<span class="op">=</span><span class="st">"TQBR"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Поля названы так же, как в выдаче ISS (раздел <a href="02-data-sources.html#sec-moex-iss" class="quarto-xref"><span>2.2</span></a>), заглавными буквами: <code>SECID</code> – тикер, <code>BOARDID</code> – режим торгов, <code>OPEN</code>, <code>HIGH</code>, <code>LOW</code>, <code>CLOSE</code>, <code>WAPRICE</code>, <code>LEGALCLOSEPRICE</code> – цены, <code>VOLUME</code> и <code>VALUE</code> – объём в штуках и оборот в рублях, <code>NUMTRADES</code> – число сделок. Аргумент <code>board="TQBR"</code> оставляет основной режим торгов акциями; <code>board=None</code> – все режимы.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Сырые данные">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span>Сырые данные
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В полной истории нет поправок на сплиты и дивиденды и нет склейки переименований: это данные в том виде, в каком их публикует биржа. До расчёта доходностей их нужно подготовить по правилам главы 3. Для большинства задач книги достаточно основного снимка.</p>
+</div>
+</div>
+</section><section id="sec-data-functions" class="level2" data-number="B.10"><h2 data-number="B.10" class="anchored" data-anchor-id="sec-data-functions">
+<span class="header-section-number">B.10</span> Функции загрузки</h2>
+<p>Функции модуля <code>qf.data</code> читают файлы из папки <code>data/</code> и возвращают таблицы pandas. Большинство из них принимает одинаковые аргументы:</p>
+<ul>
+<li>
+<code>tickers</code> – тикер или список тикеров; <code>None</code> – все бумаги;</li>
+<li>
+<code>start</code>, <code>end</code> – границы периода включительно, строкой <code>"2020-01-01"</code> или датой;</li>
+<li>
+<code>columns</code> – список нужных полей (у <code>load_stocks</code>): чтение только нужных столбцов заметно быстрее;</li>
+<li>
+<code>backend="polars"</code> – вернуть таблицу Polars вместо pandas; это удобно для больших наборов (раздел <a href="05-accounting-data.html#sec-polars" class="quarto-xref"><span>5.3</span></a>).</li>
+</ul>
+<p>Если данные лежат не в папке книги, путь к ним задаёт переменная окружения <code>QF_DATA</code>. Для R те же данные читают функции файла <code>R/qf.R</code>; набор функций в R пока меньше.</p>
+<div id="tbl-data-functions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.7: Функции загрузки данных
+</figcaption><div aria-describedby="tbl-data-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Python (<code>qf.data</code>)</th>
+<th>R (<code>R/qf.R</code>)</th>
+<th>Что загружает</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>load_stocks()</code></td>
+<td><code>qf_load_stocks()</code></td>
+<td>акции, длинный формат</td>
+</tr>
+<tr class="even">
+<td><code>load_prices(field="adj_close")</code></td>
+<td><code>qf_load_prices()</code></td>
+<td>цены, широкий формат: даты × тикеры</td>
+</tr>
+<tr class="odd">
+<td><code>load_stocks_raw()</code></td>
+<td>–</td>
+<td>сырые цены ISS</td>
+</tr>
+<tr class="even">
+<td><code>load_index()</code></td>
+<td><code>qf_load_index()</code></td>
+<td>индексы</td>
+</tr>
+<tr class="odd">
+<td><code>load_dividends()</code></td>
+<td><code>qf_load_dividends()</code></td>
+<td>дивиденды</td>
+</tr>
+<tr class="even">
+<td>
+<code>load_key_rate()</code>, <code>load_ruonia()</code>, <code>load_zcyc()</code>
+</td>
+<td>
+<code>qf_load_key_rate()</code>, <code>qf_load_ruonia()</code>, <code>qf_load_zcyc()</code>
+</td>
+<td>ставки и кривая ОФЗ</td>
+</tr>
+<tr class="odd">
+<td><code>load_reference(name)</code></td>
+<td>–</td>
+<td>справочники CSV</td>
+</tr>
+<tr class="even">
+<td>
+<code>load_rfsd(okved, years)</code> и другие <code>load_rfsd_*()</code>
+</td>
+<td><code>qf_load_rfsd()</code></td>
+<td>отчётность RFSD</td>
+</tr>
+<tr class="odd">
+<td>
+<code>load_bonds()</code>, <code>load_bond_coupons()</code>, <code>load_bond_principal()</code>, <code>load_bond_curve()</code>
+</td>
+<td>–</td>
+<td>практикум по облигациям</td>
+</tr>
+<tr class="even">
+<td><code>load_shares_full()</code></td>
+<td>–</td>
+<td>полная история рынка</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Если функции для R нет, файл можно прочитать напрямую: <code>nanoparquet::read_parquet("data/stocks_raw.parquet")</code> или <code>read.csv("data/sectors.csv")</code>.</p>
+</section><section id="sec-data-build" class="level2" data-number="B.11"><h2 data-number="B.11" class="anchored" data-anchor-id="sec-data-build">
+<span class="header-section-number">B.11</span> Как собирается и обновляется снимок</h2>
+<p>Снимок собирает автор книги скриптом <code>scripts/build_data.py</code>. Скрипт читает локальное хранилище пакета moexutils, куда ежедневно загружаются данные Московской биржи и Банка России, и записывает файлы в <code>data/</code>. Читателям этот шаг не нужен, а запустить его без хранилища нельзя. Выборка RFSD собирается в отдельном проекте, ряд Росстата – скриптом <code>scripts/build_rosstat.py</code>, снимок облигаций – <code>scripts/build_bond_data.py</code>.</p>
+<p>Обновление снимка меняет числа во всех главах, которые используют рыночные данные, поэтому оно происходит редко и вместе с пересборкой книги. Дата снимка записана в <code>data/snapshot.json</code>. Материалы отдельных занятий курса (папка <code>lessons/</code> репозитория) могут использовать собственные, более свежие выгрузки; их период указан в файлах <code>metadata.json</code> рядом с данными.</p>
+</section><section id="sec-data-sources" class="level2 page-columns page-full" data-number="B.12"><h2 data-number="B.12" class="anchored" data-anchor-id="sec-data-sources">
+<span class="header-section-number">B.12</span> Источники и условия использования</h2>
+<div id="tbl-data-sources" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.8: Источники данных книги
+</figcaption><div aria-describedby="tbl-data-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Данные</th>
+<th>Источник</th>
+<th>Условия</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Котировки акций, индексы, кривая ОФЗ, облигации</td>
+<td>Московская биржа, информационно-статистический сервер ISS</td>
+<td>данные биржи; в книге используются в учебных целях</td>
+</tr>
+<tr class="even">
+<td>Ключевая ставка, RUONIA</td>
+<td>Банк России</td>
+<td>открытые данные</td>
+</tr>
+<tr class="odd">
+<td>Дивиденды</td>
+<td>закрытияреестров.рф</td>
+<td>открытые данные</td>
+</tr>
+<tr class="even">
+<td>Отчётность компаний</td>
+<td>RFSD <span class="citation" data-cites="bondarkov2025">(<a href="references.html#ref-bondarkov2025" role="doc-biblioref">Bondarkov и др. 2025 г.</a>)</span>
+</td>
+<td>лицензия CC BY 4.0</td>
+</tr>
+<tr class="odd">
+<td>Выручка по отраслям</td>
+<td>Росстат через rustata.ru</td>
+<td>открытые данные</td>
+</tr>
+</tbody>
+</table>
+<div class="no-row-height column-margin column-container"><div id="ref-bondarkov2025" class="csl-entry" role="listitem">
+Bondarkov, Sergey, Victor Ledenev, и Dmitriy Skougarevskiy. 2025 г. <span>«Russian Financial Statements Database»</span>. <em>Scientific Data</em> 12. <a href="https://doi.org/10.1038/s41597-025-05150-1">https://doi.org/10.1038/s41597-025-05150-1</a>.
+</div></div></div>
+</figure>
+</div>
+<p>Снимок предназначен для учебных расчётов. Для инвестиционных решений и публикаций данные нужно брать из первоисточника и проверять: в любом наборе возможны ошибки, а снимок не исправляется задним числом.</p>
 
 
 
-</main> <!-- /main -->
-<script>
+</section></main><!-- /main --><script>
 // Ссылки на литературу на полях (citation-location: margin).
 // Quarto переносит запись библиографии на поле только у последнего места цитирования
 // (элемент перемещается, а не копируется), поэтому при повторной ссылке в «Что почитать»
@@ -468,8 +1288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reading.querySelectorAll("div.column-margin.column-container").forEach((c) => c.remove());
   }
 });
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -868,9 +1687,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./appendix-python.html" class="pagination-link" aria-label="Основы Python для финансиста">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Основы Python для финансиста</span></span>
       </a>          
@@ -882,7 +1699,6 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
