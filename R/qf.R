@@ -60,3 +60,11 @@ qf_load_rfsd <- function(okved = NULL, years = NULL) {
   if (!is.null(years)) df <- df[df$year %in% years, ]
   df
 }
+
+#' Данные к главе о микроструктуре (data/micro/): "panel", "price_variable",
+#' "net_edge", "sber_book", "sber_trades"
+qf_load_micro <- function(name) {
+  files <- c(panel = "panel_5s", price_variable = "price_variable",
+             net_edge = "net_edge", sber_book = "sber_book", sber_trades = "sber_trades")
+  qf_read(file.path("micro", paste0(files[[name]], ".parquet")))
+}

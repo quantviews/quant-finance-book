@@ -242,3 +242,22 @@ def verify_bond_snapshot():
     if hashlib.sha256(code.read_bytes()).hexdigest() != metadata["calculation_sha256"]:
         raise ValueError("Расчётный модуль отличается от версии учебного снимка")
     return metadata
+
+
+# ---- Микроструктура (глава 17) ------------------------------------------------
+
+def load_micro(name: Literal["panel", "price_variable", "net_edge",
+                             "sber_book", "sber_trades"], backend: Backend = "pandas"):
+    """Данные к главе о микроструктуре (папка data/micro/).
+
+    panel          – панель 5 732 тикер-дней 2021–2025 (60 акций, сетка 5 с): спреды,
+                     дисперсионные отношения, автокорреляции, OFI R²; группа и сектор бумаги;
+    price_variable – разложение дисперсии микроцены (357 тикер-дней);
+    net_edge       – торговая проверка правила на дисбалансе потока заявок (по тикер-дням);
+    sber_book      – SBER 30.12.2025, 10:00–18:40: пять лучших уровней стакана, сетка 1 с;
+    sber_trades    – SBER 30.12.2025, 10:00–18:40: сделки (время, цена, лоты, знак агрессора).
+    """
+    files = {"panel": "panel_5s", "price_variable": "price_variable",
+             "net_edge": "net_edge", "sber_book": "sber_book", "sber_trades": "sber_trades"}
+    df = pl.read_parquet(DATA_DIR / "micro" / f"{files[name]}.parquet")
+    return df if backend == "polars" else df.to_pandas()
