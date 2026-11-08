@@ -615,7 +615,7 @@ Dimson, Elroy. 1979 г. <span>«Risk Measurement When Shares Are Subject to Infr
 <span><span class="va">mkt</span> <span class="op">&lt;-</span> <span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"MCFTR"</span>, start <span class="op">=</span> <span class="st">"2021-09-01"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">month_end</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span><span class="va">month</span>, m <span class="op">=</span> <span class="va">close</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="va">close</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">qf_load_ruonia</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"2021-08-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu">qf_load_index</span><span class="op">(</span><span class="st">"MCFTR"</span><span class="op">)</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"day"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html">fill</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">date</span>, <span class="st">"%Y-%m"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>rf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">rate</span> <span class="op">/</span> <span class="fl">100</span> <span class="op">/</span> <span class="fl">365</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -625,7 +625,7 @@ Dimson, Elroy. 1979 г. <span>«Risk Measurement When Shares Are Subject to Infr
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">r</span> <span class="op">-</span> <span class="va">rf</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">m</span> <span class="op">-</span> <span class="va">rf</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (Intercept)   I(m - rf) </span></span>
-<span><span class="co">#&gt;      0.0130      1.1774</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="co">#&gt;      0.0130      1.1775</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -899,7 +899,7 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 <p>Что представляют собой факторы – премию за риск или поведенческие ошибки инвесторов, – вопрос открытый. Фама и Френч считают маленькие и дешёвые компании более рискованными: в кризис они страдают сильнее. Альтернативное объяснение – систематические ошибки: инвесторы экстраполируют прошлые успехи и переплачивают за акции роста, недореагируют на новости и поэтому создают моментум. Для практики важно другое: факторная модель даёт более точную нормальную доходность, чем CAPM, и позволяет понять, за счёт чего фонд или стратегия получили результат.</p>
 </section><section id="факторы-на-российском-рынке" class="level3" data-number="12.6.2"><h3 data-number="12.6.2" class="anchored" data-anchor-id="факторы-на-российском-рынке">
 <span class="header-section-number">12.6.2</span> Факторы на российском рынке</h3>
-<p>Построим факторы на акциях снимка по схеме Фамы – Френча с упрощениями, которые требует небольшая выборка.</p>
+<p>Построим факторы на акциях снимка по схеме Фамы – Френча с упрощениями, которые требует небольшая выборка. Состав определяется только информацией на дату формирования. Если после покупки котировки исчезают, стоимость позиции фиксируем по последней доступной цене; при возобновлении торгов учитываем накопленное изменение. Капитал этой бумаги не передаём задним числом другим акциям. Это условная оценка фактора, а не обещание исполнения сделки: при длительной приостановке или делистинге нужен отдельный сценарий возврата средств. Отбор по цене закрытия также не гарантирует возможность исполнить все сделки по этой цене.</p>
 <ul>
 <li>
 <strong>Выборка.</strong> В конце каждого месяца берём бумаги с известной капитализацией и ценами за последние 12 месяцев. Исключаем 20% наименее ликвидных по среднему обороту за три месяца: у них цены часто не отражают рынок.</li>
@@ -908,7 +908,7 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 <li>
 <strong>Стоимость.</strong> Балансовой стоимости капитала в данных книги нет, поэтому признак стоимости – <strong>дивидендная доходность за 12 месяцев</strong>. Её можно получить из самих цен: рост <code>adj_close</code> за год включает дивиденды, рост <code>close</code> – нет, и их отношение даёт доходность реинвестированных дивидендов. Бумаги делим на три группы: 30% с наименьшей доходностью (L), 40% средних, 30% с наибольшей (H).</li>
 <li>
-<strong>Моментум</strong> – рост <code>adj_close</code> с конца месяца <span class="math inline">\(t-12\)</span> до конца месяца <span class="math inline">\(t-2\)</span>. Последний месяц пропускают: на горизонте месяца доходности, наоборот, слегка разворачиваются. Группы – так же 30/40/30.</li>
+<strong>Моментум</strong> – рост <code>adj_close</code> с конца месяца <span class="math inline">\(t-13\)</span> до конца месяца <span class="math inline">\(t-2\)</span>, то есть за 11 месячных интервалов перед пропущенным месяцем <span class="math inline">\(t-1\)</span> (доходность портфеля измеряем за месяц <span class="math inline">\(t\)</span>). Последний месяц пропускают: на горизонте месяца доходности, наоборот, слегка разворачиваются. Группы – так же 30/40/30.</li>
 <li>
 <strong>Портфели</strong> взвешены по капитализации и пересматриваются ежемесячно (у Фамы и Френча – раз в год). Факторы считаются как в оригинале: <span class="math inline">\(SMB\)</span> – средняя доходность трёх маленьких портфелей минус трёх больших; <span class="math inline">\(HML\)</span> – средняя двух портфелей с высокой дивидендной доходностью минус двух с низкой; <span class="math inline">\(WML\)</span> – то же для моментума.</li>
 </ul>
@@ -924,39 +924,48 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>adj, close, cap <span class="op">=</span> monthly(<span class="st">"adj_close"</span>), monthly(<span class="st">"close"</span>), monthly(<span class="st">"market_cap"</span>)</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>liq <span class="op">=</span> monthly(<span class="st">"value_rub"</span>, <span class="st">"sum"</span>).rolling(<span class="dv">3</span>).mean()</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adj.pct_change(fill_method<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>div_yield <span class="op">=</span> (adj <span class="op">/</span> adj.shift(<span class="dv">12</span>)) <span class="op">/</span> (close <span class="op">/</span> close.shift(<span class="dv">12</span>)) <span class="op">-</span> <span class="dv">1</span>   <span class="co"># дивиденды за 12 мес.</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>momentum <span class="op">=</span> adj.shift(<span class="dv">1</span>) <span class="op">/</span> adj.shift(<span class="dv">12</span>) <span class="op">-</span> <span class="dv">1</span>                         <span class="co"># с t-12 по t-2</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tercile(x):</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> x.quantile(<span class="fl">0.3</span>), x.quantile(<span class="fl">0.7</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.where(x <span class="op">&lt;=</span> lo, <span class="st">"L"</span>, np.where(x <span class="op">&gt;</span> hi, <span class="st">"H"</span>, <span class="st">"M"</span>))</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> vw_return(g):</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.average(g[<span class="st">"r"</span>], weights<span class="op">=</span>g[<span class="st">"cap"</span>])</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, prev <span class="kw">in</span> <span class="bu">zip</span>(ret.index[<span class="dv">13</span>:], ret.index[<span class="dv">12</span>:<span class="op">-</span><span class="dv">1</span>]):</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame({<span class="st">"r"</span>: ret.loc[t], <span class="st">"cap"</span>: cap.loc[prev], <span class="st">"dy"</span>: div_yield.loc[prev],</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"mom"</span>: momentum.loc[prev], <span class="st">"liq"</span>: liq.loc[prev]}).dropna()</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"liq"</span>] <span class="op">&gt;</span> df[<span class="st">"liq"</span>].quantile(<span class="fl">0.2</span>)]</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(df) <span class="op">&lt;</span> <span class="dv">30</span>:                    <span class="co"># в ранние годы бумаг слишком мало для сортировок</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"size"</span>] <span class="op">=</span> np.where(df[<span class="st">"cap"</span>] <span class="op">&lt;=</span> df[<span class="st">"cap"</span>].median(), <span class="st">"S"</span>, <span class="st">"B"</span>)</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"value"</span>], df[<span class="st">"trend"</span>] <span class="op">=</span> tercile(df[<span class="st">"dy"</span>]), tercile(df[<span class="st">"mom"</span>])</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    pv <span class="op">=</span> df.groupby([<span class="st">"size"</span>, <span class="st">"value"</span>]).<span class="bu">apply</span>(vw_return)</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    pm <span class="op">=</span> df.groupby([<span class="st">"size"</span>, <span class="st">"trend"</span>]).<span class="bu">apply</span>(vw_return)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">"date"</span>: t, <span class="st">"n"</span>: <span class="bu">len</span>(df),</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SMB"</span>: pv.loc[<span class="st">"S"</span>].mean() <span class="op">-</span> pv.loc[<span class="st">"B"</span>].mean(),</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"HML"</span>: (pv.loc[(<span class="st">"S"</span>, <span class="st">"H"</span>)] <span class="op">+</span> pv.loc[(<span class="st">"B"</span>, <span class="st">"H"</span>)] <span class="op">-</span> pv.loc[(<span class="st">"S"</span>, <span class="st">"L"</span>)] <span class="op">-</span> pv.loc[(<span class="st">"B"</span>, <span class="st">"L"</span>)]) <span class="op">/</span> <span class="dv">2</span>,</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"WML"</span>: (pm.loc[(<span class="st">"S"</span>, <span class="st">"H"</span>)] <span class="op">+</span> pm.loc[(<span class="st">"B"</span>, <span class="st">"H"</span>)] <span class="op">-</span> pm.loc[(<span class="st">"S"</span>, <span class="st">"L"</span>)] <span class="op">-</span> pm.loc[(<span class="st">"B"</span>, <span class="st">"L"</span>)]) <span class="op">/</span> <span class="dv">2</span>})</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> pd.DataFrame(rows).set_index(<span class="st">"date"</span>).loc[<span class="st">"2013"</span>:]</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>F[<span class="st">"MKT"</span>] <span class="op">=</span> mkt_ex.reindex(F.index)</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> F[[<span class="st">"MKT"</span>, <span class="st">"SMB"</span>, <span class="st">"HML"</span>, <span class="st">"WML"</span>, <span class="st">"n"</span>]]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># На дату формирования нужна котировка именно последнего торгового дня.</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>daily_adj <span class="op">=</span> stocks.pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"ticker"</span>, values<span class="op">=</span><span class="st">"adj_close"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>available <span class="op">=</span> daily_adj.resample(<span class="st">"ME"</span>).agg(<span class="kw">lambda</span> x: x.iloc[<span class="op">-</span><span class="dv">1</span>]).notna()</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>available.index <span class="op">=</span> available.index.astype(<span class="st">"datetime64[ns]"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Пропуск не перераспределяет капитал: позиция оценивается по последней цене.</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adj.ffill().pct_change(fill_method<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>div_yield <span class="op">=</span> (adj <span class="op">/</span> adj.shift(<span class="dv">12</span>)) <span class="op">/</span> (close <span class="op">/</span> close.shift(<span class="dv">12</span>)) <span class="op">-</span> <span class="dv">1</span>   <span class="co"># дивиденды за 12 мес.</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>momentum <span class="op">=</span> adj.shift(<span class="dv">1</span>) <span class="op">/</span> adj.shift(<span class="dv">12</span>) <span class="op">-</span> <span class="dv">1</span>                         <span class="co"># в строке t-1: P(t-2) / P(t-13) - 1</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tercile(x):</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> x.quantile(<span class="fl">0.3</span>), x.quantile(<span class="fl">0.7</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.where(x <span class="op">&lt;=</span> lo, <span class="st">"L"</span>, np.where(x <span class="op">&gt;</span> hi, <span class="st">"H"</span>, <span class="st">"M"</span>))</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> vw_return(g):</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.average(g[<span class="st">"r"</span>], weights<span class="op">=</span>g[<span class="st">"cap"</span>])</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, prev <span class="kw">in</span> <span class="bu">zip</span>(ret.index[<span class="dv">13</span>:], ret.index[<span class="dv">12</span>:<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame({<span class="st">"cap"</span>: cap.loc[prev], <span class="st">"dy"</span>: div_yield.loc[prev],</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"mom"</span>: momentum.loc[prev], <span class="st">"liq"</span>: liq.loc[prev]}).dropna()</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.loc[available.loc[prev].reindex(df.index).fillna(<span class="va">False</span>)]</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"liq"</span>] <span class="op">&gt;</span> df[<span class="st">"liq"</span>].quantile(<span class="fl">0.2</span>)]</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(df) <span class="op">&lt;</span> <span class="dv">30</span>:                    <span class="co"># в ранние годы бумаг слишком мало для сортировок</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"size"</span>] <span class="op">=</span> np.where(df[<span class="st">"cap"</span>] <span class="op">&lt;=</span> df[<span class="st">"cap"</span>].median(), <span class="st">"S"</span>, <span class="st">"B"</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"value"</span>], df[<span class="st">"trend"</span>] <span class="op">=</span> tercile(df[<span class="st">"dy"</span>]), tercile(df[<span class="st">"mom"</span>])</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Доходность присоединяем только после выбора состава и групп.</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"r"</span>] <span class="op">=</span> ret.loc[t].reindex(df.index)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> df[<span class="st">"r"</span>].notna().<span class="bu">all</span>()</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    pv <span class="op">=</span> df.groupby([<span class="st">"size"</span>, <span class="st">"value"</span>]).<span class="bu">apply</span>(vw_return)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    pm <span class="op">=</span> df.groupby([<span class="st">"size"</span>, <span class="st">"trend"</span>]).<span class="bu">apply</span>(vw_return)</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">"date"</span>: t, <span class="st">"n"</span>: <span class="bu">len</span>(df),</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SMB"</span>: pv.loc[<span class="st">"S"</span>].mean() <span class="op">-</span> pv.loc[<span class="st">"B"</span>].mean(),</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"HML"</span>: (pv.loc[(<span class="st">"S"</span>, <span class="st">"H"</span>)] <span class="op">+</span> pv.loc[(<span class="st">"B"</span>, <span class="st">"H"</span>)] <span class="op">-</span> pv.loc[(<span class="st">"S"</span>, <span class="st">"L"</span>)] <span class="op">-</span> pv.loc[(<span class="st">"B"</span>, <span class="st">"L"</span>)]) <span class="op">/</span> <span class="dv">2</span>,</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"WML"</span>: (pm.loc[(<span class="st">"S"</span>, <span class="st">"H"</span>)] <span class="op">+</span> pm.loc[(<span class="st">"B"</span>, <span class="st">"H"</span>)] <span class="op">-</span> pm.loc[(<span class="st">"S"</span>, <span class="st">"L"</span>)] <span class="op">-</span> pm.loc[(<span class="st">"B"</span>, <span class="st">"L"</span>)]) <span class="op">/</span> <span class="dv">2</span>})</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> pd.DataFrame(rows).set_index(<span class="st">"date"</span>).loc[<span class="st">"2013"</span>:]</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>F[<span class="st">"MKT"</span>] <span class="op">=</span> mkt_ex.reindex(F.index)</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> F[[<span class="st">"MKT"</span>, <span class="st">"SMB"</span>, <span class="st">"HML"</span>, <span class="st">"WML"</span>, <span class="st">"n"</span>]]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>С 31.01.2013 по 30.09.2026 в расчёт каждого месяца попадали от 45 до 60 бумаг. 2013 г. выбран как начало потому, что раньше в снимке слишком мало бумаг с годовой историей. Даже так в каждом из шести портфелей в среднем 5–10 акций, и это нужно помнить при интерпретации: результат одной-двух компаний заметно сдвигает доходность портфеля.</p>
+<p>С 31.01.2013 по 30.09.2026 в расчёт каждого месяца попадали от 44 до 60 бумаг. 2013 г. выбран как начало потому, что раньше в снимке слишком мало бумаг с годовой историей. Даже так в каждом из шести портфелей в среднем 5–10 акций, и это нужно помнить при интерпретации: результат одной-двух компаний заметно сдвигает доходность портфеля.</p>
 </section><section id="премии-за-факторы" class="level3" data-number="12.6.3"><h3 data-number="12.6.3" class="anchored" data-anchor-id="премии-за-факторы">
 <span class="header-section-number">12.6.3</span> Премии за факторы</h3>
 <div class="cell" data-layout-align="center">
@@ -976,42 +985,42 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_4c4ff" class="cell caption-top table table-sm table-striped small">
+<table id="T_e6410" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_4c4ff_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность, % год.</th>
-<th id="T_4c4ff_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
-<th id="T_4c4ff_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">t-статистика</th>
-<th id="T_4c4ff_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_e6410_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Доходность, % год.</th>
+<th id="T_e6410_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность, % год.</th>
+<th id="T_e6410_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">t-статистика</th>
+<th id="T_e6410_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Шарп</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_4c4ff_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">MKT</th>
-<td id="T_4c4ff_row0_col0" class="data row0 col0">1,60</td>
-<td id="T_4c4ff_row0_col1" class="data row0 col1">20,16</td>
-<td id="T_4c4ff_row0_col2" class="data row0 col2">0,29</td>
-<td id="T_4c4ff_row0_col3" class="data row0 col3">0,08</td>
+<th id="T_e6410_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">MKT</th>
+<td id="T_e6410_row0_col0" class="data row0 col0">1,60</td>
+<td id="T_e6410_row0_col1" class="data row0 col1">20,16</td>
+<td id="T_e6410_row0_col2" class="data row0 col2">0,29</td>
+<td id="T_e6410_row0_col3" class="data row0 col3">0,08</td>
 </tr>
 <tr class="even">
-<th id="T_4c4ff_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">SMB</th>
-<td id="T_4c4ff_row1_col0" class="data row1 col0">1,14</td>
-<td id="T_4c4ff_row1_col1" class="data row1 col1">11,65</td>
-<td id="T_4c4ff_row1_col2" class="data row1 col2">0,36</td>
-<td id="T_4c4ff_row1_col3" class="data row1 col3">0,10</td>
+<th id="T_e6410_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">SMB</th>
+<td id="T_e6410_row1_col0" class="data row1 col0">0,95</td>
+<td id="T_e6410_row1_col1" class="data row1 col1">11,61</td>
+<td id="T_e6410_row1_col2" class="data row1 col2">0,30</td>
+<td id="T_e6410_row1_col3" class="data row1 col3">0,08</td>
 </tr>
 <tr class="odd">
-<th id="T_4c4ff_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">HML</th>
-<td id="T_4c4ff_row2_col0" class="data row2 col0">3,31</td>
-<td id="T_4c4ff_row2_col1" class="data row2 col1">15,16</td>
-<td id="T_4c4ff_row2_col2" class="data row2 col2">0,81</td>
-<td id="T_4c4ff_row2_col3" class="data row2 col3">0,22</td>
+<th id="T_e6410_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">HML</th>
+<td id="T_e6410_row2_col0" class="data row2 col0">3,47</td>
+<td id="T_e6410_row2_col1" class="data row2 col1">15,04</td>
+<td id="T_e6410_row2_col2" class="data row2 col2">0,86</td>
+<td id="T_e6410_row2_col3" class="data row2 col3">0,23</td>
 </tr>
 <tr class="even">
-<th id="T_4c4ff_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">WML</th>
-<td id="T_4c4ff_row3_col0" class="data row3 col0">15,17</td>
-<td id="T_4c4ff_row3_col1" class="data row3 col1">18,38</td>
-<td id="T_4c4ff_row3_col2" class="data row3 col2">3,06</td>
-<td id="T_4c4ff_row3_col3" class="data row3 col3">0,83</td>
+<th id="T_e6410_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">WML</th>
+<td id="T_e6410_row3_col0" class="data row3 col0">14,87</td>
+<td id="T_e6410_row3_col1" class="data row3 col1">18,20</td>
+<td id="T_e6410_row3_col2" class="data row3 col2">3,03</td>
+<td id="T_e6410_row3_col3" class="data row3 col3">0,82</td>
 </tr>
 </tbody>
 </table>
@@ -1042,7 +1051,7 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 </div>
 </div>
 </div>
-<p>Из четырёх факторов статистически значим только моментум: 15,2% в год при t-статистике 3,1. Премии размера (1,1%) и дивидендной доходности (3,3%) положительны, но с t-статистиками 0,4 и 0,8 неотличимы от нуля. Рыночная премия – 1,6% в год, тоже незначимая: за эти годы российские акции в целом заработали не больше денежного рынка. Корреляции между факторами низкие, по модулю не выше 0,19, то есть они описывают разные источники риска.</p>
+<p>Из четырёх факторов статистически значим только моментум: 14,9% в год при t-статистике 3,0. Премии размера (0,9%) и дивидендной доходности (3,5%) положительны, но с t-статистиками 0,3 и 0,9 неотличимы от нуля. Рыночная премия – 1,6% в год, тоже незначимая: за эти годы российские акции в целом заработали не больше денежного рынка. Корреляции между факторами низкие, по модулю не выше 0,19, то есть они описывают разные источники риска.</p>
 <p>Сильный моментум на российском рынке согласуется с международными данными: это одна из самых устойчивых аномалий. Подробно стратегии моментума и их риски разбираются в главе 16. Но к этому результату нужно относиться с осторожностью по трём причинам. Выборка небольшая, и в каждом портфеле немного бумаг. Расчёт не учитывает издержек, а моментум требует большого оборота. Наконец, набор бумаг снимка составлен сегодня: хотя в него входят и снятые с торгов акции, полностью избавиться от ошибки выжившего нельзя (раздел <a href="03-data-preparation.html#sec-survivorship" class="quarto-xref"><span>3.4</span></a>).</p>
 <div class="callout callout-style-simple callout-warning callout-titled" title="Дивидендная доходность – не то же, что B/M">
 <div class="callout-header d-flex align-content-center">
@@ -1096,7 +1105,7 @@ R_{i,t} - r_{f,t} = \alpha_i + \beta_i\,MKT_t + s_i\,SMB_t + h_i\,HML_t + w_i\,W
 <span class="header-section-number">12.8.1</span> А. Понимание</h3>
 <ol type="1">
 <li>Бета акции – 1,4, безрисковая ставка – 15%, ожидаемая доходность рынка – 22%. Какова ожидаемая доходность акции по CAPM? Что изменится, если ставка вырастет до 18% при той же доходности рынка?</li>
-<li>У двух акций одинаковая волатильность 40%. У первой <span class="math inline">\(R^2\)</span> регрессии на рынок 0,7, у второй – 0,1. Какая из них должна приносить больше по CAPM и почему?</li>
+<li>У двух акций одинаковая волатильность 40%. У первой <span class="math inline">\(R^2\)</span> регрессии на рынок 0,7, у второй – 0,1. Предположим, что обе беты положительны и ожидаемая премия рынка положительна. Какая акция должна приносить больше по CAPM и почему? Можно ли ответить без этих предположений?</li>
 <li>Портфель на 60% состоит из акции с бетой 1,3 и на 40% – из облигаций с бетой 0,1. Чему равна бета портфеля?</li>
 <li>Аналитик получил альфу акции 25% годовых, используя в качестве рынка IMOEX. Почему эту оценку нельзя принимать без проверки?</li>
 <li>Почему окна оценки и события в событийном анализе не должны пересекаться?</li>

@@ -944,14 +944,18 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> brentq</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> irr(cashflows):</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> brentq(<span class="kw">lambda</span> r: npv(r, cashflows), <span class="op">-</span><span class="fl">0.99</span>, <span class="fl">1.0</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"IRR = </span><span class="sc">{</span>irr(cashflows)<span class="sc">:.2%}</span><span class="ss">"</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; IRR = 8.36%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> irr(cashflows, lower<span class="op">=-</span><span class="fl">0.99</span>, upper<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Один корень NPV на заданном интервале ставок (обе границы &gt; -1)."""</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="op">-</span><span class="dv">1</span> <span class="op">&lt;</span> lower <span class="op">&lt;</span> upper:</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Нужны границы -1 &lt; lower &lt; upper"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> brentq(<span class="kw">lambda</span> r: npv(r, cashflows), lower, upper)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"IRR = </span><span class="sc">{</span>irr(cashflows)<span class="sc">:.2%}</span><span class="ss">"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; IRR = 8.36%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Запись <code>lambda r: npv(r, cashflows)</code> создаёт короткую безымянную функцию одного аргумента <span class="math inline">\(r\)</span>. IRR ниже 12%, что согласуется с отрицательной NPV при этой ставке.</p>
+<p>По умолчанию ищем ставку от −99% до 100%. Это ограничение интервала поиска, а не допустимых значений IRR: для потока <code>[-100, 250]</code> вызов <code>irr([-100, 250], upper=2)</code> даёт 150%. Если NPV на границах не меняет знак, <code>brentq</code> сообщает об ошибке; это ещё не доказывает отсутствие IRR вне интервала. При нескольких сменах знака денежных потоков возможны несколько корней.</p>
 </section><section id="проверка-функций" class="level3" data-number="A.5.3"><h3 data-number="A.5.3" class="anchored" data-anchor-id="проверка-функций">
 <span class="header-section-number">A.5.3</span> Проверка функций</h3>
 <p>Функцию полезно проверить на примере, ответ которого известен заранее. Для этого есть оператор <code>assert</code>: он ничего не делает, если условие истинно, и останавливает программу с ошибкой, если ложно.</p>

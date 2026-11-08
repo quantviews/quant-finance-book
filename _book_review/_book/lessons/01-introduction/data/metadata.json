@@ -1,0 +1,15 @@
+{
+  "lesson_date": "2026-11-05",
+  "source": "moexutils, MOEX and dividend adjustments",
+  "snapshot_built": "2026-11-05",
+  "start": "2021-01-04",
+  "end": "2026-11-03",
+  "rows": 1466,
+  "sha256": "90bf1f088434b60be0ea484f521b6eeff95bfeaa9817c6cf4c28656fce6082c9",
+  "fields": {
+    "SBER": "adj_close",
+    "LKOH": "adj_close",
+    "SBER_close": "close, split-adjusted",
+    "LKOH_close": "close, split-adjusted"
+  }
+}
