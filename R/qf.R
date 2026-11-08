@@ -66,5 +66,12 @@ qf_load_rfsd <- function(okved = NULL, years = NULL) {
 qf_load_micro <- function(name) {
   files <- c(panel = "panel_5s", price_variable = "price_variable",
              net_edge = "net_edge", sber_book = "sber_book", sber_trades = "sber_trades")
-  qf_read(file.path("micro", paste0(files[[name]], ".parquet")))
+  df <- qf_read(file.path("micro", paste0(files[[name]], ".parquet")))
+  if ("time" %in% names(df)) {
+    # В этих parquet время записано без timezone как московское время часов.
+    # nanoparquet читает числа как UTC: сохраняем показания часов, задавая зону.
+    df$time <- as.POSIXct(format(df$time, tz = "UTC", format = "%Y-%m-%d %H:%M:%OS6"),
+                         format = "%Y-%m-%d %H:%M:%OS", tz = "Europe/Moscow")
+  }
+  df
 }
