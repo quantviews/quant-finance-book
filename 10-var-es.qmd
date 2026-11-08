@@ -68,11 +68,13 @@ $$ {#eq-var}
 
 Иначе говоря, VaR – это квантиль уровня $\alpha$ распределения убытков. Однодневный VaR 99% в 2 млн руб. означает: в 99 днях из 100 убыток не превысит 2 млн руб.
 
-VaR отвечает на вопрос «насколько плохим может быть обычный плохой день», но ничего не говорит о том, что происходит в оставшемся одном дне из ста. Убыток сверх VaR может быть чуть больше VaR, а может быть в десять раз больше. На этот вопрос отвечает **ожидаемый недостаток** (Expected Shortfall, ES, иначе CVaR) – средний убыток при условии, что он не меньше VaR:
+VaR отвечает на вопрос «насколько плохим может быть обычный плохой день», но ничего не говорит о том, что происходит в оставшемся одном дне из ста. Убыток сверх VaR может быть чуть больше VaR, а может быть в десять раз больше. На этот вопрос отвечает **ожидаемый недостаток** (Expected Shortfall, ES, иначе CVaR) – средний убыток в худшей доле $1-\alpha$ исходов:
 
 $$
-\operatorname{ES}_\alpha = E\bigl[L \mid L \ge \operatorname{VaR}_\alpha\bigr].
+\operatorname{ES}_\alpha = \frac{1}{1-\alpha}\int_\alpha^1 \operatorname{VaR}_u\,du.
 $$ {#eq-es}
+
+Для непрерывного распределения это также $E[L \mid L \ge \operatorname{VaR}_\alpha]$. Но если на пороге VaR есть положительная вероятность, в хвост нужно включить только необходимую часть этой массы. Это важно для кредитного примера ниже и для конечной исторической выборки: худшие 1% из 250 наблюдений – два самых больших убытка и половина третьего.
 
 По определению ES не меньше VaR того же уровня. Разница между ними тем больше, чем тяжелее хвост распределения убытков.
 
@@ -133,8 +135,17 @@ $$ {#eq-var-t}
 alpha = 0.99
 window = loss.iloc[-250:]
 
+def empirical_es(losses, alpha):
+    """Средний убыток в худшей доле 1-alpha эмпирического распределения."""
+    values = np.sort(np.asarray(losses, dtype=float))[::-1]
+    if not 0 < alpha < 1 or not len(values) or not np.isfinite(values).all():
+        raise ValueError("Нужны конечные убытки и 0 < alpha < 1")
+    mass = (1 - alpha) * len(values)
+    full = int(np.floor(mass))
+    return (values[:full].sum() + (mass - full) * values[full]) / mass
+
 var_hs = window.quantile(alpha)
-es_hs = window[window >= var_hs].mean()
+es_hs = empirical_es(window, alpha)
 
 mu, sigma = r.iloc[-250:].mean(), r.iloc[-250:].std()
 z = stats.norm.ppf(alpha)
@@ -159,7 +170,14 @@ loss <- -tail(r, 250)
 alpha <- 0.99
 
 var_hs <- quantile(loss, alpha, type = 7)
-es_hs <- mean(loss[loss >= var_hs])
+empirical_es <- function(loss, alpha) {
+  stopifnot(length(loss) > 0, all(is.finite(loss)), alpha > 0, alpha < 1)
+  x <- sort(loss, decreasing = TRUE)
+  mass <- (1 - alpha) * length(x)
+  full <- floor(mass)
+  (sum(x[seq_len(full)]) + (mass - full) * x[full + 1]) / mass
+}
+es_hs <- empirical_es(loss, alpha)
 
 mu <- mean(tail(r, 250)); sigma <- sd(tail(r, 250))
 z <- qnorm(alpha)
@@ -173,8 +191,8 @@ round(c(var_hs = unname(var_hs), es_hs = es_hs, var_n = var_n, es_n = es_n), 4)
 
 ```{python}
 #| include: false
-full_q = {"var99": loss.quantile(0.99), "es99": loss[loss >= loss.quantile(0.99)].mean(),
-          "var975": loss.quantile(0.975), "es975": loss[loss >= loss.quantile(0.975)].mean(),
+full_q = {"var99": loss.quantile(0.99), "es99": empirical_es(loss, 0.99),
+          "var975": loss.quantile(0.975), "es975": empirical_es(loss, 0.975),
           "n_var99": z * r.std(), "start": str(r.index[0].date())}
 last_y = {"var_hs": var_hs, "es_hs": es_hs, "var_n": var_n, "es_n": es_n, "var_t": var_t, "es_t": es_t, "nu": nu}
 ```
@@ -196,7 +214,7 @@ def bootstrap_var_es(losses, alpha=0.99, n_boot=2000, seed=42):
     for i in range(n_boot):
         sample = rng.choice(losses, size=len(losses), replace=True)
         v = np.quantile(sample, alpha)
-        out.append((v, sample[sample >= v].mean()))   # ES – по той же подвыборке
+        out.append((v, empirical_es(sample, alpha)))   # ES – по той же подвыборке
     return np.percentile(np.array(out), [2.5, 97.5], axis=0)
 
 ci_year = bootstrap_var_es(loss.iloc[-250:].values)
@@ -314,7 +332,7 @@ fig_note = {"hs": crash["Историческое"], "norm": crash["Нормал
 Что показывали методы утром 24 февраля? Исторический VaR 99% – `r pct(py$fig_note$hs)`, нормальный – `r pct(py$fig_note$norm)`, EWMA – `r pct(py$fig_note$ewma)`, GJR-GARCH-t – `r pct(py$fig_note$garch)`, FHS – `r pct(py$fig_note$fhs)`. Модели волатильности успели отреагировать на падения 21 и 22 февраля: ещё 18 февраля GARCH-оценка была `r pct(py$fig_note$garch_0218)`. Но фактический убыток превысил даже самую высокую оценку втрое. Ни одна модель, оценённая по прошлым данным, не предскажет убыток такого масштаба: худший день MCFTR до этого, `r dt(py$fig_note$prev_date)`, принёс убыток `r pct(-py$fig_note$prev_worst)`. Для таких событий служат **стресс-тесты** – расчёт убытка по заданным сценариям («рынок падает на 30%, торги останавливаются на месяц»), без ссылки на вероятность.
 
 ::: {.callout-important title="Чего не видит однодневный VaR"}
-Однодневный VaR предполагает, что позицию можно закрыть по рыночной цене за день. С 25 февраля по 23 марта 2022 г. торги акциями на Московской бирже не проводились, а иностранные инвесторы не могли продать бумаги и после возобновления торгов. Риск ликвидности – невозможность продать актив без большой потери или вообще продать его – в стандартный VaR не входит. Индексы в эти дни не рассчитывались: в данных книги доходность MCFTR за 25 февраля сразу сменяется доходностью за 25 марта, а значение за 24 марта, первый день торгов, в снимке отсутствует.
+Однодневный VaR предполагает, что позицию можно закрыть по рыночной цене за день. С 28 февраля по 23 марта 2022 г. торги акциями на Московской бирже не проводились, а иностранные инвесторы не могли продать бумаги и после возобновления торгов. Риск ликвидности – невозможность продать актив без большой потери или вообще продать его – в стандартный VaR не входит. Индексы в эти дни не рассчитывались: в данных книги доходность MCFTR за 25 февраля сразу сменяется доходностью за 25 марта, а значение за 24 марта, первый день торгов, в снимке отсутствует.
 :::
 
 ## Бэктест VaR {#sec-var-backtest}
@@ -416,9 +434,10 @@ bt_n = len(V)
 
 ```{python}
 #| label: fig-traffic-light
-#| fig-cap: "Число пробоев однодневного VaR 99% по календарным годам и зоны «светофора»"
+#| fig-cap: "Число пробоев однодневного VaR 99% за последние 250 торговых дней на последнюю доступную дату каждого года"
 yearly = (realized.values[:, None] > V.values).astype(int)
-yearly = pd.DataFrame(yearly, index=V.index, columns=V.columns).groupby(V.index.year).sum()
+yearly = pd.DataFrame(yearly, index=V.index, columns=V.columns).rolling(250).sum().dropna()
+yearly = yearly.groupby(yearly.index.year).last()
 fig, ax = plt.subplots()
 years = yearly.index.values
 for i, c in enumerate(["Нормальное", "Историческое", "GJR-GARCH-t"]):
@@ -428,7 +447,7 @@ ax.axhspan(4.5, 9.5, color="#E3B23C", alpha=0.12)
 ax.axhspan(9.5, 16, color="#B8412E", alpha=0.08)
 ax.set_ylim(0, 16)
 ax.set_xticks(years[::2], labels=[str(y) for y in years[::2]])
-ax.set_ylabel("Пробоев за год")
+ax.set_ylabel("Пробоев за 250 дней")
 ax.legend()
 plot.source(ax, "Московская биржа, расчёты автора")
 plt.show()
@@ -443,7 +462,7 @@ tl = {"red_norm": [int(y) for y in yearly.index[yearly["Нормальное"] >
       "norm_2024": int(yearly.loc[2024, "Нормальное"])}
 ```
 
-Модель с нормальным распределением попадала в красную зону в `r paste(py$tl$red_norm, collapse = ", ")` гг. Особенно показателен 2024 г. с `r py$tl$norm_2024` пробоями: после спокойного 2023 г. волатильность выросла, а окно в 250 дней долго удерживало оценку на низком уровне спокойного года. Модель GJR-GARCH-t ни разу не вышла за пределы жёлтой зоны; больше всего пробоев у неё было в `r py$tl$year_max_garch` г. – `r py$tl$max_garch`.
+На рисунке показаны последние 250 наблюдений на конец каждого года; для неполного последнего года – на последнюю дату снимка. Окна могут пересекаться. Модель с нормальным распределением находилась в красной зоне на показанных датах в `r paste(py$tl$red_norm, collapse = ", ")` гг. Особенно показателен 2024 г. с `r py$tl$norm_2024` пробоями: после спокойного 2023 г. волатильность выросла, а окно в 250 дней долго удерживало оценку на низком уровне спокойного года. На показанных датах максимум для GJR-GARCH-t составил `r py$tl$max_garch` пробоев; больше всего пробоев у неё было в `r py$tl$year_max_garch` г. – `r py$tl$max_garch`.
 
 Несколько оговорок к бэктесту. Пробоев за 250 дней мало, и даже правильная модель с вероятностью около 11% попадает в жёлтую зону случайно. Тесты проверяют только частоту и независимость пробоев, но не их размер: модель, у которой пробои редкие, но огромные, тест Купика пройдёт. Именно поэтому регуляторы перешли к ES, а для ES разработаны отдельные, более сложные процедуры бэктеста.
 
@@ -467,7 +486,7 @@ def var_es(paths):
     pnl = value * (((1 + paths).prod(axis=1) - 1) @ w)          # результат за 10 дней, руб.
     losses = -pnl
     return {"VaR 99%": np.quantile(losses, 0.99),
-            "ES 97,5%": losses[losses >= np.quantile(losses, 0.975)].mean()}
+            "ES 97,5%": empirical_es(losses, 0.975)}
 
 mc = pd.DataFrame({"Нормальное": var_es(normal_paths), "Бутстреп": var_es(boot_paths)}).T
 stocks_only = value * stats.norm.ppf(0.99) * R2["MCFTR"].std() * np.sqrt(H)
@@ -522,7 +541,7 @@ w_mv = minimize(lambda w: w @ cov @ w, np.ones(n) / n, bounds=[(0, 1)] * n,
 def risk(w):
     port_loss = -(Rv @ w)
     v = np.quantile(port_loss, a_es)
-    return {"ES 97,5%, %": port_loss[port_loss >= v].mean() * 100,
+    return {"ES 97,5%, %": empirical_es(port_loss, a_es) * 100,
             "Волатильность, % год.": np.sqrt(w @ cov @ w) * 100}
 
 ports = {"Мин. ES": w_es, "Мин. дисперсия": w_mv, "Равные веса": np.ones(n) / n}
