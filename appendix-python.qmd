@@ -357,13 +357,18 @@ npv(0.12, cashflows)
 ```{python}
 from scipy.optimize import brentq
 
-def irr(cashflows):
-    return brentq(lambda r: npv(r, cashflows), -0.99, 1.0)
+def irr(cashflows, lower=-0.99, upper=1.0):
+    """Один корень NPV на заданном интервале ставок (обе границы > -1)."""
+    if not -1 < lower < upper:
+        raise ValueError("Нужны границы -1 < lower < upper")
+    return brentq(lambda r: npv(r, cashflows), lower, upper)
 
 print(f"IRR = {irr(cashflows):.2%}")
 ```
 
 Запись `lambda r: npv(r, cashflows)` создаёт короткую безымянную функцию одного аргумента $r$. IRR ниже 12%, что согласуется с отрицательной NPV при этой ставке.
+
+По умолчанию ищем ставку от −99% до 100%. Это ограничение интервала поиска, а не допустимых значений IRR: для потока `[-100, 250]` вызов `irr([-100, 250], upper=2)` даёт 150%. Если NPV на границах не меняет знак, `brentq` сообщает об ошибке; это ещё не доказывает отсутствие IRR вне интервала. При нескольких сменах знака денежных потоков возможны несколько корней.
 
 ### Проверка функций
 
