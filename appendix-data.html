@@ -430,10 +430,11 @@ window.Quarto = {
   <li><a href="#sec-data-reference" id="toc-sec-data-reference" class="nav-link" data-scroll-target="#sec-data-reference"><span class="header-section-number">B.6</span> Справочники</a></li>
   <li><a href="#sec-data-rfsd" id="toc-sec-data-rfsd" class="nav-link" data-scroll-target="#sec-data-rfsd"><span class="header-section-number">B.7</span> Отчётность компаний (RFSD)</a></li>
   <li><a href="#sec-data-bonds" id="toc-sec-data-bonds" class="nav-link" data-scroll-target="#sec-data-bonds"><span class="header-section-number">B.8</span> Облигации</a></li>
-  <li><a href="#sec-data-full" id="toc-sec-data-full" class="nav-link" data-scroll-target="#sec-data-full"><span class="header-section-number">B.9</span> Полная история рынка акций</a></li>
-  <li><a href="#sec-data-functions" id="toc-sec-data-functions" class="nav-link" data-scroll-target="#sec-data-functions"><span class="header-section-number">B.10</span> Функции загрузки</a></li>
-  <li><a href="#sec-data-build" id="toc-sec-data-build" class="nav-link" data-scroll-target="#sec-data-build"><span class="header-section-number">B.11</span> Как собирается и обновляется снимок</a></li>
-  <li><a href="#sec-data-sources" id="toc-sec-data-sources" class="nav-link" data-scroll-target="#sec-data-sources"><span class="header-section-number">B.12</span> Источники и условия использования</a></li>
+  <li><a href="#sec-data-micro" id="toc-sec-data-micro" class="nav-link" data-scroll-target="#sec-data-micro"><span class="header-section-number">B.9</span> Микроструктура рынка</a></li>
+  <li><a href="#sec-data-full" id="toc-sec-data-full" class="nav-link" data-scroll-target="#sec-data-full"><span class="header-section-number">B.10</span> Полная история рынка акций</a></li>
+  <li><a href="#sec-data-functions" id="toc-sec-data-functions" class="nav-link" data-scroll-target="#sec-data-functions"><span class="header-section-number">B.11</span> Функции загрузки</a></li>
+  <li><a href="#sec-data-build" id="toc-sec-data-build" class="nav-link" data-scroll-target="#sec-data-build"><span class="header-section-number">B.12</span> Как собирается и обновляется снимок</a></li>
+  <li><a href="#sec-data-sources" id="toc-sec-data-sources" class="nav-link" data-scroll-target="#sec-data-sources"><span class="header-section-number">B.13</span> Источники и условия использования</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -477,11 +478,11 @@ window.Quarto = {
 <p>Данные разделены на три слоя.</p>
 <ol type="1">
 <li>
-<strong>Базовый снимок</strong> в папке <code>data/</code> хранится в репозитории книги вместе с текстом. Его объём – около 20 МБ. Снимок рынка акций выгружен 30.09.2026, последняя дата котировок – 29.09.2026.</li>
+<strong>Базовый снимок</strong> в папке <code>data/</code> хранится в репозитории книги вместе с текстом. Его объём – около 23 МБ. Снимок рынка акций выгружен 30.09.2026, последняя дата котировок – 29.09.2026.</li>
 <li>
 <strong>Тематические наборы</strong> с собственной датой: выборка отчётности RFSD (глава 5) и практикум по облигациям (глава 13, подпапка <code>data/bonds/</code>). Они собраны отдельно и не меняются при обновлении снимка акций.</li>
 <li>
-<strong>Полная история рынка акций</strong> – около 2,5 тыс. бумаг с 1997 г. Она слишком велика для репозитория и раздаётся отдельным архивом (раздел <a href="#sec-data-full" class="quarto-xref"><span>B.9</span></a>).</li>
+<strong>Полная история рынка акций</strong> – около 2,5 тыс. бумаг с 1997 г. Она слишком велика для репозитория и раздаётся отдельным архивом (раздел <a href="#sec-data-full" class="quarto-xref"><span>B.10</span></a>).</li>
 </ol>
 <p>Снимок зафиксирован: при сборке книги код каждой главы читает одни и те же файлы, поэтому числа в тексте и в вашем ноутбуке совпадают. Обратная сторона – данные не обновляются сами. Чтобы проверить вывод на свежих данных, их нужно загрузить из первоисточника, как показано в главе 2.</p>
 <p>Файлы хранятся в формате <strong>Parquet</strong> – колоночном формате с сжатием и сохранёнными типами столбцов (о форматах см. раздел <a href="02-data-sources.html#sec-formats" class="quarto-xref"><span>2.6</span></a>). Небольшие справочники записаны в CSV, паспорта снимков – в JSON. Читать файлы удобнее всего через модуль <code>qf</code>, но можно и напрямую: <code>pd.read_parquet("data/stocks.parquet")</code>.</p>
@@ -493,140 +494,175 @@ window.Quarto = {
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_655e3" class="cell caption-top table table-sm table-striped small">
+<table id="T_61fa0" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th id="T_655e3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Файл</th>
-<th id="T_655e3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Строк</th>
-<th id="T_655e3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Период</th>
-<th id="T_655e3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">КБ</th>
-<th id="T_655e3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Функция qf.data</th>
+<th id="T_61fa0_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Файл</th>
+<th id="T_61fa0_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Строк</th>
+<th id="T_61fa0_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Период</th>
+<th id="T_61fa0_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">КБ</th>
+<th id="T_61fa0_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Функция qf.data</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td id="T_655e3_row0_col0" class="data row0 col0">stocks.parquet</td>
-<td id="T_655e3_row0_col1" class="data row0 col1">311&nbsp;631</td>
-<td id="T_655e3_row0_col2" class="data row0 col2">31.07.2003–29.09.2026</td>
-<td id="T_655e3_row0_col3" class="data row0 col3">9&nbsp;533</td>
-<td id="T_655e3_row0_col4" class="data row0 col4">load_stocks(), load_prices()</td>
+<td id="T_61fa0_row0_col0" class="data row0 col0">stocks.parquet</td>
+<td id="T_61fa0_row0_col1" class="data row0 col1">311&nbsp;631</td>
+<td id="T_61fa0_row0_col2" class="data row0 col2">31.07.2003–29.09.2026</td>
+<td id="T_61fa0_row0_col3" class="data row0 col3">9&nbsp;533</td>
+<td id="T_61fa0_row0_col4" class="data row0 col4">load_stocks(), load_prices()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row1_col0" class="data row1 col0">stocks_raw.parquet</td>
-<td id="T_655e3_row1_col1" class="data row1 col1">26&nbsp;696</td>
-<td id="T_655e3_row1_col2" class="data row1 col2">26.12.2006–29.09.2026</td>
-<td id="T_655e3_row1_col3" class="data row1 col3">929</td>
-<td id="T_655e3_row1_col4" class="data row1 col4">load_stocks_raw()</td>
+<td id="T_61fa0_row1_col0" class="data row1 col0">stocks_raw.parquet</td>
+<td id="T_61fa0_row1_col1" class="data row1 col1">26&nbsp;696</td>
+<td id="T_61fa0_row1_col2" class="data row1 col2">26.12.2006–29.09.2026</td>
+<td id="T_61fa0_row1_col3" class="data row1 col3">929</td>
+<td id="T_61fa0_row1_col4" class="data row1 col4">load_stocks_raw()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row2_col0" class="data row2 col0">indexes.parquet</td>
-<td id="T_655e3_row2_col1" class="data row2 col1">89&nbsp;853</td>
-<td id="T_655e3_row2_col2" class="data row2 col2">01.09.1995–29.09.2026</td>
-<td id="T_655e3_row2_col3" class="data row2 col3">709</td>
-<td id="T_655e3_row2_col4" class="data row2 col4">load_index()</td>
+<td id="T_61fa0_row2_col0" class="data row2 col0">indexes.parquet</td>
+<td id="T_61fa0_row2_col1" class="data row2 col1">89&nbsp;853</td>
+<td id="T_61fa0_row2_col2" class="data row2 col2">01.09.1995–29.09.2026</td>
+<td id="T_61fa0_row2_col3" class="data row2 col3">709</td>
+<td id="T_61fa0_row2_col4" class="data row2 col4">load_index()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row3_col0" class="data row3 col0">dividends.parquet</td>
-<td id="T_655e3_row3_col1" class="data row3 col1">3&nbsp;674</td>
-<td id="T_655e3_row3_col2" class="data row3 col2">01.12.1994–13.10.2026</td>
-<td id="T_655e3_row3_col3" class="data row3 col3">24</td>
-<td id="T_655e3_row3_col4" class="data row3 col4">load_dividends()</td>
+<td id="T_61fa0_row3_col0" class="data row3 col0">dividends.parquet</td>
+<td id="T_61fa0_row3_col1" class="data row3 col1">3&nbsp;674</td>
+<td id="T_61fa0_row3_col2" class="data row3 col2">01.12.1994–13.10.2026</td>
+<td id="T_61fa0_row3_col3" class="data row3 col3">24</td>
+<td id="T_61fa0_row3_col4" class="data row3 col4">load_dividends()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row4_col0" class="data row4 col0">key_rate.parquet</td>
-<td id="T_655e3_row4_col1" class="data row4 col1">96</td>
-<td id="T_655e3_row4_col2" class="data row4 col2">31.12.2003–27.07.2026</td>
-<td id="T_655e3_row4_col3" class="data row4 col3">1</td>
-<td id="T_655e3_row4_col4" class="data row4 col4">load_key_rate()</td>
+<td id="T_61fa0_row4_col0" class="data row4 col0">key_rate.parquet</td>
+<td id="T_61fa0_row4_col1" class="data row4 col1">96</td>
+<td id="T_61fa0_row4_col2" class="data row4 col2">31.12.2003–27.07.2026</td>
+<td id="T_61fa0_row4_col3" class="data row4 col3">1</td>
+<td id="T_61fa0_row4_col4" class="data row4 col4">load_key_rate()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row5_col0" class="data row5 col0">ruonia.parquet</td>
-<td id="T_655e3_row5_col1" class="data row5 col1">4&nbsp;118</td>
-<td id="T_655e3_row5_col2" class="data row5 col2">11.01.2010–28.09.2026</td>
-<td id="T_655e3_row5_col3" class="data row5 col3">43</td>
-<td id="T_655e3_row5_col4" class="data row5 col4">load_ruonia()</td>
+<td id="T_61fa0_row5_col0" class="data row5 col0">ruonia.parquet</td>
+<td id="T_61fa0_row5_col1" class="data row5 col1">4&nbsp;118</td>
+<td id="T_61fa0_row5_col2" class="data row5 col2">11.01.2010–28.09.2026</td>
+<td id="T_61fa0_row5_col3" class="data row5 col3">43</td>
+<td id="T_61fa0_row5_col4" class="data row5 col4">load_ruonia()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row6_col0" class="data row6 col0">zcyc.parquet</td>
-<td id="T_655e3_row6_col1" class="data row6 col1">35&nbsp;145</td>
-<td id="T_655e3_row6_col2" class="data row6 col2">06.01.2014–29.09.2026</td>
-<td id="T_655e3_row6_col3" class="data row6 col3">114</td>
-<td id="T_655e3_row6_col4" class="data row6 col4">load_zcyc()</td>
+<td id="T_61fa0_row6_col0" class="data row6 col0">zcyc.parquet</td>
+<td id="T_61fa0_row6_col1" class="data row6 col1">35&nbsp;145</td>
+<td id="T_61fa0_row6_col2" class="data row6 col2">06.01.2014–29.09.2026</td>
+<td id="T_61fa0_row6_col3" class="data row6 col3">114</td>
+<td id="T_61fa0_row6_col4" class="data row6 col4">load_zcyc()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row7_col0" class="data row7 col0">rfsd_sample.parquet</td>
-<td id="T_655e3_row7_col1" class="data row7 col1">89&nbsp;335</td>
-<td id="T_655e3_row7_col2" class="data row7 col2">2018–2025 гг.</td>
-<td id="T_655e3_row7_col3" class="data row7 col3">8&nbsp;453</td>
-<td id="T_655e3_row7_col4" class="data row7 col4">load_rfsd()</td>
+<td id="T_61fa0_row7_col0" class="data row7 col0">rfsd_sample.parquet</td>
+<td id="T_61fa0_row7_col1" class="data row7 col1">89&nbsp;335</td>
+<td id="T_61fa0_row7_col2" class="data row7 col2">2018–2025 гг.</td>
+<td id="T_61fa0_row7_col3" class="data row7 col3">8&nbsp;453</td>
+<td id="T_61fa0_row7_col4" class="data row7 col4">load_rfsd()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row8_col0" class="data row8 col0">rfsd_summary.parquet</td>
-<td id="T_655e3_row8_col1" class="data row8 col1">15</td>
-<td id="T_655e3_row8_col2" class="data row8 col2">2011–2025 гг.</td>
-<td id="T_655e3_row8_col3" class="data row8 col3">5</td>
-<td id="T_655e3_row8_col4" class="data row8 col4">load_rfsd_summary()</td>
+<td id="T_61fa0_row8_col0" class="data row8 col0">rfsd_summary.parquet</td>
+<td id="T_61fa0_row8_col1" class="data row8 col1">15</td>
+<td id="T_61fa0_row8_col2" class="data row8 col2">2011–2025 гг.</td>
+<td id="T_61fa0_row8_col3" class="data row8 col3">5</td>
+<td id="T_61fa0_row8_col4" class="data row8 col4">load_rfsd_summary()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row9_col0" class="data row9 col0">rfsd_cases.parquet</td>
-<td id="T_655e3_row9_col1" class="data row9 col1">90</td>
-<td id="T_655e3_row9_col2" class="data row9 col2">2011–2025 гг.</td>
-<td id="T_655e3_row9_col3" class="data row9 col3">31</td>
-<td id="T_655e3_row9_col4" class="data row9 col4">load_rfsd_cases()</td>
+<td id="T_61fa0_row9_col0" class="data row9 col0">rfsd_cases.parquet</td>
+<td id="T_61fa0_row9_col1" class="data row9 col1">90</td>
+<td id="T_61fa0_row9_col2" class="data row9 col2">2011–2025 гг.</td>
+<td id="T_61fa0_row9_col3" class="data row9 col3">31</td>
+<td id="T_61fa0_row9_col4" class="data row9 col4">load_rfsd_cases()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row10_col0" class="data row10 col0">rfsd_revenue_okved.parquet</td>
-<td id="T_655e3_row10_col1" class="data row10 col1">1&nbsp;244</td>
-<td id="T_655e3_row10_col2" class="data row10 col2">2012–2025 гг.</td>
-<td id="T_655e3_row10_col3" class="data row10 col3">13</td>
-<td id="T_655e3_row10_col4" class="data row10 col4">load_rfsd_revenue_okved()</td>
+<td id="T_61fa0_row10_col0" class="data row10 col0">rfsd_revenue_okved.parquet</td>
+<td id="T_61fa0_row10_col1" class="data row10 col1">1&nbsp;244</td>
+<td id="T_61fa0_row10_col2" class="data row10 col2">2012–2025 гг.</td>
+<td id="T_61fa0_row10_col3" class="data row10 col3">13</td>
+<td id="T_61fa0_row10_col4" class="data row10 col4">load_rfsd_revenue_okved()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row11_col0" class="data row11 col0">rfsd_hidden.parquet</td>
-<td id="T_655e3_row11_col1" class="data row11 col1">9</td>
-<td id="T_655e3_row11_col2" class="data row11 col2">2017–2025 гг.</td>
-<td id="T_655e3_row11_col3" class="data row11 col3">2</td>
-<td id="T_655e3_row11_col4" class="data row11 col4">load_rfsd_hidden()</td>
+<td id="T_61fa0_row11_col0" class="data row11 col0">rfsd_hidden.parquet</td>
+<td id="T_61fa0_row11_col1" class="data row11 col1">9</td>
+<td id="T_61fa0_row11_col2" class="data row11 col2">2017–2025 гг.</td>
+<td id="T_61fa0_row11_col3" class="data row11 col3">2</td>
+<td id="T_61fa0_row11_col4" class="data row11 col4">load_rfsd_hidden()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row12_col0" class="data row12 col0">rfsd_hidden_top.parquet</td>
-<td id="T_655e3_row12_col1" class="data row12 col1">30</td>
-<td id="T_655e3_row12_col2" class="data row12 col2">–</td>
-<td id="T_655e3_row12_col3" class="data row12 col3">3</td>
-<td id="T_655e3_row12_col4" class="data row12 col4">load_rfsd_hidden_top()</td>
+<td id="T_61fa0_row12_col0" class="data row12 col0">rfsd_hidden_top.parquet</td>
+<td id="T_61fa0_row12_col1" class="data row12 col1">30</td>
+<td id="T_61fa0_row12_col2" class="data row12 col2">–</td>
+<td id="T_61fa0_row12_col3" class="data row12 col3">3</td>
+<td id="T_61fa0_row12_col4" class="data row12 col4">load_rfsd_hidden_top()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row13_col0" class="data row13 col0">rosstat_revenue.parquet</td>
-<td id="T_655e3_row13_col1" class="data row13 col1">765</td>
-<td id="T_655e3_row13_col2" class="data row13 col2">2017–2025 гг.</td>
-<td id="T_655e3_row13_col3" class="data row13 col3">14</td>
-<td id="T_655e3_row13_col4" class="data row13 col4">load_rosstat_revenue()</td>
+<td id="T_61fa0_row13_col0" class="data row13 col0">rosstat_revenue.parquet</td>
+<td id="T_61fa0_row13_col1" class="data row13 col1">765</td>
+<td id="T_61fa0_row13_col2" class="data row13 col2">2017–2025 гг.</td>
+<td id="T_61fa0_row13_col3" class="data row13 col3">14</td>
+<td id="T_61fa0_row13_col4" class="data row13 col4">load_rosstat_revenue()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row14_col0" class="data row14 col0">bonds/quotes.parquet</td>
-<td id="T_655e3_row14_col1" class="data row14 col1">2&nbsp;796</td>
-<td id="T_655e3_row14_col2" class="data row14 col2">03.01.2024–30.09.2026</td>
-<td id="T_655e3_row14_col3" class="data row14 col3">40</td>
-<td id="T_655e3_row14_col4" class="data row14 col4">load_bonds()</td>
+<td id="T_61fa0_row14_col0" class="data row14 col0">bonds/quotes.parquet</td>
+<td id="T_61fa0_row14_col1" class="data row14 col1">2&nbsp;796</td>
+<td id="T_61fa0_row14_col2" class="data row14 col2">03.01.2024–30.09.2026</td>
+<td id="T_61fa0_row14_col3" class="data row14 col3">40</td>
+<td id="T_61fa0_row14_col4" class="data row14 col4">load_bonds()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row15_col0" class="data row15 col0">bonds/coupons.parquet</td>
-<td id="T_655e3_row15_col1" class="data row15 col1">101</td>
-<td id="T_655e3_row15_col2" class="data row15 col2">15.04.2020–15.05.2041</td>
-<td id="T_655e3_row15_col3" class="data row15 col3">4</td>
-<td id="T_655e3_row15_col4" class="data row15 col4">load_bond_coupons()</td>
+<td id="T_61fa0_row15_col0" class="data row15 col0">bonds/coupons.parquet</td>
+<td id="T_61fa0_row15_col1" class="data row15 col1">101</td>
+<td id="T_61fa0_row15_col2" class="data row15 col2">15.04.2020–15.05.2041</td>
+<td id="T_61fa0_row15_col3" class="data row15 col3">4</td>
+<td id="T_61fa0_row15_col4" class="data row15 col4">load_bond_coupons()</td>
 </tr>
 <tr class="odd">
-<td id="T_655e3_row16_col0" class="data row16 col0">bonds/principal.parquet</td>
-<td id="T_655e3_row16_col1" class="data row16 col1">4</td>
-<td id="T_655e3_row16_col2" class="data row16 col2">06.10.2027–15.05.2041</td>
-<td id="T_655e3_row16_col3" class="data row16 col3">2</td>
-<td id="T_655e3_row16_col4" class="data row16 col4">load_bond_principal()</td>
+<td id="T_61fa0_row16_col0" class="data row16 col0">bonds/principal.parquet</td>
+<td id="T_61fa0_row16_col1" class="data row16 col1">4</td>
+<td id="T_61fa0_row16_col2" class="data row16 col2">06.10.2027–15.05.2041</td>
+<td id="T_61fa0_row16_col3" class="data row16 col3">2</td>
+<td id="T_61fa0_row16_col4" class="data row16 col4">load_bond_principal()</td>
 </tr>
 <tr class="even">
-<td id="T_655e3_row17_col0" class="data row17 col0">bonds/curve.parquet</td>
-<td id="T_655e3_row17_col1" class="data row17 col1">11</td>
-<td id="T_655e3_row17_col2" class="data row17 col2">30.09.2026–30.09.2026</td>
-<td id="T_655e3_row17_col3" class="data row17 col3">1</td>
-<td id="T_655e3_row17_col4" class="data row17 col4">load_bond_curve()</td>
+<td id="T_61fa0_row17_col0" class="data row17 col0">bonds/curve.parquet</td>
+<td id="T_61fa0_row17_col1" class="data row17 col1">11</td>
+<td id="T_61fa0_row17_col2" class="data row17 col2">30.09.2026–30.09.2026</td>
+<td id="T_61fa0_row17_col3" class="data row17 col3">1</td>
+<td id="T_61fa0_row17_col4" class="data row17 col4">load_bond_curve()</td>
+</tr>
+<tr class="odd">
+<td id="T_61fa0_row18_col0" class="data row18 col0">micro/sber_book.parquet</td>
+<td id="T_61fa0_row18_col1" class="data row18 col1">31&nbsp;200</td>
+<td id="T_61fa0_row18_col2" class="data row18 col2">30.12.2025–30.12.2025</td>
+<td id="T_61fa0_row18_col3" class="data row18 col3">927</td>
+<td id="T_61fa0_row18_col4" class="data row18 col4">load_micro("sber_book")</td>
+</tr>
+<tr class="even">
+<td id="T_61fa0_row19_col0" class="data row19 col0">micro/sber_trades.parquet</td>
+<td id="T_61fa0_row19_col1" class="data row19 col1">88&nbsp;693</td>
+<td id="T_61fa0_row19_col2" class="data row19 col2">30.12.2025–30.12.2025</td>
+<td id="T_61fa0_row19_col3" class="data row19 col3">768</td>
+<td id="T_61fa0_row19_col4" class="data row19 col4">load_micro("sber_trades")</td>
+</tr>
+<tr class="odd">
+<td id="T_61fa0_row20_col0" class="data row20 col0">micro/panel_5s.parquet</td>
+<td id="T_61fa0_row20_col1" class="data row20 col1">5&nbsp;732</td>
+<td id="T_61fa0_row20_col2" class="data row20 col2">04.01.2021–30.06.2025</td>
+<td id="T_61fa0_row20_col3" class="data row20 col3">936</td>
+<td id="T_61fa0_row20_col4" class="data row20 col4">load_micro("panel")</td>
+</tr>
+<tr class="even">
+<td id="T_61fa0_row21_col0" class="data row21 col0">micro/price_variable.parquet</td>
+<td id="T_61fa0_row21_col1" class="data row21 col1">357</td>
+<td id="T_61fa0_row21_col2" class="data row21 col2">04.01.2021–02.06.2025</td>
+<td id="T_61fa0_row21_col3" class="data row21 col3">51</td>
+<td id="T_61fa0_row21_col4" class="data row21 col4">load_micro("price_variable")</td>
+</tr>
+<tr class="odd">
+<td id="T_61fa0_row22_col0" class="data row22 col0">micro/net_edge.parquet</td>
+<td id="T_61fa0_row22_col1" class="data row22 col1">5&nbsp;432</td>
+<td id="T_61fa0_row22_col2" class="data row22 col2">31.03.2021–30.06.2025</td>
+<td id="T_61fa0_row22_col3" class="data row22 col3">277</td>
+<td id="T_61fa0_row22_col4" class="data row22 col4">load_micro("net_edge")</td>
 </tr>
 </tbody>
 </table>
@@ -750,121 +786,121 @@ window.Quarto = {
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_fbf16" class="cell caption-top table table-sm table-striped small">
+<table id="T_04b15" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th id="T_fbf16_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Индекс</th>
-<th id="T_fbf16_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Описание</th>
-<th id="T_fbf16_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Начало</th>
-<th id="T_fbf16_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Конец</th>
+<th id="T_04b15_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Индекс</th>
+<th id="T_04b15_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Описание</th>
+<th id="T_04b15_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Начало</th>
+<th id="T_04b15_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Конец</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td id="T_fbf16_row0_col0" class="data row0 col0">IMOEX</td>
-<td id="T_fbf16_row0_col1" class="data row0 col1">Индекс МосБиржи (ценовой), руб.</td>
-<td id="T_fbf16_row0_col2" class="data row0 col2">22.09.1997</td>
-<td id="T_fbf16_row0_col3" class="data row0 col3">29.09.2026</td>
+<td id="T_04b15_row0_col0" class="data row0 col0">IMOEX</td>
+<td id="T_04b15_row0_col1" class="data row0 col1">Индекс МосБиржи (ценовой), руб.</td>
+<td id="T_04b15_row0_col2" class="data row0 col2">22.09.1997</td>
+<td id="T_04b15_row0_col3" class="data row0 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row1_col0" class="data row1 col0">MCFTR</td>
-<td id="T_fbf16_row1_col1" class="data row1 col1">Индекс МосБиржи полной доходности брутто</td>
-<td id="T_fbf16_row1_col2" class="data row1 col2">26.02.2003</td>
-<td id="T_fbf16_row1_col3" class="data row1 col3">29.09.2026</td>
+<td id="T_04b15_row1_col0" class="data row1 col0">MCFTR</td>
+<td id="T_04b15_row1_col1" class="data row1 col1">Индекс МосБиржи полной доходности брутто</td>
+<td id="T_04b15_row1_col2" class="data row1 col2">26.02.2003</td>
+<td id="T_04b15_row1_col3" class="data row1 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row2_col0" class="data row2 col0">MCFTRR</td>
-<td id="T_fbf16_row2_col1" class="data row2 col1">Индекс МосБиржи полной доходности нетто (после налога на дивиденды)</td>
-<td id="T_fbf16_row2_col2" class="data row2 col2">26.02.2003</td>
-<td id="T_fbf16_row2_col3" class="data row2 col3">29.09.2026</td>
+<td id="T_04b15_row2_col0" class="data row2 col0">MCFTRR</td>
+<td id="T_04b15_row2_col1" class="data row2 col1">Индекс МосБиржи полной доходности нетто (после налога на дивиденды)</td>
+<td id="T_04b15_row2_col2" class="data row2 col2">26.02.2003</td>
+<td id="T_04b15_row2_col3" class="data row2 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row3_col0" class="data row3 col0">RTSI</td>
-<td id="T_fbf16_row3_col1" class="data row3 col1">Индекс РТС (в долларах США)</td>
-<td id="T_fbf16_row3_col2" class="data row3 col2">01.09.1995</td>
-<td id="T_fbf16_row3_col3" class="data row3 col3">29.09.2026</td>
+<td id="T_04b15_row3_col0" class="data row3 col0">RTSI</td>
+<td id="T_04b15_row3_col1" class="data row3 col1">Индекс РТС (в долларах США)</td>
+<td id="T_04b15_row3_col2" class="data row3 col2">01.09.1995</td>
+<td id="T_04b15_row3_col3" class="data row3 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row4_col0" class="data row4 col0">MOEXBC</td>
-<td id="T_fbf16_row4_col1" class="data row4 col1">Индекс голубых фишек</td>
-<td id="T_fbf16_row4_col2" class="data row4 col2">24.04.2009</td>
-<td id="T_fbf16_row4_col3" class="data row4 col3">29.09.2026</td>
+<td id="T_04b15_row4_col0" class="data row4 col0">MOEXBC</td>
+<td id="T_04b15_row4_col1" class="data row4 col1">Индекс голубых фишек</td>
+<td id="T_04b15_row4_col2" class="data row4 col2">24.04.2009</td>
+<td id="T_04b15_row4_col3" class="data row4 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row5_col0" class="data row5 col0">RGBI</td>
-<td id="T_fbf16_row5_col1" class="data row5 col1">Индекс ОФЗ (ценовой)</td>
-<td id="T_fbf16_row5_col2" class="data row5 col2">30.12.2002</td>
-<td id="T_fbf16_row5_col3" class="data row5 col3">29.09.2026</td>
+<td id="T_04b15_row5_col0" class="data row5 col0">RGBI</td>
+<td id="T_04b15_row5_col1" class="data row5 col1">Индекс ОФЗ (ценовой)</td>
+<td id="T_04b15_row5_col2" class="data row5 col2">30.12.2002</td>
+<td id="T_04b15_row5_col3" class="data row5 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row6_col0" class="data row6 col0">RGBITR</td>
-<td id="T_fbf16_row6_col1" class="data row6 col1">Индекс ОФЗ полной доходности</td>
-<td id="T_fbf16_row6_col2" class="data row6 col2">30.12.2002</td>
-<td id="T_fbf16_row6_col3" class="data row6 col3">29.09.2026</td>
+<td id="T_04b15_row6_col0" class="data row6 col0">RGBITR</td>
+<td id="T_04b15_row6_col1" class="data row6 col1">Индекс ОФЗ полной доходности</td>
+<td id="T_04b15_row6_col2" class="data row6 col2">30.12.2002</td>
+<td id="T_04b15_row6_col3" class="data row6 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row7_col0" class="data row7 col0">RUCBTRNS</td>
-<td id="T_fbf16_row7_col1" class="data row7 col1">Индекс корпоративных облигаций полной доходности</td>
-<td id="T_fbf16_row7_col2" class="data row7 col2">03.01.2019</td>
-<td id="T_fbf16_row7_col3" class="data row7 col3">29.09.2026</td>
+<td id="T_04b15_row7_col0" class="data row7 col0">RUCBTRNS</td>
+<td id="T_04b15_row7_col1" class="data row7 col1">Индекс корпоративных облигаций полной доходности</td>
+<td id="T_04b15_row7_col2" class="data row7 col2">03.01.2019</td>
+<td id="T_04b15_row7_col3" class="data row7 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row8_col0" class="data row8 col0">MOEXOG</td>
-<td id="T_fbf16_row8_col1" class="data row8 col1">Нефть и газ</td>
-<td id="T_fbf16_row8_col2" class="data row8 col2">30.12.2004</td>
-<td id="T_fbf16_row8_col3" class="data row8 col3">29.09.2026</td>
+<td id="T_04b15_row8_col0" class="data row8 col0">MOEXOG</td>
+<td id="T_04b15_row8_col1" class="data row8 col1">Нефть и газ</td>
+<td id="T_04b15_row8_col2" class="data row8 col2">30.12.2004</td>
+<td id="T_04b15_row8_col3" class="data row8 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row9_col0" class="data row9 col0">MOEXFN</td>
-<td id="T_fbf16_row9_col1" class="data row9 col1">Финансы</td>
-<td id="T_fbf16_row9_col2" class="data row9 col2">30.12.2004</td>
-<td id="T_fbf16_row9_col3" class="data row9 col3">29.09.2026</td>
+<td id="T_04b15_row9_col0" class="data row9 col0">MOEXFN</td>
+<td id="T_04b15_row9_col1" class="data row9 col1">Финансы</td>
+<td id="T_04b15_row9_col2" class="data row9 col2">30.12.2004</td>
+<td id="T_04b15_row9_col3" class="data row9 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row10_col0" class="data row10 col0">MOEXMM</td>
-<td id="T_fbf16_row10_col1" class="data row10 col1">Металлы и добыча</td>
-<td id="T_fbf16_row10_col2" class="data row10 col2">30.12.2004</td>
-<td id="T_fbf16_row10_col3" class="data row10 col3">29.09.2026</td>
+<td id="T_04b15_row10_col0" class="data row10 col0">MOEXMM</td>
+<td id="T_04b15_row10_col1" class="data row10 col1">Металлы и добыча</td>
+<td id="T_04b15_row10_col2" class="data row10 col2">30.12.2004</td>
+<td id="T_04b15_row10_col3" class="data row10 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row11_col0" class="data row11 col0">MOEXEU</td>
-<td id="T_fbf16_row11_col1" class="data row11 col1">Электроэнергетика</td>
-<td id="T_fbf16_row11_col2" class="data row11 col2">30.12.2004</td>
-<td id="T_fbf16_row11_col3" class="data row11 col3">29.09.2026</td>
+<td id="T_04b15_row11_col0" class="data row11 col0">MOEXEU</td>
+<td id="T_04b15_row11_col1" class="data row11 col1">Электроэнергетика</td>
+<td id="T_04b15_row11_col2" class="data row11 col2">30.12.2004</td>
+<td id="T_04b15_row11_col3" class="data row11 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row12_col0" class="data row12 col0">MOEXTL</td>
-<td id="T_fbf16_row12_col1" class="data row12 col1">Телекоммуникации</td>
-<td id="T_fbf16_row12_col2" class="data row12 col2">30.12.2004</td>
-<td id="T_fbf16_row12_col3" class="data row12 col3">19.03.2026</td>
+<td id="T_04b15_row12_col0" class="data row12 col0">MOEXTL</td>
+<td id="T_04b15_row12_col1" class="data row12 col1">Телекоммуникации</td>
+<td id="T_04b15_row12_col2" class="data row12 col2">30.12.2004</td>
+<td id="T_04b15_row12_col3" class="data row12 col3">19.03.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row13_col0" class="data row13 col0">MOEXCH</td>
-<td id="T_fbf16_row13_col1" class="data row13 col1">Химия и нефтехимия</td>
-<td id="T_fbf16_row13_col2" class="data row13 col2">29.12.2006</td>
-<td id="T_fbf16_row13_col3" class="data row13 col3">29.09.2026</td>
+<td id="T_04b15_row13_col0" class="data row13 col0">MOEXCH</td>
+<td id="T_04b15_row13_col1" class="data row13 col1">Химия и нефтехимия</td>
+<td id="T_04b15_row13_col2" class="data row13 col2">29.12.2006</td>
+<td id="T_04b15_row13_col3" class="data row13 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row14_col0" class="data row14 col0">MOEXCN</td>
-<td id="T_fbf16_row14_col1" class="data row14 col1">Потребительский сектор</td>
-<td id="T_fbf16_row14_col2" class="data row14 col2">31.12.2004</td>
-<td id="T_fbf16_row14_col3" class="data row14 col3">29.09.2026</td>
+<td id="T_04b15_row14_col0" class="data row14 col0">MOEXCN</td>
+<td id="T_04b15_row14_col1" class="data row14 col1">Потребительский сектор</td>
+<td id="T_04b15_row14_col2" class="data row14 col2">31.12.2004</td>
+<td id="T_04b15_row14_col3" class="data row14 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row15_col0" class="data row15 col0">MOEXTN</td>
-<td id="T_fbf16_row15_col1" class="data row15 col1">Транспорт</td>
-<td id="T_fbf16_row15_col2" class="data row15 col2">28.12.2007</td>
-<td id="T_fbf16_row15_col3" class="data row15 col3">29.09.2026</td>
+<td id="T_04b15_row15_col0" class="data row15 col0">MOEXTN</td>
+<td id="T_04b15_row15_col1" class="data row15 col1">Транспорт</td>
+<td id="T_04b15_row15_col2" class="data row15 col2">28.12.2007</td>
+<td id="T_04b15_row15_col3" class="data row15 col3">29.09.2026</td>
 </tr>
 <tr class="odd">
-<td id="T_fbf16_row16_col0" class="data row16 col0">MOEXIT</td>
-<td id="T_fbf16_row16_col1" class="data row16 col1">Информационные технологии</td>
-<td id="T_fbf16_row16_col2" class="data row16 col2">25.12.2020</td>
-<td id="T_fbf16_row16_col3" class="data row16 col3">29.09.2026</td>
+<td id="T_04b15_row16_col0" class="data row16 col0">MOEXIT</td>
+<td id="T_04b15_row16_col1" class="data row16 col1">Информационные технологии</td>
+<td id="T_04b15_row16_col2" class="data row16 col2">25.12.2020</td>
+<td id="T_04b15_row16_col3" class="data row16 col3">29.09.2026</td>
 </tr>
 <tr class="even">
-<td id="T_fbf16_row17_col0" class="data row17 col0">MOEXRE</td>
-<td id="T_fbf16_row17_col1" class="data row17 col1">Строительные компании</td>
-<td id="T_fbf16_row17_col2" class="data row17 col2">20.03.2020</td>
-<td id="T_fbf16_row17_col3" class="data row17 col3">29.09.2026</td>
+<td id="T_04b15_row17_col0" class="data row17 col0">MOEXRE</td>
+<td id="T_04b15_row17_col1" class="data row17 col1">Строительные компании</td>
+<td id="T_04b15_row17_col2" class="data row17 col2">20.03.2020</td>
+<td id="T_04b15_row17_col3" class="data row17 col3">29.09.2026</td>
 </tr>
 </tbody>
 </table>
@@ -1063,8 +1099,59 @@ window.Quarto = {
 </figure>
 </div>
 <p>Доходности в снимке – годовые эффективные, срок считается по правилу ACT/365F. Паспорт <code>bonds/snapshot.json</code> хранит контрольные суммы SHA-256 всех файлов и расчётного модуля <code>qf/bonds.py</code>. Функция <code>data.verify_bond_snapshot()</code> сверяет их и останавливает расчёт, если данные или код изменились. График выплат соответствует дате выгрузки: если эмитент позже изменил условия выпуска, снимок этого не покажет.</p>
-</section><section id="sec-data-full" class="level2" data-number="B.9"><h2 data-number="B.9" class="anchored" data-anchor-id="sec-data-full">
-<span class="header-section-number">B.9</span> Полная история рынка акций</h2>
+</section><section id="sec-data-micro" class="level2 page-columns page-full" data-number="B.9"><h2 data-number="B.9" class="anchored" data-anchor-id="sec-data-micro">
+<span class="header-section-number">B.9</span> Микроструктура рынка</h2>
+<p>Подпапка <code>data/micro/</code> – данные к главе 17. Они получены из полного журнала заявок Московской биржи, который сам распространять нельзя, поэтому в книге только производные величины. Собирает папку скрипт <code>scripts/build_micro.py</code>.</p>
+<div id="tbl-data-micro" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-micro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;B.7: Файлы данных по микроструктуре
+</figcaption><div aria-describedby="tbl-data-micro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr class="header">
+<th>Файл</th>
+<th>Содержание</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>sber_book.parquet</code></td>
+<td>SBER, 30.12.2025, основная сессия 10:00–18:40: пять лучших уровней стакана на каждую секунду – цены <code>bid_px1</code>…<code>bid_px5</code>, <code>ask_px1</code>…<code>ask_px5</code> (руб.) и объёмы <code>bid_qty1</code>…<code>ask_qty5</code> (акций)</td>
+</tr>
+<tr class="even">
+<td><code>sber_trades.parquet</code></td>
+<td>сделки SBER за ту же сессию: <code>time</code>, <code>price</code>, <code>qty</code> (лотов; у SBER лот = 1 акция), <code>side</code> – знак агрессора (+1 – покупка, −1 – продажа)</td>
+</tr>
+<tr class="odd">
+<td><code>panel_5s.parquet</code></td>
+<td>панель 60 акций × 5 732 тикер-дня 2021–2025 гг. из статьи <span class="citation" data-cites="salikhov2026">Салихов (<a href="references.html#ref-salikhov2026" role="doc-biblioref">2026 г.</a>)</span>: котируемый спред и спред по Роллу (б. п.), дисперсионные отношения и автокорреляции на средней котировке (<code>*_mid</code>), микроцене и цене сделки, OFI R², реализованная волатильность, группа ликвидности <code>tier</code> и сектор</td>
+</tr>
+<tr class="even">
+<td><code>price_variable.parquet</code></td>
+<td>разложение дисперсии приращений микроцены по 357 тикер-дням</td>
+</tr>
+<tr class="odd">
+<td><code>net_edge.parquet</code></td>
+<td>торговая проверка правила на дисбалансе потока заявок: суммы доходности до издержек, издержек и чистой доходности (б. п.) и число сделок по тикер-дням</td>
+</tr>
+<tr class="even">
+<td>
+<code>universe.csv</code>, <code>ofi_horizon.csv</code>, <code>vr_monthly.csv</code>
+</td>
+<td>состав выборки статьи, OFI R² по горизонтам прогноза, месячный ряд отклонения VR(5) от единицы</td>
+</tr>
+</tbody>
+</table>
+<div class="no-row-height column-margin column-container"><div id="ref-salikhov2026" class="csl-entry" role="listitem">
+Салихов, Марсель. 2026 г. <span>«Больше розницы, не меньше эффективности: российский рынок акций после 2022 года»</span>. Manuscript.
+</div></div></div>
+</figure>
+</div>
+<p>Панель и сопутствующие таблицы взяты из открытого репликационного пакета статьи и распространяются по лицензии CC BY 4.0 (файл <code>LICENSE-data</code>).</p>
+</section><section id="sec-data-full" class="level2" data-number="B.10"><h2 data-number="B.10" class="anchored" data-anchor-id="sec-data-full">
+<span class="header-section-number">B.10</span> Полная история рынка акций</h2>
 <p>Для исследований, которым мало 94 бумаг основного снимка, есть полная история торгов всеми акциями Московской биржи с 1997 г. – около 2,5 тыс. бумаг во всех режимах торгов. Она нужна, например, для факторов размера и стоимости, моментума по широкому рынку и для честной оценки ошибки выжившего.</p>
 <p>Архив разбит по годам: <code>shares/year=YYYY/part-0.parquet</code>. Распакуйте его в любую папку и укажите путь в переменной окружения <code>QF_FULL_DATA</code> или положите в папку <code>_data_full/</code> в корне книги. Загрузка:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>shares <span class="op">=</span> data.load_shares_full(start<span class="op">=</span><span class="st">"2020-01-01"</span>, board<span class="op">=</span><span class="st">"TQBR"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1082,8 +1169,8 @@ window.Quarto = {
 <p>В полной истории нет поправок на сплиты и дивиденды и нет склейки переименований: это данные в том виде, в каком их публикует биржа. До расчёта доходностей их нужно подготовить по правилам главы 3. Для большинства задач книги достаточно основного снимка.</p>
 </div>
 </div>
-</section><section id="sec-data-functions" class="level2" data-number="B.10"><h2 data-number="B.10" class="anchored" data-anchor-id="sec-data-functions">
-<span class="header-section-number">B.10</span> Функции загрузки</h2>
+</section><section id="sec-data-functions" class="level2" data-number="B.11"><h2 data-number="B.11" class="anchored" data-anchor-id="sec-data-functions">
+<span class="header-section-number">B.11</span> Функции загрузки</h2>
 <p>Функции модуля <code>qf.data</code> читают файлы из папки <code>data/</code> и возвращают таблицы pandas. Большинство из них принимает одинаковые аргументы:</p>
 <ul>
 <li>
@@ -1098,7 +1185,7 @@ window.Quarto = {
 <p>Если данные лежат не в папке книги, путь к ним задаёт переменная окружения <code>QF_DATA</code>. Для R те же данные читают функции файла <code>R/qf.R</code>; набор функций в R пока меньше.</p>
 <div id="tbl-data-functions" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;B.7: Функции загрузки данных
+Таблица&nbsp;B.8: Функции загрузки данных
 </figcaption><div aria-describedby="tbl-data-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
@@ -1166,6 +1253,11 @@ window.Quarto = {
 <td>практикум по облигациям</td>
 </tr>
 <tr class="even">
+<td><code>load_micro(name)</code></td>
+<td><code>qf_load_micro(name)</code></td>
+<td>микроструктура: стакан и сделки SBER, панель 60 акций</td>
+</tr>
+<tr class="odd">
 <td><code>load_shares_full()</code></td>
 <td>–</td>
 <td>полная история рынка</td>
@@ -1176,15 +1268,15 @@ window.Quarto = {
 </figure>
 </div>
 <p>Если функции для R нет, файл можно прочитать напрямую: <code>nanoparquet::read_parquet("data/stocks_raw.parquet")</code> или <code>read.csv("data/sectors.csv")</code>.</p>
-</section><section id="sec-data-build" class="level2" data-number="B.11"><h2 data-number="B.11" class="anchored" data-anchor-id="sec-data-build">
-<span class="header-section-number">B.11</span> Как собирается и обновляется снимок</h2>
-<p>Снимок собирает автор книги скриптом <code>scripts/build_data.py</code>. Скрипт читает локальное хранилище пакета moexutils, куда ежедневно загружаются данные Московской биржи и Банка России, и записывает файлы в <code>data/</code>. Читателям этот шаг не нужен, а запустить его без хранилища нельзя. Выборка RFSD собирается в отдельном проекте, ряд Росстата – скриптом <code>scripts/build_rosstat.py</code>, снимок облигаций – <code>scripts/build_bond_data.py</code>.</p>
+</section><section id="sec-data-build" class="level2" data-number="B.12"><h2 data-number="B.12" class="anchored" data-anchor-id="sec-data-build">
+<span class="header-section-number">B.12</span> Как собирается и обновляется снимок</h2>
+<p>Снимок собирает автор книги скриптом <code>scripts/build_data.py</code>. Скрипт читает локальное хранилище пакета moexutils, куда ежедневно загружаются данные Московской биржи и Банка России, и записывает файлы в <code>data/</code>. Читателям этот шаг не нужен, а запустить его без хранилища нельзя. Выборка RFSD собирается в отдельном проекте, ряд Росстата – скриптом <code>scripts/build_rosstat.py</code>, снимок облигаций – <code>scripts/build_bond_data.py</code>, данные по микроструктуре – <code>scripts/build_micro.py</code> из проекта автора по журналу заявок.</p>
 <p>Обновление снимка меняет числа во всех главах, которые используют рыночные данные, поэтому оно происходит редко и вместе с пересборкой книги. Дата снимка записана в <code>data/snapshot.json</code>. Материалы отдельных занятий курса (папка <code>lessons/</code> репозитория) могут использовать собственные, более свежие выгрузки; их период указан в файлах <code>metadata.json</code> рядом с данными.</p>
-</section><section id="sec-data-sources" class="level2 page-columns page-full" data-number="B.12"><h2 data-number="B.12" class="anchored" data-anchor-id="sec-data-sources">
-<span class="header-section-number">B.12</span> Источники и условия использования</h2>
+</section><section id="sec-data-sources" class="level2 page-columns page-full" data-number="B.13"><h2 data-number="B.13" class="anchored" data-anchor-id="sec-data-sources">
+<span class="header-section-number">B.13</span> Источники и условия использования</h2>
 <div id="tbl-data-sources" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;B.8: Источники данных книги
+Таблица&nbsp;B.9: Источники данных книги
 </figcaption><div aria-describedby="tbl-data-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <table class="caption-top table">
 <colgroup>

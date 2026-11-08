@@ -430,7 +430,7 @@ window.Quarto = {
   <ul class="collapse">
 <li><a href="#%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D0%B1%D0%B5%D0%BD%D1%87%D0%BC%D0%B0%D1%80%D0%BA-%D0%BD%D1%83%D0%B6%D0%B5%D0%BD" id="toc-какой-бенчмарк-нужен" class="nav-link" data-scroll-target="#%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D0%B1%D0%B5%D0%BD%D1%87%D0%BC%D0%B0%D1%80%D0%BA-%D0%BD%D1%83%D0%B6%D0%B5%D0%BD"><span class="header-section-number">15.3.1</span> Какой бенчмарк нужен</a></li>
   <li><a href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%B8%D0%B7%D0%B4%D0%B5%D1%80%D0%B6%D0%B5%D0%BA" id="toc-проверка-издержек" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%B8%D0%B7%D0%B4%D0%B5%D1%80%D0%B6%D0%B5%D0%BA"><span class="header-section-number">15.3.2</span> Проверка издержек</a></li>
-  <li><a href="#%D0%B8%D0%B7%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D0%B2-%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0%D1%85-%D1%80%D0%B8%D1%81%D0%BA%D0%B0" id="toc-издержки-в-единицах-риска" class="nav-link" data-scroll-target="#%D0%B8%D0%B7%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D0%B2-%D0%B5%D0%B4%D0%B8%D0%BD%D0%B8%D1%86%D0%B0%D1%85-%D1%80%D0%B8%D1%81%D0%BA%D0%B0"><span class="header-section-number">15.3.3</span> Издержки в единицах риска</a></li>
+  <li><a href="#sec-backtest-costs" id="toc-sec-backtest-costs" class="nav-link" data-scroll-target="#sec-backtest-costs"><span class="header-section-number">15.3.3</span> Издержки в единицах риска</a></li>
   </ul>
 </li>
   <li>
@@ -648,35 +648,35 @@ s_t=\mathbf{1}\!\left(P_t&gt;\frac{1}{n}\sum_{j=0}^{n-1}P_{t-j}\right).
 </details><div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_1f17a" class="caption-top table table-sm table-striped small">
+<table id="T_ac90c" class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_1f17a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">return</th>
-<th id="T_1f17a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">held</th>
-<th id="T_1f17a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">target</th>
-<th id="T_1f17a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">traded</th>
+<th id="T_ac90c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">return</th>
+<th id="T_ac90c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">held</th>
+<th id="T_ac90c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">target</th>
+<th id="T_ac90c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">traded</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_1f17a_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</th>
-<td id="T_1f17a_row0_col0" class="data row0 col0">−1,0%</td>
-<td id="T_1f17a_row0_col1" class="data row0 col1">0</td>
-<td id="T_1f17a_row0_col2" class="data row0 col2">1</td>
-<td id="T_1f17a_row0_col3" class="data row0 col3">1</td>
+<th id="T_ac90c_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</th>
+<td id="T_ac90c_row0_col0" class="data row0 col0">−1,0%</td>
+<td id="T_ac90c_row0_col1" class="data row0 col1">0</td>
+<td id="T_ac90c_row0_col2" class="data row0 col2">1</td>
+<td id="T_ac90c_row0_col3" class="data row0 col3">1</td>
 </tr>
 <tr class="even">
-<th id="T_1f17a_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</th>
-<td id="T_1f17a_row1_col0" class="data row1 col0">10,0%</td>
-<td id="T_1f17a_row1_col1" class="data row1 col1">1</td>
-<td id="T_1f17a_row1_col2" class="data row1 col2">1</td>
-<td id="T_1f17a_row1_col3" class="data row1 col3">0</td>
+<th id="T_ac90c_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</th>
+<td id="T_ac90c_row1_col0" class="data row1 col0">10,0%</td>
+<td id="T_ac90c_row1_col1" class="data row1 col1">1</td>
+<td id="T_ac90c_row1_col2" class="data row1 col2">1</td>
+<td id="T_ac90c_row1_col3" class="data row1 col3">0</td>
 </tr>
 <tr class="odd">
-<th id="T_1f17a_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</th>
-<td id="T_1f17a_row2_col0" class="data row2 col0">−1,0%</td>
-<td id="T_1f17a_row2_col1" class="data row2 col1">1</td>
-<td id="T_1f17a_row2_col2" class="data row2 col2">0</td>
-<td id="T_1f17a_row2_col3" class="data row2 col3">1</td>
+<th id="T_ac90c_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</th>
+<td id="T_ac90c_row2_col0" class="data row2 col0">−1,0%</td>
+<td id="T_ac90c_row2_col1" class="data row2 col1">1</td>
+<td id="T_ac90c_row2_col2" class="data row2 col2">0</td>
+<td id="T_ac90c_row2_col3" class="data row2 col3">1</td>
 </tr>
 </tbody>
 </table>
@@ -740,56 +740,56 @@ s_t=\mathbf{1}\!\left(P_t&gt;\frac{1}{n}\sum_{j=0}^{n-1}P_{t-j}\right).
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_7b2e6" class="cell caption-top table table-sm table-striped small">
+<table id="T_e5b18" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_7b2e6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
-<th id="T_7b2e6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_7b2e6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_7b2e6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
+<th id="T_e5b18_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
+<th id="T_e5b18_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_e5b18_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_e5b18_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_7b2e6_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">MCFTR</th>
-<td id="T_7b2e6_row0_col0" class="data row0 col0">8,3%</td>
-<td id="T_7b2e6_row0_col1" class="data row0 col1">23,1%</td>
-<td id="T_7b2e6_row0_col2" class="data row0 col2">0,06</td>
-<td id="T_7b2e6_row0_col3" class="data row0 col3">−53,5%</td>
+<th id="T_e5b18_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">MCFTR</th>
+<td id="T_e5b18_row0_col0" class="data row0 col0">8,3%</td>
+<td id="T_e5b18_row0_col1" class="data row0 col1">23,1%</td>
+<td id="T_e5b18_row0_col2" class="data row0 col2">0,06</td>
+<td id="T_e5b18_row0_col3" class="data row0 col3">−53,5%</td>
 </tr>
 <tr class="even">
-<th id="T_7b2e6_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">RUONIA</th>
-<td id="T_7b2e6_row1_col0" class="data row1 col0">9,9%</td>
-<td id="T_7b2e6_row1_col1" class="data row1 col1">0,6%</td>
-<td id="T_7b2e6_row1_col2" class="data row1 col2">–</td>
-<td id="T_7b2e6_row1_col3" class="data row1 col3">0,0%</td>
+<th id="T_e5b18_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">RUONIA</th>
+<td id="T_e5b18_row1_col0" class="data row1 col0">9,9%</td>
+<td id="T_e5b18_row1_col1" class="data row1 col1">0,6%</td>
+<td id="T_e5b18_row1_col2" class="data row1 col2">–</td>
+<td id="T_e5b18_row1_col3" class="data row1 col3">0,0%</td>
 </tr>
 <tr class="odd">
-<th id="T_7b2e6_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">SMA200</th>
-<td id="T_7b2e6_row2_col0" class="data row2 col0">8,5%</td>
-<td id="T_7b2e6_row2_col1" class="data row2 col1">14,4%</td>
-<td id="T_7b2e6_row2_col2" class="data row2 col2">−0,02</td>
-<td id="T_7b2e6_row2_col3" class="data row2 col3">−26,9%</td>
+<th id="T_e5b18_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">SMA200</th>
+<td id="T_e5b18_row2_col0" class="data row2 col0">8,5%</td>
+<td id="T_e5b18_row2_col1" class="data row2 col1">14,4%</td>
+<td id="T_e5b18_row2_col2" class="data row2 col2">−0,02</td>
+<td id="T_e5b18_row2_col3" class="data row2 col3">−26,9%</td>
 </tr>
 <tr class="even">
-<th id="T_7b2e6_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">SMA200 без издержек</th>
-<td id="T_7b2e6_row3_col0" class="data row3 col0">9,4%</td>
-<td id="T_7b2e6_row3_col1" class="data row3 col1">14,4%</td>
-<td id="T_7b2e6_row3_col2" class="data row3 col2">0,04</td>
-<td id="T_7b2e6_row3_col3" class="data row3 col3">−26,0%</td>
+<th id="T_e5b18_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">SMA200 без издержек</th>
+<td id="T_e5b18_row3_col0" class="data row3 col0">9,4%</td>
+<td id="T_e5b18_row3_col1" class="data row3 col1">14,4%</td>
+<td id="T_e5b18_row3_col2" class="data row3 col2">0,04</td>
+<td id="T_e5b18_row3_col3" class="data row3 col3">−26,0%</td>
 </tr>
 <tr class="odd">
-<th id="T_7b2e6_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">SMA200 без дохода на деньги</th>
-<td id="T_7b2e6_row4_col0" class="data row4 col0">5,3%</td>
-<td id="T_7b2e6_row4_col1" class="data row4 col1">14,4%</td>
-<td id="T_7b2e6_row4_col2" class="data row4 col2">−0,23</td>
-<td id="T_7b2e6_row4_col3" class="data row4 col3">−32,1%</td>
+<th id="T_e5b18_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">SMA200 без дохода на деньги</th>
+<td id="T_e5b18_row4_col0" class="data row4 col0">5,3%</td>
+<td id="T_e5b18_row4_col1" class="data row4 col1">14,4%</td>
+<td id="T_e5b18_row4_col2" class="data row4 col2">−0,23</td>
+<td id="T_e5b18_row4_col3" class="data row4 col3">−32,1%</td>
 </tr>
 <tr class="even">
-<th id="T_7b2e6_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Ошибка времени</th>
-<td id="T_7b2e6_row5_col0" class="data row5 col0">24,4%</td>
-<td id="T_7b2e6_row5_col1" class="data row5 col1">13,4%</td>
-<td id="T_7b2e6_row5_col2" class="data row5 col2">1,00</td>
-<td id="T_7b2e6_row5_col3" class="data row5 col3">−14,5%</td>
+<th id="T_e5b18_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">Ошибка времени</th>
+<td id="T_e5b18_row5_col0" class="data row5 col0">24,4%</td>
+<td id="T_e5b18_row5_col1" class="data row5 col1">13,4%</td>
+<td id="T_e5b18_row5_col2" class="data row5 col2">1,00</td>
+<td id="T_e5b18_row5_col3" class="data row5 col3">−14,5%</td>
 </tr>
 </tbody>
 </table>
@@ -842,49 +842,49 @@ s_t=\mathbf{1}\!\left(P_t&gt;\frac{1}{n}\sum_{j=0}^{n-1}P_{t-j}\right).
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_3c02c" class="cell caption-top table table-sm table-striped small">
+<table id="T_d3f72" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_3c02c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
-<th id="T_3c02c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_3c02c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_3c02c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
+<th id="T_d3f72_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
+<th id="T_d3f72_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_d3f72_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_d3f72_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_3c02c_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0 б. п.</th>
-<td id="T_3c02c_row0_col0" class="data row0 col0">9,4%</td>
-<td id="T_3c02c_row0_col1" class="data row0 col1">14,4%</td>
-<td id="T_3c02c_row0_col2" class="data row0 col2">0,04</td>
-<td id="T_3c02c_row0_col3" class="data row0 col3">−26,0%</td>
+<th id="T_d3f72_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0 б. п.</th>
+<td id="T_d3f72_row0_col0" class="data row0 col0">9,4%</td>
+<td id="T_d3f72_row0_col1" class="data row0 col1">14,4%</td>
+<td id="T_d3f72_row0_col2" class="data row0 col2">0,04</td>
+<td id="T_d3f72_row0_col3" class="data row0 col3">−26,0%</td>
 </tr>
 <tr class="even">
-<th id="T_3c02c_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">5 б. п.</th>
-<td id="T_3c02c_row1_col0" class="data row1 col0">8,9%</td>
-<td id="T_3c02c_row1_col1" class="data row1 col1">14,4%</td>
-<td id="T_3c02c_row1_col2" class="data row1 col2">0,01</td>
-<td id="T_3c02c_row1_col3" class="data row1 col3">−26,5%</td>
+<th id="T_d3f72_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">5 б. п.</th>
+<td id="T_d3f72_row1_col0" class="data row1 col0">8,9%</td>
+<td id="T_d3f72_row1_col1" class="data row1 col1">14,4%</td>
+<td id="T_d3f72_row1_col2" class="data row1 col2">0,01</td>
+<td id="T_d3f72_row1_col3" class="data row1 col3">−26,5%</td>
 </tr>
 <tr class="odd">
-<th id="T_3c02c_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">10 б. п.</th>
-<td id="T_3c02c_row2_col0" class="data row2 col0">8,5%</td>
-<td id="T_3c02c_row2_col1" class="data row2 col1">14,4%</td>
-<td id="T_3c02c_row2_col2" class="data row2 col2">−0,02</td>
-<td id="T_3c02c_row2_col3" class="data row2 col3">−26,9%</td>
+<th id="T_d3f72_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">10 б. п.</th>
+<td id="T_d3f72_row2_col0" class="data row2 col0">8,5%</td>
+<td id="T_d3f72_row2_col1" class="data row2 col1">14,4%</td>
+<td id="T_d3f72_row2_col2" class="data row2 col2">−0,02</td>
+<td id="T_d3f72_row2_col3" class="data row2 col3">−26,9%</td>
 </tr>
 <tr class="even">
-<th id="T_3c02c_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25 б. п.</th>
-<td id="T_3c02c_row3_col0" class="data row3 col0">7,1%</td>
-<td id="T_3c02c_row3_col1" class="data row3 col1">14,4%</td>
-<td id="T_3c02c_row3_col2" class="data row3 col2">−0,11</td>
-<td id="T_3c02c_row3_col3" class="data row3 col3">−31,8%</td>
+<th id="T_d3f72_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25 б. п.</th>
+<td id="T_d3f72_row3_col0" class="data row3 col0">7,1%</td>
+<td id="T_d3f72_row3_col1" class="data row3 col1">14,4%</td>
+<td id="T_d3f72_row3_col2" class="data row3 col2">−0,11</td>
+<td id="T_d3f72_row3_col3" class="data row3 col3">−31,8%</td>
 </tr>
 <tr class="odd">
-<th id="T_3c02c_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50 б. п.</th>
-<td id="T_3c02c_row4_col0" class="data row4 col0">4,8%</td>
-<td id="T_3c02c_row4_col1" class="data row4 col1">14,5%</td>
-<td id="T_3c02c_row4_col2" class="data row4 col2">−0,25</td>
-<td id="T_3c02c_row4_col3" class="data row4 col3">−41,6%</td>
+<th id="T_d3f72_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50 б. п.</th>
+<td id="T_d3f72_row4_col0" class="data row4 col0">4,8%</td>
+<td id="T_d3f72_row4_col1" class="data row4 col1">14,5%</td>
+<td id="T_d3f72_row4_col2" class="data row4 col2">−0,25</td>
+<td id="T_d3f72_row4_col3" class="data row4 col3">−41,6%</td>
 </tr>
 </tbody>
 </table>
@@ -895,7 +895,7 @@ s_t=\mathbf{1}\!\left(P_t&gt;\frac{1}{n}\sum_{j=0}^{n-1}P_{t-j}\right).
 </div>
 <p>Один базисный пункт – 0,01 процентного пункта. Таблица – сценарный расчёт, а не оценка реальных расходов. Реальные издержки зависят от комиссии брокера и биржи, разницы цен покупки и продажи, размера заявки и её влияния на рынок. Одинаковые 10 б. п. для небольшой заявки в ликвидной акции и крупной заявки в редкоторгуемой бумаге – сильное допущение.</p>
 <p>Для стратегии по отдельным акциям полезно дополнительно ограничить размер заявки долей <strong>прошлого</strong> дневного оборота. Если для ограничения используется полный оборот дня исполнения, доступный только вечером, снова возникает заглядывание в будущее. Нельзя также считать все заявки исполненными по цене закрытия при остановке торгов или отсутствии встречных заявок.</p>
-</section><section id="издержки-в-единицах-риска" class="level3 page-columns page-full" data-number="15.3.3"><h3 data-number="15.3.3" class="anchored" data-anchor-id="издержки-в-единицах-риска">
+</section><section id="sec-backtest-costs" class="level3 page-columns page-full" data-number="15.3.3"><h3 data-number="15.3.3" class="anchored" data-anchor-id="sec-backtest-costs">
 <span class="header-section-number">15.3.3</span> Издержки в единицах риска</h3>
 <p>Таблица показывает издержки в процентах, но удобнее сравнивать их с тем, что стратегия зарабатывает за риск. <span class="citation" data-cites="carver2019">Carver (<a href="references.html#ref-carver2019" role="doc-biblioref">2019 г.</a>)</span> делит годовые издержки на годовую волатильность стратегии и получает их стоимость в единицах коэффициента Шарпа. Такая мера не зависит от плеча: удвоение позиции удваивает и издержки, и риск. Его практическое правило – <strong>предел скорости</strong>: издержки не должны превышать трети ожидаемого Шарпа до издержек. Запас нужен потому, что ожидаемая доходность известна плохо: если она окажется вдвое ниже, после издержек что-то всё равно останется.</p>
 <div class="no-row-height column-margin column-container"></div><p>Для SMA200 волатильность – около 14% в год, переключений – 8,5 в год. При 10 б. п. за переключение издержки отнимают всего 0,059 единицы Шарпа, при 50 б. п. – 0,30. В абсолютном выражении это немного. Но предел скорости считается от <strong>ожидаемого</strong> Шарпа до издержек, а у SMA200 относительно RUONIA он и без издержек всего 0,04: даже 10 б. п. превышают треть этой величины в несколько раз. Правило не делает стратегию прибыльной, а лишь показывает, есть ли у неё запас на издержки. У SMA200 этого запаса нет. Пример стратегии, которая подходит к пределу вплотную, – ежемесячная ребалансировка по моментуму в главе 16 (раздел <a href="16-momentum.html#sec-mom-buffer" class="quarto-xref"><span>16.4.1</span></a>).</p>
@@ -1013,42 +1013,42 @@ s_t=\mathbf{1}\!\left(P_t&gt;\frac{1}{n}\sum_{j=0}^{n-1}P_{t-j}\right).
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_4dfe3" class="cell caption-top table table-sm table-striped small">
+<table id="T_31321" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_4dfe3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
-<th id="T_4dfe3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_4dfe3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_4dfe3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
+<th id="T_31321_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
+<th id="T_31321_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_31321_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_31321_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_4dfe3_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Ежегодный выбор</th>
-<td id="T_4dfe3_row0_col0" class="data row0 col0">12,9%</td>
-<td id="T_4dfe3_row0_col1" class="data row0 col1">13,3%</td>
-<td id="T_4dfe3_row0_col2" class="data row0 col2">0,19</td>
-<td id="T_4dfe3_row0_col3" class="data row0 col3">−22,6%</td>
+<th id="T_31321_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Ежегодный выбор</th>
+<td id="T_31321_row0_col0" class="data row0 col0">12,9%</td>
+<td id="T_31321_row0_col1" class="data row0 col1">13,3%</td>
+<td id="T_31321_row0_col2" class="data row0 col2">0,19</td>
+<td id="T_31321_row0_col3" class="data row0 col3">−22,6%</td>
 </tr>
 <tr class="even">
-<th id="T_4dfe3_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Победитель всей истории</th>
-<td id="T_4dfe3_row1_col0" class="data row1 col0">15,4%</td>
-<td id="T_4dfe3_row1_col1" class="data row1 col1">13,7%</td>
-<td id="T_4dfe3_row1_col2" class="data row1 col2">0,35</td>
-<td id="T_4dfe3_row1_col3" class="data row1 col3">−18,8%</td>
+<th id="T_31321_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Победитель всей истории</th>
+<td id="T_31321_row1_col0" class="data row1 col0">15,4%</td>
+<td id="T_31321_row1_col1" class="data row1 col1">13,7%</td>
+<td id="T_31321_row1_col2" class="data row1 col2">0,35</td>
+<td id="T_31321_row1_col3" class="data row1 col3">−18,8%</td>
 </tr>
 <tr class="odd">
-<th id="T_4dfe3_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">MCFTR</th>
-<td id="T_4dfe3_row2_col0" class="data row2 col0">10,5%</td>
-<td id="T_4dfe3_row2_col1" class="data row2 col1">23,5%</td>
-<td id="T_4dfe3_row2_col2" class="data row2 col2">0,10</td>
-<td id="T_4dfe3_row2_col3" class="data row2 col3">−53,5%</td>
+<th id="T_31321_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">MCFTR</th>
+<td id="T_31321_row2_col0" class="data row2 col0">10,5%</td>
+<td id="T_31321_row2_col1" class="data row2 col1">23,5%</td>
+<td id="T_31321_row2_col2" class="data row2 col2">0,10</td>
+<td id="T_31321_row2_col3" class="data row2 col3">−53,5%</td>
 </tr>
 <tr class="even">
-<th id="T_4dfe3_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">RUONIA</th>
-<td id="T_4dfe3_row3_col0" class="data row3 col0">11,0%</td>
-<td id="T_4dfe3_row3_col1" class="data row3 col1">0,7%</td>
-<td id="T_4dfe3_row3_col2" class="data row3 col2">–</td>
-<td id="T_4dfe3_row3_col3" class="data row3 col3">0,0%</td>
+<th id="T_31321_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">RUONIA</th>
+<td id="T_31321_row3_col0" class="data row3 col0">11,0%</td>
+<td id="T_31321_row3_col1" class="data row3 col1">0,7%</td>
+<td id="T_31321_row3_col2" class="data row3 col2">–</td>
+<td id="T_31321_row3_col3" class="data row3 col3">0,0%</td>
 </tr>
 </tbody>
 </table>
@@ -1138,42 +1138,42 @@ r_t=c+\phi r_{t-1}+\varepsilon_t.
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_3af05" class="cell caption-top table table-sm table-striped small">
+<table id="T_656e3" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_3af05_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
-<th id="T_3af05_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
-<th id="T_3af05_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
-<th id="T_3af05_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
+<th id="T_656e3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">CAGR</th>
+<th id="T_656e3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Волатильность</th>
+<th id="T_656e3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Шарп</th>
+<th id="T_656e3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Просадка</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_3af05_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">AR(1)</th>
-<td id="T_3af05_row0_col0" class="data row0 col0">7,9%</td>
-<td id="T_3af05_row0_col1" class="data row0 col1">23,1%</td>
-<td id="T_3af05_row0_col2" class="data row0 col2">0,04</td>
-<td id="T_3af05_row0_col3" class="data row0 col3">−53,5%</td>
+<th id="T_656e3_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">AR(1)</th>
+<td id="T_656e3_row0_col0" class="data row0 col0">7,9%</td>
+<td id="T_656e3_row0_col1" class="data row0 col1">23,1%</td>
+<td id="T_656e3_row0_col2" class="data row0 col2">0,04</td>
+<td id="T_656e3_row0_col3" class="data row0 col3">−53,5%</td>
 </tr>
 <tr class="even">
-<th id="T_3af05_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">SMA200</th>
-<td id="T_3af05_row1_col0" class="data row1 col0">8,5%</td>
-<td id="T_3af05_row1_col1" class="data row1 col1">14,4%</td>
-<td id="T_3af05_row1_col2" class="data row1 col2">−0,02</td>
-<td id="T_3af05_row1_col3" class="data row1 col3">−26,9%</td>
+<th id="T_656e3_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">SMA200</th>
+<td id="T_656e3_row1_col0" class="data row1 col0">8,5%</td>
+<td id="T_656e3_row1_col1" class="data row1 col1">14,4%</td>
+<td id="T_656e3_row1_col2" class="data row1 col2">−0,02</td>
+<td id="T_656e3_row1_col3" class="data row1 col3">−26,9%</td>
 </tr>
 <tr class="odd">
-<th id="T_3af05_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">MCFTR</th>
-<td id="T_3af05_row2_col0" class="data row2 col0">8,3%</td>
-<td id="T_3af05_row2_col1" class="data row2 col1">23,1%</td>
-<td id="T_3af05_row2_col2" class="data row2 col2">0,06</td>
-<td id="T_3af05_row2_col3" class="data row2 col3">−53,5%</td>
+<th id="T_656e3_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">MCFTR</th>
+<td id="T_656e3_row2_col0" class="data row2 col0">8,3%</td>
+<td id="T_656e3_row2_col1" class="data row2 col1">23,1%</td>
+<td id="T_656e3_row2_col2" class="data row2 col2">0,06</td>
+<td id="T_656e3_row2_col3" class="data row2 col3">−53,5%</td>
 </tr>
 <tr class="even">
-<th id="T_3af05_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">RUONIA</th>
-<td id="T_3af05_row3_col0" class="data row3 col0">9,9%</td>
-<td id="T_3af05_row3_col1" class="data row3 col1">0,6%</td>
-<td id="T_3af05_row3_col2" class="data row3 col2">–</td>
-<td id="T_3af05_row3_col3" class="data row3 col3">0,0%</td>
+<th id="T_656e3_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">RUONIA</th>
+<td id="T_656e3_row3_col0" class="data row3 col0">9,9%</td>
+<td id="T_656e3_row3_col1" class="data row3 col1">0,6%</td>
+<td id="T_656e3_row3_col2" class="data row3 col2">–</td>
+<td id="T_656e3_row3_col3" class="data row3 col3">0,0%</td>
 </tr>
 </tbody>
 </table>
