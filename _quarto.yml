@@ -2,6 +2,7 @@ project:
   type: book
   output-dir: _book
   resources:
+    - "!_book_*/**"  # временные сборки и проверки не входят в публикацию
     - lessons/index.html
     - lessons/*/lecture.html
     - lessons/*/practice-*.ipynb
