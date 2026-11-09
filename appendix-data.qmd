@@ -81,13 +81,15 @@ loaders = {
     "credit/default_years.parquet": 'load_credit("default_years")',
     "credit/default_rates.parquet": 'load_credit("default_rates")',
     "credit/spread_market.parquet": 'load_credit("spread_market")',
+    "credit/spread_ratings.parquet": 'load_credit("spread_ratings")',
     "credit/spread_buckets.parquet": 'load_credit("spread_buckets")',
     "credit/event_paths.parquet": 'load_credit("event_paths")',
     "credit/cross_section.parquet": 'load_credit("cross_section")',
 }
 date_cols = {"micro/sber_book.parquet": "time", "micro/sber_trades.parquet": "time",
              "dividends.parquet": "closing_date", "bonds/coupons.parquet": "payment_date",
-             "bonds/principal.parquet": "payment_date", "credit/spread_market.parquet": "t"}
+             "bonds/principal.parquet": "payment_date", "credit/spread_market.parquet": "t",
+             "credit/spread_ratings.parquet": "t"}
 rows = []
 for name, loader in loaders.items():
     path = D / name
@@ -281,7 +283,7 @@ n_lines = sum(c.startswith("line_") for c in rf.columns)
 
 ## Кредитный риск {#sec-data-credit}
 
-Подпапка `data/credit/` – данные к главе 14. Метки дефолтов взяты из календаря дефолтов [Cbonds](https://cbonds.ru) (январь 2022 – 2 октября 2026 г.). Это лицензионные данные, поэтому в книге только агрегаты: в каждой строке таблиц объединены несколько эмитентов, а списков выпусков и эмитентов с дефолтом нет. Если в ячейке меньше трёх эмитентов, суммы неисполненных обязательств не показываются. Торги, параметры выпусков и кривая бескупонной доходности – Московская биржа. Собирает папку скрипт `scripts/build_credit_data.py`.
+Подпапка `data/credit/` – данные к главе 14. Метки дефолтов взяты из календаря дефолтов [Cbonds](https://cbonds.ru) (январь 2022 – 2 октября 2026 г.). Это лицензионные данные, поэтому в книге только агрегаты: в каждой строке таблиц объединены несколько эмитентов, а списков выпусков и эмитентов с дефолтом нет. Если в ячейке меньше трёх эмитентов, суммы неисполненных обязательств не показываются. Торги, параметры выпусков, индексы корпоративных облигаций и кривая бескупонной доходности – Московская биржа. Собирает папку скрипт `scripts/build_credit_data.py`.
 
 | Файл | Содержание |
 |---|---|
@@ -291,6 +293,7 @@ n_lines = sum(c.startswith("line_") for c in rf.columns)
 | `default_rates.parquet` | годовые когорты эмитентов с торгами на бирже и число дефолтов, всего и по объёму облигаций в обращении |
 | `spread_buckets.parquet`, `spread_buckets_year.parquet` | эмитенты по корзинам G-спреда на конец месяца и дефолт в следующие 12 месяцев; выборки `all` и `fixed` (только известный фиксированный купон) |
 | `spread_market.parquet` | квантили G-спреда эмитентов на конец месяца |
+| `spread_ratings.parquet` | доходность, дюрация и G-спред индексов корпоративных облигаций Мосбиржи по рейтинговым группам AAA, AA, A, BBB; медиана дневных значений за месяц |
 | `event_paths.parquet` | медиана и квартили цены и G-спреда, оборот относительно обычного в торговые дни от −250 до +60 относительно первого дефолта |
 | `warning_variants.parquet`, `warning_recall.parquet`, `warning_thresholds.parquet` | проверка правила раннего предупреждения: точность, полнота, опережение, типичные ошибки и разные пороги |
 | `cross_section.parquet` | биржевой срез облигаций с фиксированным купоном на 29.09.2026: цена, доходность, дюрация, оборот, уровень листинга; меток дефолта нет |

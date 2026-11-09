@@ -253,6 +253,43 @@ def table_spreads(ims: pd.DataFrame, iss: pd.DataFrame):
     return pd.concat([total, fixed], ignore_index=True), by_year, market
 
 
+RATING_INDEXES = {"RUCBCPAAANS": "AAA", "RUCBCPAANS": "AA", "RUCBCPANS": "A", "RUCBCPBBBNS": "BBB"}
+
+
+def table_rating_spreads(snap: int, params: pd.DataFrame) -> pd.DataFrame:
+    """G-спред индексов корпоративных облигаций Мосбиржи по рейтинговым группам, медиана за месяц.
+
+    Доходность индекса – эффективная годовая, дюрация – в днях; спред считается к КБД
+    на дюрации индекса, как для отдельного выпуска."""
+    from moexutils import lake
+    tickers = ", ".join(f"'{t}'" for t in RATING_INDEXES)
+    idx = lake.query(
+        f"SELECT date, SECID AS ticker, YIELD, DURATION FROM {lake.ref('indexes_all', snap)} "
+        f"WHERE SECID IN ({tickers}) AND date >= ? AND date <= ? AND YIELD > 0 AND DURATION > 0",
+        [pd.Timestamp("2021-12-01").date(), DATA_END.date()],
+    ).to_pandas()
+    idx["date"] = pd.to_datetime(idx["date"])
+    keys = [c for c in params.columns if c not in ("date", "tradetime")]
+    pr = params.assign(date=pd.to_datetime(params["date"]))[["date"] + keys]
+    idx = idx.merge(pr, on="date", how="inner")
+    idx["g_bp"] = 100 * (idx["YIELD"] - zero_yield_pct(idx["DURATION"] / 365, {k: idx[k] for k in keys}))
+    idx["t"] = idx["date"] + pd.offsets.MonthEnd(0)
+    # Медиана дневных значений за месяц: пока выпуск с обвалившейся ценой не исключён из индекса,
+    # доходность индекса может на несколько дней уходить в сотни процентов.
+    m = (idx.groupby(["ticker", "t"])
+         .agg(yield_pct=("YIELD", "median"), duration_days=("DURATION", "median"),
+              g_bp=("g_bp", "median"), yield_max=("YIELD", "max"))
+         .reset_index())
+    out = pd.DataFrame({
+        "t": m["t"], "index": m["ticker"], "rating": m["ticker"].map(RATING_INDEXES),
+        "yield_pct": m["yield_pct"], "duration_days": m["duration_days"], "g_bp": m["g_bp"],
+        "yield_max": m["yield_max"],
+    })
+    out = out[out["t"] <= pd.Timestamp("2026-09-30")]
+    out["rating"] = pd.Categorical(out["rating"], categories=list(RATING_INDEXES.values()), ordered=True)
+    return out.sort_values(["rating", "t"]).reset_index(drop=True)
+
+
 def trading_index(panel: pd.DataFrame) -> pd.Series:
     days = pd.Index(np.sort(panel["date"].unique()))
     return pd.Series(np.arange(len(days)), index=days)
@@ -441,6 +478,7 @@ def main():
     save(sp, "spread_buckets.parquet")
     save(sp_year, "spread_buckets_year.parquet")
     save(market, "spread_market.parquet")
+    save(table_rating_spreads(snap, params), "spread_ratings.parquet")
     paths, path_meta = table_event_paths(panel, iss)
     save(suppress(paths), "event_paths.parquet")
     warn, rec, sens = table_warning(panel, iss)
@@ -453,7 +491,7 @@ def main():
         "schema_version": 1,
         "built_at_utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "moex_snapshot_id": snap,
-        "moex_source": "MOEX ISS via moexutils DuckLake: bonds (TQCB, TQIR, TQRD; RUB), bonds_securities, zcyc_params",
+        "moex_source": "MOEX ISS via moexutils DuckLake: bonds (TQCB, TQIR, TQRD; RUB), bonds_securities, zcyc_params, indexes_all (RUCBCPAAANS, RUCBCPAANS, RUCBCPANS, RUCBCPBBBNS)",
         "defaults_source": "Cbonds, календарь дефолтов (выгрузки 2022–2024 и 2025–2026); в книге только агрегаты",
         "defaults_period": ["2022-01-01", str(DATA_END.date())],
         "cross_section_date": str(XS_DATE.date()),

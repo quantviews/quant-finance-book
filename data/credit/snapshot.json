@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "built_at_utc": "2026-11-09T10:17:33+00:00",
+  "built_at_utc": "2026-11-09T17:20:28+00:00",
   "moex_snapshot_id": 20515,
-  "moex_source": "MOEX ISS via moexutils DuckLake: bonds (TQCB, TQIR, TQRD; RUB), bonds_securities, zcyc_params",
+  "moex_source": "MOEX ISS via moexutils DuckLake: bonds (TQCB, TQIR, TQRD; RUB), bonds_securities, zcyc_params, indexes_all (RUCBCPAAANS, RUCBCPAANS, RUCBCPANS, RUCBCPBBBNS)",
   "defaults_source": "Cbonds, календарь дефолтов (выгрузки 2022–2024 и 2025–2026); в книге только агрегаты",
   "defaults_period": [
     "2022-01-01",
@@ -42,6 +42,10 @@
     "spread_market.parquet": {
       "sha256": "8ae05f0b8c8b624e435c0dca40f7e8425556e238b6d0e4dd896c82733d847d1a",
       "rows": 58
+    },
+    "spread_ratings.parquet": {
+      "sha256": "a309e0a5535512d3601da8e902ad27ee8bd135d91918804c9e71d55a9885cf6c",
+      "rows": 232
     },
     "event_paths.parquet": {
       "sha256": "397bcbf81d92081587ea0e70d7da5a11cf29958c51e88fa9b977db7d0780e6e1",

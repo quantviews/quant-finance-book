@@ -70,3 +70,13 @@ def test_cross_section_gspread_close_to_parametric_curve():
     assert len(curve) >= 10
     g = 100 * (xs["ytm_pct"] - np.interp(xs["duration_days"] / 365, curve["period"], curve["value"]))
     assert g.notna().all() and len(g) > 300
+
+
+def test_rating_spreads_ordered_on_average():
+    rt = data.load_credit("spread_ratings")
+    assert set(rt["rating"].astype(str)) == {"AAA", "AA", "A", "BBB"}
+    assert rt.groupby("rating", observed=True)["t"].nunique().nunique() == 1
+    mean = rt.groupby("rating", observed=True)["g_bp"].mean()
+    assert mean["AAA"] < mean["AA"] < mean["A"] < mean["BBB"]
+    # Медиана за месяц не пропускает дневные выбросы проблемных выпусков.
+    assert rt["yield_pct"].max() < 45

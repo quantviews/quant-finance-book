@@ -247,7 +247,7 @@ def verify_bond_snapshot():
 # ---- Кредитный риск (глава 14) ------------------------------------------------
 
 CREDIT_FILES = ("default_events", "default_years", "default_reasons", "default_rates",
-                "spread_buckets", "spread_buckets_year", "spread_market", "event_paths",
+                "spread_buckets", "spread_buckets_year", "spread_market", "spread_ratings", "event_paths",
                 "warning_variants", "warning_recall", "warning_thresholds", "cross_section")
 
 
@@ -264,6 +264,7 @@ def load_credit(name: str, backend: Backend = "pandas"):
     spread_buckets      – G-спред эмитента на конец месяца и дефолт в следующие 12 месяцев;
     spread_buckets_year – то же по годам наблюдения;
     spread_market       – квантили G-спреда эмитентов по месяцам;
+    spread_ratings      – G-спред индексов Мосбиржи по рейтинговым группам (AAA, AA, A, BBB), медиана за месяц;
     event_paths         – медианная цена, G-спред и оборот в дни до и после дефолта;
     warning_variants    – проверка правила раннего предупреждения и типичные ошибки;
     warning_recall      – доля дефолтов, которым предшествовал сигнал;
