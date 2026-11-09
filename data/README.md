@@ -76,6 +76,7 @@ prices = data.load_stocks(["SBER", "GAZP"], start="2015-01-01")
 | `default_events.parquet`, `default_years.parquet`, `default_reasons.parquet` | Строки календаря, выпуски и эмитенты по годам, типам, статусам и причинам |
 | `default_rates.parquet` | Когорты эмитентов с торгами на бирже и дефолты за год, по объёму облигаций |
 | `spread_buckets.parquet`, `spread_buckets_year.parquet`, `spread_market.parquet` | G-спред эмитентов на конец месяца, корзины спреда и дефолт в следующие 12 месяцев |
+| `spread_ratings.parquet` | G-спред индексов корпоративных облигаций Мосбиржи по рейтинговым группам (AAA, AA, A, BBB), медиана за месяц |
 | `event_paths.parquet` | Цена, G-спред и оборот вокруг первого дефолта эмитента (медианы и квартили) |
 | `warning_*.parquet` | Проверка правила раннего предупреждения по падению цены |
 | `cross_section.parquet` | Облигации с фиксированным купоном на 29.09.2026 (только данные биржи) |

@@ -586,44 +586,80 @@ G = y - z(D),
 </div>
 </section><section id="спред-рынка-во-времени" class="level3" data-number="14.1.2"><h3 data-number="14.1.2" class="anchored" data-anchor-id="спред-рынка-во-времени">
 <span class="header-section-number">14.1.2</span> Спред рынка во времени</h3>
-<p>Чтобы проследить спред во времени, на конец каждого месяца возьмём для каждого эмитента медиану G-спредов его выпусков с дюрацией не меньше трёх месяцев. Эмитенты, у которых уже наступил дефолт, в расчёт не входят.</p>
+<p>Спред зависит от кредитного качества заёмщика, поэтому его динамику надо сравнивать внутри однородных групп. Если взять среднее по всем выпускам рынка, на нём скажется не только переоценка риска, но и смена состава: приход новых слабых заёмщиков поднимет среднее, даже если требования к каждому из прежних не изменились. Московская биржа рассчитывает индексы корпоративных облигаций по рейтинговым группам национальной шкалы – AAA, AA, A и BBB – и публикует для каждого эффективную доходность и дюрацию. По ним G-спред группы считается так же, как для отдельного выпуска: из доходности индекса вычитаем ставку КБД на сроке, равном его дюрации.</p>
+<p>Доходность индекса – средняя по входящим в него выпускам с весами по капитализации. Если цена одного выпуска обваливается, а из индекса его ещё не исключили, доходность индекса на несколько дней уходит в десятки и сотни процентов. В снимке такое случалось с индексом BBB: в отдельные дни его доходность доходила до 107%. Поэтому для каждого месяца берём медиану дневных значений, а не последнее наблюдение.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mk <span class="op">=</span> data.load_credit(<span class="st">"spread_market"</span>)</span>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rt <span class="op">=</span> data.load_credit(<span class="st">"spread_ratings"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">3.2</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.fill_between(mk[<span class="st">"t"</span>], mk[<span class="st">"q25"</span>], mk[<span class="st">"q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>, label<span class="op">=</span><span class="st">"25–75-й процентили"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ax.plot(mk[<span class="st">"t"</span>], mk[<span class="st">"q50"</span>], label<span class="op">=</span><span class="st">"медиана"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax.plot(mk[<span class="st">"t"</span>], mk[<span class="st">"q90"</span>], ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">"90-й процентиль"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"б.п."</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rating, g <span class="kw">in</span> rt.groupby(<span class="st">"rating"</span>, observed<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ax.plot(g[<span class="st">"t"</span>], g[<span class="st">"g_bp"</span>], label<span class="op">=</span>rating)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"б.п."</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, frameon<span class="op">=</span><span class="va">False</span>, ncol<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div id="fig-credit-market" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-credit-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="14-credit-risk_files/figure-html/fig-credit-market-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<div id="fig-credit-ratings" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-credit-ratings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="14-credit-risk_files/figure-html/fig-credit-ratings-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-credit-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;14.1: G-спред эмитентов рублёвых корпоративных облигаций на конец месяца: медиана и межквартильный размах
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-credit-ratings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;14.1: G-спред индексов корпоративных облигаций Московской биржи по рейтинговым группам, медиана дневных значений за месяц
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>В каждом месяце в расчёт входят от 259 до 318 эмитентов. Весной 2022 г. медианный спред за три месяца вырос примерно в пять раз; к лету он снизился, но остался выше уровня конца 2021 г. В 2023 г. медианный спред в среднем составлял 294 б.п., в 2025 г. – 827 б.п. Расширение спредов во втором полугодии 2024 г. совпало с подъёмом ключевой ставки до 21%: при дорогом рефинансировании рынок стал требовать от заёмщиков большей компенсации. На конец ряда медиана – 604 б.п.</p>
+<p>Спреды выстроены по рейтингу: чем ниже группа, тем выше спред и тем сильнее он реагирует на шоки. В конце 2021 г. G-спред индекса AAA составлял 43 б.п., BBB – 330 б.п. Весной 2022 г. спреды всех групп выросли в несколько раз (у BBB – до 1&nbsp;149 б.п.), к лету заметно снизились, но остались выше уровня конца 2021 г. Во втором полугодии 2024 г., пока ключевая ставка поднималась до 21%, спреды групп AA, A и BBB расширялись несколько месяцев подряд, а у AAA до декабря держались около 50–60 б.п.: при дорогом рефинансировании рынок стал требовать большей компенсации прежде всего от слабых заёмщиков. В декабре 2024 г. спред индекса A ненадолго превысил спред BBB. Индексы различаются составом и дюрацией, поэтому в острые периоды порядок групп может нарушаться. В 2025 г. средний спред группы A составлял 735 б.п. против 281 б.п. в 2023 г., BBB – 1&nbsp;205 против 429 б.п. На конец ряда спред AAA – 61 б.п., A – 555 б.п., BBB – 1&nbsp;158 б.п.</p>
+<p>Индексы охватывают только выпуски с рейтингом и достаточной ликвидностью. Многие эмитенты высокодоходных облигаций в них не входят: у них нет рейтинга или он ниже BBB. Чтобы увидеть весь рынок, на конец каждого месяца возьмём для каждого эмитента медиану G-спредов его выпусков с дюрацией не меньше трёх месяцев. Эмитенты, у которых уже наступил дефолт, в расчёт не входят.</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mk <span class="op">=</span> data.load_credit(<span class="st">"spread_market"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">3.2</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ax.fill_between(mk[<span class="st">"t"</span>], mk[<span class="st">"q25"</span>], mk[<span class="st">"q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>, label<span class="op">=</span><span class="st">"25–75-й процентили"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ax.plot(mk[<span class="st">"t"</span>], mk[<span class="st">"q50"</span>], label<span class="op">=</span><span class="st">"медиана"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.plot(mk[<span class="st">"t"</span>], mk[<span class="st">"q90"</span>], ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">"90-й процентиль"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"б.п."</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, расчёты автора"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-credit-market" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-credit-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="14-credit-risk_files/figure-html/fig-credit-market-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-credit-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;14.2: G-спред эмитентов рублёвых корпоративных облигаций на конец месяца: медиана и межквартильный размах
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>В каждом месяце в расчёт входят от 259 до 318 эмитентов. Сравним медиану по эмитентам с рейтинговыми группами. В конце 2021 г. она составляла 194 б.п. и была близка к спреду индекса A (198 б.п.). В 2025 г. медиана в среднем равнялась 827 б.п. – между группами A (735 б.п.) и BBB (1&nbsp;205 б.п.). Положение медианы относительно рейтинговых групп сместилось: в 2021 г. типичный эмитент был сопоставим с группой A, в 2025 г. – слабее её. Значит, часть роста медианного спреда объясняется сменой состава рынка, в том числе выходом небольших заёмщиков без рейтинга, а не только переоценкой риска прежних эмитентов.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: смена состава вместо изменения риска">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: смена состава вместо изменения риска
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Рост медианного спреда по всему рынку складывается из двух частей: каждый заёмщик стал платить больше, и в выборке стало больше слабых заёмщиков. По одному ряду эти части не разделить. Вывод о том, что «кредитный риск вырос», надо проверять внутри однородных групп – по рейтингу, отрасли или на постоянном наборе эмитентов. Та же проблема возникает с любыми средними по меняющейся совокупности: средней доходностью фондов (выжившие фонды лучше закрывшихся), средним мультипликатором рынка, средней зарплатой в отрасли.</p>
+</div>
+</div>
 </section></section><section id="sec-credit-defaults" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="sec-credit-defaults">
 <span class="header-section-number">14.2</span> Сколько было дефолтов</h2>
 <p>Календарь Cbonds фиксирует каждое неисполненное обязательство: пропущенный купон, непогашенный номинал, невыкупленную оферту. У одного эмитента обычно несколько выпусков, а у каждого выпуска – несколько платежей подряд, которые он перестаёт исполнять после первого дефолта. Поэтому число строк календаря быстро растёт и само по себе мало говорит о кредитном риске.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>yr <span class="op">=</span> data.load_credit(<span class="st">"default_years"</span>).set_index(<span class="st">"year"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Строк календаря"</span>: yr[<span class="st">"rows"</span>],</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Выпусков"</span>: yr[<span class="st">"issues"</span>],</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов"</span>: yr[<span class="st">"issuers"</span>],</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Впервые в календаре"</span>: yr[<span class="st">"new_issuers"</span>],</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"из них дефолт"</span>: yr[<span class="st">"new_defaulters"</span>],</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Не исполнено, млрд руб."</span>: yr[<span class="st">"unpaid_mln"</span>] <span class="op">/</span> <span class="dv">1000</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>tab.index.name <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>tab.style.<span class="bu">format</span>(f0).<span class="bu">format</span>(f1, subset<span class="op">=</span>[<span class="st">"Не исполнено, млрд руб."</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>yr <span class="op">=</span> data.load_credit(<span class="st">"default_years"</span>).set_index(<span class="st">"year"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Строк календаря"</span>: yr[<span class="st">"rows"</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Выпусков"</span>: yr[<span class="st">"issues"</span>],</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов"</span>: yr[<span class="st">"issuers"</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Впервые в календаре"</span>: yr[<span class="st">"new_issuers"</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"из них дефолт"</span>: yr[<span class="st">"new_defaulters"</span>],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Не исполнено, млрд руб."</span>: yr[<span class="st">"unpaid_mln"</span>] <span class="op">/</span> <span class="dv">1000</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>tab.index.name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>tab.style.<span class="bu">format</span>(f0).<span class="bu">format</span>(f1, subset<span class="op">=</span>[<span class="st">"Не исполнено, млрд руб."</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-credit-years" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-credit-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;14.1: Календарь дефолтов по годам: строки, выпуски и эмитенты. 2026 г. – по 2 октября
@@ -631,61 +667,61 @@ G = y - z(D),
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_d9c45" class="cell caption-top table table-sm table-striped small">
+<table id="T_680f9" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_d9c45_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Строк календаря</th>
-<th id="T_d9c45_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Выпусков</th>
-<th id="T_d9c45_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Эмитентов</th>
-<th id="T_d9c45_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Впервые в календаре</th>
-<th id="T_d9c45_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">из них дефолт</th>
-<th id="T_d9c45_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Не исполнено, млрд руб.</th>
+<th id="T_680f9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Строк календаря</th>
+<th id="T_680f9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Выпусков</th>
+<th id="T_680f9_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Эмитентов</th>
+<th id="T_680f9_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Впервые в календаре</th>
+<th id="T_680f9_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">из них дефолт</th>
+<th id="T_680f9_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Не исполнено, млрд руб.</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_d9c45_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">2022</th>
-<td id="T_d9c45_row0_col0" class="data row0 col0">302</td>
-<td id="T_d9c45_row0_col1" class="data row0 col1">68</td>
-<td id="T_d9c45_row0_col2" class="data row0 col2">34</td>
-<td id="T_d9c45_row0_col3" class="data row0 col3">30</td>
-<td id="T_d9c45_row0_col4" class="data row0 col4">28</td>
-<td id="T_d9c45_row0_col5" class="data row0 col5">19,2</td>
+<th id="T_680f9_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">2022</th>
+<td id="T_680f9_row0_col0" class="data row0 col0">302</td>
+<td id="T_680f9_row0_col1" class="data row0 col1">68</td>
+<td id="T_680f9_row0_col2" class="data row0 col2">34</td>
+<td id="T_680f9_row0_col3" class="data row0 col3">30</td>
+<td id="T_680f9_row0_col4" class="data row0 col4">28</td>
+<td id="T_680f9_row0_col5" class="data row0 col5">19,2</td>
 </tr>
 <tr class="even">
-<th id="T_d9c45_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">2023</th>
-<td id="T_d9c45_row1_col0" class="data row1 col0">298</td>
-<td id="T_d9c45_row1_col1" class="data row1 col1">54</td>
-<td id="T_d9c45_row1_col2" class="data row1 col2">29</td>
-<td id="T_d9c45_row1_col3" class="data row1 col3">12</td>
-<td id="T_d9c45_row1_col4" class="data row1 col4">7</td>
-<td id="T_d9c45_row1_col5" class="data row1 col5">15,2</td>
+<th id="T_680f9_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">2023</th>
+<td id="T_680f9_row1_col0" class="data row1 col0">298</td>
+<td id="T_680f9_row1_col1" class="data row1 col1">54</td>
+<td id="T_680f9_row1_col2" class="data row1 col2">29</td>
+<td id="T_680f9_row1_col3" class="data row1 col3">12</td>
+<td id="T_680f9_row1_col4" class="data row1 col4">7</td>
+<td id="T_680f9_row1_col5" class="data row1 col5">15,2</td>
 </tr>
 <tr class="odd">
-<th id="T_d9c45_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2024</th>
-<td id="T_d9c45_row2_col0" class="data row2 col0">234</td>
-<td id="T_d9c45_row2_col1" class="data row2 col1">55</td>
-<td id="T_d9c45_row2_col2" class="data row2 col2">25</td>
-<td id="T_d9c45_row2_col3" class="data row2 col3">12</td>
-<td id="T_d9c45_row2_col4" class="data row2 col4">11</td>
-<td id="T_d9c45_row2_col5" class="data row2 col5">42,6</td>
+<th id="T_680f9_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2024</th>
+<td id="T_680f9_row2_col0" class="data row2 col0">234</td>
+<td id="T_680f9_row2_col1" class="data row2 col1">55</td>
+<td id="T_680f9_row2_col2" class="data row2 col2">25</td>
+<td id="T_680f9_row2_col3" class="data row2 col3">12</td>
+<td id="T_680f9_row2_col4" class="data row2 col4">11</td>
+<td id="T_680f9_row2_col5" class="data row2 col5">42,6</td>
 </tr>
 <tr class="even">
-<th id="T_d9c45_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">2025</th>
-<td id="T_d9c45_row3_col0" class="data row3 col0">334</td>
-<td id="T_d9c45_row3_col1" class="data row3 col1">86</td>
-<td id="T_d9c45_row3_col2" class="data row3 col2">51</td>
-<td id="T_d9c45_row3_col3" class="data row3 col3">39</td>
-<td id="T_d9c45_row3_col4" class="data row3 col4">30</td>
-<td id="T_d9c45_row3_col5" class="data row3 col5">17,3</td>
+<th id="T_680f9_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">2025</th>
+<td id="T_680f9_row3_col0" class="data row3 col0">334</td>
+<td id="T_680f9_row3_col1" class="data row3 col1">86</td>
+<td id="T_680f9_row3_col2" class="data row3 col2">51</td>
+<td id="T_680f9_row3_col3" class="data row3 col3">39</td>
+<td id="T_680f9_row3_col4" class="data row3 col4">30</td>
+<td id="T_680f9_row3_col5" class="data row3 col5">17,3</td>
 </tr>
 <tr class="odd">
-<th id="T_d9c45_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">2026</th>
-<td id="T_d9c45_row4_col0" class="data row4 col0">606</td>
-<td id="T_d9c45_row4_col1" class="data row4 col1">143</td>
-<td id="T_d9c45_row4_col2" class="data row4 col2">67</td>
-<td id="T_d9c45_row4_col3" class="data row4 col3">43</td>
-<td id="T_d9c45_row4_col4" class="data row4 col4">27</td>
-<td id="T_d9c45_row4_col5" class="data row4 col5">21,9</td>
+<th id="T_680f9_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">2026</th>
+<td id="T_680f9_row4_col0" class="data row4 col0">606</td>
+<td id="T_680f9_row4_col1" class="data row4 col1">143</td>
+<td id="T_680f9_row4_col2" class="data row4 col2">67</td>
+<td id="T_680f9_row4_col3" class="data row4 col3">43</td>
+<td id="T_680f9_row4_col4" class="data row4 col4">27</td>
+<td id="T_680f9_row4_col5" class="data row4 col5">21,9</td>
 </tr>
 </tbody>
 </table>
@@ -716,35 +752,35 @@ G = y - z(D),
 <p>Чтобы получить частоту дефолтов, нужен знаменатель: сколько эмитентов могли допустить дефолт. Рейтинговые агентства используют для этого когорты <span class="citation" data-cites="hull2023">(<a href="references.html#ref-hull2023" role="doc-biblioref">Hull 2023 г.</a>)</span>. Зафиксируем на начало года всех эмитентов, которые находились «под наблюдением», и посчитаем, какая их доля допустила дефолт до конца года.</p>
 <div class="no-row-height column-margin column-container"></div><p>В когорту года <span class="math inline">\(t\)</span> входят эмитенты, облигации которых торговались на бирже в IV квартале года <span class="math inline">\(t-1\)</span>. Исключаются эмитенты, у которых дефолт уже был, и эмитенты, бумаги которых до начала года торговались в режиме TQRD для облигаций в дефолте: их дефолт мог случиться раньше, чем начинается выгрузка Cbonds. Эмитентов делим на три группы по номинальному объёму облигаций в обращении на начало года.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rates <span class="op">=</span> data.load_credit(<span class="st">"default_rates"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>full <span class="op">=</span> rates[rates[<span class="st">"year"</span>] <span class="op">&lt;=</span> <span class="dv">2025</span>]                         <span class="co"># полные годы</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pooled <span class="op">=</span> full.groupby(<span class="st">"size"</span>, sort<span class="op">=</span><span class="va">False</span>)[[<span class="st">"issuers"</span>, <span class="st">"defaults"</span>]].<span class="bu">sum</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wilson(k, n, z<span class="op">=</span><span class="fl">1.96</span>):</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""95-процентный доверительный интервал Уилсона для доли k/n."""</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> k <span class="op">/</span> n</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    centre <span class="op">=</span> (p <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> n)) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> n)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    half <span class="op">=</span> z <span class="op">*</span> np.sqrt(p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> n <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> n<span class="op">**</span><span class="dv">2</span>)) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> n)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> centre <span class="op">-</span> half, centre <span class="op">+</span> half</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pooled[<span class="st">"rate"</span>] <span class="op">=</span> pooled[<span class="st">"defaults"</span>] <span class="op">/</span> pooled[<span class="st">"issuers"</span>]</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>pooled[<span class="st">"low"</span>], pooled[<span class="st">"high"</span>] <span class="op">=</span> wilson(pooled[<span class="st">"defaults"</span>], pooled[<span class="st">"issuers"</span>])</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>pooled</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                     issuers  defaults      rate       low      high</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; size                                                               </span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; все                    1409        33  0.023421  0.016725  0.032709</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; до 2 млрд руб.          604        29  0.048013  0.033635  0.068105</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2–10 млрд руб.          290         2  0.006897  0.001893  0.024793</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; более 10 млрд руб.      515         2  0.003883  0.001066  0.014048</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rates <span class="op">=</span> data.load_credit(<span class="st">"default_rates"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>full <span class="op">=</span> rates[rates[<span class="st">"year"</span>] <span class="op">&lt;=</span> <span class="dv">2025</span>]                         <span class="co"># полные годы</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pooled <span class="op">=</span> full.groupby(<span class="st">"size"</span>, sort<span class="op">=</span><span class="va">False</span>)[[<span class="st">"issuers"</span>, <span class="st">"defaults"</span>]].<span class="bu">sum</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wilson(k, n, z<span class="op">=</span><span class="fl">1.96</span>):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""95-процентный доверительный интервал Уилсона для доли k/n."""</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> k <span class="op">/</span> n</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    centre <span class="op">=</span> (p <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> n)) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> n)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    half <span class="op">=</span> z <span class="op">*</span> np.sqrt(p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> n <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> n<span class="op">**</span><span class="dv">2</span>)) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> z<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> n)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> centre <span class="op">-</span> half, centre <span class="op">+</span> half</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>pooled[<span class="st">"rate"</span>] <span class="op">=</span> pooled[<span class="st">"defaults"</span>] <span class="op">/</span> pooled[<span class="st">"issuers"</span>]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>pooled[<span class="st">"low"</span>], pooled[<span class="st">"high"</span>] <span class="op">=</span> wilson(pooled[<span class="st">"defaults"</span>], pooled[<span class="st">"issuers"</span>])</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>pooled</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                     issuers  defaults      rate       low      high</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; size                                                               </span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; все                    1409        33  0.023421  0.016725  0.032709</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; до 2 млрд руб.          604        29  0.048013  0.033635  0.068105</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2–10 млрд руб.          290         2  0.006897  0.001893  0.024793</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; более 10 млрд руб.      515         2  0.003883  0.001066  0.014048</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Интервал Уилсона здесь лучше обычного <span class="math inline">\(\hat p \pm 1{,}96\sqrt{\hat p(1-\hat p)/n}\)</span>: при нескольких дефолтах на сотню эмитентов нормальное приближение даёт отрицательную нижнюю границу.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> rates.assign(cell<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>fp(d <span class="op">/</span> n)<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">)"</span> <span class="cf">for</span> d, n <span class="kw">in</span> <span class="bu">zip</span>(rates[<span class="st">"defaults"</span>], rates[<span class="st">"issuers"</span>])])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> wide.pivot(index<span class="op">=</span><span class="st">"size"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"cell"</span>).loc[rates[<span class="st">"size"</span>].unique()]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>wide.index.name <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>wide.columns.name <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>wide.style</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> rates.assign(cell<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>fp(d <span class="op">/</span> n)<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">)"</span> <span class="cf">for</span> d, n <span class="kw">in</span> <span class="bu">zip</span>(rates[<span class="st">"defaults"</span>], rates[<span class="st">"issuers"</span>])])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> wide.pivot(index<span class="op">=</span><span class="st">"size"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"cell"</span>).loc[rates[<span class="st">"size"</span>].unique()]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>wide.index.name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>wide.columns.name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>wide.style</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-credit-rates" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-credit-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;14.2: Доля эмитентов когорты, допустивших дефолт за год, по объёму облигаций в обращении. В скобках – число эмитентов в когорте. 2026 г. – январь–сентябрь
@@ -752,47 +788,47 @@ G = y - z(D),
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_671ea" class="cell caption-top table table-sm table-striped small">
+<table id="T_a478e" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_671ea_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">2022</th>
-<th id="T_671ea_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">2023</th>
-<th id="T_671ea_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">2024</th>
-<th id="T_671ea_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">2025</th>
-<th id="T_671ea_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">2026</th>
+<th id="T_a478e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">2022</th>
+<th id="T_a478e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">2023</th>
+<th id="T_a478e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">2024</th>
+<th id="T_a478e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">2025</th>
+<th id="T_a478e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">2026</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_671ea_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">все</th>
-<td id="T_671ea_row0_col0" class="data row0 col0">2,7% (332)</td>
-<td id="T_671ea_row0_col1" class="data row0 col1">0,9% (322)</td>
-<td id="T_671ea_row0_col2" class="data row0 col2">2,2% (359)</td>
-<td id="T_671ea_row0_col3" class="data row0 col3">3,3% (396)</td>
-<td id="T_671ea_row0_col4" class="data row0 col4">4,1% (417)</td>
+<th id="T_a478e_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">все</th>
+<td id="T_a478e_row0_col0" class="data row0 col0">2,7% (332)</td>
+<td id="T_a478e_row0_col1" class="data row0 col1">0,9% (322)</td>
+<td id="T_a478e_row0_col2" class="data row0 col2">2,2% (359)</td>
+<td id="T_a478e_row0_col3" class="data row0 col3">3,3% (396)</td>
+<td id="T_a478e_row0_col4" class="data row0 col4">4,1% (417)</td>
 </tr>
 <tr class="even">
-<th id="T_671ea_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">до 2 млрд руб.</th>
-<td id="T_671ea_row1_col0" class="data row1 col0">6,5% (123)</td>
-<td id="T_671ea_row1_col1" class="data row1 col1">2,4% (125)</td>
-<td id="T_671ea_row1_col2" class="data row1 col2">3,8% (156)</td>
-<td id="T_671ea_row1_col3" class="data row1 col3">6,0% (200)</td>
-<td id="T_671ea_row1_col4" class="data row1 col4">7,5% (199)</td>
+<th id="T_a478e_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">до 2 млрд руб.</th>
+<td id="T_a478e_row1_col0" class="data row1 col0">6,5% (123)</td>
+<td id="T_a478e_row1_col1" class="data row1 col1">2,4% (125)</td>
+<td id="T_a478e_row1_col2" class="data row1 col2">3,8% (156)</td>
+<td id="T_a478e_row1_col3" class="data row1 col3">6,0% (200)</td>
+<td id="T_a478e_row1_col4" class="data row1 col4">7,5% (199)</td>
 </tr>
 <tr class="odd">
-<th id="T_671ea_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2–10 млрд руб.</th>
-<td id="T_671ea_row2_col0" class="data row2 col0">1,3% (77)</td>
-<td id="T_671ea_row2_col1" class="data row2 col1">0,0% (70)</td>
-<td id="T_671ea_row2_col2" class="data row2 col2">1,3% (79)</td>
-<td id="T_671ea_row2_col3" class="data row2 col3">0,0% (64)</td>
-<td id="T_671ea_row2_col4" class="data row2 col4">0,0% (70)</td>
+<th id="T_a478e_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2–10 млрд руб.</th>
+<td id="T_a478e_row2_col0" class="data row2 col0">1,3% (77)</td>
+<td id="T_a478e_row2_col1" class="data row2 col1">0,0% (70)</td>
+<td id="T_a478e_row2_col2" class="data row2 col2">1,3% (79)</td>
+<td id="T_a478e_row2_col3" class="data row2 col3">0,0% (64)</td>
+<td id="T_a478e_row2_col4" class="data row2 col4">0,0% (70)</td>
 </tr>
 <tr class="even">
-<th id="T_671ea_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">более 10 млрд руб.</th>
-<td id="T_671ea_row3_col0" class="data row3 col0">0,0% (132)</td>
-<td id="T_671ea_row3_col1" class="data row3 col1">0,0% (127)</td>
-<td id="T_671ea_row3_col2" class="data row3 col2">0,8% (124)</td>
-<td id="T_671ea_row3_col3" class="data row3 col3">0,8% (132)</td>
-<td id="T_671ea_row3_col4" class="data row3 col4">1,4% (148)</td>
+<th id="T_a478e_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">более 10 млрд руб.</th>
+<td id="T_a478e_row3_col0" class="data row3 col0">0,0% (132)</td>
+<td id="T_a478e_row3_col1" class="data row3 col1">0,0% (127)</td>
+<td id="T_a478e_row3_col2" class="data row3 col2">0,8% (124)</td>
+<td id="T_a478e_row3_col3" class="data row3 col3">0,8% (132)</td>
+<td id="T_a478e_row3_col4" class="data row3 col4">1,4% (148)</td>
 </tr>
 </tbody>
 </table>
@@ -807,34 +843,34 @@ G = y - z(D),
 <span class="header-section-number">14.4</span> Спред и последующий дефолт</h2>
 <p>Если спред отражает ожидаемые потери, эмитенты с широким спредом должны чаще допускать дефолт. Проверим это. На конец каждого месяца с декабря 2021 по сентябрь 2024 г. (чтобы у каждого наблюдения был полный горизонт 12 месяцев) распределим эмитентов по корзинам G-спреда. Затем посчитаем, какая доля наблюдений закончилась дефолтом эмитента в следующие 12 месяцев.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sb <span class="op">=</span> data.load_credit(<span class="st">"spread_buckets"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fixed <span class="op">=</span> sb[sb[<span class="st">"sample"</span>] <span class="op">==</span> <span class="st">"fixed"</span>].set_index(<span class="st">"bucket"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> <span class="fl">0.25</span>                                                    <span class="co"># предположение о возмещении</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fixed[<span class="st">"freq"</span>] <span class="op">=</span> fixed[<span class="st">"defaults"</span>] <span class="op">/</span> fixed[<span class="st">"obs"</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fixed[<span class="st">"implied"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>fixed[<span class="st">"g_median"</span>].clip(lower<span class="op">=</span><span class="dv">0</span>) <span class="op">/</span> <span class="fl">1e4</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> R))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fixed[[<span class="st">"obs"</span>, <span class="st">"issuers"</span>, <span class="st">"default_issuers"</span>, <span class="st">"g_median"</span>, <span class="st">"freq"</span>, <span class="st">"implied"</span>]]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                obs  issuers  default_issuers     g_median      freq   implied</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bucket                                                                       </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; до 100       587.0     87.0              0.0   -15.612854  0.000000  0.000000</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 100–200      419.0    105.0              0.0   154.934402  0.000000  0.020446</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 200–400      906.0    167.0              1.0   299.559775  0.003311  0.039154</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 400–700     1192.0    203.0              8.0   533.566055  0.016779  0.068670</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 700–1000     707.0    176.0             10.0   828.977615  0.029703  0.104641</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; более 1000  1323.0    191.0             25.0  1403.858256  0.099017  0.170706</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sb <span class="op">=</span> data.load_credit(<span class="st">"spread_buckets"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fixed <span class="op">=</span> sb[sb[<span class="st">"sample"</span>] <span class="op">==</span> <span class="st">"fixed"</span>].set_index(<span class="st">"bucket"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> <span class="fl">0.25</span>                                                    <span class="co"># предположение о возмещении</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>fixed[<span class="st">"freq"</span>] <span class="op">=</span> fixed[<span class="st">"defaults"</span>] <span class="op">/</span> fixed[<span class="st">"obs"</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>fixed[<span class="st">"implied"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>fixed[<span class="st">"g_median"</span>].clip(lower<span class="op">=</span><span class="dv">0</span>) <span class="op">/</span> <span class="fl">1e4</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> R))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>fixed[[<span class="st">"obs"</span>, <span class="st">"issuers"</span>, <span class="st">"default_issuers"</span>, <span class="st">"g_median"</span>, <span class="st">"freq"</span>, <span class="st">"implied"</span>]]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                obs  issuers  default_issuers     g_median      freq   implied</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bucket                                                                       </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; до 100       587.0     87.0              0.0   -15.612854  0.000000  0.000000</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 100–200      419.0    105.0              0.0   154.934402  0.000000  0.020446</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 200–400      906.0    167.0              1.0   299.559775  0.003311  0.039154</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 400–700     1192.0    203.0              8.0   533.566055  0.016779  0.068670</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 700–1000     707.0    176.0             10.0   828.977615  0.029703  0.104641</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; более 1000  1323.0    191.0             25.0  1403.858256  0.099017  0.170706</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>show <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Медиана спреда, б.п."</span>: fixed[<span class="st">"g_median"</span>].<span class="bu">map</span>(f0),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитенто-месяцев"</span>: fixed[<span class="st">"obs"</span>].<span class="bu">map</span>(f0),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов"</span>: fixed[<span class="st">"issuers"</span>].<span class="bu">map</span>(f0),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов с дефолтом"</span>: fixed[<span class="st">"default_issuers"</span>].<span class="bu">map</span>(f0),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Частота дефолта за 12 мес."</span>: fixed[<span class="st">"freq"</span>].<span class="bu">map</span>(fp),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Подразумеваемая спредом"</span>: fixed[<span class="st">"implied"</span>].<span class="bu">map</span>(fp),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>show.index.name <span class="op">=</span> <span class="st">"G-спред, б.п."</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>show.style</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>show <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Медиана спреда, б.п."</span>: fixed[<span class="st">"g_median"</span>].<span class="bu">map</span>(f0),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитенто-месяцев"</span>: fixed[<span class="st">"obs"</span>].<span class="bu">map</span>(f0),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов"</span>: fixed[<span class="st">"issuers"</span>].<span class="bu">map</span>(f0),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Эмитентов с дефолтом"</span>: fixed[<span class="st">"default_issuers"</span>].<span class="bu">map</span>(f0),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Частота дефолта за 12 мес."</span>: fixed[<span class="st">"freq"</span>].<span class="bu">map</span>(fp),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Подразумеваемая спредом"</span>: fixed[<span class="st">"implied"</span>].<span class="bu">map</span>(fp),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>show.index.name <span class="op">=</span> <span class="st">"G-спред, б.п."</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>show.style</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-credit-buckets" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-credit-buckets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;14.3: Эмитенты по корзинам G-спреда на конец месяца (декабрь 2021 – сентябрь 2024 г.) и дефолт в следующие 12 месяцев. Только эмитенты, все выпуски которых имеют известный фиксированный купон. Подразумеваемая вероятность – при возмещении 25%
@@ -842,16 +878,16 @@ G = y - z(D),
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_71cb2" class="cell caption-top table table-sm table-striped small">
+<table id="T_17701" class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_71cb2_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Медиана спреда, б.п.</th>
-<th id="T_71cb2_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Эмитенто-месяцев</th>
-<th id="T_71cb2_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Эмитентов</th>
-<th id="T_71cb2_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Эмитентов с дефолтом</th>
-<th id="T_71cb2_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Частота дефолта за 12 мес.</th>
-<th id="T_71cb2_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Подразумеваемая спредом</th>
+<th id="T_17701_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Медиана спреда, б.п.</th>
+<th id="T_17701_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Эмитенто-месяцев</th>
+<th id="T_17701_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Эмитентов</th>
+<th id="T_17701_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Эмитентов с дефолтом</th>
+<th id="T_17701_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Частота дефолта за 12 мес.</th>
+<th id="T_17701_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Подразумеваемая спредом</th>
 </tr>
 <tr class="even">
 <th class="index_name level0" data-quarto-table-cell-role="th">G-спред, б.п.</th>
@@ -865,58 +901,58 @@ G = y - z(D),
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_71cb2_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">до 100</th>
-<td id="T_71cb2_row0_col0" class="data row0 col0">−16</td>
-<td id="T_71cb2_row0_col1" class="data row0 col1">587</td>
-<td id="T_71cb2_row0_col2" class="data row0 col2">87</td>
-<td id="T_71cb2_row0_col3" class="data row0 col3">0</td>
-<td id="T_71cb2_row0_col4" class="data row0 col4">0,0%</td>
-<td id="T_71cb2_row0_col5" class="data row0 col5">0,0%</td>
+<th id="T_17701_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">до 100</th>
+<td id="T_17701_row0_col0" class="data row0 col0">−16</td>
+<td id="T_17701_row0_col1" class="data row0 col1">587</td>
+<td id="T_17701_row0_col2" class="data row0 col2">87</td>
+<td id="T_17701_row0_col3" class="data row0 col3">0</td>
+<td id="T_17701_row0_col4" class="data row0 col4">0,0%</td>
+<td id="T_17701_row0_col5" class="data row0 col5">0,0%</td>
 </tr>
 <tr class="even">
-<th id="T_71cb2_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">100–200</th>
-<td id="T_71cb2_row1_col0" class="data row1 col0">155</td>
-<td id="T_71cb2_row1_col1" class="data row1 col1">419</td>
-<td id="T_71cb2_row1_col2" class="data row1 col2">105</td>
-<td id="T_71cb2_row1_col3" class="data row1 col3">0</td>
-<td id="T_71cb2_row1_col4" class="data row1 col4">0,0%</td>
-<td id="T_71cb2_row1_col5" class="data row1 col5">2,0%</td>
+<th id="T_17701_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">100–200</th>
+<td id="T_17701_row1_col0" class="data row1 col0">155</td>
+<td id="T_17701_row1_col1" class="data row1 col1">419</td>
+<td id="T_17701_row1_col2" class="data row1 col2">105</td>
+<td id="T_17701_row1_col3" class="data row1 col3">0</td>
+<td id="T_17701_row1_col4" class="data row1 col4">0,0%</td>
+<td id="T_17701_row1_col5" class="data row1 col5">2,0%</td>
 </tr>
 <tr class="odd">
-<th id="T_71cb2_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">200–400</th>
-<td id="T_71cb2_row2_col0" class="data row2 col0">300</td>
-<td id="T_71cb2_row2_col1" class="data row2 col1">906</td>
-<td id="T_71cb2_row2_col2" class="data row2 col2">167</td>
-<td id="T_71cb2_row2_col3" class="data row2 col3">1</td>
-<td id="T_71cb2_row2_col4" class="data row2 col4">0,3%</td>
-<td id="T_71cb2_row2_col5" class="data row2 col5">3,9%</td>
+<th id="T_17701_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">200–400</th>
+<td id="T_17701_row2_col0" class="data row2 col0">300</td>
+<td id="T_17701_row2_col1" class="data row2 col1">906</td>
+<td id="T_17701_row2_col2" class="data row2 col2">167</td>
+<td id="T_17701_row2_col3" class="data row2 col3">1</td>
+<td id="T_17701_row2_col4" class="data row2 col4">0,3%</td>
+<td id="T_17701_row2_col5" class="data row2 col5">3,9%</td>
 </tr>
 <tr class="even">
-<th id="T_71cb2_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">400–700</th>
-<td id="T_71cb2_row3_col0" class="data row3 col0">534</td>
-<td id="T_71cb2_row3_col1" class="data row3 col1">1&nbsp;192</td>
-<td id="T_71cb2_row3_col2" class="data row3 col2">203</td>
-<td id="T_71cb2_row3_col3" class="data row3 col3">8</td>
-<td id="T_71cb2_row3_col4" class="data row3 col4">1,7%</td>
-<td id="T_71cb2_row3_col5" class="data row3 col5">6,9%</td>
+<th id="T_17701_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">400–700</th>
+<td id="T_17701_row3_col0" class="data row3 col0">534</td>
+<td id="T_17701_row3_col1" class="data row3 col1">1&nbsp;192</td>
+<td id="T_17701_row3_col2" class="data row3 col2">203</td>
+<td id="T_17701_row3_col3" class="data row3 col3">8</td>
+<td id="T_17701_row3_col4" class="data row3 col4">1,7%</td>
+<td id="T_17701_row3_col5" class="data row3 col5">6,9%</td>
 </tr>
 <tr class="odd">
-<th id="T_71cb2_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">700–1000</th>
-<td id="T_71cb2_row4_col0" class="data row4 col0">829</td>
-<td id="T_71cb2_row4_col1" class="data row4 col1">707</td>
-<td id="T_71cb2_row4_col2" class="data row4 col2">176</td>
-<td id="T_71cb2_row4_col3" class="data row4 col3">10</td>
-<td id="T_71cb2_row4_col4" class="data row4 col4">3,0%</td>
-<td id="T_71cb2_row4_col5" class="data row4 col5">10,5%</td>
+<th id="T_17701_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">700–1000</th>
+<td id="T_17701_row4_col0" class="data row4 col0">829</td>
+<td id="T_17701_row4_col1" class="data row4 col1">707</td>
+<td id="T_17701_row4_col2" class="data row4 col2">176</td>
+<td id="T_17701_row4_col3" class="data row4 col3">10</td>
+<td id="T_17701_row4_col4" class="data row4 col4">3,0%</td>
+<td id="T_17701_row4_col5" class="data row4 col5">10,5%</td>
 </tr>
 <tr class="even">
-<th id="T_71cb2_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">более 1000</th>
-<td id="T_71cb2_row5_col0" class="data row5 col0">1&nbsp;404</td>
-<td id="T_71cb2_row5_col1" class="data row5 col1">1&nbsp;323</td>
-<td id="T_71cb2_row5_col2" class="data row5 col2">191</td>
-<td id="T_71cb2_row5_col3" class="data row5 col3">25</td>
-<td id="T_71cb2_row5_col4" class="data row5 col4">9,9%</td>
-<td id="T_71cb2_row5_col5" class="data row5 col5">17,1%</td>
+<th id="T_17701_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">более 1000</th>
+<td id="T_17701_row5_col0" class="data row5 col0">1&nbsp;404</td>
+<td id="T_17701_row5_col1" class="data row5 col1">1&nbsp;323</td>
+<td id="T_17701_row5_col2" class="data row5 col2">191</td>
+<td id="T_17701_row5_col3" class="data row5 col3">25</td>
+<td id="T_17701_row5_col4" class="data row5 col4">9,9%</td>
+<td id="T_17701_row5_col5" class="data row5 col5">17,1%</td>
 </tr>
 </tbody>
 </table>
@@ -946,27 +982,27 @@ G = y - z(D),
 <div class="no-row-height column-margin column-container"><div id="ref-mackinlay1997" class="csl-entry" role="listitem">
 MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</span>. <em>Journal of Economic Literature</em> 35 (1): 13–39.
 </div></div><div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ep <span class="op">=</span> data.load_credit(<span class="st">"event_paths"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, (a1, a2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.2</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>a1.fill_between(ep[<span class="st">"k"</span>], ep[<span class="st">"price_q25"</span>], ep[<span class="st">"price_q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>a1.plot(ep[<span class="st">"k"</span>], ep[<span class="st">"price_q50"</span>])</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>a1.set_title(<span class="st">"Цена, % номинала"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> ep[ep[<span class="st">"k"</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>a2.fill_between(pre[<span class="st">"k"</span>], pre[<span class="st">"g_q25"</span>], pre[<span class="st">"g_q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>a2.plot(pre[<span class="st">"k"</span>], pre[<span class="st">"g_q50"</span>])</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>a2.set_title(<span class="st">"G-спред, б.п."</span>)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> (a1, a2):</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    a.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">":"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    a.set_xlabel(<span class="st">"торговые дни относительно дефолта"</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plot.source(a1, <span class="st">"Московская биржа, Cbonds, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ep <span class="op">=</span> data.load_credit(<span class="st">"event_paths"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig, (a1, a2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.2</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>a1.fill_between(ep[<span class="st">"k"</span>], ep[<span class="st">"price_q25"</span>], ep[<span class="st">"price_q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>a1.plot(ep[<span class="st">"k"</span>], ep[<span class="st">"price_q50"</span>])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>a1.set_title(<span class="st">"Цена, % номинала"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> ep[ep[<span class="st">"k"</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>a2.fill_between(pre[<span class="st">"k"</span>], pre[<span class="st">"g_q25"</span>], pre[<span class="st">"g_q75"</span>], alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>a2.plot(pre[<span class="st">"k"</span>], pre[<span class="st">"g_q50"</span>])</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>a2.set_title(<span class="st">"G-спред, б.п."</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> (a1, a2):</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    a.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    a.set_xlabel(<span class="st">"торговые дни относительно дефолта"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plot.source(a1, <span class="st">"Московская биржа, Cbonds, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div id="fig-credit-event" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-credit-event-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="14-credit-risk_files/figure-html/fig-credit-event-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="14-credit-risk_files/figure-html/fig-credit-event-5.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-credit-event-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;14.2: Чистая цена (% номинала) и G-спред облигаций эмитентов вокруг первого дефолта: медиана и межквартильный размах по эмитентам. Спред показан до дня дефолта
+Рисунок&nbsp;14.3: Чистая цена (% номинала) и G-спред облигаций эмитентов вокруг первого дефолта: медиана и межквартильный размах по эмитентам. Спред показан до дня дефолта
 </figcaption></figure>
 </div>
 </div>
@@ -981,24 +1017,24 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 <p><strong>Правило.</strong> Средневзвешенная чистая цена выпуска за 60 торговых наблюдений упала не меньше чем на 10% и отстала от медианного изменения цен выпусков той же дюрационной группы (до 1 года, 1–3 года, больше 3 лет) не меньше чем на 5 процентных пунктов. Условие должно выполняться три наблюдения подряд с перерывами не больше 7 дней. Сигнал по эмитенту – первый сигнал по любому из его выпусков. После сигнала следующие 126 дней (около полугода) новые сигналы по тому же эмитенту не учитываются.</p>
 <p><strong>Оценка.</strong> Сигнал считается подтверждённым, если в следующие 180 дней у эмитента наступил дефолт. Доля подтверждённых сигналов – это <strong>точность</strong> правила. Доля дефолтов, которым предшествовал сигнал в пределах 180 дней, – это <strong>полнота</strong>. В полноте учитываются только эмитенты, облигации которых торговались в эти 180 дней.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wv <span class="op">=</span> data.load_credit(<span class="st">"warning_variants"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> data.load_credit(<span class="st">"warning_recall"</span>).set_index(<span class="st">"period"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ok <span class="op">=</span> wv[wv[<span class="st">"code"</span>] <span class="op">==</span> <span class="st">"correct"</span>].set_index(<span class="st">"period"</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"сигналов"</span>: ok[<span class="st">"signals"</span>],</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"подтверждено"</span>: ok[<span class="st">"hits"</span>],</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"точность"</span>: ok[<span class="st">"hits"</span>] <span class="op">/</span> ok[<span class="st">"signals"</span>],</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"дефолтов с торгами"</span>: rc[<span class="st">"defaults_traded"</span>],</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"с сигналом"</span>: rc[<span class="st">"detected"</span>],</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"полнота"</span>: rc[<span class="st">"detected"</span>] <span class="op">/</span> rc[<span class="st">"defaults_traded"</span>],</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"медиана опережения, дн."</span>: rc[<span class="st">"lead_median"</span>],</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            сигналов  подтверждено  ...  полнота  медиана опережения, дн.</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; period                             ...                                  </span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2022–2024       347            17  ...   0.6500                     64.0</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2025–2026       120            15  ...   0.5625                    117.0</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2 rows x 7 columns]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wv <span class="op">=</span> data.load_credit(<span class="st">"warning_variants"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> data.load_credit(<span class="st">"warning_recall"</span>).set_index(<span class="st">"period"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ok <span class="op">=</span> wv[wv[<span class="st">"code"</span>] <span class="op">==</span> <span class="st">"correct"</span>].set_index(<span class="st">"period"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"сигналов"</span>: ok[<span class="st">"signals"</span>],</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"подтверждено"</span>: ok[<span class="st">"hits"</span>],</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"точность"</span>: ok[<span class="st">"hits"</span>] <span class="op">/</span> ok[<span class="st">"signals"</span>],</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"дефолтов с торгами"</span>: rc[<span class="st">"defaults_traded"</span>],</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"с сигналом"</span>: rc[<span class="st">"detected"</span>],</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"полнота"</span>: rc[<span class="st">"detected"</span>] <span class="op">/</span> rc[<span class="st">"defaults_traded"</span>],</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"медиана опережения, дн."</span>: rc[<span class="st">"lead_median"</span>],</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            сигналов  подтверждено  ...  полнота  медиана опережения, дн.</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; period                             ...                                  </span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2022–2024       347            17  ...   0.6500                     64.0</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2025–2026       120            15  ...   0.5625                    117.0</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2 rows x 7 columns]</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Правило находит значительную часть дефолтов: 65% в 2022–2024 гг. и 56% в 2025–2026 гг., в среднем за 64 и 117 дней до события. Но большинство сигналов ложные. В 2022–2024 гг. из 347 сигналов дефолтом закончились 17, точность – 5%. В 2025–2026 гг., когда дефолтов стало больше, точность выросла до 12%.</p>
@@ -1007,16 +1043,16 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 <span class="header-section-number">14.6.1</span> Как ошибки проверки улучшают результат</h3>
 <p>Ту же проверку легко провести неправильно, и почти каждая ошибка делает правило лучше, чем оно есть. В таблице – результаты четырёх типичных ошибок на тех же данных.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wv[<span class="st">"точность"</span>] <span class="op">=</span> wv[<span class="st">"hits"</span>] <span class="op">/</span> wv[<span class="st">"signals"</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> wv.pivot_table(index<span class="op">=</span>[<span class="st">"code"</span>, <span class="st">"variant"</span>], columns<span class="op">=</span><span class="st">"period"</span>, values<span class="op">=</span>[<span class="st">"signals"</span>, <span class="st">"точность"</span>], sort<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Проверка"</span>: tab.index.get_level_values(<span class="st">"variant"</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Сигналов 2022–2024"</span>: tab[(<span class="st">"signals"</span>, <span class="st">"2022–2024"</span>)].<span class="bu">map</span>(f0).to_numpy(),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Точность 2022–2024"</span>: tab[(<span class="st">"точность"</span>, <span class="st">"2022–2024"</span>)].<span class="bu">map</span>(fp).to_numpy(),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Сигналов 2025–2026"</span>: tab[(<span class="st">"signals"</span>, <span class="st">"2025–2026"</span>)].<span class="bu">map</span>(f0).to_numpy(),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Точность 2025–2026"</span>: tab[(<span class="st">"точность"</span>, <span class="st">"2025–2026"</span>)].<span class="bu">map</span>(fp).to_numpy(),</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>tab.style.hide(axis<span class="op">=</span><span class="st">"index"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>wv[<span class="st">"точность"</span>] <span class="op">=</span> wv[<span class="st">"hits"</span>] <span class="op">/</span> wv[<span class="st">"signals"</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> wv.pivot_table(index<span class="op">=</span>[<span class="st">"code"</span>, <span class="st">"variant"</span>], columns<span class="op">=</span><span class="st">"period"</span>, values<span class="op">=</span>[<span class="st">"signals"</span>, <span class="st">"точность"</span>], sort<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Проверка"</span>: tab.index.get_level_values(<span class="st">"variant"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Сигналов 2022–2024"</span>: tab[(<span class="st">"signals"</span>, <span class="st">"2022–2024"</span>)].<span class="bu">map</span>(f0).to_numpy(),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Точность 2022–2024"</span>: tab[(<span class="st">"точность"</span>, <span class="st">"2022–2024"</span>)].<span class="bu">map</span>(fp).to_numpy(),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Сигналов 2025–2026"</span>: tab[(<span class="st">"signals"</span>, <span class="st">"2025–2026"</span>)].<span class="bu">map</span>(f0).to_numpy(),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Точность 2025–2026"</span>: tab[(<span class="st">"точность"</span>, <span class="st">"2025–2026"</span>)].<span class="bu">map</span>(fp).to_numpy(),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>tab.style.hide(axis<span class="op">=</span><span class="st">"index"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-credit-mistakes" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-credit-mistakes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Таблица&nbsp;14.4: Точность правила раннего предупреждения при правильной проверке и при типичных ошибках: доля сигналов, за которыми в течение 180 дней последовал дефолт
@@ -1024,49 +1060,49 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_2413a" class="cell caption-top table table-sm table-striped small">
+<table id="T_c18b8" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th id="T_2413a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Проверка</th>
-<th id="T_2413a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Сигналов 2022–2024</th>
-<th id="T_2413a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Точность 2022–2024</th>
-<th id="T_2413a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Сигналов 2025–2026</th>
-<th id="T_2413a_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Точность 2025–2026</th>
+<th id="T_c18b8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Проверка</th>
+<th id="T_c18b8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Сигналов 2022–2024</th>
+<th id="T_c18b8_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Точность 2022–2024</th>
+<th id="T_c18b8_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Сигналов 2025–2026</th>
+<th id="T_c18b8_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Точность 2025–2026</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td id="T_2413a_row0_col0" class="data row0 col0">эмитенты, без сигналов после дефолта, полный горизонт</td>
-<td id="T_2413a_row0_col1" class="data row0 col1">347</td>
-<td id="T_2413a_row0_col2" class="data row0 col2">4,9%</td>
-<td id="T_2413a_row0_col3" class="data row0 col3">120</td>
-<td id="T_2413a_row0_col4" class="data row0 col4">12,5%</td>
+<td id="T_c18b8_row0_col0" class="data row0 col0">эмитенты, без сигналов после дефолта, полный горизонт</td>
+<td id="T_c18b8_row0_col1" class="data row0 col1">347</td>
+<td id="T_c18b8_row0_col2" class="data row0 col2">4,9%</td>
+<td id="T_c18b8_row0_col3" class="data row0 col3">120</td>
+<td id="T_c18b8_row0_col4" class="data row0 col4">12,5%</td>
 </tr>
 <tr class="even">
-<td id="T_2413a_row1_col0" class="data row1 col0">считать выпуски, а не эмитентов</td>
-<td id="T_2413a_row1_col1" class="data row1 col1">547</td>
-<td id="T_2413a_row1_col2" class="data row1 col2">6,0%</td>
-<td id="T_2413a_row1_col3" class="data row1 col3">202</td>
-<td id="T_2413a_row1_col4" class="data row1 col4">18,8%</td>
+<td id="T_c18b8_row1_col0" class="data row1 col0">считать выпуски, а не эмитентов</td>
+<td id="T_c18b8_row1_col1" class="data row1 col1">547</td>
+<td id="T_c18b8_row1_col2" class="data row1 col2">6,0%</td>
+<td id="T_c18b8_row1_col3" class="data row1 col3">202</td>
+<td id="T_c18b8_row1_col4" class="data row1 col4">18,8%</td>
 </tr>
 <tr class="odd">
-<td id="T_2413a_row2_col0" class="data row2 col0">оставить сигналы после начала дефолта</td>
-<td id="T_2413a_row2_col1" class="data row2 col1">359</td>
-<td id="T_2413a_row2_col2" class="data row2 col2">8,1%</td>
-<td id="T_2413a_row2_col3" class="data row2 col3">147</td>
-<td id="T_2413a_row2_col4" class="data row2 col4">28,6%</td>
+<td id="T_c18b8_row2_col0" class="data row2 col0">оставить сигналы после начала дефолта</td>
+<td id="T_c18b8_row2_col1" class="data row2 col1">359</td>
+<td id="T_c18b8_row2_col2" class="data row2 col2">8,1%</td>
+<td id="T_c18b8_row2_col3" class="data row2 col3">147</td>
+<td id="T_c18b8_row2_col4" class="data row2 col4">28,6%</td>
 </tr>
 <tr class="even">
-<td id="T_2413a_row3_col0" class="data row3 col0">неполный горизонт считать ложной тревогой</td>
-<td id="T_2413a_row3_col1" class="data row3 col1">347</td>
-<td id="T_2413a_row3_col2" class="data row3 col2">4,9%</td>
-<td id="T_2413a_row3_col3" class="data row3 col3">192</td>
-<td id="T_2413a_row3_col4" class="data row3 col4">7,8%</td>
+<td id="T_c18b8_row3_col0" class="data row3 col0">неполный горизонт считать ложной тревогой</td>
+<td id="T_c18b8_row3_col1" class="data row3 col1">347</td>
+<td id="T_c18b8_row3_col2" class="data row3 col2">4,9%</td>
+<td id="T_c18b8_row3_col3" class="data row3 col3">192</td>
+<td id="T_c18b8_row3_col4" class="data row3 col4">7,8%</td>
 </tr>
 <tr class="odd">
-<td id="T_2413a_row4_col0" class="data row4 col0">только эмитенты, у которых был дефолт</td>
-<td id="T_2413a_row4_col1" class="data row4 col1">50</td>
-<td id="T_2413a_row4_col2" class="data row4 col2">34,0%</td>
-<td id="T_2413a_row4_col3" class="data row4 col3">26</td>
-<td id="T_2413a_row4_col4" class="data row4 col4">57,7%</td>
+<td id="T_c18b8_row4_col0" class="data row4 col0">только эмитенты, у которых был дефолт</td>
+<td id="T_c18b8_row4_col1" class="data row4 col1">50</td>
+<td id="T_c18b8_row4_col2" class="data row4 col2">34,0%</td>
+<td id="T_c18b8_row4_col3" class="data row4 col3">26</td>
+<td id="T_c18b8_row4_col4" class="data row4 col4">57,7%</td>
 </tr>
 </tbody>
 </table>
@@ -1102,28 +1138,28 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 <span class="header-section-number">14.6.2</span> Выбор порога</h3>
 <p>Порог падения цены 10% выбран заранее. Посмотрим, как меняются точность и полнота при других порогах. Это не поиск лучшего значения, а иллюстрация компромисса: мягкое правило замечает больше дефолтов, но даёт больше ложных тревог.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> data.load_credit(<span class="st">"warning_thresholds"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>th[<span class="st">"precision"</span>] <span class="op">=</span> th[<span class="st">"hits"</span>] <span class="op">/</span> th[<span class="st">"signals"</span>]</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>th[<span class="st">"recall"</span>] <span class="op">=</span> th[<span class="st">"detected"</span>] <span class="op">/</span> th[<span class="st">"defaults_traded"</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="fl">3.4</span>))</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> period, g <span class="kw">in</span> th.groupby(<span class="st">"period"</span>):</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(g[<span class="st">"recall"</span>], g[<span class="st">"precision"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>period)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x, y, d <span class="kw">in</span> <span class="bu">zip</span>(g[<span class="st">"recall"</span>], g[<span class="st">"precision"</span>], g[<span class="st">"drop"</span>]):</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="ss">f"</span><span class="sc">{</span>d<span class="sc">:.0%}</span><span class="ss">"</span>, (x, y), textcoords<span class="op">=</span><span class="st">"offset points"</span>, xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>), fontsize<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"полнота: доля дефолтов с сигналом"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"точность: доля сигналов с дефолтом"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(<span class="dv">1</span>, decimals<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(<span class="dv">1</span>, decimals<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, Cbonds, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> data.load_credit(<span class="st">"warning_thresholds"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>th[<span class="st">"precision"</span>] <span class="op">=</span> th[<span class="st">"hits"</span>] <span class="op">/</span> th[<span class="st">"signals"</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>th[<span class="st">"recall"</span>] <span class="op">=</span> th[<span class="st">"detected"</span>] <span class="op">/</span> th[<span class="st">"defaults_traded"</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="fl">3.4</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> period, g <span class="kw">in</span> th.groupby(<span class="st">"period"</span>):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(g[<span class="st">"recall"</span>], g[<span class="st">"precision"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>period)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x, y, d <span class="kw">in</span> <span class="bu">zip</span>(g[<span class="st">"recall"</span>], g[<span class="st">"precision"</span>], g[<span class="st">"drop"</span>]):</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="ss">f"</span><span class="sc">{</span>d<span class="sc">:.0%}</span><span class="ss">"</span>, (x, y), textcoords<span class="op">=</span><span class="st">"offset points"</span>, xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>), fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"полнота: доля дефолтов с сигналом"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"точность: доля сигналов с дефолтом"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(<span class="dv">1</span>, decimals<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(plt.matplotlib.ticker.PercentFormatter(<span class="dv">1</span>, decimals<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plot.source(ax, <span class="st">"Московская биржа, Cbonds, расчёты автора"</span>, offset<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div id="fig-credit-thresholds" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-credit-thresholds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="14-credit-risk_files/figure-html/fig-credit-thresholds-5.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="14-credit-risk_files/figure-html/fig-credit-thresholds-7.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-credit-thresholds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;14.3: Полнота и точность правила раннего предупреждения при разных порогах падения цены за 60 торговых наблюдений
+Рисунок&nbsp;14.4: Полнота и точность правила раннего предупреждения при разных порогах падения цены за 60 торговых наблюдений
 </figcaption></figure>
 </div>
 </div>
@@ -1169,7 +1205,7 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 </ol></section><section id="г.-мини-исследование" class="level3" data-number="14.8.4"><h3 data-number="14.8.4" class="anchored" data-anchor-id="г.-мини-исследование">
 <span class="header-section-number">14.8.4</span> Г. Мини-исследование</h3>
 <ol start="9" type="1">
-<li>Оцените экономику правила раннего предупреждения. Пусть при подтверждённом сигнале продажа позволяет избежать потери <span class="math inline">\(L\)</span> процентных пунктов номинала, а при ложном сигнале инвестор теряет <span class="math inline">\(c\)</span> процентных пунктов (скидка при продаже и упущенное восстановление цены). Покажите, что правило окупается при точности выше <span class="math inline">\(c/(c+L)\)</span>. Оцените <span class="math inline">\(L\)</span> по <a href="#fig-credit-event" class="quarto-xref">Рисунок&nbsp;<span>14.2</span></a> и сравните пороговую точность с результатами главы при <span class="math inline">\(c\)</span> = 2, 5 и 10 п.п.</li>
+<li>Оцените экономику правила раннего предупреждения. Пусть при подтверждённом сигнале продажа позволяет избежать потери <span class="math inline">\(L\)</span> процентных пунктов номинала, а при ложном сигнале инвестор теряет <span class="math inline">\(c\)</span> процентных пунктов (скидка при продаже и упущенное восстановление цены). Покажите, что правило окупается при точности выше <span class="math inline">\(c/(c+L)\)</span>. Оцените <span class="math inline">\(L\)</span> по <a href="#fig-credit-event" class="quarto-xref">Рисунок&nbsp;<span>14.3</span></a> и сравните пороговую точность с результатами главы при <span class="math inline">\(c\)</span> = 2, 5 и 10 п.п.</li>
 </ol></section></section><section id="вопросы-для-самопроверки" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="вопросы-для-самопроверки">Вопросы для самопроверки</h2>
 <ol type="1">
 <li>Чем G-спред отличается от Z-спреда?</li>
@@ -1179,7 +1215,7 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 <li>Почему проверка правила только на компаниях с дефолтом завышает его точность?</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1188,7 +1224,7 @@ MacKinlay, A. Craig. 1997 г. <span>«Event Studies in Economics and Finance»</
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>G-спред сравнивает доходность облигации с одной точкой КБД на срок дюрации. Z-спред – постоянная добавка ко всей кривой, при которой дисконтированные платежи равны цене.</li>
