@@ -551,7 +551,7 @@ window.Quarto = {
 <span class="header-section-number">9.2</span> Утечка данных</h2>
 <section id="как-модель-угадала-85-дней" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="как-модель-угадала-85-дней">
 <span class="header-section-number">9.2.1</span> Как модель «угадала» 85% дней</h3>
-<p>Вернёмся к модели из начала главы. Она воспроизводит признаки из прошлогоднего учебного ноутбука курса: цель – доходность дня <span class="math inline">\(t\)</span>, признаки – лаги доходности, скользящие средние <code>ma5</code>, <code>ma10</code>, <code>ma20</code>, скользящие стандартные отклонения, индекс относительной силы (RSI), оборот торгов, день недели и месяц. Лаги сдвинуты правильно, а скользящие статистики – нет: <code>r.rolling(5).mean()</code> в строке <span class="math inline">\(t\)</span> – это среднее доходностей дней с <span class="math inline">\(t-4\)</span> по <span class="math inline">\(t\)</span>, то есть включает цель.</p>
+<p>Вернёмся к модели из начала главы. Она воспроизводит набор признаков, который часто встречается в учебных работах: цель – доходность дня <span class="math inline">\(t\)</span>, признаки – лаги доходности, скользящие средние <code>ma5</code>, <code>ma10</code>, <code>ma20</code>, скользящие стандартные отклонения, индекс относительной силы (RSI), оборот торгов, день недели и месяц. Лаги сдвинуты правильно, а скользящие статистики – нет: <code>r.rolling(5).mean()</code> в строке <span class="math inline">\(t\)</span> – это среднее доходностей дней с <span class="math inline">\(t-4\)</span> по <span class="math inline">\(t\)</span>, то есть включает цель.</p>
 <p>Насколько серьёзна такая подсказка, показывает обычная линейная регрессия. Скользящее среднее за 5 дней и четыре лага содержат цель точно:</p>
 <p><span id="eq-leak-identity"><span class="math display">\[
 r_t = 5 \cdot \text{ma5}_t - r_{t-1} - r_{t-2} - r_{t-3} - r_{t-4}.
@@ -729,23 +729,23 @@ r_t = 5 \cdot \text{ma5}_t - r_{t-1} - r_{t-2} - r_{t-3} - r_{t-4}.
 </details><div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_459b5" class="caption-top table table-sm table-striped small">
+<table id="T_8f353" class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_459b5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² вне выборки</th>
+<th id="T_8f353_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² вне выборки</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_459b5_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Случайные фолды (перемешивание)</th>
-<td id="T_459b5_row0_col0" class="data row0 col0">0,31</td>
+<th id="T_8f353_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Случайные фолды (перемешивание)</th>
+<td id="T_8f353_row0_col0" class="data row0 col0">0,31</td>
 </tr>
 <tr class="even">
-<th id="T_459b5_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Расширяющееся окно</th>
-<td id="T_459b5_row1_col0" class="data row1 col0">−0,29</td>
+<th id="T_8f353_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Расширяющееся окно</th>
+<td id="T_8f353_row1_col0" class="data row1 col0">−0,29</td>
 </tr>
 <tr class="odd">
-<th id="T_459b5_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Расширяющееся окно, разрыв 20 дней</th>
-<td id="T_459b5_row2_col0" class="data row2 col0">−0,30</td>
+<th id="T_8f353_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Расширяющееся окно, разрыв 20 дней</th>
+<td id="T_8f353_row2_col0" class="data row2 col0">−0,30</td>
 </tr>
 </tbody>
 </table>
@@ -799,31 +799,31 @@ r_t = 5 \cdot \text{ma5}_t - r_{t-1} - r_{t-2} - r_{t-3} - r_{t-4}.
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_8286c" class="cell caption-top table table-sm table-striped small">
+<table id="T_f0432" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_8286c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² против нуля</th>
-<th id="T_8286c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R² против среднего</th>
-<th id="T_8286c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Доля угаданных знаков</th>
+<th id="T_f0432_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">R² против нуля</th>
+<th id="T_f0432_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R² против среднего</th>
+<th id="T_f0432_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Доля угаданных знаков</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_8286c_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое среднее</th>
-<td id="T_8286c_row0_col0" class="data row0 col0">−0,001</td>
-<td id="T_8286c_row0_col1" class="data row0 col1">0,000</td>
-<td id="T_8286c_row0_col2" class="data row0 col2">0,520</td>
+<th id="T_f0432_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое среднее</th>
+<td id="T_f0432_row0_col0" class="data row0 col0">−0,001</td>
+<td id="T_f0432_row0_col1" class="data row0 col1">0,000</td>
+<td id="T_f0432_row0_col2" class="data row0 col2">0,520</td>
 </tr>
 <tr class="even">
-<th id="T_8286c_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Гребневая регрессия</th>
-<td id="T_8286c_row1_col0" class="data row1 col0">−0,015</td>
-<td id="T_8286c_row1_col1" class="data row1 col1">−0,014</td>
-<td id="T_8286c_row1_col2" class="data row1 col2">0,498</td>
+<th id="T_f0432_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Гребневая регрессия</th>
+<td id="T_f0432_row1_col0" class="data row1 col0">−0,015</td>
+<td id="T_f0432_row1_col1" class="data row1 col1">−0,014</td>
+<td id="T_f0432_row1_col2" class="data row1 col2">0,498</td>
 </tr>
 <tr class="odd">
-<th id="T_8286c_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM</th>
-<td id="T_8286c_row2_col0" class="data row2 col0">−0,044</td>
-<td id="T_8286c_row2_col1" class="data row2 col1">−0,044</td>
-<td id="T_8286c_row2_col2" class="data row2 col2">0,519</td>
+<th id="T_f0432_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM</th>
+<td id="T_f0432_row2_col0" class="data row2 col0">−0,044</td>
+<td id="T_f0432_row2_col1" class="data row2 col1">−0,044</td>
+<td id="T_f0432_row2_col2" class="data row2 col2">0,519</td>
 </tr>
 </tbody>
 </table>
@@ -895,32 +895,32 @@ r_t = 5 \cdot \text{ma5}_t - r_{t-1} - r_{t-2} - r_{t-3} - r_{t-4}.
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_5bd4f" class="cell caption-top table table-sm table-striped small">
+<table id="T_b4707" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_5bd4f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">RMSE</th>
-<th id="T_5bd4f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R²</th>
+<th id="T_b4707_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">RMSE</th>
+<th id="T_b4707_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">R²</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_5bd4f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Последняя неделя</th>
-<td id="T_5bd4f_row0_col0" class="data row0 col0">1,086</td>
-<td id="T_5bd4f_row0_col1" class="data row0 col1">−0,000</td>
+<th id="T_b4707_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Последняя неделя</th>
+<td id="T_b4707_row0_col0" class="data row0 col0">1,086</td>
+<td id="T_b4707_row0_col1" class="data row0 col1">−0,000</td>
 </tr>
 <tr class="even">
-<th id="T_5bd4f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">HAR</th>
-<td id="T_5bd4f_row1_col0" class="data row1 col0">0,897</td>
-<td id="T_5bd4f_row1_col1" class="data row1 col1">0,317</td>
+<th id="T_b4707_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">HAR</th>
+<td id="T_b4707_row1_col0" class="data row1 col0">0,897</td>
+<td id="T_b4707_row1_col1" class="data row1 col1">0,317</td>
 </tr>
 <tr class="odd">
-<th id="T_5bd4f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM (d, w, m)</th>
-<td id="T_5bd4f_row2_col0" class="data row2 col0">0,925</td>
-<td id="T_5bd4f_row2_col1" class="data row2 col1">0,274</td>
+<th id="T_b4707_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">LightGBM (d, w, m)</th>
+<td id="T_b4707_row2_col0" class="data row2 col0">0,925</td>
+<td id="T_b4707_row2_col1" class="data row2 col1">0,274</td>
 </tr>
 <tr class="even">
-<th id="T_5bd4f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">LightGBM (все признаки)</th>
-<td id="T_5bd4f_row3_col0" class="data row3 col0">0,913</td>
-<td id="T_5bd4f_row3_col1" class="data row3 col1">0,293</td>
+<th id="T_b4707_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">LightGBM (все признаки)</th>
+<td id="T_b4707_row3_col0" class="data row3 col0">0,913</td>
+<td id="T_b4707_row3_col1" class="data row3 col1">0,293</td>
 </tr>
 </tbody>
 </table>

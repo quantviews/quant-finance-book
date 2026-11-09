@@ -446,7 +446,7 @@ moexutils (bondmath.py, cashflows, zcyc); moexutils/marimo/bond-market.py; ид�
 - Упражнение (по его ДЗ, Модуль1_1, с. 72): дюрация портфеля ОФЗ и изменение цены при ±1%; добавить выпуклость.
 - НЕ брать: ошибку «снижение ставки → цена падает» (Модуль1_1, с. 19) и налоговые «лайфхаки» (с. 34, 67, 69–70).
 --><p>Облигация обещает выплаты, но не обещает неизменную рыночную цену. Одна и та же последовательность купонов может стоить существенно по-разному при разных ставках дисконтирования. Покупателю поэтому нужны как минимум три ответа: сколько денег он платит сейчас, какие выплаты получает в будущем и сколько может потерять при продаже до погашения.</p>
-<p>В этой главе мы построим небольшой практикум на четырёх ОФЗ с постоянным купонным доходом — ОФЗ-ПД. Начнём с биржевой котировки, восстановим денежные потоки и посчитаем доходность. Затем проверим процентный риск двумя способами: приблизительно через дюрацию и точно через повторное дисконтирование выплат.</p>
+<p>В этой главе мы построим небольшой практикум на четырёх ОФЗ с постоянным купонным доходом – ОФЗ-ПД. Начнём с биржевой котировки, восстановим денежные потоки и посчитаем доходность. Затем проверим процентный риск двумя способами: приблизительно через дюрацию и точно через повторное дисконтирование выплат.</p>
 <div class="callout callout-style-simple callout-note callout-titled" title="В этом практикуме">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -464,17 +464,17 @@ moexutils (bondmath.py, cashflows, zcyc); moexutils/marimo/bond-market.py; ид�
 <li>Сопоставляем доходность купонной бумаги с бескупонной кривой.</li>
 <li>Проверяем сценарии изменения ставок и обсуждаем применение к собственной позиции.</li>
 </ul>
-<p><strong>Данные:</strong> отдельный снимок <code>data/bonds/</code> на 30.09.2026: ОФЗ 26232, 26236, 26243 и 26238. Источник — <a href="https://www.moex.com/ru/indices">Московская биржа</a>. Доступ к хранилищу для выполнения примеров не нужен.</p>
-<p><strong>Предпосылки:</strong> известные купоны и погашение всего номинала одним платежом; годовая эффективная ставка, ACT/365F. Дата оценки совпадает с датой котировки — учебная модель T+0. Налоги и комиссии здесь не включены. Флоатеры, линкеры и облигации с офертами требуют расширения модели.</p>
+<p><strong>Данные:</strong> отдельный снимок <code>data/bonds/</code> на 30.09.2026: ОФЗ 26232, 26236, 26243 и 26238. Источник – <a href="https://www.moex.com/ru/indices">Московская биржа</a>. Доступ к хранилищу для выполнения примеров не нужен.</p>
+<p><strong>Предпосылки:</strong> известные купоны и погашение всего номинала одним платежом; годовая эффективная ставка, ACT/365F. Дата оценки совпадает с датой котировки – учебная модель T+0. Налоги и комиссии здесь не включены. Флоатеры, линкеры и облигации с офертами требуют расширения модели.</p>
 </div>
 </div>
 <section id="sec-bond-price" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="sec-bond-price">
 <span class="header-section-number">13.1</span> Чистая и грязная цена</h2>
-<p>Котировка облигации обычно выражена в процентах от непогашенного номинала. При этом накопленный купонный доход — НКД — задаётся в рублях на одну бумагу. Их нельзя складывать без приведения к одной единице измерения.</p>
+<p>Котировка облигации обычно выражена в процентах от непогашенного номинала. При этом накопленный купонный доход – НКД – задаётся в рублях на одну бумагу. Их нельзя складывать без приведения к одной единице измерения.</p>
 <p><span class="math display">\[
 P_{\mathrm{dirty}}=\frac{Q_{\mathrm{clean}}}{100}F+A,
 \]</span></p>
-<p>где <span class="math inline">\(Q_{\mathrm{clean}}\)</span> — котировка, <span class="math inline">\(F\)</span> — номинал, <span class="math inline">\(A\)</span> — НКД. Грязная цена — стоимость облигации вместе с накопленным купонным доходом. Комиссия брокера в эту формулу ещё не входит.</p>
+<p>где <span class="math inline">\(Q_{\mathrm{clean}}\)</span> – котировка, <span class="math inline">\(F\)</span> – номинал, <span class="math inline">\(A\)</span> – НКД. Грязная цена – стоимость облигации вместе с накопленным купонным доходом. Комиссия брокера в эту формулу ещё не входит.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ticker <span class="op">=</span> <span class="st">"SU26238RMFS4"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>quote <span class="op">=</span> data.load_bonds(</span>
@@ -492,12 +492,12 @@ P_{\mathrm{dirty}}=\frac{Q_{\mathrm{clean}}}{100}F+A,
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Грязная цена: 530.55 руб.</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Для выбранного выпуска получаем 50,740% от номинала 1&nbsp;000 руб. плюс НКД 23,15 руб. Итого — 530,55 руб. на одну облигацию.</p>
+<p>Для выбранного выпуска получаем 50,740% от номинала 1&nbsp;000 руб. плюс НКД 23,15 руб. Итого – 530,55 руб. на одну облигацию.</p>
 <p>НКД компенсирует продавцу часть купона, накопленную за время владения после предыдущей выплаты. Внутри обычного купонного периода его можно приблизить пропорционально прошедшим дням:</p>
 <p><span class="math display">\[
 A_{\mathrm{linear}}=C\frac{d-d_0}{d_1-d_0},
 \]</span></p>
-<p>где <span class="math inline">\(C\)</span> — сумма купона, <span class="math inline">\(d_0,d_1\)</span> — границы периода. Это полезная проверка, но условия начисления и округления определяются выпуском. Для оценки мы используем наблюдаемое поле <code>ACCINT</code>, а не заменяем его приближением.</p>
+<p>где <span class="math inline">\(C\)</span> – сумма купона, <span class="math inline">\(d_0,d_1\)</span> – границы периода. Это полезная проверка, но условия начисления и округления определяются выпуском. Для оценки мы используем наблюдаемое поле <code>ACCINT</code>, а не заменяем его приближением.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>coupons <span class="op">=</span> data.load_bond_coupons(ticker)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>next_coupon <span class="op">=</span> coupons.loc[</span>
@@ -514,7 +514,7 @@ A_{\mathrm{linear}}=C\frac{d-d_0}{d_1-d_0},
 <p>В день выплаты наш расчёт исключает платёж, уже пришедшийся на дату оценки, и рассматривает только будущие поступления. Для реальной сделки отдельно проверяют дату расчётов и право на ближайший купон: простого сравнения с датой выплаты может быть недостаточно.</p>
 </section><section id="sec-bond-cashflows" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="sec-bond-cashflows">
 <span class="header-section-number">13.2</span> Восстановление денежных потоков</h2>
-<p>ОФЗ-ПД платит купоны, а в конце срока возвращает номинал. Последняя выплата поэтому состоит из двух частей. Номинал следует прибавить один раз — в дату погашения, а не к каждому купону.</p>
+<p>ОФЗ-ПД платит купоны, а в конце срока возвращает номинал. Последняя выплата поэтому состоит из двух частей. Номинал следует прибавить один раз – в дату погашения, а не к каждому купону.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cashflows_for(ticker):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> data.load_bond_coupons(ticker)</span>
@@ -573,12 +573,12 @@ A_{\mathrm{linear}}=C\frac{d-d_0}{d_1-d_0},
 </div>
 </section><section id="sec-bond-ytm" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="sec-bond-ytm">
 <span class="header-section-number">13.3</span> Доходность как решение уравнения</h2>
-<p>Доходность к погашению <span class="math inline">\(y\)</span> — ставка, при которой приведённая стоимость выплат совпадает с грязной ценой:</p>
+<p>Доходность к погашению <span class="math inline">\(y\)</span> – ставка, при которой приведённая стоимость выплат совпадает с грязной ценой:</p>
 <p><span class="math display">\[
 P_{\mathrm{dirty}}=\sum_{i=1}^{n}\frac{CF_i}{(1+y)^{t_i}},
 \qquad t_i=\frac{d_i-d}{365}.
 \]</span></p>
-<p>Здесь <span class="math inline">\(y\)</span> записана в долях: 0,15 означает 15% годовых. Мы используем фактическое число дней и постоянный знаменатель 365 — соглашение ACT/365F. Это явно выбранная модель, которую можно независимо проверить.</p>
+<p>Здесь <span class="math inline">\(y\)</span> записана в долях: 0,15 означает 15% годовых. Мы используем фактическое число дней и постоянный знаменатель 365 – соглашение ACT/365F. Это явно выбранная модель, которую можно независимо проверить.</p>
 <p>Для известной ставки цену получить просто. Обратную задачу решаем численно: при положительных будущих поступлениях цена монотонно убывает с ростом ставки, поэтому корень единственен. В модуле <code>qf/bonds.py</code> используется метод Брента.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ytm <span class="op">=</span> bonds.yield_to_maturity(flows, valuation_date, dirty)</span>
@@ -590,7 +590,7 @@ P_{\mathrm{dirty}}=\sum_{i=1}^{n}\frac{CF_i}{(1+y)^{t_i}},
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; YIELDCLOSE биржи: 16.4600%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Полученная доходность — 16,46%. Она отличается от ставки купона: купон начисляется на номинал, а покупатель платит рыночную цену. Кроме купонов, в доходности учитывается разница между покупной ценой и погашением.</p>
+<p>Полученная доходность – 16,46%. Она отличается от ставки купона: купон начисляется на номинал, а покупатель платит рыночную цену. Кроме купонов, в доходности учитывается разница между покупной ценой и погашением.</p>
 <p>Доходность к погашению не равна гарантированной доходности продажи через год. Для такой продажи важна будущая рыночная цена. Чтобы интерпретировать YTM как сложный темп роста итогового капитала до погашения, потребуется ещё предположение о реинвестировании промежуточных купонов.</p>
 <div class="callout callout-style-simple callout-important callout-titled" title="Почему модель может отличаться от биржи">
 <div class="callout-header d-flex align-content-center">
@@ -617,7 +617,7 @@ D_M=\frac{\sum_i t_i\,PV(CF_i)}{P},
 <p><span class="math display">\[
 \frac{\Delta P}{P}\approx-D_{\mathrm{mod}}\Delta y.
 \]</span></p>
-<p>При переходе от 15% к 16% величина <span class="math inline">\(\Delta y\)</span> равна 0,01, а не 1. Для более крупных изменений полезен второй член разложения — выпуклость:</p>
+<p>При переходе от 15% к 16% величина <span class="math inline">\(\Delta y\)</span> равна 0,01, а не 1. Для более крупных изменений полезен второй член разложения – выпуклость:</p>
 <p><span class="math display">\[
 C=\frac{1}{P}\sum_i
 \frac{t_i(t_i+1)CF_i}{(1+y)^{t_i+2}},
@@ -648,7 +648,7 @@ C=\frac{1}{P}\sum_i
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Точная переоценка при +100 б.п.: -2938.19 руб.</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Это <strong>мгновенная переоценка</strong>: дата остаётся прежней, купоны не выплачиваются, НКД не изменяется. Доходность владения за несколько месяцев — другая задача, в которой надо учесть прошедшее время и полученные выплаты.</p>
+<p>Это <strong>мгновенная переоценка</strong>: дата остаётся прежней, купоны не выплачиваются, НКД не изменяется. Доходность владения за несколько месяцев – другая задача, в которой надо учесть прошедшее время и полученные выплаты.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column, label <span class="kw">in</span> [</span>
@@ -675,12 +675,12 @@ C=\frac{1}{P}\sum_i
 </div>
 </section><section id="sec-bond-curve" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="sec-bond-curve">
 <span class="header-section-number">13.5</span> Сравнение выпусков и бескупонная кривая</h2>
-<p>Купонная облигация состоит из выплат на разные даты. Поэтому единая YTM такой бумаги и ставка бескупонной облигации на срок её погашения — разные показатели. Чтобы учесть всю временную структуру ставок, каждую выплату дисконтируют по ставке своего срока:</p>
+<p>Купонная облигация состоит из выплат на разные даты. Поэтому единая YTM такой бумаги и ставка бескупонной облигации на срок её погашения – разные показатели. Чтобы учесть всю временную структуру ставок, каждую выплату дисконтируют по ставке своего срока:</p>
 <p><span class="math display">\[
 P(z)=\sum_i\frac{CF_i}{[1+r(t_i)+z]^{t_i}}.
 \]</span></p>
-<p>В нашем расчёте <span class="math inline">\(r(t)\)</span> — эффективная годовая спот-ставка. Между опубликованными узлами КБД линейно интерполируется логарифм дисконт-фактора. В начале добавляется точка <span class="math inline">\(D(0)=1\)</span>, что даёт постоянную спот-ставку до первого узла. За последним узлом экстраполяция запрещена. Это прозрачное приближение по опубликованной сетке, а не повторная оценка параметрической модели биржи.</p>
-<p>Величина <span class="math inline">\(z\)</span>, при которой <span class="math inline">\(P(z)\)</span> совпадает с наблюдаемой грязной ценой, — <strong>модельный Z-спред</strong>. Для сравнения бумаг он полезнее механической разности между YTM и спот-ставкой на срок погашения. Но он также отражает особенности цен и выбранной модели; отрицательный спред отдельной ОФЗ не означает отрицательный кредитный риск.</p>
+<p>В нашем расчёте <span class="math inline">\(r(t)\)</span> – эффективная годовая спот-ставка. Между опубликованными узлами КБД линейно интерполируется логарифм дисконт-фактора. В начале добавляется точка <span class="math inline">\(D(0)=1\)</span>, что даёт постоянную спот-ставку до первого узла. За последним узлом экстраполяция запрещена. Это прозрачное приближение по опубликованной сетке, а не повторная оценка параметрической модели биржи.</p>
+<p>Величина <span class="math inline">\(z\)</span>, при которой <span class="math inline">\(P(z)\)</span> совпадает с наблюдаемой грязной ценой, – <strong>модельный Z-спред</strong>. Для сравнения бумаг он полезнее механической разности между YTM и спот-ставкой на срок погашения. Но он также отражает особенности цен и выбранной модели; отрицательный спред отдельной ОФЗ не означает отрицательный кредитный риск.</p>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold"><summary>Код</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sid <span class="kw">in</span> meta[<span class="st">"secids"</span>]:</span>
@@ -797,13 +797,37 @@ P(z)=\sum_i\frac{CF_i}{[1+r(t_i)+z]^{t_i}}.
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Изменение цены при +100 б.п. ко всей КБД: -5.44%</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: объяснять отрицательный спред">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: объяснять отрицательный спред
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В учебных работах отрицательный G-спред корпоративной облигации нередко объясняют высокой надёжностью эмитента: «инвесторы готовы покупать её с доходностью ниже, чем у ОФЗ». Почти всегда причина в данных, и её нужно найти до интерпретации:</p>
+<ul>
+<li>
+<strong>Другой инструмент.</strong> Флоатер, валютная или замещающая облигация, выпуск с офертой: их доходность нельзя сравнивать с кривой ОФЗ с постоянным купоном на срок до погашения. Для выпуска с офертой срок считают до даты оферты.</li>
+<li>
+<strong>Единицы и соглашения.</strong> Ставки в процентах вычитают из ставок в долях; эффективную годовую доходность сравнивают с кривой в другом начислении.</li>
+<li>
+<strong>Цена.</strong> Доходность посчитана по чистой цене без НКД, по устаревшей котировке или по дню без сделок.</li>
+<li>
+<strong>Кривая по двум-трём точкам.</strong> Кривую эмитента по нескольким выпускам продлевают на 15–20 лет и обсуждают её «форму».</li>
+</ul>
+<p>Спред, который пережил эти проверки, можно интерпретировать. Но и тогда это разница доходностей, а не прямая мера вероятности дефолта.</p>
+</div>
+</div>
 </section><section id="sec-bond-decisions" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="sec-bond-decisions">
 <span class="header-section-number">13.6</span> Как использовать расчёт для своей позиции</h2>
 <p>Практический вопрос удобно формулировать через изменение позиции: «Если заменить часть коротких ОФЗ длинными, сколько дополнительного процентного риска я беру?» Сначала следует сравнить дюрации и рублёвые DV01 позиций, затем проверить точную переоценку при нескольких сценариях. Для портфеля DV01 складываются, если речь идёт об одинаково определённом сдвиге доходностей.</p>
 <p>Перед использованием результата для покупки нужны дополнительные входные данные:</p>
 <ul>
 <li>
-<strong>Исполнимая цена и объём.</strong> Цена закрытия из снимка — исторический ориентир; покупка оценивается по доступной цене продавца и глубине рынка.</li>
+<strong>Исполнимая цена и объём.</strong> Цена закрытия из снимка – исторический ориентир; покупка оценивается по доступной цене продавца и глубине рынка.</li>
 <li>
 <strong>Дата расчётов и право на выплату.</strong> НКД и перечень причитающихся купонов должны соответствовать конкретной сделке.</li>
 <li>
@@ -846,7 +870,7 @@ P(z)=\sum_i\frac{CF_i}{[1+r(t_i)+z]^{t_i}}.
 <li>Чем отличается сценарий сдвига ставок от доходности владения?</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -855,12 +879,12 @@ P(z)=\sum_i\frac{CF_i}{[1+r(t_i)+z]^{t_i}}.
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Чистая котировка — в процентах номинала, НКД — в рублях на бумагу. Сначала переводим цену в рубли.</li>
+<li>Чистая котировка – в процентах номинала, НКД – в рублях на бумагу. Сначала переводим цену в рубли.</li>
 <li>Только платежи после даты оценки, на которые имеет право держатель. В практикуме сложные случаи купонной отсечки исключены при проверке снимка.</li>
-<li>Фактическое число дней делится на 365; 100 б.п. — один процентный пункт, или 0,01 в долях ставки.</li>
+<li>Фактическое число дней делится на 365; 100 б.п. – один процентный пункт, или 0,01 в долях ставки.</li>
 <li>Нет. Для продажи нужна будущая цена, а также полученные купоны и издержки.</li>
 <li>В мгновенном сценарии меняются ставки, но не дата. Доходность владения учитывает течение времени, выплаты и цену выхода.</li>
 </ol>

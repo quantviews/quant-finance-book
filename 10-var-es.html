@@ -663,7 +663,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>В прошлогоднем учебном ноутбуке курса встречались три ошибки, которые легко повторить. Переменная <code>alpha = 0.05</code> называлась уровнем доверия, хотя уровень доверия – 95%, а 5% – вероятность превышения. VaR в одних ячейках получался отрицательным числом (квантиль доходности, умноженный на стоимость позиции), а в другой – положительным, но с ожидаемой доходностью, прибавленной к убытку вместо вычитания. В ES по распределению Стьюдента не было множителя <span class="math inline">\(\sqrt{(\nu-2)/\nu}\)</span>, который стоял в формуле VaR строкой выше. Договоритесь о соглашениях один раз и придерживайтесь их: в этой книге VaR и ES – положительные числа, убыток – доходность с обратным знаком, <span class="math inline">\(\alpha\)</span> – уровень доверия (0,99), а <span class="math inline">\(1-\alpha\)</span> – вероятность превышения.</p>
+<p>В учебных расчётах VaR часто встречаются три ошибки, которые легко повторить. Переменная <code>alpha = 0.05</code> называлась уровнем доверия, хотя уровень доверия – 95%, а 5% – вероятность превышения. VaR в одних ячейках получался отрицательным числом (квантиль доходности, умноженный на стоимость позиции), а в другой – положительным, но с ожидаемой доходностью, прибавленной к убытку вместо вычитания. В ES по распределению Стьюдента не было множителя <span class="math inline">\(\sqrt{(\nu-2)/\nu}\)</span>, который стоял в формуле VaR строкой выше. Договоритесь о соглашениях один раз и придерживайтесь их: в этой книге VaR и ES – положительные числа, убыток – доходность с обратным знаком, <span class="math inline">\(\alpha\)</span> – уровень доверия (0,99), а <span class="math inline">\(1-\alpha\)</span> – вероятность превышения.</p>
 </div>
 </div>
 </section><section id="насколько-точны-оценки" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="насколько-точны-оценки">
@@ -690,7 +690,7 @@ window.Quarto = {
 </details>
 </div>
 <p>По всей истории 95%-й интервал для VaR 99% – от 4,6% до 5,7%, для ES 99% – от 7,0% до 9,6%: ES оценивается менее точно, потому что зависит от нескольких самых крайних наблюдений. На одном годе интервал для VaR – от 3,1% до 4,2%, а для ES – от 3,9% до 4,3%. Последний интервал обманчиво узок. Бутстреп перебирает только уже наблюдавшиеся дни и не может создать убыток больше худшего дня выборки, а в хвост 1% годовой выборки попадают всего два-три дня. Для крайних квантилей и коротких выборок бутстреп недооценивает неопределённость.</p>
-<p>Оценку ES нужно считать по той же подвыборке, по которой найден квантиль. Если взять квантиль из подвыборки, а среднее хвоста – по исходным данным, как в прошлогоднем ноутбуке курса, разброс ES окажется искусственно заниженным.</p>
+<p>Оценку ES нужно считать по той же подвыборке, по которой найден квантиль. Если взять квантиль из подвыборки, а среднее хвоста – по исходным данным (такая ошибка встречается на практике), разброс ES окажется искусственно заниженным.</p>
 </section><section id="горизонт-больше-дня" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="горизонт-больше-дня">
 <span class="header-section-number">10.2.4</span> Горизонт больше дня</h3>
 <p>Для горизонта <span class="math inline">\(H\)</span> дней VaR часто получают из однодневного умножением на <span class="math inline">\(\sqrt{H}\)</span>. Правило верно, если дневные доходности независимы и одинаково нормально распределены, – то же допущение, что при переводе дневной волатильности в годовую.</p>
@@ -808,6 +808,19 @@ window.Quarto = {
 LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \chi^2(1).
 \tag{10.5}\]</span></span></p>
 <p>Слишком много пробоев означает, что риск занижен; слишком мало – что модель чрезмерно осторожна и требует лишнего капитала. Тест отвергает модель в обоих случаях.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Типичная ошибка: бэктест на тех же данных">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка: бэктест на тех же данных
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В учебных работах среднее и стандартное отклонение часто оценивают по тем же 1000 дням, на которых затем считают пробои. VaR получается одним числом на весь период, а проверка показывает только, насколько хорошо нормальное распределение описывает уже известную выборку. Это не бэктест: VaR на каждый день нужно считать только по данным, известным накануне, например по скользящему окну (раздел <a href="#sec-var-dynamic" class="quarto-xref"><span>10.3</span></a>). Второе частое заблуждение – считать малое число пробоев безопасным результатом. Модель, которая систематически завышает риск, тоже ошибается: она требует лишнего капитала и ограничивает позиции без причины.</p>
+</div>
+</div>
 </section><section id="независимость-пробоев-тест-кристофферсена" class="level3 page-columns page-full" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="независимость-пробоев-тест-кристофферсена">
 <span class="header-section-number">10.4.2</span> Независимость пробоев: тест Кристофферсена</h3>
 <p>Правильная доля пробоев ещё не всё. Если пробои идут сериями, модель плохо реагирует на изменение риска: после первого крупного убытка она продолжает показывать низкий VaR. Тест <span class="citation" data-cites="christoffersen1998">Christoffersen (<a href="references.html#ref-christoffersen1998" role="doc-biblioref">1998 г.</a>)</span> проверяет, зависит ли вероятность пробоя сегодня от того, был ли пробой вчера. Обозначим <span class="math inline">\(\pi_{01}\)</span> долю пробоев среди дней после дня без пробоя, <span class="math inline">\(\pi_{11}\)</span> – после дня с пробоем. При независимости они равны; статистика отношения правдоподобия также имеет распределение <span class="math inline">\(\chi^2(1)\)</span>.</p>
@@ -887,61 +900,61 @@ LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \
 <div class="cell-output-display">
 <style type="text/css">
 </style>
-<table id="T_23b19" class="cell caption-top table table-sm table-striped small">
+<table id="T_cfc3c" class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_23b19_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Пробоев</th>
-<th id="T_23b19_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Доля, %</th>
-<th id="T_23b19_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">p Купика</th>
-<th id="T_23b19_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Пробоев подряд</th>
-<th id="T_23b19_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">p Кристофферсена</th>
-<th id="T_23b19_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Средний VaR, %</th>
+<th id="T_cfc3c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Пробоев</th>
+<th id="T_cfc3c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Доля, %</th>
+<th id="T_cfc3c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">p Купика</th>
+<th id="T_cfc3c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Пробоев подряд</th>
+<th id="T_cfc3c_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">p Кристофферсена</th>
+<th id="T_cfc3c_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Средний VaR, %</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<th id="T_23b19_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое</th>
-<td id="T_23b19_row0_col0" class="data row0 col0">66</td>
-<td id="T_23b19_row0_col1" class="data row0 col1">1,58</td>
-<td id="T_23b19_row0_col2" class="data row0 col2">0,001</td>
-<td id="T_23b19_row0_col3" class="data row0 col3">4</td>
-<td id="T_23b19_row0_col4" class="data row0 col4">0,024</td>
-<td id="T_23b19_row0_col5" class="data row0 col5">3,48</td>
+<th id="T_cfc3c_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Историческое</th>
+<td id="T_cfc3c_row0_col0" class="data row0 col0">66</td>
+<td id="T_cfc3c_row0_col1" class="data row0 col1">1,58</td>
+<td id="T_cfc3c_row0_col2" class="data row0 col2">0,001</td>
+<td id="T_cfc3c_row0_col3" class="data row0 col3">4</td>
+<td id="T_cfc3c_row0_col4" class="data row0 col4">0,024</td>
+<td id="T_cfc3c_row0_col5" class="data row0 col5">3,48</td>
 </tr>
 <tr class="even">
-<th id="T_23b19_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Нормальное</th>
-<td id="T_23b19_row1_col0" class="data row1 col0">81</td>
-<td id="T_23b19_row1_col1" class="data row1 col1">1,94</td>
-<td id="T_23b19_row1_col2" class="data row1 col2">0,000</td>
-<td id="T_23b19_row1_col3" class="data row1 col3">10</td>
-<td id="T_23b19_row1_col4" class="data row1 col4">0,000</td>
-<td id="T_23b19_row1_col5" class="data row1 col5">3,17</td>
+<th id="T_cfc3c_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Нормальное</th>
+<td id="T_cfc3c_row1_col0" class="data row1 col0">81</td>
+<td id="T_cfc3c_row1_col1" class="data row1 col1">1,94</td>
+<td id="T_cfc3c_row1_col2" class="data row1 col2">0,000</td>
+<td id="T_cfc3c_row1_col3" class="data row1 col3">10</td>
+<td id="T_cfc3c_row1_col4" class="data row1 col4">0,000</td>
+<td id="T_cfc3c_row1_col5" class="data row1 col5">3,17</td>
 </tr>
 <tr class="odd">
-<th id="T_23b19_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">EWMA</th>
-<td id="T_23b19_row2_col0" class="data row2 col0">76</td>
-<td id="T_23b19_row2_col1" class="data row2 col1">1,82</td>
-<td id="T_23b19_row2_col2" class="data row2 col2">0,000</td>
-<td id="T_23b19_row2_col3" class="data row2 col3">3</td>
-<td id="T_23b19_row2_col4" class="data row2 col4">0,222</td>
-<td id="T_23b19_row2_col5" class="data row2 col5">2,93</td>
+<th id="T_cfc3c_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">EWMA</th>
+<td id="T_cfc3c_row2_col0" class="data row2 col0">76</td>
+<td id="T_cfc3c_row2_col1" class="data row2 col1">1,82</td>
+<td id="T_cfc3c_row2_col2" class="data row2 col2">0,000</td>
+<td id="T_cfc3c_row2_col3" class="data row2 col3">3</td>
+<td id="T_cfc3c_row2_col4" class="data row2 col4">0,222</td>
+<td id="T_cfc3c_row2_col5" class="data row2 col5">2,93</td>
 </tr>
 <tr class="even">
-<th id="T_23b19_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">GJR-GARCH-t</th>
-<td id="T_23b19_row3_col0" class="data row3 col0">36</td>
-<td id="T_23b19_row3_col1" class="data row3 col1">0,86</td>
-<td id="T_23b19_row3_col2" class="data row3 col2">0,353</td>
-<td id="T_23b19_row3_col3" class="data row3 col3">0</td>
-<td id="T_23b19_row3_col4" class="data row3 col4">0,429</td>
-<td id="T_23b19_row3_col5" class="data row3 col5">3,45</td>
+<th id="T_cfc3c_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">GJR-GARCH-t</th>
+<td id="T_cfc3c_row3_col0" class="data row3 col0">36</td>
+<td id="T_cfc3c_row3_col1" class="data row3 col1">0,86</td>
+<td id="T_cfc3c_row3_col2" class="data row3 col2">0,353</td>
+<td id="T_cfc3c_row3_col3" class="data row3 col3">0</td>
+<td id="T_cfc3c_row3_col4" class="data row3 col4">0,429</td>
+<td id="T_cfc3c_row3_col5" class="data row3 col5">3,45</td>
 </tr>
 <tr class="odd">
-<th id="T_23b19_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">FHS</th>
-<td id="T_23b19_row4_col0" class="data row4 col0">28</td>
-<td id="T_23b19_row4_col1" class="data row4 col1">0,67</td>
-<td id="T_23b19_row4_col2" class="data row4 col2">0,022</td>
-<td id="T_23b19_row4_col3" class="data row4 col3">0</td>
-<td id="T_23b19_row4_col4" class="data row4 col4">0,539</td>
-<td id="T_23b19_row4_col5" class="data row4 col5">3,67</td>
+<th id="T_cfc3c_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">FHS</th>
+<td id="T_cfc3c_row4_col0" class="data row4 col0">28</td>
+<td id="T_cfc3c_row4_col1" class="data row4 col1">0,67</td>
+<td id="T_cfc3c_row4_col2" class="data row4 col2">0,022</td>
+<td id="T_cfc3c_row4_col3" class="data row4 col3">0</td>
+<td id="T_cfc3c_row4_col4" class="data row4 col4">0,539</td>
+<td id="T_cfc3c_row4_col5" class="data row4 col5">3,67</td>
 </tr>
 </tbody>
 </table>
@@ -983,7 +996,7 @@ LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \
 </div>
 </div>
 </div>
-<p>На рисунке показаны последние 250 наблюдений на конец каждого года; для неполного последнего года – на последнюю дату снимка. Окна могут пересекаться. Модель с нормальным распределением находилась в красной зоне на показанных датах в 2011, 2020, 2022, 2024 гг. Особенно показателен 2024 г. с 15 пробоями: после спокойного 2023 г. волатильность выросла, а окно в 250 дней долго удерживало оценку на низком уровне спокойного года. На показанных датах максимум для GJR-GARCH-t составил 6 пробоев; больше всего пробоев у неё было в 2022 г. – 6.</p>
+<p>На рисунке показаны последние 250 наблюдений на конец каждого года; для неполного последнего года – на последнюю дату снимка. Окна могут пересекаться. Модель с нормальным распределением находилась в красной зоне на показанных датах в 2011, 2020, 2022, 2024 гг. Особенно показателен 2024 г. с 15 пробоями: после спокойного 2023 г. волатильность выросла, а окно в 250 дней долго удерживало оценку на низком уровне спокойного года. Модель GJR-GARCH-t ни на одной из показанных дат не попала в красную зону; больше всего пробоев у неё – 6 в 2022 г.</p>
 <p>Несколько оговорок к бэктесту. Пробоев за 250 дней мало, и даже правильная модель с вероятностью около 11% попадает в жёлтую зону случайно. Тесты проверяют только частоту и независимость пробоев, но не их размер: модель, у которой пробои редкие, но огромные, тест Купика пройдёт. Именно поэтому регуляторы перешли к ES, а для ES разработаны отдельные, более сложные процедуры бэктеста.</p>
 </section></section><section id="sec-var-mc" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="sec-var-mc">
 <span class="header-section-number">10.5</span> Метод Монте-Карло для портфеля</h2>
@@ -1125,7 +1138,7 @@ LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \
 <li>Почему бутстреп-интервал для ES 99% по одному году данных нельзя считать надёжным?</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Ответы">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1134,7 +1147,7 @@ LR_{POF} = -2 \ln \frac{(1-p)^{n-k}\,p^k}{(1-\hat p)^{n-k}\,\hat p^{\,k}} \sim \
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>VaR – порог, который превышается с малой вероятностью; ES – средний убыток в худшей доле <span class="math inline">\(1-\alpha\)</span> исходов; при массе на пороге VaR берётся только нужная её часть. ES показывает, насколько велики убытки в хвосте, а VaR – только где хвост начинается.</li>
