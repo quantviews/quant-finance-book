@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "built_at_utc": "2026-11-09T10:17:33+00:00",
+  "moex_snapshot_id": 20515,
+  "moex_source": "MOEX ISS via moexutils DuckLake: bonds (TQCB, TQIR, TQRD; RUB), bonds_securities, zcyc_params",
+  "defaults_source": "Cbonds, календарь дефолтов (выгрузки 2022–2024 и 2025–2026); в книге только агрегаты",
+  "defaults_period": [
+    "2022-01-01",
+    "2026-10-02"
+  ],
+  "cross_section_date": "2026-09-29",
+  "min_group": 3,
+  "issuer_key": "EMITTER_ID карточки MOEX; для выпусков вне биржи – название до запятой",
+  "default_date": "первое платёжное событие эмитента (купон, погашение, оферта), если затем был статус «Дефолт» или «Неисполнение оферты»",
+  "issuers_defaulted_on_moex": 61,
+  "issuers_with_paths": 53,
+  "files": {
+    "default_events.parquet": {
+      "sha256": "475d5b90d14c32ec4e36d494e474f02f47f3dcf9fba63bb0fb6aed87d7ed1907",
+      "rows": 33
+    },
+    "default_years.parquet": {
+      "sha256": "c5d5ac20a4d8c824219b4e11e972b6c40751abd1deea4818cf103446387d0a5d",
+      "rows": 5
+    },
+    "default_reasons.parquet": {
+      "sha256": "76dd038425035429ca940ab458cf255c06002a06f780eaf979115ab42224f4d3",
+      "rows": 5
+    },
+    "default_rates.parquet": {
+      "sha256": "83dda4e568665b3bac0c6868bba4747474cd241a6b223d95a56b9cee8d3229a8",
+      "rows": 20
+    },
+    "spread_buckets.parquet": {
+      "sha256": "978b4bbfdbe34e30040bb40227e62f8bf77825c8ac3fd433ab897a1feac357bb",
+      "rows": 12
+    },
+    "spread_buckets_year.parquet": {
+      "sha256": "218c42bbeda5e4247f7d693055ce7f703d148c7fa2313e344fc6f9cf1b2a31e6",
+      "rows": 30
+    },
+    "spread_market.parquet": {
+      "sha256": "8ae05f0b8c8b624e435c0dca40f7e8425556e238b6d0e4dd896c82733d847d1a",
+      "rows": 58
+    },
+    "event_paths.parquet": {
+      "sha256": "397bcbf81d92081587ea0e70d7da5a11cf29958c51e88fa9b977db7d0780e6e1",
+      "rows": 311
+    },
+    "warning_variants.parquet": {
+      "sha256": "5f241dad393b1102dd18286c719e10786c30b585271cb86d3cee07c3618dbe9c",
+      "rows": 10
+    },
+    "warning_recall.parquet": {
+      "sha256": "86c96b5823e64d93ce4e7cb477923d210c8617d1316a989c6a21e09924dfabd5",
+      "rows": 2
+    },
+    "warning_thresholds.parquet": {
+      "sha256": "bf2d66cd35726e5bdc593329b76f1f68d39650cdcb44b3942dafa73d0f50de9f",
+      "rows": 10
+    },
+    "cross_section.parquet": {
+      "sha256": "aedc542766c0a9776a0cac565f508676310b8edb2dcd498971b757046bdda48e",
+      "rows": 657
+    }
+  }
+}

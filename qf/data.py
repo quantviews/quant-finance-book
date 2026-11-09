@@ -244,6 +244,50 @@ def verify_bond_snapshot():
     return metadata
 
 
+# ---- Кредитный риск (глава 14) ------------------------------------------------
+
+CREDIT_FILES = ("default_events", "default_years", "default_reasons", "default_rates",
+                "spread_buckets", "spread_buckets_year", "spread_market", "event_paths",
+                "warning_variants", "warning_recall", "warning_thresholds", "cross_section")
+
+
+def load_credit(name: str, backend: Backend = "pandas"):
+    """Данные к главе о кредитном риске (папка data/credit/).
+
+    Все таблицы, кроме cross_section, – агрегаты по календарю дефолтов Cbonds
+    и истории торгов MOEX; отдельные выпуски и эмитенты в них не раскрываются.
+
+    default_events      – строки календаря по годам, типам событий и статусам;
+    default_years       – итоги по годам: строки, выпуски, эмитенты, новые дефолты;
+    default_reasons     – причины неисполнения (число эмитентов);
+    default_rates       – когорты эмитентов с торгами на бирже и дефолты за год;
+    spread_buckets      – G-спред эмитента на конец месяца и дефолт в следующие 12 месяцев;
+    spread_buckets_year – то же по годам наблюдения;
+    spread_market       – квантили G-спреда эмитентов по месяцам;
+    event_paths         – медианная цена, G-спред и оборот в дни до и после дефолта;
+    warning_variants    – проверка правила раннего предупреждения и типичные ошибки;
+    warning_recall      – доля дефолтов, которым предшествовал сигнал;
+    warning_thresholds  – то же при разных порогах падения цены;
+    cross_section       – биржевой срез облигаций с фиксированным купоном на одну дату.
+    """
+    if name not in CREDIT_FILES:
+        raise ValueError(f"Нет таблицы {name}; есть: {', '.join(CREDIT_FILES)}")
+    df = pl.read_parquet(DATA_DIR / "credit" / f"{name}.parquet")
+    return df if backend == "polars" else df.to_pandas()
+
+
+def verify_credit_snapshot():
+    """Проверить хеши файлов data/credit/ и вернуть паспорт снимка."""
+    import hashlib
+    import json
+    root = DATA_DIR / "credit"
+    meta = json.loads((root / "snapshot.json").read_text(encoding="utf-8"))
+    for fname, info in meta["files"].items():
+        if hashlib.sha256((root / fname).read_bytes()).hexdigest() != info["sha256"]:
+            raise ValueError(f"Нарушена целостность снимка: {fname}")
+    return meta
+
+
 # ---- Микроструктура (глава 17) ------------------------------------------------
 
 def load_micro(name: Literal["panel", "price_variable", "net_edge",

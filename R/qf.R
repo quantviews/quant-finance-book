@@ -61,6 +61,11 @@ qf_load_rfsd <- function(okved = NULL, years = NULL) {
   df
 }
 
+#' Данные к главе о кредитном риске (data/credit/); имена – как в qf.data.load_credit
+qf_load_credit <- function(name) {
+  qf_read(file.path("credit", paste0(name, ".parquet")))
+}
+
 #' Данные к главе о микроструктуре (data/micro/): "panel", "price_variable",
 #' "net_edge", "sber_book", "sber_trades"
 qf_load_micro <- function(name) {

@@ -61,6 +61,25 @@ prices = data.load_stocks(["SBER", "GAZP"], start="2015-01-01")
 Панель и таблицы – из репликационного пакета статьи «Больше розницы, не меньше эффективности»
 (https://github.com/quantviews/efficiency-paper-2026), лицензия CC BY 4.0 (`micro/LICENSE-data`).
 
+## Кредитный риск (`credit/`)
+
+Агрегаты к главе 14: календарь дефолтов Cbonds (январь 2022 – 2 октября 2026 г.) и история
+торгов, карточки выпусков и КБД Московской биржи. Календарь Cbonds – лицензионные данные:
+в папке нет строк календаря, списков выпусков и эмитентов с дефолтом, только суммы и доли
+по группам (суммы неисполненного в ячейках меньше трёх эмитентов скрыты).
+Читаются функцией `data.load_credit(name)`, в R – `qf_load_credit(name)`;
+`data.verify_credit_snapshot()` проверяет контрольные суммы. Собираются авторским скриптом
+`scripts/build_credit_data.py`.
+
+| Файл | Что внутри |
+|---|---|
+| `default_events.parquet`, `default_years.parquet`, `default_reasons.parquet` | Строки календаря, выпуски и эмитенты по годам, типам, статусам и причинам |
+| `default_rates.parquet` | Когорты эмитентов с торгами на бирже и дефолты за год, по объёму облигаций |
+| `spread_buckets.parquet`, `spread_buckets_year.parquet`, `spread_market.parquet` | G-спред эмитентов на конец месяца, корзины спреда и дефолт в следующие 12 месяцев |
+| `event_paths.parquet` | Цена, G-спред и оборот вокруг первого дефолта эмитента (медианы и квартили) |
+| `warning_*.parquet` | Проверка правила раннего предупреждения по падению цены |
+| `cross_section.parquet` | Облигации с фиксированным купоном на 29.09.2026 (только данные биржи) |
+
 ## Полная история рынка акций (отдельный архив)
 
 Все бумаги рынка акций Московской биржи с 1997 г. (≈2,5 тыс. бумаг, все режимы торгов,
@@ -75,7 +94,8 @@ shares = data.load_shares_full(start="2020-01-01", board="TQBR")
 ## Источники и условия
 
 Московская биржа (ISS), Банк России (ключевая ставка, RUONIA), закрытияреестров.рф (дивиденды),
-RFSD (Bondarkov et al., 2025; CC BY 4.0), Росстат через rustata.ru.
+RFSD (Bondarkov et al., 2025; CC BY 4.0), Росстат через rustata.ru, Cbonds (календарь дефолтов,
+только агрегаты в `credit/`).
 Данные предназначены для учебных целей. Снимок собран скриптом `scripts/build_data.py`.
 
 
@@ -94,7 +114,7 @@ RFSD (Bondarkov et al., 2025; CC BY 4.0), Росстат через rustata.ru.
 
 Чтение: `qf.data.load_bonds`, `load_bond_coupons`, `load_bond_principal`, `load_bond_curve`.
 `qf.data.verify_bond_snapshot()` проверяет целостность данных и кода.
-`qf/bonds.py` — точная автономная копия проверенного модуля из moex-analytics,
+`qf/bonds.py` – точная автономная копия проверенного модуля из moex-analytics,
 синхронизируемая авторским `scripts/build_bond_data.py`; установка moexutils или
 moex-analytics читателям не нужна. Основной `scripts/build_data.py` этот снимок не меняет.
 
