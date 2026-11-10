@@ -29,7 +29,7 @@ md(f"""
 
 **Имя и группа:** …
 
-**Моя акция:** … (её назначит ячейка в задании 1)
+**Моя акция:** … (см. [таблицу распределения акций](https://docs.google.com/spreadsheets/d/1jDm3lILAcKnvIehthge5Q3NfrHSzqmem/edit?usp=sharing))
 
 ### Первая часть · 80 минут
 | Минуты | Что делаем |
@@ -80,9 +80,7 @@ print("Готово")
 
 md("""
 ## Задание 1. Карточка бумаги · 10 минут
-Акции распределены между студентами группы случайно, у каждого своя. Впишите в первую ячейку ниже фамилию и имя, как в списке группы (например, `"Иванова Мария"`), и выполните её: ячейка запишет код вашей акции в `TICKER`. Имён в ноутбуке нет, только их хэши.
-
-Если ячейка не нашла вас, проверьте написание. Если всё равно не находит, возьмите любую акцию из списка и укажите в форме сдачи, что выбрали её сами: GAZP, LKOH, GMKN, ROSN, NVTK, TATN, MGNT, MTSS, PLZL, CHMF, NLMK, MOEX, ALRS, AFLT, PHOR, SNGS, IRAO, HYDR, RUAL, SIBN, MAGN, PIKK, SBERP, TRNFP, FEES, RTKM, BSPB.
+Акции распределены между студентами группы случайно, у каждого своя. Найдите свой тикер в [таблице распределения акций](https://docs.google.com/spreadsheets/d/1jDm3lILAcKnvIehthge5Q3NfrHSzqmem/edit?usp=sharing) и впишите его в `TICKER`. SBER и VTBR понадобятся всем в заданиях 5–6.
 
 Запросите карточку бумаги: путь `securities/{TICKER}`. В ответе две таблицы: `description` (параметры выпуска) и `boards` (режимы торгов).
 
@@ -92,16 +90,7 @@ md("""
 """)
 
 code('''
-STUDENT = "Фамилия Имя"   # как в списке группы
-
-import hashlib
-ASSIGN = {"50936b90a0": "LKOH", "c0e7c76869": "NLMK", "a06803b649": "SNGS", "18a40d1e14": "CHMF", "34155dcd11": "GMKN", "8aadb71e4e": "NVTK", "d1dde47d26": "GAZP", "3deac0b3d5": "PHOR", "f99e5d0f18": "TRNFP", "58a9c6ad72": "HYDR", "e5190ab90f": "FEES", "923bdec360": "MAGN", "1e3e1dc649": "PLZL", "8fac23d876": "RUAL", "2632c37299": "SBERP", "be8f2b3ba2": "TATN", "4365b8008d": "MOEX", "fd442d84ec": "AFLT", "4e54405155": "PIKK", "6643897483": "ROSN", "029542ed00": "SIBN", "2c73e4440d": "MTSS", "84e9fa693d": "ALRS", "c62afae782": "BSPB", "78ae6a7971": "IRAO"}
-key = " ".join(STUDENT.lower().replace("ё", "е").split())
-TICKER = ASSIGN.get(hashlib.sha256(f"qf2026:{key}".encode()).hexdigest()[:10])
-print("Ваша акция:", TICKER if TICKER else "не найдена – проверьте написание или возьмите акцию из списка выше")
-''')
-
-code('''
+TICKER = "..."   # ваш тикер из таблицы распределения акций
 card = iss_get(f"securities/{TICKER}")
 card["description"][["name", "title", "value"]]
 ''')
