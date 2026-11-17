@@ -146,6 +146,22 @@ usd_info = dict(start=fmt(usd_d.iloc[0], 2), end=fmt(usd_d.iloc[-1], 2),
 real_period = f"{dt(s.index[0])}–{dt(s.index[-1])}"
 cat = macro["catalog"]
 
+# MCFTR в рублях и в ценах начала периода: 100 = первый день снимка, ИПЦ накоплен помесячно с января 2015 г.
+m_nom = s["MCFTR"].dropna().resample("ME").last()
+m_nom = pd.concat([pd.Series({s.index[0]: s["MCFTR"].dropna().iloc[0]}), m_nom]) / s["MCFTR"].dropna().iloc[0] * 100
+price_idx = cpi.loc[s.index[0].strftime("%Y-%m"):cpi_last].cumprod()
+price_idx.index = price_idx.index + pd.offsets.MonthEnd(0)
+price_idx = pd.concat([pd.Series({s.index[0]: 1.0}), price_idx]) * 100
+m_real = m_nom / price_idx * 100
+real_peak = m_real.loc[:"2022-12-31"].idxmax()
+real_trough = m_real.loc[real_peak:].idxmin()
+real_info = dict(nom=fmt(m_nom.iloc[-1], 0), prices=fmt(price_idx.iloc[-1], 0), real=fmt(m_real.iloc[-1], 0),
+                 peak=fmt(m_real[real_peak], 0), peak_m=mm(real_peak), trough=fmt(m_real[real_trough], 0),
+                 trough_m=mm(real_trough), fall=pct(1 - m_real[real_trough] / m_real[real_peak], 0),
+                 below=pct(1 - m_real.iloc[-1] / m_real[real_peak], 0))
+assert abs(m_nom.iloc[-1] / 100 - s["MCFTR"].dropna().iloc[-1] / s["MCFTR"].dropna().iloc[0]) < 1e-9
+assert abs(price_idx.iloc[-1] / 100 - infl_total) < 1e-9
+
 # ---------------------------------------------------------------- графики
 fig, ax = plt.subplots(figsize=(11.8, 4.4), layout="constrained")
 ax.plot(before.index, before, color=GREY, lw=1.6, label="Сырые цены ISS")
@@ -171,6 +187,18 @@ ax.set_xlim(cpi_yoy.index[0], cpi_yoy.index[-1])
 ax.set_ylim(0, None)
 ax.legend(frameon=False, ncol=2, loc="lower left", bbox_to_anchor=(0, 1.01), fontsize=13)
 finish(fig, ax, "inflation.svg", pctfmt=True)
+
+fig, ax = plt.subplots(figsize=(11.8, 4.4), layout="constrained")
+for ser, color, label in [(m_nom, BLUE, "MCFTR в рублях"), (price_idx, RED, "Цены: накопленный ИПЦ"),
+                          (m_real, ORANGE, "MCFTR в реальном выражении")]:
+    ax.plot(ser.index, ser, color=color, lw=2.2, label=label)
+    ax.annotate(fmt(ser.iloc[-1], 0), (ser.index[-1], ser.iloc[-1]), xytext=(6, 0), textcoords="offset points",
+                va="center", color=color, fontsize=13, weight="semibold")
+ax.axhline(100, color=GREY, lw=.8)
+ax.set_xlim(m_nom.index[0], m_nom.index[-1] + pd.Timedelta(days=200))
+ax.set_ylabel("январь 2015 г. = 100")
+ax.legend(frameon=False, ncol=3, loc="lower left", bbox_to_anchor=(0, 1.01), fontsize=13)
+finish(fig, ax, "mcftr-real.svg")
 
 # ---------------------------------------------------------------- слайды
 slides = f'''## Финансовые данные: четыре группы
@@ -403,6 +431,18 @@ SBER, реестр 18.07.2025, дивиденд 34,84 руб.: по `close` – 
 
 ::: {{.source}}
 ИПЦ – Росстат (ЕМИСС, показатель 31074), через rustata.ru; RUONIA – Банк России. Последний месяц ИПЦ – {MONTHS[cpi_last.month - 1]} {cpi_last.year}.
+:::
+
+## Рубли и покупательная способность
+
+![](figures/mcftr-real.svg){{.chart}}
+
+::: {{.small}}
+Реальный индекс = MCFTR в рублях / накопленный ИПЦ × 100 – сколько товаров и услуг можно купить на вложение. Реальный пик – {real_info["peak"]} ({real_info["peak_m"]}), дно – {real_info["trough"]} ({real_info["trough_m"]}), падение на {real_info["fall"]}; в конце периода – на {real_info["below"]} ниже пика.
+:::
+
+::: {{.source}}
+MCFTR – Московская биржа, на конец месяца; ИПЦ – Росстат через rustata.ru. {real_period}. До налогов и издержек.
 :::
 
 ## Номинальная, реальная и долларовая доходность

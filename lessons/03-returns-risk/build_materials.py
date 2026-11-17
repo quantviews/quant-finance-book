@@ -26,7 +26,7 @@ CSV_NAME = "prices_2015_2026.csv"
 DATA_URL = ("https://raw.githubusercontent.com/quantviews/quant-finance-book/main/"
             f"lessons/03-returns-risk/data/{CSV_NAME}")
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1jDm3lILAcKnvIehthge5Q3NfrHSzqmem/edit?usp=sharing"
-FORM_URL = None   # ссылка на Google-форму сдачи; None – «способ сдачи объявит преподаватель»
+FORM_URL = "https://forms.gle/fiR6cNu3dRBKVqj49"   # Google-форма сдачи практики 3; None – «способ сдачи объявит преподаватель»
 
 STUDENT_TICKERS = ["AFLT", "ALRS", "BSPB", "CHMF", "FEES", "GAZP", "GMKN", "HYDR", "IRAO", "LKOH",
                    "MAGN", "MOEX", "MTSS", "NLMK", "NVTK", "PHOR", "PIKK", "PLZL", "ROSN", "RUAL",
@@ -256,6 +256,14 @@ promo_20 = 1.2 ** 5 - 1                # если бы 20% в год со сло
 deposit = 0.16
 deposit_5 = (1 + deposit) ** 5 - 1
 
+# Почему геометрическое среднее ниже арифметического: пары доходностей ±x.
+drag_rows = []
+for x in [0.10, 0.20, 0.50]:
+    g = np.sqrt((1 + x) * (1 - x)) - 1          # σ (деление на n) = x, среднее 0
+    drag_rows.append(f"| +{pct(x, 0)}, −{pct(x, 0)} | 0% | {pct(g, 2)} | {pct(x ** 2 / 2, 2)} |")
+drag_rows = "\n".join(drag_rows)
+drag_g20 = np.sqrt(1.2 * 0.8) - 1
+
 # ---------------------------------------------------------------- слайды с расчётами
 tail_rows = "\n".join(f"| сильнее {k}σ | {n} | {fmt(e, 1) if e >= 1 else (fmt(e, 2) if e >= .01 else "<0,01")} |" for k, n, e in tails)
 worst_rows = "\n".join(f"| {dt(d)} | {pct(v)} |" for d, v in worst.items())
@@ -419,6 +427,35 @@ IMOEX: **{pct(cagr_i)}** в год · MCFTR: **{pct(cagr_m)}** · RUONIA: **{pct
 
 ::: {{.prompt}}
 Какое среднее вы увидите в рекламе инвестиционного продукта?
+:::
+
+## Почему геометрическое ниже: пример ±20%
+
+::: {{.columns}}
+::: {{.column width="46%"}}
+Первый год **+20%**, второй **−20%**. Арифметическое среднее – **0%**.
+
+Капитал: 1,2 × 0,8 = 0,96. Геометрическое среднее: √0,96 − 1 = **{pct(drag_g20, 2)}** в год.
+
+Доходности μ + σ и μ − σ:
+
+(1 + μ + σ)(1 + μ − σ) = (1 + μ)² − σ²
+
+Колебания в любую сторону отнимают σ². Отсюда геометрическое ≈ μ − σ²/2.
+:::
+::: {{.column width="50%"}}
+| Доходности | Арифм. | Геом. | σ²/2 |
+|---|---:|---:|---:|
+{drag_rows}
+
+::: {{.small}}
+σ – с делением на n: для ±20% это 20%. С делением на n − 1 (по умолчанию в pandas) получится 28,3% – это оценка дисперсии по выборке, а не тождество для ряда.
+:::
+:::
+:::
+
+::: {{.prompt}}
+У двух акций средняя доходность 10% в год, волатильность 10% и 40%. Какая принесёт больше денег за 10 лет?
 :::
 
 ## «100% за 5 лет – это 20% в год»?
