@@ -1,0 +1,46 @@
+{
+  "end": "2026-09-30",
+  "built": "2026-11-17",
+  "sources": {
+    "cpi": "Росстат, ЕМИСС 31074 (все товары и услуги, к предыдущему месяцу), через rustata.ru API v1",
+    "funds": "MOEX ISS, режимы TQTF (до 19.06.2026) и TQBR (с 22.06.2026)",
+    "ofz": "MOEX ISS, режим TQOB; купоны – bondization"
+  },
+  "funds": [
+    "TMOS",
+    "SBMX",
+    "EQMX"
+  ],
+  "fund_splits": [
+    {
+      "tradedate": "2021-06-04",
+      "secid": "SBMX",
+      "before": 1,
+      "after": 100
+    }
+  ],
+  "ofz": {
+    "SU26238RMFS4": "ПД",
+    "SU26235RMFS0": "ПД",
+    "SU29013RMFS8": "ПК",
+    "SU52003RMFS9": "ИН"
+  },
+  "files": {
+    "cpi.parquet": {
+      "rows": 286,
+      "sha256": "6bab03053d1ba30325832dd074f9938acb64dbdb852dd9d6d950a88b8c9a22a0"
+    },
+    "funds.parquet": {
+      "rows": 4606,
+      "sha256": "4927c1f1e51913b79b75bee986dfa559338d17e33c3cbc11212047eaadf4c9bd"
+    },
+    "ofz.parquet": {
+      "rows": 3812,
+      "sha256": "307e9503200063822e6f641ba10543eb68812f1b827ae698ab17788ea49d467a"
+    },
+    "ofz_coupons.parquet": {
+      "rows": 38,
+      "sha256": "dd91c6958db6e3d0200c7a37def26a00baba8043ca745e500167da08fd18f83e"
+    }
+  }
+}

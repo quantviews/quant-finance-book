@@ -106,6 +106,48 @@ def load_ruonia(start=None, end=None, backend: Backend = "pandas"):
     return _read("ruonia.parquet", start=start, end=end, backend=backend)
 
 
+def load_cpi(start=None, end=None, backend: Backend = "pandas"):
+    """ИПЦ России: date (первое число месяца), cpi_mom – в % к предыдущему месяцу (100,5 = рост цен на 0,5%).
+
+    Росстат (ЕМИСС, показатель 31074) через rustata.ru; снимок data/investor/.
+    """
+    return _read("investor/cpi.parquet", start=start, end=end, backend=backend)
+
+
+def load_funds(tickers=None, start=None, end=None, backend: Backend = "pandas"):
+    """БПИФ на индекс Мосбиржи (TMOS, SBMX, EQMX): date, ticker, board, close, close_raw, volume, value_rub.
+
+    close – в текущей базе с учётом сплита паёв; режимы TQTF и TQBR склеены.
+    """
+    return _read("investor/funds.parquet", tickers, start, end, backend=backend)
+
+
+def load_ofz(secids=None, start=None, end=None, backend: Backend = "pandas"):
+    """Котировки ОФЗ-ПД, ОФЗ-ПК и ОФЗ-ИН (data/investor/ofz.parquet).
+
+    Колонки: date, secid, name, type (ПД/ПК/ИН), clean_pct (% номинала), accrued (НКД, руб.),
+    face_value (номинал, у ОФЗ-ИН индексируется), ytm_pct (у ОФЗ-ИН – реальная доходность),
+    bei_pct (инфляция безубыточности, только ОФЗ-ИН), duration_days, value_rub, maturity.
+    """
+    df = _read("investor/ofz.parquet", start=start, end=end, backend="polars")
+    if secids is not None:
+        df = df.filter(pl.col("secid").is_in(_as_list(secids)))
+    return df if backend == "polars" else df.to_pandas()
+
+
+def load_ofz_coupons(secids=None, backend: Backend = "pandas"):
+    """Выплаченные купоны тех же ОФЗ: secid, payment_date, period_start, amount (руб.), rate_pct."""
+    df = _read("investor/ofz_coupons.parquet", backend="polars", date_col="payment_date")
+    if secids is not None:
+        df = df.filter(pl.col("secid").is_in(_as_list(secids)))
+    if backend == "polars":
+        return df
+    out = df.to_pandas()
+    for c in ("payment_date", "period_start"):
+        out[c] = pd.to_datetime(out[c])
+    return out
+
+
 def load_zcyc(start=None, end=None, backend: Backend = "pandas"):
     """Кривая бескупонной доходности ОФЗ: date, period (лет), value (% годовых)."""
     return _read("zcyc.parquet", start=start, end=end, backend=backend)

@@ -53,6 +53,27 @@ qf_load_key_rate <- function() qf_read("key_rate.parquet")
 qf_load_ruonia <- function(start = NULL, end = NULL) qf_read("ruonia.parquet", NULL, start, end)
 qf_load_zcyc <- function(start = NULL, end = NULL) qf_read("zcyc.parquet", NULL, start, end)
 
+#' ИПЦ России: cpi_mom – в % к предыдущему месяцу (100,5 = рост цен на 0,5%)
+qf_load_cpi <- function(start = NULL, end = NULL) qf_read("investor/cpi.parquet", NULL, start, end)
+
+#' БПИФ на индекс Мосбиржи: close – с учётом сплита паёв
+qf_load_funds <- function(tickers = NULL, start = NULL, end = NULL) {
+  qf_read("investor/funds.parquet", tickers, start, end)
+}
+
+#' Котировки ОФЗ-ПД, ОФЗ-ПК и ОФЗ-ИН
+qf_load_ofz <- function(secids = NULL, start = NULL, end = NULL) {
+  df <- qf_read("investor/ofz.parquet", NULL, start, end)
+  if (!is.null(secids)) df <- df[df$secid %in% secids, ]
+  df
+}
+
+qf_load_ofz_coupons <- function(secids = NULL) {
+  df <- qf_read("investor/ofz_coupons.parquet", date_col = "payment_date")
+  if (!is.null(secids)) df <- df[df$secid %in% secids, ]
+  df
+}
+
 #' Выборка RFSD (отчётность компаний; тыс. руб., расходы отрицательны)
 qf_load_rfsd <- function(okved = NULL, years = NULL) {
   df <- qf_read("rfsd_sample.parquet")
