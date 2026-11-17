@@ -1,0 +1,32 @@
+{
+  "source": "rustata.ru API v1",
+  "exported": "2026-11-17",
+  "catalog": {
+    "datasets": 134,
+    "providers": [
+      "cbr",
+      "fedstat",
+      "fns_vpd",
+      "minobrnauki",
+      "opec",
+      "roskazna",
+      "rosstat_files",
+      "showdata"
+    ],
+    "series": 5670585
+  },
+  "cpi": {
+    "dataset": "fedstat/indicator_31074",
+    "geo": "country",
+    "class": "1",
+    "measure": "MOM",
+    "first": "2014-12-01",
+    "last": "2026-09-01"
+  },
+  "usdrub": {
+    "series_key": "s1_qfc54254m35y2ayc",
+    "dataset": "cbr/fx_daily",
+    "first": "2014-12-02",
+    "last": "2026-11-17"
+  }
+}

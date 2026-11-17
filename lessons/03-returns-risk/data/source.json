@@ -1,0 +1,18 @@
+{
+  "source": "moexutils, MOEX ISS and dividend adjustments",
+  "exported": "2026-11-17",
+  "requested": [
+    "2015-01-01",
+    "2026-11-16"
+  ],
+  "from_iss_not_lake": [
+    "SIBN"
+  ],
+  "stocks_last": "2026-11-16",
+  "index_last": "2026-11-16",
+  "ruonia": {
+    "source": "Bank of Russia RUONIA via moexutils lake",
+    "first": "2014-12-01",
+    "last": "2026-11-13"
+  }
+}
