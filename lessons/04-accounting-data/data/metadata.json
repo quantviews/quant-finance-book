@@ -1,0 +1,21 @@
+{
+  "lesson_date": "2026-11-26",
+  "issuers": {
+    "file": "issuers_2018_2025.csv",
+    "sha256": "cfbb64e1130adcad8070989d57e02633ee4b268c3149ed975436f26e2c9f7b5a",
+    "rows": 208,
+    "source": "RFSD (irlspbru/RFSD), CC BY 4.0",
+    "rfsd_sha": "bde9b8b129a8be582b66de4e30ed79c9187a8515",
+    "fields": "ticker, issuer, inn, year, флаги RFSD (filed, imputed, outlier), строки форм в тыс. руб.; расходы отрицательные",
+    "notes": [
+      "ИНН – головная компания-эмитент, отчётность РСБУ отдельного юрлица, не группы",
+      "Строка без значений: отчётность не раскрыта или организации нет в RFSD (банки, Мосбиржа)",
+      "SBER и SBERP – один эмитент"
+    ]
+  },
+  "sample": {
+    "url": "https://raw.githubusercontent.com/quantviews/quant-finance-book/6a42857136078f2a01d5e0d85c9d9cf211b14fce/data/rfsd_sample.parquet",
+    "sha256": "9b0171a181556c0df0db07397f49a2017b2f25b2108403318f95394203c7557a",
+    "description": "выборка книги: классы ОКВЭД 10, 41, 47, 49, 62, выручка ≥ 1 млрд руб. хотя бы в одном году 2018–2025"
+  }
+}
