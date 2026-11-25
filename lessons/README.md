@@ -24,6 +24,15 @@
 - [CSV для работы без сети](03-returns-risk/data/prices_2015_2026.csv): сохранить в папку `data` рядом с ноутбуком.
 - [Описание занятия и сборка](03-returns-risk/README.md).
 
+## Четвёртое занятие · 26 ноября 2026 · отчётность компаний, RFSD
+
+Лекция по главе 5: бухгалтерская отчётность российских компаний и набор RFSD, parquet, pandas и Polars, ОКВЭД, финансовые коэффициенты и качество данных. Практика: эмитент своей акции в RFSD и класс ОКВЭД по выборке книги. Дома – старт проекта 1 по полному RFSD.
+
+- [Презентация HTML: скачать](https://raw.githubusercontent.com/quantviews/quant-finance-book/main/lessons/04-accounting-data/lecture.html) и открыть сохранённый файл в браузере.
+- [Ноутбук практики](04-accounting-data/practice-04.ipynb).
+- [CSV эмитентов для работы без сети](04-accounting-data/data/issuers_2018_2025.csv) и [выборка RFSD](https://github.com/quantviews/quant-finance-book/raw/main/data/rfsd_sample.parquet): сохранить в папку `data` рядом с ноутбуком.
+- [Описание занятия и сборка](04-accounting-data/README.md).
+
 ## Единый стиль презентаций
 
 Все занятия используют `lessons/_shared/hse-lesson.scss`, `fonts.css` и `hse-logo.png`. Правки оформления вносятся только в общие файлы, затем презентации пересобираются.
